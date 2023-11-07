@@ -9,7 +9,7 @@ class Server {
         this.port = process.env.PORT || '4000'
     }
     //En el puerto 6000 o 4000 
-    //
+    //node ts dist/index.js
     //nodemon dist/index.js
 
     listen() {
