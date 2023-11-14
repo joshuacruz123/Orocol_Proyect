@@ -11,6 +11,11 @@ import { PieComponent } from './components/pie/pie.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './registro/registro.component';
+import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+import { MineroComponent } from './minero/minero.component';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AgregarEditarPersonaComponent } from './components/agregar-editar-persona/agregar-editar-persona.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,12 @@ import { RegistroComponent } from './registro/registro.component';
     EncabezadoComponent,
     PieComponent,
     HomeComponent,
-    RegistroComponent
+    RegistroComponent,
+    IniciarSesionComponent,
+    MineroComponent,
+    AdministradorComponent,
+    UsuariosComponent,
+    AgregarEditarPersonaComponent
   ],
   imports: [
     BrowserModule,

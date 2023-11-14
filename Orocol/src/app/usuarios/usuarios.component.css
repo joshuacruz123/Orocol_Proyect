@@ -1,0 +1,25 @@
+table {
+    width: 100%;
+  }
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 90%;
+    margin-right: 10px;
+  }
+
+.btnEdit, .btnInact, .btnAdd {
+  cursor: pointer;
+}
+
+.btnEdit {
+  color: rgb(0, 157, 248);
+}
+
+.btnInact {
+  color: rgb(255, 0, 0);
+}
+
+.btnAdd {
+  color: rgb(255, 255, 255);
+}

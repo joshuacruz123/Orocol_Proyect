@@ -1,0 +1,51 @@
+<h1>Gestionar usuarios del sistema:</h1>
+
+<mat-card>
+    <mat-form-field>
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar usuarios" #input autocomplete="off">
+      </mat-form-field>
+      <button (click)="addEditPersona()" mat-raised-button color="primary">Agregar usuario <mat-icon class="btnAdd">person_add</mat-icon></button>
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z3">
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre: </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido: </th>
+            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipoDocumento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo documento: </th>
+            <td mat-cell *matCellDef="let element"> {{element.tipoDocumento}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="documento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> documento: </th>
+            <td mat-cell *matCellDef="let element"> {{element.documento}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fechaNacimiento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha nacimiento: </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaNacimiento | date:'dd/MM/yyyy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element"> 
+                <mat-icon class="btnEdit" matTooltip="Editar a {{ element.nombre }}">edit</mat-icon> 
+                <mat-icon class="btnInact" matTooltip="Inactivar a {{ element.nombre }}">remove</mat-icon>          
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+  </mat-card>
+
+  
