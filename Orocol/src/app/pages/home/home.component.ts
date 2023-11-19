@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  imagenes: string[] = [
+    '../../../assets/img/barraOro.jpg',
+    '../../../assets/img/extraccion.jpg',
+    '../../../assets/img/flechaOro.jpg',
+  ];
 }

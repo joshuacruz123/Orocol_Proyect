@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const routes_1 = __importDefault(require("../routes/routes"));
 const connection_1 = __importDefault(require("../db/connection"));
+const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -15,6 +16,13 @@ class Server {
         this.conexionDB();
     }
     //En el puerto 6000 o 4000 
+    /* {
+    "nombreUsuario": "Estupido tonto",
+    "apellidosUsuario": "Cruz Fierro",
+    "correoUsuario": "shfksdfj@gmail.com",
+    "passwordUsuario": "wfjsfw4nfs"
+    }
+    */
     //tsc --watch
     //nodemon dist/index.js
     listen() {
@@ -25,8 +33,10 @@ class Server {
     //Función para correr express
     middlewares() {
         this.app.use(express_1.default.json());
+        this.app.use(cors_1.default);
+        // Dependencia Cors para comunicar servidores
     }
-    //Parseo del body
+    //Funsion para parseo del body
     routes() {
         this.app.use('/api/route', routes_1.default);
     }
