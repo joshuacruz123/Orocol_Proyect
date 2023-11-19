@@ -17,7 +17,7 @@ import { VentaMineroComponent } from './pages/venta-minero/venta-minero.componen
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  
-  { path: 'Manual_Usuario', component: ManualUsuarioComponent},
+  { path: 'Manual_Usuario', component: ManualUsuarioComponent}, 
   { path: 'Registro', component: RegistroComponent },
   { path: 'Iniciar_sesión', component: IniciarSesionComponent },
   { path: 'Administrador', component: AdministradorComponent },
