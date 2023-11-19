@@ -30,6 +30,10 @@ import { EditarAdministradorComponent } from './pages/editar-administrador/edita
 import { EditarMineroComponent } from './pages/editar-minero/editar-minero.component';
 import { VentaMineroComponent } from './pages/venta-minero/venta-minero.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+//pdf
+
+import { ManualUsuarioComponent } from './pages/manual-usuario/manual-usuario.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -55,13 +59,15 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     EditarAdministradorComponent,
     EditarMineroComponent,
     VentaMineroComponent,
-    CarouselComponent
+    CarouselComponent,
+    ManualUsuarioComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

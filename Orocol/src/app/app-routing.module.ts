@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //paginas
 import { HomeComponent } from './pages/home/home.component';
+import { ManualUsuarioComponent } from './pages/manual-usuario/manual-usuario.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { IniciarSesionComponent } from './pages/iniciar-sesion/iniciar-sesion.component';
 import { MineroComponent } from './pages/minero/minero.component';
@@ -15,7 +16,8 @@ import { EditarMineroComponent } from './pages/editar-minero/editar-minero.compo
 import { VentaMineroComponent } from './pages/venta-minero/venta-minero.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }, 
+  { path: '', component: HomeComponent },  
+  { path: 'Manual_Usuario', component: ManualUsuarioComponent},
   { path: 'Registro', component: RegistroComponent },
   { path: 'Iniciar_sesión', component: IniciarSesionComponent },
   { path: 'Administrador', component: AdministradorComponent },
