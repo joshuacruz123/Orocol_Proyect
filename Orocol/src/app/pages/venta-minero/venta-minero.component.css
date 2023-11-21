@@ -15,7 +15,7 @@
     padding: 2%;
 }
 body {
-    background-image: url('background.jpg');
+    background-image: url('../../../assets/img/background.jpg');
     background-repeat: no-repeat;
     background-size: cover  
 }

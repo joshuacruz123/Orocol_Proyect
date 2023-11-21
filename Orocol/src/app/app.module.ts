@@ -12,6 +12,8 @@ import { SharedModule } from './shared/shared.module';
 //paginas
 import { HomeComponent } from './pages/home/home.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { FormularioAdministradorComponent } from './components/formulario-administrador/formulario-administrador.component';
+import { FormularioMineroComponent } from './components/formulario-minero/formulario-minero.component';
 import { IniciarSesionComponent } from './pages/iniciar-sesion/iniciar-sesion.component';
 import { MineroComponent } from './pages/minero/minero.component';
 import { AdministradorComponent } from './pages/administrador/administrador.component';
@@ -31,9 +33,9 @@ import { EditarMineroComponent } from './pages/editar-minero/editar-minero.compo
 import { VentaMineroComponent } from './pages/venta-minero/venta-minero.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 //pdf
-
 import { ManualUsuarioComponent } from './pages/manual-usuario/manual-usuario.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     PieComponent,
     HomeComponent,
     RegistroComponent,
+    FormularioAdministradorComponent,
+    FormularioMineroComponent,
     IniciarSesionComponent,
     MineroComponent,
     AdministradorComponent,
@@ -66,6 +70,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     SharedModule,
     PdfViewerModule
   ],

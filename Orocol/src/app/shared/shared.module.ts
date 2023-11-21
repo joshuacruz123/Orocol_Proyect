@@ -13,7 +13,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Modal
@@ -21,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //endpoint
 import { HttpClientModule } from '@angular/common/http';
 
@@ -47,7 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    CarouselModule.forRoot(),
+    FormsModule,
     //http
     HttpClientModule
   ],
@@ -71,7 +70,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    CarouselModule,
+    FormsModule,
     HttpClientModule
   ] 
 })
