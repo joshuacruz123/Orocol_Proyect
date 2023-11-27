@@ -1,55 +1,54 @@
-<form>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-            <label class="obligatorio">*Obligatorio</label>
-                <label for="usuario">Nombre(s) <font color="red">*</font></label>
-                <div class="input-group">
-    
-                    <div class="input-group-prepend">
-                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>person</mat-icon></font></span>
-                    </div>
-                    <input  type="text" class="inputt" placeholder="Nombre" name="registroNombreAd" required="">
-                    
+        <label class="obligatorio">*Obligatorio</label>
+            <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
+            <div class="input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>person</mat-icon></font></span>
                 </div>
-    
+                <input  type="text" class="inputt" placeholder="Nombre" formControlName="nombreUsuario" required="">
+                
             </div>
-    
-            <div class="form-group">
-                <label for="usuario">Apellido(s)</label>
-                <div class="input-group">
-    
-                    <div class="input-group-prepend">
-                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>person</mat-icon></font></span>
-                    </div>
-                    <input class="apellido" type="text" class="nobligatorio" placeholder="Apellido" name="registroApellidoAd">
-                    
+
+        </div>
+
+        <div class="form-group">
+            <label for="apellidosUsuario">Apellido(s)</label>
+            <div class="input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>person</mat-icon></font></span>
                 </div>
-    
+                <input class="apellido" type="text" class="nobligatorio" placeholder="Apellido" formControlName="apellidosUsuario">
+                
             </div>
-    
-            <div class="form-group">
-                <label for="correo">Correo <font color="red">*</font></label>
-                <div class="input-group">
-    
-                    <div class="input-group-prepend">
-                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>mail</mat-icon></font></span>
-                    </div>
-                    <input  type="email" class="inputt" placeholder="Correo" name="registroCorreoAd" required placeholder="Te falta digitar el correo electronico." >
-                    
+
+        </div>
+
+        <div class="form-group">
+            <label for="correoUsuario">Correo <font color="red">*</font></label>
+            <div class="input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>mail</mat-icon></font></span>
                 </div>
-    
+                <input  type="email" class="inputt" placeholder="Correo" formControlName="correoUsuario" required placeholder="Te falta digitar el correo electronico." >
+                
             </div>
-    
-            <div class="form-group">
-                <label for="pwd">Contraseña <font color="red">*</font></label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>key</mat-icon></font></span>            
-                    </div>
-     
-                    <input  type="password" class="inputt" placeholder="Crear contraseña" id="pwd" required="" name="registroContrasennaAd">
-                    <input type="hidden" name="idUsuario" value="">
-                    </div>
-            </div> 
+
+        </div>
+
+        <div class="form-group">
+            <label for="passwordUsuario">Contraseña <font color="red">*</font></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>key</mat-icon></font></span>            
+                </div>
+ 
+                <input  type="password" class="inputt" placeholder="Crear contraseña" id="pwd" required="" formControlName="passwordUsuario">
+                </div>
+        </div>
 
             <div class="form-group">
                 <label for="pwd">Tipo de documento <font color="red">*</font></label>
