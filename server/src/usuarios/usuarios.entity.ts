@@ -1,36 +1,36 @@
 // usuario.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne } from 'typeorm';
 import { Rol } from './rol.entity';
 import { Administrador } from '../administrador/administrador.entity'; // Importa la entidad Administrador
 
 enum EstadoUsuario {
   ACTIVO = 'activo',
-  INACTIVO = 'inactivo',
+  INACTIVO = 'inactivo', 
 }
 
-@Entity({ name: 'usuarios' })
+@Entity({ name: 'Usuarios' })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
-  id_usuario: number;
+  idUsuario: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  nombre_usuario: string;
+  nombreUsuario: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  apellidos_usuario: string;
+  apellidosUsuario: string;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  correo_usuario: string;
+  correoUsuario: string;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  password_usuario: string;
+  passwordUsuario: string;
 
   @Column({
     type: 'enum',
     enum: EstadoUsuario,
     default: EstadoUsuario.ACTIVO,
   })
-  estado_usuario: EstadoUsuario;
+  estadoUsuario: EstadoUsuario;
 
   @ManyToOne(() => Rol, rol => rol.usuarios)
   rol: Rol;

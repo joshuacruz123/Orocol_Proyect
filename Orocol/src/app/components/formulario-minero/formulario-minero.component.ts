@@ -9,6 +9,7 @@ import { Usuario } from '../../models/usuarios.model';
   styleUrls: ['./formulario-minero.component.css']
 })
 export class FormularioMineroComponent {
+  /*
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private servicioService: ServicioService) {
@@ -34,4 +35,5 @@ export class FormularioMineroComponent {
       }
     );
   }
+  */
 }

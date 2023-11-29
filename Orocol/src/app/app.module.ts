@@ -36,6 +36,16 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { ManualUsuarioComponent } from './pages/manual-usuario/manual-usuario.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FormsModule } from '@angular/forms';
+import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente.component';
+import { GestionNovedadesMinComponent } from './pages/gestion-novedades-min/gestion-novedades-min.component';
+import { VerNovedadesAdminComponent } from './pages/ver-novedades-admin/ver-novedades-admin.component';
+import { EditarVentaComponent } from './pages/editar-venta/editar-venta.component';
+import { EditarVentaMinComponent } from './pages/editar-venta-min/editar-venta-min.component';
+import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
+import { EditarClienteComponent } from './pages/editar-cliente/editar-cliente.component';
+import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
+import { EditarNovedadMinComponent } from './pages/editar-novedad-min/editar-novedad-min.component';
+import { VerClientesMinComponent } from './pages/ver-clientes-min/ver-clientes-min.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +74,17 @@ import { FormsModule } from '@angular/forms';
     EditarMineroComponent,
     VentaMineroComponent,
     CarouselComponent,
-    ManualUsuarioComponent
+    ManualUsuarioComponent,
+    GestionClienteComponent,
+    GestionNovedadesMinComponent,
+    VerNovedadesAdminComponent,
+    EditarVentaComponent,
+    EditarVentaMinComponent,
+    EditarUsuarioComponent,
+    EditarClienteComponent,
+    EditarProductoComponent,
+    EditarNovedadMinComponent,
+    VerClientesMinComponent
   ],
   imports: [
     BrowserModule,

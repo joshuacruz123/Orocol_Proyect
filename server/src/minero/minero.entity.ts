@@ -12,31 +12,31 @@ enum TipoDocumento {
     Acepto = 'Acepto',
   }
 
-@Entity({ name: 'mineros' })
+@Entity({ name: 'Mineros' })
 export class Minero {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
   IdMinero: number;
 
   @Column({ type: 'enum', enum: TipoDocumento })
-  TipoDoc: TipoDocumento;
+  tipo_documento: TipoDocumento;
 
   @Column({ type: 'bigint', unique: true })
-  NumeroDoc: number;
+  numero_documento: number;
 
   @Column({
   type: 'enum', enum: CambioDocumento, nullable: false})
-  cambioDocumento: CambioDocumento;
+  cambio_documento: CambioDocumento;
   
   @Column({ type: 'mediumint' })
-  Telefono: number;
+  telefono: number;
 
   @Column({ type: 'date' })
-  FechaNacimiento: Date;
+  fecha_nacimiento: Date;
 
   @Column({ type: 'varchar', length: 255, nullable: false})
-  DireccionVivienda: string;
+  direccion_vivienda: string;
 
   @ManyToOne(() => Usuario, { eager: true }) // eager loading para cargar el usuario al recuperar un administrador
   @JoinColumn({ name: 'IdUs_FK' })
-  usuario: Usuario;
+  Usuarios: Usuario; 
 }

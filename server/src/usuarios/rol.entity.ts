@@ -12,24 +12,24 @@ enum EstadoRol {
   INACTIVO = 'inactivo',
 }
 
-@Entity({ name: 'rol' })
+@Entity({ name: 'Rol' })
 export class Rol {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
-  id_rol: number;
+  idRol: number;
 
   @Column({
     type: 'enum',
     enum: TipoRol,
     nullable: false,
   })
-  tipo_rol: TipoRol;
+  tipoRol: TipoRol;
 
   @Column({
     type: 'enum',
     enum: EstadoRol,
     default: EstadoRol.ACTIVO,
   })
-  estado_rol: EstadoRol;
+  estadoRol: EstadoRol;
 
   @OneToMany(() => Usuario, usuario => usuario.rol)
   usuarios: Usuario[];

@@ -3,25 +3,31 @@ donde va a contener los datos y la lógica de negocios*/
 
 //Para crear service:nest g service nombre --no-spec
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Usuario } from './usuarios.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Rol } from './rol.entity';
-import { Administrador } from '../administrador/administrador.entity'
+import { UsuarioMetodos } from './usuarios_metodos.interface';
 import { Minero } from 'src/minero/minero.entity';
 
 @Injectable()
-export class UsuariosService {
+export class UsuariosService implements UsuarioMetodos {
+    private readonly usuariosRepository: Repository<Usuario>;
+    private readonly rolesRepository: Repository<Rol>;
+    private readonly mineroRepository: Repository<Minero>;
+
     constructor(
         @InjectRepository(Usuario)
-        private readonly usuariosRepository: Repository<Usuario>,
+        usuariosRepository: Repository<Usuario>,
         @InjectRepository(Rol)
-        private readonly rolesRepository: Repository<Rol>,
+        rolesRepository: Repository<Rol>,
         @InjectRepository(Minero)
-        private readonly mineroRepository: Repository<Minero>,
-        @InjectRepository(Minero)
-        private readonly administradorRepository: Repository<Administrador>,
-    ) {}
+        mineroRepository: Repository<Minero>,
+    ) {
+        this.usuariosRepository = usuariosRepository;
+        this.rolesRepository = rolesRepository;
+        this.mineroRepository = mineroRepository;
+    }
 
     /*async findOne(idUsuario: number): Promise<Usuario> {
         // Obtiene un usuario por su ID

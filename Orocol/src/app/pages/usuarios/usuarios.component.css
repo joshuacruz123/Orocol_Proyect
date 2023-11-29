@@ -1,25 +1,261 @@
-table {
-    width: 100%;
-  }
-
-.mat-mdc-form-field {
-    font-size: 14px;
-    width: 90%;
-    margin-right: 10px;
-  }
-
-.btnEdit, .btnInact, .btnAdd {
-  cursor: pointer;
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.btnEdit {
-  color: rgb(0, 157, 248);
+/*Estilo de barra de navegacion*/
+.stilnav{
+    list-style-type: none;
+    align-items: center;
 }
 
-.btnInact {
-  color: rgb(255, 0, 0);
+nav li{
+    display: inline;
+
+}
+/*Estilo de tabla*/
+.tabla{
+    background-color: #252121;
+    color: white;
+    width: 220%;
+    height: 70px;
+    align-items: center;
+    border-collapse: collapse;
+}
+ /*Estilos formulario de registro*/
+.contenendorstyle{
+    width: 60%;
+}
+.card{
+    background-color: #252121;
+    color: white;
+    padding: 2%;
 }
 
-.btnAdd {
-  color: rgb(255, 255, 255);
+body {
+    background-repeat: no-repeat;
+    background-size: cover  
+}
+
+h4{
+   text-align: center;
+   color: white;
+}
+
+h2{
+    text-align: inherit;
+}
+
+form button a{
+    text-decoration: none;
+}
+.logo{
+     padding: 5px;
+     margin-right: 120px;
+     width: 25%;
+     background: #252121;
+}
+
+.barra {
+    background: #252121;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.dropdown-menu {
+    margin: 17px;
+    background: #252121;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
+}
+
+.menuperfil {
+    color: white;
+}
+
+.menuperfil:focus {
+    background: #aea023;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
+}
+.menuperfil:hover{
+    background-color: #aea023;
+}
+
+.cerrar:hover {
+    background-color: #a49123;
+}
+
+.user {
+    font-size: 40px;
+    padding: 10px;
+}
+
+
+/*BARRA LATERAL*/
+
+.barra-lateral {
+    background: #252121;
+    color: #fff;
+    min-width: 250px;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.barra-lateral a {
+    color: #fff;
+}
+
+
+/*ESTILOS MENU*/
+
+.barra-lateral .menu a {
+    display: block;
+    padding: 20px;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    border-bottom: #a49123;
+}
+
+.barra-lateral .menu a:hover {
+    background-color:  #a49123;
+    text-decoration: none;
+}
+
+.active {
+    background:  #a49123;;
+}
+
+.barra-lateral .menu {
+    border-top: 5px #fff solid;
+}
+
+.barra-lateral .menu a i {
+    margin-right: 20px;
+}
+
+
+/*MAIN*/
+
+.main {
+    padding-top: 40px;
+}
+
+.main .columna {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+/*mediaquerys*/
+
+@media screen and (max-width:1300px) {
+    .barra-lateral {
+        min-width: auto;
+    }
+    .barra-lateral .menu a span {
+        display: none;
+    }
+    .barra-lateral .menu a i {
+        margin: 0;
+    }
+    .barra {
+        min-width: auto;
+    }
+    .dropdown-menu {
+        margin: 20px -79px 0px;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .barra-lateral {
+        min-height: auto;
+    }
+    .barra-lateral .menu a {
+        display: inline-block;
+        border-bottom: none;
+    }
+    .dropdown-menu {
+        margin: 20px -78px 0px;
+    }
+    .logocppe {
+        width: 100%;
+    }
+    body {
+        background: #a49123;
+        font-size: 16px;
+        overflow: visible;
+    }
+}
+
+
+
+@media screen and (max-width:575px) {
+    .barra-lateral {
+        height: auto;
+    }
+    .barra-lateral.menu a {
+        display: inline-block;
+        border-bottom: none;
+    }
+    .dropdown-menu {
+        margin: 20px -78 0px;
+    }
+    body {
+        font-size: 16px;
+        overflow: visible;
+    }
+}
+table{
+    background-color:#252121 ;
+    color: white;
+    width: 650px;
+}
+
+.my-button {
+    padding: 10px ;
+    background-color: #252121;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.my-button:hover {
+    background-color: #aea023;
+}
+
+.my-button:active {
+    background-color: #aea023;
+}
+
+
+.search-container {
+    display: flex;
+    justify-items: right;
+    justify-content: right;
+    text-align: right;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.search-button {
+    background-color: #252121;
+    color: white;
+    border: 1px solid #000;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #aea023;
 }

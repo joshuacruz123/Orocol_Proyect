@@ -3,14 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { Administrador } from './administrador.entity'; 
+import { UsuarioMetodos } from '../usuarios/usuarios_metodos.interface';
+import { VentaService } from '../venta/venta.service'; // Importa la clase VentaService para asociación
 
-@Injectable() 
-export class AdministradorService extends UsuariosService {
+@Injectable()
+export class AdministradorService extends UsuariosService implements UsuarioMetodos {
     constructor(
-      @InjectRepository(Administrador)
-      private readonly administradorRepository: Repository<Administrador>,
+        @InjectRepository(Administrador)
+        private readonly administradorRepository: Repository<Administrador>,
+        private readonly ventaService: VentaService, // Inyecta VentaService
     ) {
-      super(administradorRepository);
+    super(usuariosRepository, rolesRepository);
     }
 
     async registrarAdmin(cargoAdmin: Administrador): Promise<Administrador> {
@@ -58,5 +61,11 @@ export class AdministradorService extends UsuariosService {
         return this.administradorRepository.findOne(idAdmin);
     }
 
+    /* async ejemploLlamadaVentaService() {
+        // Puedes llamar a métodos de VentaService aquí
+        const resultadoVenta = await this.ventaService.registrarVenta(entradaData);
+        return resultadoVenta;
+    }
+    */
 }
  

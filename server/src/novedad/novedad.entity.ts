@@ -1,6 +1,6 @@
 // turno.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Minero } from './minero.entity';
+import { Minero } from '../minero/minero.entity';
 import { Administrador } from 'src/administrador/administrador.entity';
 
 enum Asistencia {

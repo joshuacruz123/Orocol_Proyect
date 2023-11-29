@@ -11,7 +11,7 @@ export class HomeComponent {
     '../../../assets/img/extraccion.jpg',
     '../../../assets/img/flechaOro.jpg',
   ];
-
+  
   descargarPDF(): void {
     const url = `../../../assets/Manual_orocol.pdf`; 
     const link = document.createElement('a');

@@ -9,6 +9,7 @@ import { Usuario } from '../../models/usuarios.model';
   styleUrls: ['./formulario-administrador.component.css']
 })
 export class FormularioAdministradorComponent {
+  /*
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private servicioService: ServicioService) {
@@ -33,5 +34,5 @@ export class FormularioAdministradorComponent {
         // Puedes manejar el error de alguna manera, mostrar un mensaje al usuario, etc.
       }
     );
-  }
+  }*/
 }
