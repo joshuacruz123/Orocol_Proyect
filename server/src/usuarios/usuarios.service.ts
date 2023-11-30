@@ -17,9 +17,9 @@ export class UsuariosService implements UsuarioMetodos {
     private readonly mineroRepository: Repository<Minero>;
 
     constructor(
-        @InjectRepository(Usuario)
+        @InjectRepository(Usuario) 
         usuariosRepository: Repository<Usuario>,
-        @InjectRepository(Rol)
+        @InjectRepository(Rol) 
         rolesRepository: Repository<Rol>,
         @InjectRepository(Minero)
         mineroRepository: Repository<Minero>,

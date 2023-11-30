@@ -5,15 +5,15 @@ import { UsuariosService } from '../usuarios/usuarios.service';
 import { Administrador } from './administrador.entity'; 
 import { UsuarioMetodos } from '../usuarios/usuarios_metodos.interface';
 import { VentaService } from '../venta/venta.service'; // Importa la clase VentaService para asociación
-
+ 
 @Injectable()
 export class AdministradorService extends UsuariosService implements UsuarioMetodos {
     constructor(
-        @InjectRepository(Administrador)
+        @InjectRepository(Administrador) 
         private readonly administradorRepository: Repository<Administrador>,
-        private readonly ventaService: VentaService, // Inyecta VentaService
+        private readonly ventaServiceRepository: VentaService, // Inyecta VentaService
     ) {
-    super(usuariosRepository, rolesRepository);
+    super(usuariosRepository, rolesRepository);  
     }
 
     async registrarAdmin(cargoAdmin: Administrador): Promise<Administrador> {
@@ -43,7 +43,7 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
 
     async consultarMineros(idAdmin: number): Promise<Administrador> {
         const administrador = await this.administradorRepository.findOne(idAdmin);
-        return administrador;      
+        return administrador;       
     }
 
     async solicitarEditarDoc(cargoAdmin: Administrador): Promise<Administrador> {

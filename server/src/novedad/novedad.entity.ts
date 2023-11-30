@@ -11,10 +11,10 @@ enum Asistencia {
 @Entity({ name: 'novedades' })
 export class Novedad {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
-  Id_Novedad: number;
+  idNovedad: number;
 
   @Column({ type: 'date', nullable: false })
-  fecha_Novedad: Date;
+  fechaNovedad: Date;
 
   @Column({ type: 'text', nullable: false })
   descripcion: Text;

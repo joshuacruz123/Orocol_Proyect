@@ -13,7 +13,7 @@ export class UsuariosController {
     findAll(): Promise<Usuario[]> {
         return this.usuariosService.findAll();
     }*/
-
+    
     @Post()
     iniciarSesion(@Body() usuarioData: Usuario): Promise<Usuario> {
         return this.usuariosService.ingresarAlSistema(usuarioData);

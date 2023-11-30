@@ -30,7 +30,7 @@ export class MineroController {
     responderSolicitud(@Body() mineroData: Minero): Promise<Minero> {
         return this.mineroService.resSolicitudEditarDoc(mineroData);
     }
-
+ 
     @Post()
     registrarAsistencias(@Body() mineroData: Minero): Promise<Minero> {
         return this.mineroService.registrarAsistencia(mineroData);

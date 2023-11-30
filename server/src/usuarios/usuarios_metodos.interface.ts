@@ -7,4 +7,4 @@ export interface UsuarioMetodos {
   solicitarReactivacion(usuarioData: Usuario): Promise<Usuario>;
   editarUsuario(idUsuario: number, usuarioData: Usuario): Promise<Usuario>;
   inactivarUsuario(idUsuario: number): Promise<void>;
-}
+} 

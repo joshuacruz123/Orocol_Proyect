@@ -2,15 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EntradaVenta } from './entradaventas.entity';
-
+import { SalidaVenta } from './salidaventas.entity';
+import { CompraService } from '../compra/compra.service';
+import { ProductoService } from '../producto/producto.service'
+import { NovedadService } from '../novedad/novedad.service'
+ 
 @Injectable()
 export class VentaService {
-    constructor(
+    constructor( 
         @InjectRepository(EntradaVenta)
         private readonly entradaVentaRepository: Repository<EntradaVenta>,
+        private readonly compraServiceRepository: CompraService,
+        private readonly productoServiceRepository: ProductoService,
+        private readonly novedadServiceRepository: NovedadService,
     ) {}
 
-    async registrarVenta(entradaData: EntradaVenta): Promise<EntradaVenta> {
+    async insertarVenta(entradaData: EntradaVenta): Promise<EntradaVenta> {
         const nuevoVenta = this.entradaVentaRepository.create(entradaData);
         return this.entradaVentaRepository.save(nuevoVenta);
     }
@@ -25,34 +32,21 @@ export class VentaService {
         return this.entradaVentaRepository.findOne(idGestionVenta);
     }
 
-    async verNoverVentaero(idGestionVenta: number): Promise<EntradaVenta> {
-        const verNovMin = this.entradaVentaRepository.findOne(idGestionVenta);
-        return verNovMin;
+    async anularVenta(idGestionVenta: number, entradaData: EntradaVenta): Promise<EntradaVenta> {
+        await this.entradaVentaRepository.update(idGestionVenta, entradaData);
+        return this.entradaVentaRepository.findOne(idGestionVenta);
     }
 
-    async registrarMinero(entradaData: EntradaVenta): Promise<EntradaVenta> {
-        const nuevoMinero = this.entradaVentaRepository.create(entradaData);
-        return this.entradaVentaRepository.save(nuevoMinero);
-    }
 
-    async consultarMineros(idGestionVenta: number): Promise<EntradaVenta> {
+    async GenerarReporteVenta(idGestionVenta: number): Promise<EntradaVenta> {
         const EntradaVenta = await this.entradaVentaRepository.findOne(idGestionVenta);
         return EntradaVenta;      
     }
 
-    async solicitarEditarDoc(entradaData: EntradaVenta): Promise<EntradaVenta> {
-        const solicitudMinero = this.entradaVentaRepository.create(entradaData);
-        return this.entradaVentaRepository.save(solicitudMinero);
-    }
-
-    async editarMinero(idGestionVenta: number, entradaData: EntradaVenta): Promise<EntradaVenta> {
-        await this.entradaVentaRepository.update(idGestionVenta, entradaData);
-        return this.entradaVentaRepository.findOne(idGestionVenta);
-    }
-
-    async reactivarMinero(idGestionVenta: number, entradaData: EntradaVenta): Promise<EntradaVenta> {
-        await this.entradaVentaRepository.update(idGestionVenta, entradaData);
-        return this.entradaVentaRepository.findOne(idGestionVenta);
-    }
+    /*
+    async MostrarIndicadoresFinancierosMes(idGestionVenta: number): Promise<EntradaVenta> {
+        const EntradaVenta = await this.entradaVentaRepository.findOne(idGestionVenta);
+        return EntradaVenta;      
+    } */
 }
  

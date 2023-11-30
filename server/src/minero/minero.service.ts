@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { Minero } from './minero.entity'; 
 import { UsuarioMetodos } from '../usuarios/usuarios_metodos.interface';
+import { VentaService } from '../venta/venta.service'; 
 
 @Injectable()
 export class  MineroService extends UsuariosService implements UsuarioMetodos {
     constructor(
         @InjectRepository(Minero)
         private readonly mineroRepository: Repository<Minero>,
+        private readonly ventaServiceRepository: VentaService,
     ) {
         super(usuariosRepository, rolesRepository);
     }
@@ -43,6 +45,13 @@ export class  MineroService extends UsuariosService implements UsuarioMetodos {
         const nuevoMinero = this.mineroRepository.create(mineroData);
         return this.mineroRepository.save(nuevoMinero); 
     }
+
+    /* async ejemploLlamadaVentaService() {
+        // Puedes llamar a métodos de VentaService aquí
+        const resultadoVenta = await this.ventaService.registrarVenta(entradaData);
+        return resultadoVenta;
+    }
+    */
 
 }
  
