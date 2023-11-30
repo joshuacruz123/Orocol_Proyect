@@ -2,10 +2,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Minero } from '../minero/minero.entity';
 import { Administrador } from 'src/administrador/administrador.entity';
-
+ 
 enum Asistencia {
   Si = 'Sí',
-  No = 'Nó',
+  No = 'Nó',  
 }
 
 @Entity({ name: 'novedades' })

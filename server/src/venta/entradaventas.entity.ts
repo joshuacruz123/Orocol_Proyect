@@ -4,7 +4,7 @@ import { Minero } from '../minero/minero.entity';
   enum EstadoVenta {
     ACTIVO = 'Activo',
     INACTIVO = 'Inactivo', 
-  } 
+  }  
 
 @Entity({ name: 'EntradaVentas' })
 export class EntradaVenta {

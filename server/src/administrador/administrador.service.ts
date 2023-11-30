@@ -54,7 +54,7 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
     async editarMinero(idAdmin: number, cargoAdmin: Administrador): Promise<Administrador> {
         await this.administradorRepository.update(idAdmin, cargoAdmin);
         return this.administradorRepository.findOne(idAdmin);
-    }
+    } 
 
     async reactivarMinero(idAdmin: number, cargoAdmin: Administrador): Promise<Administrador> {
         await this.administradorRepository.update(idAdmin, cargoAdmin);

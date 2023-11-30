@@ -8,7 +8,7 @@ export class ProductoService {
     constructor(
         @InjectRepository(Producto)
         private readonly productoRepository: Repository<Producto>,
-    ) {}
+    ) {}  
 
     async insertarProducto(productoData: Producto): Promise<Producto> {
         const nuevoProducto = this.productoRepository.create(productoData);

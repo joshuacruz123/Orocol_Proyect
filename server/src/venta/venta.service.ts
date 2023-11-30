@@ -7,7 +7,7 @@ import { CompraService } from '../compra/compra.service';
 import { ProductoService } from '../producto/producto.service'
 import { NovedadService } from '../novedad/novedad.service'
  
-@Injectable()
+@Injectable() 
 export class VentaService {
     constructor( 
         @InjectRepository(EntradaVenta)
@@ -37,8 +37,7 @@ export class VentaService {
         return this.entradaVentaRepository.findOne(idGestionVenta);
     }
 
-
-    async GenerarReporteVenta(idGestionVenta: number): Promise<EntradaVenta> {
+    async generarReporteVenta(idGestionVenta: number): Promise<EntradaVenta> {
         const EntradaVenta = await this.entradaVentaRepository.findOne(idGestionVenta);
         return EntradaVenta;      
     }

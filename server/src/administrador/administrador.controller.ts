@@ -8,7 +8,7 @@ export class AdministradorController {
     /*
     @Get()
     findAll(): Promise<Usuario[]> {
-        return this.usuariosService.findAll();
+        return this.usuariosService.findAll(); 
     }*/
 
     @Post()
@@ -19,7 +19,7 @@ export class AdministradorController {
     @Get(':idAdmin')
     verAdmin(idAdmin: number): Promise<Administrador> {
         return this.administradorService.consultarAdmin(idAdmin);
-    }
+    } 
     
     @Put(':idAdmin')
     editarUsuario(@Param('idAdmin') idAdmin: number, @Body() cargoAdmin: Administrador): Promise<Administrador> {

@@ -6,7 +6,7 @@ import { Minero } from './minero.entity';
 import { UsuarioMetodos } from '../usuarios/usuarios_metodos.interface';
 import { VentaService } from '../venta/venta.service'; 
 
-@Injectable()
+@Injectable() 
 export class  MineroService extends UsuariosService implements UsuarioMetodos {
     constructor(
         @InjectRepository(Minero)

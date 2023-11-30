@@ -5,13 +5,13 @@ import { Cliente } from '../compra/cliente.entity';
 
 @Injectable() 
 export class CompraService {
-    constructor(
+    constructor( 
         @InjectRepository(Cliente)
         private readonly clienteRepository: Repository<Cliente>,
     ) {}
 
-    async insertarCliente(entradaData: Cliente): Promise<Cliente> {
-        const nuevoCliente = this.clienteRepository.create(entradaData);
+    async insertarCliente(compraData: Cliente): Promise<Cliente> {
+        const nuevoCliente = this.clienteRepository.create(compraData);
         return this.clienteRepository.save(nuevoCliente);
     }
     
@@ -20,13 +20,13 @@ export class CompraService {
         return Cliente;      
     }
 
-    async editarCliente(IdCliente: number, entradaData: Cliente): Promise<Cliente> {
-        await this.clienteRepository.update(IdCliente, entradaData);
+    async editarCliente(IdCliente: number, compraData: Cliente): Promise<Cliente> {
+        await this.clienteRepository.update(IdCliente, compraData);
         return this.clienteRepository.findOne(IdCliente);
     }
 
-    async anularCliente(IdCliente: number, entradaData: Cliente): Promise<Cliente> {
-        await this.clienteRepository.update(IdCliente, entradaData);
+    async anularCliente(IdCliente: number, compraData: Cliente): Promise<Cliente> {
+        await this.clienteRepository.update(IdCliente, compraData);
         return this.clienteRepository.findOne(IdCliente);
     }
 
