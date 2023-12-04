@@ -5,36 +5,45 @@ import { Cliente } from './cliente.entity';
 @Controller('compra')
 export class CompraController {
     constructor(private readonly compraService: CompraService) {}
-    /*
-    @Get()
-    findAll(): Promise<Usuario[]> {
-        return this.usuariosService.findAll(); 
-    }*/
 
     @Post()
-    registrarCompra(@Body() compraData: Cliente): Promise<Cliente> {
+    async registrarCompra(@Body() compraData: Cliente): Promise<Cliente> {
         return this.compraService.insertarCliente(compraData);
     }
+    // Método para controlar 
     
-    @Get(':IdCliente')
-    verCliente(IdCliente: number): Promise<Cliente> {
-        return this.compraService.consultarCliente(IdCliente);
-    } 
+    @Get()
+    async verCliente(): Promise<Cliente[]> {
+        return this.compraService.consultarCliente();
+    }
+    // Método para controlar
     
     @Put(':IdCliente')
-    actualizarCompra(@Param('IdCliente') IdCliente: number, @Body() compraData: Cliente): Promise<Cliente> {
-        return this.compraService.editarCliente(IdCliente, compraData);
+    async actualizarProducto(@Param('IdCliente') IdCliente: number, @Body() compraData: Cliente): Promise<Cliente> {
+        try {
+            return await this.compraService.editarCliente(IdCliente, compraData);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
     }
+    // Método para controlar 
 
-    @Put(':IdCliente')
-    anularCompra(@Param('IdCliente') IdCliente: number, @Body() compraData: Cliente): Promise<Cliente> {
-        return this.compraService.anularCliente(IdCliente, compraData);
-    }
+    @Put('/inactivar/:IdCliente')
+    async inactivarProducto(@Param('IdCliente') IdCliente: number): Promise<string> {
+        try {
+            await this.compraService.anularCompra(IdCliente);
+            return 'La compra ahora es inactiva en el sistema.';
+        } catch (error) {
+            return `Error al inactivar compra: ${error.message}`;
+        }
+    } 
+    // Método para controlar  
 
     @Get()
-    generarReportesCompra(): Promise<Cliente[]> {
+    async generarReportesCompra(): Promise<Cliente[]> {
         return this.compraService.GenerarReporteCompra(); 
     }
+    // Método para controlar  
 
     /*
     @Delete(':IdCliente')

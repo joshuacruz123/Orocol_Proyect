@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <body>
 <header>
     <img class="logo" src="../../../assets/img/logo-orocol.jpg" alt="Orocol">
@@ -5,33 +6,43 @@
     <nav id="menu" class="menuPrincipal">
     <button id="cerrar" class="cerrarMenu"><i class="bi bi-three-dots"></i></button>
         <ul class="listaMenu">
-          <li><a href=""><mat-icon class="icono">home</mat-icon> Regresar</a></li>
+            <li><a href=""><i class="fas fa-arrow-left"></i> Regresar</a></li>
         </ul>
     </nav>
 </header>
-<br><br><br> 
-<br> 
-    <br>
-    <br>
-    <form class="form" name="login" class="login" action="/login" method="post" >
-        <div>
-            <h2>Ingrese su correo y contraseña</h2>
-        </div>
-        <div class="content">
-            <p type="Usuario">
-            <input type="email" name="loginCorreo" required placeholder="Digite su correo electronico">
-            </p>
-            <p type="contraseña"><input type="password" name="loginPassword" required placeholder="Digite su contrasena"></p>	
-        </div>
- 
-        <div >
-            <a href="Administrador" class="btn btn-success btn-lg">Ingresar</a>
-        </div>
-    </form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+<form class="form" name="login" class="login" action="/login" method="post">
+    <h1>Iniciar Sesión</h1>
+    <label>Usuario</label><br>
+    <input type="text" required placeholder="Digite el nombre de usuario" pattern=".*\S+.*" title="Campo obligatorio" id="usuario" minlength="4" maxlength="20">
+    <span class="error-message" id="usuario-error">Campo obligatorio (4-20 caracteres)</span><br>
+    
+    <label>Contraseña</label><br>
+    <input type="password" required placeholder="Digite su contraseña" pattern=".*\S+.*" title="Campo obligatorio" id="contrasena" minlength="6" maxlength="15">
+    <span class="error-message" id="contrasena-error">Campo obligatorio (6-15 caracteres)</span><br>
+    
+    <input type="submit" value="Enviar" onclick="return validarFormulario()">
+</form>
+
+    <script>
+        function validarFormulario() {
+            var usuario = document.getElementById('usuario');
+            var contrasena = document.getElementById('contrasena');
+            var usuarioError = document.getElementById('usuario-error');
+            var contrasenaError = document.getElementById('contrasena-error');
+    
+            if (!usuario.validity.valid) {
+                usuarioError.style.display = 'inline';
+            } else {
+                usuarioError.style.display = 'none';
+            }
+    
+            if (!contrasena.validity.valid) {
+                contrasenaError.style.display = 'inline';
+            } else {
+                contrasenaError.style.display = 'none';
+            }
+    
+            return usuario.validity.valid && contrasena.validity.valid;
+        }
+    </script>
 <app-pie></app-pie>
-</body>

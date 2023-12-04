@@ -14,3 +14,4 @@ export class Administrador {
   @JoinColumn({ name: 'IdUs_FK' })
   usuario: Usuario;
 }
+ 

@@ -7,7 +7,7 @@ enum EstadoUsuario {
   ACTIVO = 'activo',
   INACTIVO = 'inactivo', 
 }
-
+ 
 @Entity({ name: 'Usuarios' })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
@@ -18,8 +18,8 @@ export class Usuario {
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   apellidosUsuario: string;
-
-  @Column({ type: 'varchar', length: 255, nullable: false })
+ 
+  @Column({ type: 'varchar', length: 255, unsigned: true, nullable: false })
   correoUsuario: string;
 
   @Column({ type: 'varchar', length: 255, nullable: false })

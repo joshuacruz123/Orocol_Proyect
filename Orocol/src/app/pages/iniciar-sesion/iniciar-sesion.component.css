@@ -1,16 +1,20 @@
+*{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .logo {
     max-width: 22rem;
     margin-left: 4px;
   }
+
   
-  header {
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 3rem;
     background-color: #010101;
   }
-  
   .listaMenu {
     list-style-type: none;
     display: flex;
@@ -33,80 +37,95 @@
     padding: 15px;
     font-size: 20px;
   }
-  
-  @media screen and (max-width: 550px) {
-    
-    .abrirMenu,
-    .cerrarMenu {
-        display: block;
-        border: none;
-        font-size: 2.5rem;
-        cursor:pointer
-    }
-  
-    .cerrarMenu {
-        background-color: transparent;
-        color: white;
-    }
-  
-    .abrirMenu {
-        background-color: transparent;
-        color: #ececec;
-    }
-  
-    .menuPrincipal{
-        opacity: 0;
-        visibility: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: end;
-        gap: 1.5rem;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: black;
-        padding: 2rem;
-        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.35);
-    }
-  
-    .menuPrincipal.visible{
-        opacity: 1;
-        visibility: visible;
-    }
-  
-    .listaMenu {
-        flex-direction: column;
-        align-items: end;
-    }
-  
-    .listaMenu li a {
-        color: white;
-    }
-  }
+.a
+{
+    background:#ffffff;color:white; font-family: 'montserrat', sans-serif;
+}
 
-body{background-image: url('../../../assets/img/background.jpg');
+/*formulario de registro*/
+
+form {
+width:500px;
+padding:16px;
+height:60vh;
+background:#000000;
+border-radius:10px;
+margin:auto;
+box-shadow:0 0 40px -10px rgb(160, 146, 45);
+margin:calc(50vh - 220px) auto;
+padding:20px 30px;
+max-width:
+calc(100vw - 40px);
+box-sizing:border-box;
+font-family:'Montserrat',sans-serif;
+position:relative;
+}
+
+
+
+h1 {
+    color:#ffffff; 
+text-align: center;
+font-size: 30px;
+}
+
+input { 
+width:100%;
+padding:5px;
+box-sizing:border-box;
+background:none;
+outline:none;
+resize:none;
+border:0;
+font-family:'Montserrat',sans-serif;
+transition:all .3s;
+border-bottom:2px solid #ffffff; 
+color: white;
+}
+
+input:focus {
+border-bottom:2px solid #aea023
+}
+
+label {
+content:attr(type);
+display:block;
+margin:28px 0 0;font-size:14px;
+color:#ffffff;
+font-size: 20px;
+}
+body {
+    background: url(../../../assets/img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    height: 150vh;
 }
-.a{
-    background:#78788c;color:white; font-family: 'montserrat', sans-serif;
+
+input[type="submit"] {
+    background-color: #000000; 
+    border: none; 
+    color: rgb(255, 255, 255); 
+    padding: 12px 24px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px;
+    cursor: pointer; 
+    border-radius: 6px; 
+    width: 100px;
+    border: 1px solid white;
+    margin-top: 10px;
 }
-.form{
-    width:40%;padding:16px;height:140%;background:#000000;border-radius:10px;margin:auto;box-shadow:0 0 40px -10px #c4a415;opacity: 0.7;margin:calc(60vh - 220px) auto;padding:20px 30px;max-width:calc(100vw - 40px);box-sizing:border-box;font-family:'Montserrat',sans-serif;position:relative
+
+input[type="submit"]:hover {
+    background-color: rgb(160, 146, 45);
+    color: rgb(0, 0, 0); 
 }
-h2{
-    margin:10px 0;padding-bottom:10px;width:180px;color:#fffcfc;border-bottom:3px solid #ffffff;text-align: center;
-}
-input{
-    width:100%;padding:5px;box-sizing:border-box;color:#ffffff;background:none;outline:none;resize:none;border:0;font-family:'Montserrat',sans-serif;transition:all .3s;border-bottom:2px solid #000000
-}
-input:focus{
-    border-bottom:2px solid #ffffff
-}
-p:before{
-    content:attr(type);display:block;margin:28px 0 0;font-size:14px;color:#ffffff
-}
-.Enviar:hover{ 
-    background-color: #c4a415;
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
 }

@@ -3,6 +3,12 @@
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
+    body {
+        background-image: url("../../../assets/img/bakground_2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover  
+    }
+
     ul, ol {
         list-style:none;
     }

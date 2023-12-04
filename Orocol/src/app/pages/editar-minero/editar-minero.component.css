@@ -11,6 +11,12 @@
     margin-left: 2%;
     margin-top: 1%;
  }
+
+ body {
+  background-image: url("../../../assets/img/bakground_2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover  
+}
  
  .logo{
    padding: 5px;

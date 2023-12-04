@@ -105,8 +105,8 @@ color:white;
     }
 
     body {
-        background-image: url('background.jpg');
-	    background-repeat: no-repeat;
+        background-image: url("../../../assets/img/bakground_2.jpg");
+        background-repeat: no-repeat;
         background-size: cover  
     }
     .logo{

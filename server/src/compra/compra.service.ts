@@ -9,32 +9,43 @@ export class CompraService {
         @InjectRepository(Cliente)
         private readonly clienteRepository: Repository<Cliente>,
     ) {}
-
+ 
     async insertarCliente(compraData: Cliente): Promise<Cliente> {
-        const nuevoCliente = this.clienteRepository.create(compraData);
-        return this.clienteRepository.save(nuevoCliente);
+        return await this.clienteRepository.save(nuevoCliente);
     }
+    // Método para 
     
-    async consultarCliente(IdCliente: number): Promise<Cliente> {
-        const Cliente = await this.clienteRepository.findOne(IdCliente);
-        return Cliente;      
-    }
-
+    async consultarCliente(): Promise<Cliente[]> {
+        return await this.clienteRepository.find();
+      }
+    // Método para 
+ 
     async editarCliente(IdCliente: number, compraData: Cliente): Promise<Cliente> {
-        await this.clienteRepository.update(IdCliente, compraData);
-        return this.clienteRepository.findOne(IdCliente);
+        const cliente = await this.clienteRepository.findOne(IdCliente);
+        if (!cliente) {
+          throw new NotFoundException('producto no encontrado');
+        }
+    
+        return await this.clienteRepository.save({ ...cliente, ...compraData });
     }
+    // Método para
 
-    async anularCliente(IdCliente: number, compraData: Cliente): Promise<Cliente> {
-        await this.clienteRepository.update(IdCliente, compraData);
-        return this.clienteRepository.findOne(IdCliente);
+    async anularCompra(IdCliente: number): Promise<void> {
+        const compra = await this.clienteRepository.findOne(IdCliente);
+        if (!compra) {
+          throw new NotFoundException('Compra no encontrada');
+        }
+    
+        compra.estadoCompra = 'Terminado'; 
+        await this.clienteRepository.save(compra);
+      } 
+    
+    // Método para 
+
+    async GenerarReporteCompra(): Promise<Cliente[]> {
+        return await this.clienteRepository.find();
     }
-
-
-    async GenerarReporteCompra(IdCliente: number): Promise<Cliente> {
-        const Cliente = await this.clienteRepository.findOne(IdCliente);
-        return Cliente;      
-    }
+    // Método para 
 
     /*
     async MostrarIndicadoresFinancierosMes(IdCliente: number): Promise<Cliente> {

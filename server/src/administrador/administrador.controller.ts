@@ -1,59 +1,59 @@
-import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, NotFoundException } from '@nestjs/common';
 import { AdministradorService } from './administrador.service';
 import { Administrador } from './administrador.entity';
+import { Usuario } from 'src/usuarios/usuarios.entity';
+import { Minero } from '../minero/minero.entity';
 
 @Controller('administrador')
 export class AdministradorController {
     constructor(private readonly administradorService: AdministradorService) {}
-    /*
-    @Get()
-    findAll(): Promise<Usuario[]> {
-        return this.usuariosService.findAll(); 
-    }*/
-
+    
     @Post()
-    registrarAdministrador(@Body() cargoAdmin: Administrador): Promise<Administrador> {
+    async registrarAdministrador(@Body() cargoAdmin: Administrador): Promise<Administrador> {
         return this.administradorService.registrarAdmin(cargoAdmin);
     }
-    
+
     @Get(':idAdmin')
-    verAdmin(idAdmin: number): Promise<Administrador> {
-        return this.administradorService.consultarAdmin(idAdmin);
-    } 
-    
+    async verAdmin(@Param('idAdmin') idAdmin: number): Promise<Administrador> {
+        try {
+            return await this.administradorService.consultarAdmin(idAdmin);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
+    }
+
     @Put(':idAdmin')
-    editarUsuario(@Param('idAdmin') idAdmin: number, @Body() cargoAdmin: Administrador): Promise<Administrador> {
-        return this.administradorService.editarAdmin(idAdmin, cargoAdmin);
+    async editarUsuario(@Param('idAdmin') idAdmin: number, @Body() cargoAdmin: Administrador): Promise<Administrador> {
+        try {
+            return await this.administradorService.editarAdmin(idAdmin, cargoAdmin);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
     }
 
-    @Get(':idAdmin')
-    verNovedadMineros(idAdmin: number): Promise<Administrador> {
-        return this.administradorService.verNoveradMinero(idAdmin);
-    }
-
-    @Get(':idAdmin')
-    verMineros(idAdmin: number): Promise<Administrador> {
-        return this.administradorService.consultarMineros(idAdmin);
-    }
-
-    @Post()
-    registrarMineros(@Body() cargoAdmin: Administrador): Promise<Administrador> {
-        return this.administradorService.registrarMinero(cargoAdmin);
-    }
-    
+    /*
     @Post()
     solicitarEdicionDoc(@Body() cargoAdmin: Administrador): Promise<Administrador> {
         return this.administradorService.solicitarEditarDoc(cargoAdmin);
+    } */
+
+    @Get()
+    async consultarAdministradores(): Promise<Administrador[]> {
+        return this.administradorService.consultarAdministradores();
     }
 
-    @Put(':idAdmin')
-    editarMineros(@Param('idAdmin') idAdmin: number, @Body() cargoAdmin: Administrador): Promise<Administrador> {
-        return this.administradorService.editarMinero(idAdmin, cargoAdmin);
+    @Get('mineros')
+    async consultarMineros(): Promise<Minero[]> {
+        return this.administradorService.consultarMineros();
     }
 
-    /*
-    @Delete(':idAdmin')
-    eliminarUsuario(@Param('idAdmin') idAdmin: number): Promise<void> {
-        return this.administradorService.delete(idAdmin);
-    }*/
+    @Post('registrar-minero')
+    async registrarMinero(@Body() mineroData: Minero): Promise<Minero> {
+        return this.administradorService.registrarMinero(mineroData);
+    }
+
+    @Put('reactivar-usuario/:idUsuario')
+    async reactivarUsuario(@Param('idUsuario') idUsuario: number, @Body() usuarioData: Usuario): Promise<Usuario> {
+        return this.administradorService.reactivarUsuario(idUsuario, usuarioData);
+    }
 }

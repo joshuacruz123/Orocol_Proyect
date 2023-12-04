@@ -34,8 +34,8 @@ nav li{
     color: white;
     padding: 2%;
 }
-
 body {
+    background-image: url("../../../assets/img/bakground_2.jpg");
     background-repeat: no-repeat;
     background-size: cover  
 }

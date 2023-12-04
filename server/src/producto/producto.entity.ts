@@ -2,8 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 't
 import { EntradaVenta } from '../venta/entradaventas.entity';
   
   enum EstadoProducto {
-    ACTIVO = 'Activo',
-    INACTIVO = 'Inactivo', 
+    ACTIVO = 'Disponible',
+    INACTIVO = 'No disponible', 
   }
 
 @Entity({ name: 'Productos' })
@@ -19,7 +19,7 @@ export class Producto {
     enum: EstadoProducto,
     default: EstadoProducto.ACTIVO,
   })
-  Estadoproducto: EstadoProducto;
+  estadoProducto: EstadoProducto;
   
 
   @ManyToOne(() => EntradaVenta, { eager: true }) 

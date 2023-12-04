@@ -11,19 +11,28 @@ export class NovedadService {
         @InjectRepository(Novedad)
         private readonly novedadRepository: Repository<Novedad>,
     ) {}
-
+ 
     async insertarNovedad(novedadData: Novedad): Promise<Novedad> {
-        const nuevoNovedad = this.novedadRepository.create(novedadData);
-        return this.novedadRepository.save(nuevoNovedad);
+        return await this.novedadRepository.save(nuevoNovedad);
     }
-    
-    async consultarNovedad(idNovedad: number): Promise<Novedad> {
-        const Novedad = await this.novedadRepository.findOne(idNovedad);
-        return Novedad;      
-    }
+    // Método para 
+
+    async consultarNovedad(): Promise<Novedad[]> {
+        return await this.novedadRepository.find();
+      }
+    // Método para
 
     async editarNovedad(idNovedad: number, novedadData: Novedad): Promise<Novedad> {
         await this.novedadRepository.update(idNovedad, novedadData);
         return this.novedadRepository.findOne(idNovedad);
     }
+    async editarNovedad(idNovedad: number, novedadData: Novedad): Promise<Novedad> {
+        const novedad = await this.novedadRepository.findOne(idNovedad);
+        if (!novedad) {
+          throw new NotFoundException('producto no encontrado');
+        } 
+    
+        return await this.novedadRepository.save({ ...novedad, ...novedadData });
+    }
+    // Método para
 }

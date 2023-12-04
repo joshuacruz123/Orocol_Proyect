@@ -23,7 +23,7 @@ export class Minero {
   @Column({ type: 'bigint', unique: true })
   numero_documento: number;
 
-  @Column({
+  @Column({ 
   type: 'enum', enum: CambioDocumento, nullable: false})
   cambio_documento: CambioDocumento;
   

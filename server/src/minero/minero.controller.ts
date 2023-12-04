@@ -12,20 +12,31 @@ export class MineroController {
     }*/
 
     @Post()
-    registrarMinerosPropio(@Body() mineroData: Minero): Promise<Minero> {
+    async registrarMinerosPropio(@Body() mineroData: Minero): Promise<Minero> {
         return this.mineroService.registrarMinero(mineroData);
     }
+
     
     @Get(':IdMinero')
-    consultarMineroPropio(IdMinero: number): Promise<Minero> {
-        return this.mineroService.consultarMinero(IdMinero);
+    async consultarMineroPropio(@Param('IdMinero') IdMinero: number): Promise<Minero> {
+        try {
+            return await this.mineroService.consultarMinero(IdMinero);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
     }
+
     
     @Put(':IdMinero')
-    editarMineroPropio(@Param('IdMinero') IdMinero: number, @Body() mineroData: Minero): Promise<Minero> {
-        return this.mineroService.editarMinero(IdMinero, mineroData);
+    async editarMineroPropio(@Param('IdMinero') IdMinero: number, @Body() mineroData: Minero): Promise<Minero> {
+        try {
+            return await this.mineroService.editarMinero(IdMinero, mineroData);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
     }
     
+    /*
     @Post()
     responderSolicitud(@Body() mineroData: Minero): Promise<Minero> {
         return this.mineroService.resSolicitudEditarDoc(mineroData);
@@ -40,7 +51,7 @@ export class MineroController {
     EnviarNovedad(@Body() mineroData: Minero): Promise<Minero> {
         return this.mineroService.registrarNovedad(mineroData);
     }
-
+    */
     /*
     @Delete(':IdMinero')
     eliminarUsuario(@Param('IdMinero') IdMinero: number): Promise<void> {

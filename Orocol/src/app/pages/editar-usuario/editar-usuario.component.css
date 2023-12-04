@@ -46,9 +46,10 @@ padding:2px 2px;
         right:-140px;
         top:0px;
     }
-    body{
-    background-repeat: no-repeat;
-    background-size: cover
+    body {
+        background-image: url("../../../assets/img/bakground_2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover  
     }
     .a
     {
@@ -104,11 +105,6 @@ padding:2px 2px;
     color:#ffffff
     }
 
-    body {
-        background-image: url('background.jpg');
-	    background-repeat: no-repeat;
-        background-size: cover  
-    }
 
     .logo{
         padding: 5px;

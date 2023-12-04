@@ -4,41 +4,89 @@ import { EntradaVenta } from './entradaventas.entity';
 import { SalidaVenta } from './salidaventas.entity';
 
 @Controller('venta')
-export class VentaController {
-    constructor(private readonly ventaService: VentaService) {}
-    /*
-    @Get()
-    findAll(): Promise<Usuario[]> {
-        return this.usuariosService.findAll(); 
-    }*/
+export class VentaController { 
+  constructor(private readonly ventaService: VentaService) {}
 
-    @Post()
-    registrarVenta(@Body() ventaData: EntradaVenta): Promise<EntradaVenta> {
-        return this.ventaService.insertarVenta(ventaData);
+  @Post('/minero')
+  async registrarVentaMinero(@Body() ventaData: EntradaVenta): Promise<string> {
+    try {
+      await this.ventaService.insertarVentaMinero(ventaData);
+      return 'Registro en la tabla EntradaVenta exitosa.';
+    } catch (error) {
+      return `Error al insertar en la entidad EntradaVenta: ${error.message}`;
     }
-    
-    @Get(':idGestionVenta')
-    verVenta(idGestionVenta: number): Promise<EntradaVenta> {
-        return this.ventaService.consultarVenta(idGestionVenta);
-    }
-    
-    @Put(':idGestionVenta')
-    actualizarVenta(@Param('idGestionVenta') idGestionVenta: number, @Body() ventaData: EntradaVenta): Promise<EntradaVenta> {
-        return this.ventaService.editarVenta(idGestionVenta, ventaData);
-    }
+  } 
 
-    @Put(':idGestionVenta')
-    anularVentas(@Param('idGestionVenta') idGestionVenta: number, @Body() ventaData: EntradaVenta): Promise<EntradaVenta> {
-        return this.ventaService.anularVenta(idGestionVenta, ventaData);
+  @Get('/minero')
+  async verVentaMinero(): Promise<EntradaVenta[]> {
+    try {
+      return await this.ventaService.consultarVenta();
+    } catch (error) {
+      return `Error al conseguir los registros: ${error.message}`;
     }
+  }
 
-    @Get()
-    generarReportesVentas(): Promise<EntradaVenta[]> {
-        return this.ventaService.generarReporteVenta(); 
+  @Post('/administrador')
+  async registrarVentaAdministrador(@Body() salidaData: SalidaVenta): Promise<string> {
+    try {
+      await this.ventaService.insertarVentaAdministrador(salidaData);
+      return 'Registro en la tabla SalidaVenta exitosa.';
+    } catch (error) {
+      return `Error al insertar en la entidad SalidaVenta: ${error.message}`;
     }
-    /*
-    @Delete(':idGestionVenta')
-    eliminarUsuario(@Param('idGestionVenta') idGestionVenta: number): Promise<void> {
-        return this.ventaService.delete(idGestionVenta);
-    }*/
+  }
+
+  @Get('/administrador')
+  async verVentaAdministrador(): Promise<SalidaVenta[]> {
+    try {
+      return await this.ventaService.consultarSalidaVenta();
+    } catch (error) {
+      return `Error al conseguir los registros: ${error.message}`;
+    }
+  }
+
+  @Put('/minero/:idGestionVenta')
+  async actualizarVentaMinero(
+    @Param('idGestionVenta') idGestionVenta: number,
+    @Body() ventaData: EntradaVenta,
+  ): Promise<EntradaVenta | string> {
+    try {
+      const venta = await this.ventaService.editarVentaMinero(idGestionVenta, ventaData);
+      return venta || 'No se encontró la venta.';
+    } catch (error) {
+      return `Error al editar tus datos: ${error.message}`;
+    }
+  }
+
+  @Put('/administrador/:idGestionVenta')
+  async actualizarVentaAdministrador(
+    @Param('idGestionVenta') idGestionVenta: number,
+    @Body() salidaData: SalidaVenta,
+  ): Promise<SalidaVenta | string> {
+    try {
+      const venta = await this.ventaService.editarVentaAdministrador(idGestionVenta, salidaData);
+      return venta || 'No se encontró la venta.';
+    } catch (error) {
+      return `Error al editar tus datos: ${error.message}`;
+    }
+  }
+
+  @Put('/inactivar/:idGestionVenta')
+  async inactivarVenta(@Param('idGestionVenta') idGestionVenta: number): Promise<string> {
+    try {
+      await this.ventaService.inactivarVenta(idGestionVenta);
+      return 'La venta ahora es inactiva en el sistema.';
+    } catch (error) {
+      return `Error al inactivar venta: ${error.message}`;
+    }
+  } 
+
+  @Get('/reporte')
+  async generarReportesVentas(): Promise<EntradaVenta[] | string> {
+    try {
+      return await this.ventaService.generarReporteVenta();
+    } catch (error) {
+      return `Error al conseguir los registros: ${error.message}`;
+    }
+  }
 }

@@ -1,31 +1,12 @@
-<!--
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novedades</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-
-</head>
-<style>
-    body {
-            background-image: url("../../../assets/img/bakground_2.jpg");
-            background-repeat: no-repeat;
-            background-size: cover  
-        }
-</style>
 <body>
-
     <div class="container-fluid">
         <div class="row justify-content-center align-content-center">
             <div class="col-8 barra">
                 <nav class="stilnav">
                     <div class="col-8 barra">
-                        <li><a href="Administrador"><img src="../../../assets/img/logo.jpg" alt="" class="logo" ></a></li>
+                        <li><a href="Administrador"><img src="../../../assets/img/logo.jpg" alt="" class="logo"></a></li>
                     </div>
-            </nav>
+                </nav>
             </div>
             <div class="col-4 text-right barra">
                 <ul class="navbar-nav mr-auto">
@@ -51,13 +32,13 @@
                     <a href="Gestionar_clientes"><i class="fas fa-users text-white"></i><span>Gestion clientes</span></a>
                     <a href="Gestionar_productos"><i class="fas fa-box-open text-white"></i><span>Gestion Productos </span></a>
                     <a href="Ver_novedades_admin"><i class="fas fa-bell text-white"></i><span>Ver Novedades</span></a>
-                </nav>  
+                </nav>
             </div>
             <main class="main col">
                 <nav class="search-container">
                     <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
                     <button class="search-button" id="search-button">Buscar</button>
-                    </nav>
+                </nav>
                 <script>
                     function buscar() {
                         var input = document.getElementById('search-input').value;
@@ -66,37 +47,33 @@
                     document.getElementById('search-button').addEventListener('click', buscar);
                 </script>
                 <br>
-                    <div class="col-md-7">
-                        <div>
-                            <table class="tabla" class="table table-primary">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Id Minero</th>
-                                        <th scope="col">Nombre Minero</th>
-                                        <th scope="col">Apellido Minero</th>
-                                        <th scope="col">Fecha Novedad</th>
-                                        <th scope="col">Descripcion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="">
-                                        <td scope="row">Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        </div>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                    </div>    
+                <div class="col-md-7">
+                    <div>
+                        <table class="tabla" class="table table-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Id Minero</th>
+                                    <th scope="col">Nombre Minero</th>
+                                    <th scope="col">Apellido Minero</th>
+                                    <th scope="col">Fecha Novedad</th>
+                                    <th scope="col">Descripcion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td scope="row">Item</td>
+                                    <td>Item</td>
+                                    <td>Item</td>
+                                    <td>Item</td>
+                                    <td>Item</td>
+                                    <td>Item</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -104,5 +81,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/646c794df3.js"></script>
 </body>
-</html>
--->

@@ -5,35 +5,48 @@ import { Producto } from '../producto/producto.entity';
 @Controller('producto')
 export class ProductoController {
     constructor(private readonly productoService: ProductoService) {}
-    /*
-    @Get()
-    findAll(): Promise<Usuario[]> {
-        return this.usuariosService.findAll(); 
-    }*/
+    // 
 
     @Post()
-    registrarProducto(@Body() productoData: Producto): Promise<Producto> {
+    async registrarProducto(@Body() productoData: Producto): Promise<Producto> {
         return this.productoService.insertarProducto(productoData);
     }
+    // Método para controlar   
     
     @Get(':IdProducto')
-    verProducto(IdProducto: number): Promise<Producto> {
-        return this.productoService.consultarProducto(IdProducto);
-    } 
+    async verProducto(@Param('IdProducto') IdProducto: number): Promise<Producto> {
+        try {
+            return await this.productoService.consultarProducto(IdProducto);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
+    }
+    // Método para controlar  
     
     @Put(':IdProducto')
-    editarUsuario(@Param('IdProducto') IdProducto: number, @Body() productoData: Producto): Promise<Producto> {
-        return this.productoService.editarProducto(IdProducto, productoData);
+    async actualizarProducto(@Param('IdProducto') IdProducto: number, @Body() productoData: Producto): Promise<Producto> {
+        try {
+            return await this.productoService.editarProducto(IdProducto, productoData);
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
     }
-
-    @Put(':IdProducto')
-    inactivarProducto(@Param('IdProducto') IdProducto: number, @Body() productoData: Producto): Promise<Producto> {
-        return this.productoService.anularProducto(IdProducto, productoData);
-    }
+    // Método para controlar   
+    
+    @Put('/inactivar/:IdProducto')
+    async inactivarProducto(@Param('IdProducto') IdProducto: number): Promise<string> {
+        try {
+            await this.productoService.anularProducto(IdProducto);
+            return 'El producto ahora es inactiva en el sistema.';
+        } catch (error) {
+            return `Error al inactivar producto: ${error.message}`;
+        }
+    } 
+    // Método para controlar  
 
     /*
     @Delete(':IdProducto')
-    eliminarUsuario(@Param('IdProducto') IdProducto: number): Promise<void> {
+    eliminarproducto(@Param('IdProducto') IdProducto: number): Promise<void> {
         return this.productoService.delete(IdProducto);
     }*/
 

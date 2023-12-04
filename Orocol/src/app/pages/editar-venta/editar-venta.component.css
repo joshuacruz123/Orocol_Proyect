@@ -46,10 +46,10 @@ color:white;
         right:-140px;
         top:0px;
     }
-    body{
-    background-image: url('Imagen fondo-formulario-proyecto.jpg');
-    background-repeat: no-repeat;
-    background-size: cover
+    body {
+        background-image: url("../../../assets/img/bakground_2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover  
     }
     .a
     {
@@ -103,12 +103,6 @@ color:white;
     display:block;
     margin:28px 0 0;font-size:14px;
     color:#ffffff
-    }
-
-    body {
-        background-image: url('background.jpg');
-	    background-repeat: no-repeat;
-        background-size: cover  
     }
     .logo{
         padding: 5px;

@@ -1,3 +1,10 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+*{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+}
+
 .logo {
   max-width: 22rem;
   margin-left: 4px;
@@ -9,6 +16,13 @@ header {
   justify-content: space-between;
   padding: 3rem;
   background-color: #010101;
+}
+
+body{
+  background: #fceabb;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f8b500, #fceabb);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f8b500, #fceabb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
 }
 
 .listaMenu {
@@ -93,112 +107,12 @@ p {
 
 /* Carousel */
 /* Estilos generales del carrusel */
-#carouselExampleIndicators {
-  position: relative;
-}
-
-.carousel-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.carousel-item {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.carousel-item.active {
-  display: block;
-}
-
-/* Estilos de los indicadores */
-.carousel-indicators {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.carousel-indicators li {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  cursor: pointer;
-  background-color: #888;
-  border-radius: 50%;
-}
-
-.carousel-indicators li.active {
-  background-color: #333;
-}
-
-/* Estilos de los controles de navegación */
-.carousel-control-prev,
-.carousel-control-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 1px solid #fff;
-  border-radius: 50%;
-  color: #fff;
-  text-align: center;
-  font-size: 18px;
-  line-height: 30px;
-  text-decoration: none;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  background-color: #fff;
-  border-radius: 50%;
-}
-
-.carousel-control-prev {
-  left: 10px;
-}
-
-.carousel {
-  position: relative;
-  width: 100%;
+.d-item{
   height: 500px;
-  background-color: #eee;
-  border-radius: 10px;
-  overflow: hidden;
 }
 
-.carousel-inner {
-  display: flex; 
-  transition: transform 0.5s ease-in-out; 
-}
-
-.carousel-item {
-  width: 100%; 
-}
-
-a .sr-only {
-  text-decoration: none;
-}
-
-
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%); 
-  }
+.d-img {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
 }

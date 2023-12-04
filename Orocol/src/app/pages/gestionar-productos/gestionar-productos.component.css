@@ -36,10 +36,10 @@ nav li{
 }
 
 body {
+    background-image: url("../../../assets/img/bakground_2.jpg");
     background-repeat: no-repeat;
     background-size: cover  
 }
-
 h4{
    text-align: center;
    color: white;

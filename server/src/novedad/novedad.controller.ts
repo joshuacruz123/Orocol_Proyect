@@ -9,7 +9,7 @@ export class NovedadController {
     @Get()
     findAll(): Promise<Novedad[]> {
         return this.novedadService.findAll(); 
-    }*/
+    }*/ 
 
     @Post()
     registrarNovedad(@Body() cargoAdmin: Novedad): Promise<Novedad> {
@@ -25,4 +25,4 @@ export class NovedadController {
     actualizarNovedad(@Param('idNovedad') idNovedad: number, @Body() cargoAdmin: Novedad): Promise<Novedad> {
         return this.novedadService.editarNovedad(idNovedad, cargoAdmin);
     }      
-} 
+}  
