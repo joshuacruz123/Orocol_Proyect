@@ -26,16 +26,17 @@ import { VerClientesMinComponent } from './pages/ver-clientes-min/ver-clientes-m
 import { VerNovedadesAdminComponent } from './pages/ver-novedades-admin/ver-novedades-admin.component';
 
 const routes: Routes = [
+  // Páginas
   { path: '', component: HomeComponent },  
   { path: 'Manual_Usuario', component: ManualUsuarioComponent},   
   { path: 'Registro', component: RegistroComponent },
   { path: 'Iniciar_sesión', component: IniciarSesionComponent },
-  { path: 'Administrador', component: AdministradorComponent },
-  { path: 'Editar_administrador', component: EditarAdministradorComponent },
+  { path: 'Administrador/:idUsuario', component: AdministradorComponent },
+  { path: 'Editar_administrador/:idUsuario', component: EditarAdministradorComponent },
   { path: 'Usuarios', component: UsuariosComponent },
   { path: 'Gestionar_productos', component: GestionarProductosComponent },
   { path: 'Gestionar_venta', component: GestionarVentaComponent },
-  { path: 'Minero', component: MineroComponent },
+  { path: 'Minero', component: MineroComponent }, 
   { path: 'Editar_minero', component: EditarMineroComponent },
   { path: 'Productos_minero', component: ProductosMineroComponent },
   { path: 'Venta_minero', component: VentaMineroComponent },
@@ -48,7 +49,8 @@ const routes: Routes = [
   { path: 'Editar_usuario', component: EditarUsuarioComponent},
   { path: 'Editar_venta', component: EditarVentaComponent},
   { path: 'Editar_venta_min', component: EditarVentaMinComponent},
-  { path: 'Ver_clientes_min', component: VerClientesMinComponent}
+  { path: 'Ver_clientes_min', component: VerClientesMinComponent},
+  { path: '**', redirectTo: '', pathMatch: 'full'}
 ];
  
 @NgModule({

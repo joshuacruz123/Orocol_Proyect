@@ -14,13 +14,13 @@ export class ProductoService {
     async insertarProducto(productoData: Producto): Promise<Producto> {
         return await this.productoRepository.save(productoData);
     }
-    // Método para 
+    // Método para registrar un nuevo producto
     
     
     async consultarProducto(): Promise<Producto[]> {
         return await this.productoRepository.find();
       }
-    // Método para 
+    // Método para consultar producto
 
     async editarProducto(IdProducto: number, productoData: Producto): Promise<Producto> {
         const producto = await this.productoRepository.findOne(IdProducto);
@@ -30,7 +30,7 @@ export class ProductoService {
     
         return await this.productoRepository.save({ ...producto, ...productoData });
     }
-    // Método para 
+    // Método para editar producto
 
     async anularProducto(IdProducto: number): Promise<void> {
         const producto = await this.productoRepository.findOne(IdProducto);
@@ -41,11 +41,5 @@ export class ProductoService {
         producto.estadoProducto = 'No disponible'; 
         await this.productoRepository.save(producto);
     } 
-    // Método para  
-
-    /*
-    async MostrarIndicadoresFinancierosMes(IdProducto: number): Promise<Producto> {
-        const Producto = await this.productoRepository.findOne(IdProducto);
-        return Producto;      
-    } */
+    // Método para inactivar producto
 }

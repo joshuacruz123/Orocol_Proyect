@@ -1,4 +1,9 @@
-//nest g module nombre
+/*
+nest g module  
+nest g service  --no-spec
+nest g controller  --no-spec
+.entity.ts
+*/
 import { Module } from '@nestjs/common';
 import { UsuariosController } from './usuarios.controller';
 import { UsuariosService } from './usuarios.service';

@@ -16,6 +16,7 @@ export class VentaController {
       return `Error al insertar en la entidad EntradaVenta: ${error.message}`;
     }
   } 
+  // Método para controlar registro de las ventas minero
 
   @Get('/minero')
   async verVentaMinero(): Promise<EntradaVenta[]> {
@@ -25,6 +26,7 @@ export class VentaController {
       return `Error al conseguir los registros: ${error.message}`;
     }
   }
+  // Método para controlar consulta de las ventas minero
 
   @Post('/administrador')
   async registrarVentaAdministrador(@Body() salidaData: SalidaVenta): Promise<string> {
@@ -35,6 +37,7 @@ export class VentaController {
       return `Error al insertar en la entidad SalidaVenta: ${error.message}`;
     }
   }
+  // Método para controlar registro de las ventas administrador
 
   @Get('/administrador')
   async verVentaAdministrador(): Promise<SalidaVenta[]> {
@@ -44,6 +47,7 @@ export class VentaController {
       return `Error al conseguir los registros: ${error.message}`;
     }
   }
+  // Método para controlar consulta de las ventas administrador
 
   @Put('/minero/:idGestionVenta')
   async actualizarVentaMinero(
@@ -57,6 +61,7 @@ export class VentaController {
       return `Error al editar tus datos: ${error.message}`;
     }
   }
+  // Método para controlar actualización de las ventas minero
 
   @Put('/administrador/:idGestionVenta')
   async actualizarVentaAdministrador(
@@ -70,6 +75,7 @@ export class VentaController {
       return `Error al editar tus datos: ${error.message}`;
     }
   }
+  // Método para controlar actualización de las ventas administrador
 
   @Put('/inactivar/:idGestionVenta')
   async inactivarVenta(@Param('idGestionVenta') idGestionVenta: number): Promise<string> {
@@ -80,6 +86,7 @@ export class VentaController {
       return `Error al inactivar venta: ${error.message}`;
     }
   } 
+  // Método para controlar inactivación de las ventas
 
   @Get('/reporte')
   async generarReportesVentas(): Promise<EntradaVenta[] | string> {
@@ -89,4 +96,5 @@ export class VentaController {
       return `Error al conseguir los registros: ${error.message}`;
     }
   }
+  // Método para controlar generación de reportes de las ventas
 }

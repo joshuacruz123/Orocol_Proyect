@@ -28,9 +28,9 @@ export class  MineroService extends UsuariosService implements UsuarioMetodos {
                 return nuevoMinero;
             } catch (error) {
                 throw new BadRequestException('Error al insertar en la entidad minero: ' + error.message);
-            }
         }
-        
+    }
+    // Método para registrar un nuevo minero
 
     async consultarMinero(IdMinero: number): Promise<Minero> {
         try {
@@ -41,8 +41,9 @@ export class  MineroService extends UsuariosService implements UsuarioMetodos {
             return admin;
         } catch (error) {
             throw new BadRequestException('Error al traer los datos de minero: ' + error.message);
-        }
+        } 
     }
+    // Método para consultar minero
 
     async editarMinero(IdMinero: number, mineroData: Minero): Promise<Minero> {
         try {
@@ -63,29 +64,25 @@ export class  MineroService extends UsuariosService implements UsuarioMetodos {
             throw new BadRequestException('Error al editar los datos de minero: ' + error.message);
         }
     }
+    // Método para editar minero
 
 
     /* async resSolicitudEditarDoc(mineroData: Minero): Promise<Minero> {
         const solicitudMinero = this.mineroRepository.create(mineroData);
         return this.mineroRepository.save(solicitudMinero);
     }
+    // Método para responder solicitud de administrador 
  
     async registrarAsistencia(mineroData: Minero): Promise<Minero> {
         const solicitudMinero = this.mineroRepository.create(mineroData);
         return this.mineroRepository.save(solicitudMinero);
     }
+    // Método para registrar asistencia
 
     async registrarNovedad(mineroData: Minero): Promise<Minero> {
         const nuevoMinero = this.mineroRepository.create(mineroData);
         return this.mineroRepository.save(nuevoMinero); 
-    } */
-
-    /* async ejemploLlamadaVentaService() {
-        // Puedes llamar a métodos de VentaService aquí
-        const resultadoVenta = await this.ventaService.registrarVenta(entradaData);
-        return resultadoVenta;
-    }
-    */
-
+    } 
+    // Método para registrar novedad minero*/
 }
  

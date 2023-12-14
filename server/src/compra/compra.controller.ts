@@ -10,13 +10,13 @@ export class CompraController {
     async registrarCompra(@Body() compraData: Cliente): Promise<Cliente> {
         return this.compraService.insertarCliente(compraData);
     }
-    // Método para controlar 
+    // Método para controlar registro de las compras
     
     @Get()
     async verCliente(): Promise<Cliente[]> {
         return this.compraService.consultarCliente();
     }
-    // Método para controlar
+    // Método para controlar consulta de las compras
     
     @Put(':IdCliente')
     async actualizarProducto(@Param('IdCliente') IdCliente: number, @Body() compraData: Cliente): Promise<Cliente> {
@@ -26,7 +26,7 @@ export class CompraController {
             throw new NotFoundException(error.message);
         }
     }
-    // Método para controlar 
+    // Método para controlar edición de las compras
 
     @Put('/inactivar/:IdCliente')
     async inactivarProducto(@Param('IdCliente') IdCliente: number): Promise<string> {
@@ -37,18 +37,11 @@ export class CompraController {
             return `Error al inactivar compra: ${error.message}`;
         }
     } 
-    // Método para controlar  
+    // Método para controlar inactivación de las compras 
 
     @Get()
     async generarReportesCompra(): Promise<Cliente[]> {
         return this.compraService.GenerarReporteCompra(); 
     }
-    // Método para controlar  
-
-    /*
-    @Delete(':IdCliente')
-    eliminarUsuario(@Param('IdCliente') IdCliente: number): Promise<void> {
-        return this.compraService.delete(IdCliente);
-    }*/
-
+    // Método para controlar generación de reportes de las compras  
 } 

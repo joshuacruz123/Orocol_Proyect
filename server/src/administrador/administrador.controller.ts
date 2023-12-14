@@ -1,3 +1,4 @@
+// administrador.controller.ts
 import { Controller, Get, Post, Body, Put, Param, NotFoundException } from '@nestjs/common';
 import { AdministradorService } from './administrador.service';
 import { Administrador } from './administrador.entity';
@@ -8,10 +9,11 @@ import { Minero } from '../minero/minero.entity';
 export class AdministradorController {
     constructor(private readonly administradorService: AdministradorService) {}
     
-    @Post()
+    @Post() 
     async registrarAdministrador(@Body() cargoAdmin: Administrador): Promise<Administrador> {
         return this.administradorService.registrarAdmin(cargoAdmin);
     }
+    // Método para controlar registro de administrador
 
     @Get(':idAdmin')
     async verAdmin(@Param('idAdmin') idAdmin: number): Promise<Administrador> {
@@ -21,6 +23,7 @@ export class AdministradorController {
             throw new NotFoundException(error.message);
         }
     }
+    // Método para controlar consulta de administrador
 
     @Put(':idAdmin')
     async editarUsuario(@Param('idAdmin') idAdmin: number, @Body() cargoAdmin: Administrador): Promise<Administrador> {
@@ -30,30 +33,36 @@ export class AdministradorController {
             throw new NotFoundException(error.message);
         }
     }
+    // Método para controlar edición de administrador
 
     /*
     @Post()
     solicitarEdicionDoc(@Body() cargoAdmin: Administrador): Promise<Administrador> {
         return this.administradorService.solicitarEditarDoc(cargoAdmin);
-    } */
+    }
+    // Método para controlar solicitud edición a minero */
 
     @Get()
     async consultarAdministradores(): Promise<Administrador[]> {
         return this.administradorService.consultarAdministradores();
     }
+    // Método para controlar consulta de administradores
 
     @Get('mineros')
     async consultarMineros(): Promise<Minero[]> {
         return this.administradorService.consultarMineros();
     }
+    // Método para controlar consulta de mineros   
 
     @Post('registrar-minero')
     async registrarMinero(@Body() mineroData: Minero): Promise<Minero> {
         return this.administradorService.registrarMinero(mineroData);
     }
+    // Método para controlar registro de mineros
 
     @Put('reactivar-usuario/:idUsuario')
     async reactivarUsuario(@Param('idUsuario') idUsuario: number, @Body() usuarioData: Usuario): Promise<Usuario> {
         return this.administradorService.reactivarUsuario(idUsuario, usuarioData);
     }
+    // Método para controlar reactivación de usuarios
 }

@@ -34,7 +34,7 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
             throw new BadRequestException('Error al insertar en la entidad Administrador: ' + error.message);
         }
     }
-
+    // Método para registrar un nuevo admistrador
 
     async consultarAdmin(idAdmin: number): Promise<Administrador> {
         try {
@@ -47,7 +47,7 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
             throw new BadRequestException('Error al traer los datos de administrador: ' + error.message);
         }
     }
-
+    // Método para visualizar administador
 
     async editarAdmin(idAdmin: number, cargoAdmin: Administrador): Promise<Administrador> {
         try {
@@ -68,24 +68,17 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
             throw new BadRequestException('Error al editar los datos de administrador: ' + error.message);
         }
     }
-
-
-    /*
-    async solicitarEditarDoc(cargoAdmin: Administrador): Promise<Administrador> {
-        const solicitudMinero = this.administradorRepository.create(cargoAdmin);
-        return this.administradorRepository.save(solicitudMinero);
-    } */
- 
+    // Método para editar administador
 
     async consultarAdministradores(): Promise<Administrador[]> {
         return await this.administradorRepository.find();
       }
-    
+    // Método para consultar administadores
 
       async consultarMineros(): Promise<Minero[]> {
         return await this.mineroRepository.find();
       }
-
+    // Método para consultar mineros
     
       async registrarMinero(mineroData: Minero): Promise<Minero> {
         const nuevoUsuario = await this.registrarUsuario({
@@ -108,7 +101,7 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
         await this.mineroRepository.save(nuevoMinero);
         return nuevoMinero;
       } 
-
+    // Método para registrar mineros
     
       async reactivarUsuario(idUsuario: number, usuarioData: Usuario): Promise<Usuario> {
         const usuario = await this.usuariosRepository.findOne(idUsuario);
@@ -119,7 +112,7 @@ export class AdministradorService extends UsuariosService implements UsuarioMeto
         await this.usuariosRepository.save(usuario);
         return usuario;
       }
-
+    // Método para reactivar usuario
 
     /* async ejemploLlamadaVentaService() {
         // Puedes llamar a métodos de VentaService aquí

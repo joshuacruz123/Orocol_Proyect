@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { Persona } from 'src/app/interfaces/usuarios';
 
 @Component({
@@ -8,8 +7,8 @@ import { Persona } from 'src/app/interfaces/usuarios';
   templateUrl: './agregar-editar-persona.component.html',
   styleUrls: ['./agregar-editar-persona.component.css']
 })
-export class AgregarEditarPersonaComponent implements OnInit{
-
+export class AgregarEditarPersonaComponent /*implements OnInit*/{
+/*
   maxDate: Date;
  tipoDocumento: string[] = ['Cedula de cuidadania', 'Cedula de extrangeria'];
  form: FormGroup;
@@ -47,5 +46,5 @@ export class AgregarEditarPersonaComponent implements OnInit{
       fechaNacimiento: this.form.value.fechaNacimiento
     }
   }
-
+*/
 }

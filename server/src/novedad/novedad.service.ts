@@ -15,17 +15,13 @@ export class NovedadService {
     async insertarNovedad(novedadData: Novedad): Promise<Novedad> {
         return await this.novedadRepository.save(nuevoNovedad);
     }
-    // Método para 
+    // Método para registrar la novedad
 
     async consultarNovedad(): Promise<Novedad[]> {
         return await this.novedadRepository.find();
       }
-    // Método para
+    // Método para consultar la novedad
 
-    async editarNovedad(idNovedad: number, novedadData: Novedad): Promise<Novedad> {
-        await this.novedadRepository.update(idNovedad, novedadData);
-        return this.novedadRepository.findOne(idNovedad);
-    }
     async editarNovedad(idNovedad: number, novedadData: Novedad): Promise<Novedad> {
         const novedad = await this.novedadRepository.findOne(idNovedad);
         if (!novedad) {
@@ -34,5 +30,5 @@ export class NovedadService {
     
         return await this.novedadRepository.save({ ...novedad, ...novedadData });
     }
-    // Método para
+    // Método para editar la novedad
 }

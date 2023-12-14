@@ -5,13 +5,13 @@ import { Producto } from '../producto/producto.entity';
 @Controller('producto')
 export class ProductoController {
     constructor(private readonly productoService: ProductoService) {}
-    // 
+    // Trae el servicio de ProductoService
 
     @Post()
     async registrarProducto(@Body() productoData: Producto): Promise<Producto> {
         return this.productoService.insertarProducto(productoData);
     }
-    // Método para controlar   
+    // Método para controlar registro de los productos 
     
     @Get(':IdProducto')
     async verProducto(@Param('IdProducto') IdProducto: number): Promise<Producto> {
@@ -21,7 +21,7 @@ export class ProductoController {
             throw new NotFoundException(error.message);
         }
     }
-    // Método para controlar  
+    // Método para controlar consulta de los productos 
     
     @Put(':IdProducto')
     async actualizarProducto(@Param('IdProducto') IdProducto: number, @Body() productoData: Producto): Promise<Producto> {
@@ -31,7 +31,7 @@ export class ProductoController {
             throw new NotFoundException(error.message);
         }
     }
-    // Método para controlar   
+    // Método para controlar edición de los productos 
     
     @Put('/inactivar/:IdProducto')
     async inactivarProducto(@Param('IdProducto') IdProducto: number): Promise<string> {
@@ -40,14 +40,8 @@ export class ProductoController {
             return 'El producto ahora es inactiva en el sistema.';
         } catch (error) {
             return `Error al inactivar producto: ${error.message}`;
-        }
+        } 
     } 
-    // Método para controlar  
-
-    /*
-    @Delete(':IdProducto')
-    eliminarproducto(@Param('IdProducto') IdProducto: number): Promise<void> {
-        return this.productoService.delete(IdProducto);
-    }*/
+    // Método para controlar inactivación de los productos
 
 }

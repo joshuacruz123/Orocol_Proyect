@@ -26,18 +26,22 @@ export class VentaService {
   async insertarVentaMinero(entradaData: EntradaVenta): Promise<EntradaVenta> {
     return await this.entradaVentaRepository.save(entradaData);
   } 
+  // Método para registrar las ventas de minero
 
   async consultarVenta(): Promise<EntradaVenta[]> {
     return await this.entradaVentaRepository.find();
   }
+  // Método para consultar las ventas de mineros
 
   async insertarVentaAdministrador(salidaData: SalidaVenta): Promise<SalidaVenta> {
     return await this.salidaVentaRepository.save(salidaData);
   }
+  // Método para registrar las ventas de administrador
 
   async consultarSalidaVenta(): Promise<SalidaVenta[]> {
     return await this.salidaVentaRepository.find();
   }
+  // Método para consultar las ventas de administrador
 
   async editarVentaMinero(idGestionVenta: number, entradaData: EntradaVenta): Promise<EntradaVenta> {
     const venta = await this.entradaVentaRepository.findOne(idGestionVenta);
@@ -47,6 +51,7 @@ export class VentaService {
 
     return await this.entradaVentaRepository.save({ ...venta, ...entradaData });
   }
+  // Método para editar las ventas minero
 
   async editarVentaAdministrador(idGestionVenta: number, salidaData: SalidaVenta): Promise<SalidaVenta> {
     const venta = await this.salidaVentaRepository.findOne(idGestionVenta);
@@ -55,7 +60,8 @@ export class VentaService {
     }
 
     return await this.salidaVentaRepository.save({ ...venta, ...salidaData });
-  }
+  } 
+  // Método para editar las ventas administrador
 
   async inactivarVenta(idGestionVenta: number): Promise<void> {
     const venta = await this.entradaVentaRepository.findOne(idGestionVenta);
@@ -66,15 +72,12 @@ export class VentaService {
     venta.estadoVenta = 'Inactivo'; 
     await this.entradaVentaRepository.save(venta);
   } 
+  // Método para inactivar las ventas
 
   async generarReporteVenta(): Promise<EntradaVenta[]> {
     return await this.entradaVentaRepository.find();
   }
+  // Método para generar reportes de las ventas
 
-    /*
-    async MostrarIndicadoresFinancierosMes(idGestionVenta: number): Promise<EntradaVenta> {
-        const EntradaVenta = await this.entradaVentaRepository.findOne(idGestionVenta);
-        return EntradaVenta;      
-    } */
 }
  

@@ -41,6 +41,7 @@ export class UsuariosService implements UsuarioMetodos {
             throw new BadRequestException('Error al insertar en la entidad Usuarios y Rol: ' + error.message);
         }
     }
+    // Método para registrar un nuevo usuario
 
     async ingresarAlSistema(idUsuario: number, usuarioData: Usuario): Promise<Usuario | null> {
         const usuario = await this.usuariosRepository.findOne({
@@ -54,6 +55,7 @@ export class UsuariosService implements UsuarioMetodos {
             return null;
         }
     }
+    // Método para poder ingresar al sistema
 
     async inactivarUsuario(idUsuario: number): Promise<Usuario> {
         const usuario = await this.usuariosRepository.findOne(idUsuario, { relations: ['rol'] });
@@ -66,7 +68,8 @@ export class UsuariosService implements UsuarioMetodos {
         await this.usuariosRepository.save(usuario);
 
         return usuario;
-    }
+    } 
+    // Método para inactivar usuario
  
     /* 
     async solicitarReactivacion(usuarioData: Usuario): Promise<Usuario> {

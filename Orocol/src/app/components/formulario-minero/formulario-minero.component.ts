@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ServicioService } from '../../services/servicio.service';
-import { Usuario } from '../../models/usuarios.model';
 
 @Component({
   selector: 'app-formulario-minero',

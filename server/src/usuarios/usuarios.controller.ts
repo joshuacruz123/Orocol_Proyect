@@ -21,8 +21,9 @@ export class UsuariosController {
             }
         } catch (error) {
             throw new BadRequestException(error.message);
-        }
+        } 
     }
+    // Método para controlar registro de usuario
 
     @Post('iniciar-sesion')
     async iniciarSesion(@Body() usuarioData: Usuario): Promise<string> {
@@ -38,6 +39,7 @@ export class UsuariosController {
 
         throw new BadRequestException('Error al ingresar al sistema');
     }
+    // Método para controlar inicio de sesión  de usuario
 
     @Put(':idUsuario/inactivar')
     async inactivarUsuario(@Param('idUsuario') idUsuario: number): Promise<string> {
@@ -48,4 +50,5 @@ export class UsuariosController {
             throw new NotFoundException('Error al inactivar usuario: ' + error.message);
         }
     }
+    // Método para controlar inactivación de usuario
 }

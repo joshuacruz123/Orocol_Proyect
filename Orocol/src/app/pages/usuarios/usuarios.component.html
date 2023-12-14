@@ -4,14 +4,17 @@
             <div class="col-8 barra">
                 <nav class="stilnav">
                     <div class="col-8 barra">
-                        <li><a href="Administrador"><img src="../../../assets/img/logo.jpg" alt="" class="logo" ></a></li>
+                        <li><a href="Administrador"><img src="../../../assets/img/logo.jpg" alt="" class="logo"></a>
+                        </li>
                     </div>
                 </nav>
             </div>
             <div class="col-4 text-right barra">
                 <ul class="navbar-nav mr-auto">
                     <li>
-                        <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
+                        <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                class="fas fa-user-circle user"></i></a>
                         <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
                             <a class="dropdown-item menuperfil cerrar" href="Editar_administrador">Perfil</a>
                             <a class="dropdown-item menuperfil cerrar" href="#">Salir</a>
@@ -30,7 +33,8 @@
                     <a href="Usuario.html"><i class="fas fa-user text-white"></i><span>Gestion Usuarios</span></a>
                     <a href="Ventas.html"><i class="fas fa-cart-plus text-white"></i><span>Gestion Ventas</span></a>
                     <a href="Clientes.html"><i class="fas fa-users text-white"></i><span>Gestion clientes</span></a>
-                    <a href="Productos.html"><i class="fas fa-box-open text-white"></i><span>Gestion Productos </span></a>
+                    <a href="Productos.html"><i class="fas fa-box-open text-white"></i><span>Gestion Productos
+                        </span></a>
                     <a href="Novedades_Admin.html"><i class="fas fa-bell text-white"></i><span>Ver Novedades</span></a>
                 </nav>
             </div>
@@ -56,63 +60,79 @@
                                     <form method="post" action="" class="form">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Nombre de usuario</label>
-                                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" required placeholder="Digite el Nombre completo">
+                                            <input type="text" class="form-control" name="" id=""
+                                                aria-describedby="helpId" required
+                                                placeholder="Digite el Nombre completo">
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Apellido de Usuario</label>
-                                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" required placeholder="Digite el Apellido completo">
+                                            <input type="text" class="form-control" name="" id=""
+                                                aria-describedby="helpId" required
+                                                placeholder="Digite el Apellido completo">
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Correo electronico</label>
-                                            <input type="email" class="form-control" name="" id="" aria-describedby="helpId" required placeholder="Digite la direccion del correo electronico">
+                                            <input type="email" class="form-control" name="" id=""
+                                                aria-describedby="helpId" required
+                                                placeholder="Digite la direccion del correo electronico">
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">password</label>
-                                            <input type="password" class="form-control" name="" id="" aria-describedby="helpId" required placeholder="Digite la clave">
+                                            <input type="password" class="form-control" name="" id=""
+                                                aria-describedby="helpId" required placeholder="Digite la clave">
                                         </div>
-                                        <input name="" id="" class="btn btn-primary" style="background-color: white; color:black;" type="submit" value="Agregar +">
+                                        <input name="" id="" class="btn btn-primary"
+                                            style="background-color: white; color:black;" type="submit"
+                                            value="Agregar +">
                                     </form>
                                 </div>
                                 <div class="card-footer text-muted"></div>
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <div>
+                            <div class="container" *ngIf="!listaVacia">
                                 <table class="tabla" class="table table-primary">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nombre de usuario</th>
-                                            <th scope="col">Apellido de Usuario</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
                                             <th scope="col">Correo electronico</th>
-                                            <th scope="col">Password</th>
+                                            <th scope="col">Contraseña</th>
                                             <th scope="col">Estado</th>
                                             <th scope="col">acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="">
-                                            <td scope="row">Item</td>
-                                            <td>Item</td>
-                                            <td>Item</td>
-                                            <td>Item</td>
-                                            <td>Item</td>
-                                            <td>Item</td>
+                                        <tr *ngFor="let usuario of usuarios">
+                                            <td>{{usuario.idUsuario}}</td>
+                                            <td>{{usuario.nombreUsuario}}</td>
+                                            <td>{{usuario.apellidosUsuario}}</td>
+                                            <td>{{usuario.correoUsuario}}</td>
+                                            <td>{{usuario.passwordUsuario}}</td>
+                                            <td>Activo</td>
                                             <td>
-                                                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                                <div class="btn-group-vertical" role="group"
+                                                    aria-label="Vertical button group">
                                                     <form class="form-inline" method="get" action="">
-                                                        <button class="btn btn-warning" type="submit"><a href="Editar_usuario" style="text-decoration: none; color: white;">Editar</a></button>
+                                                        <button class="btn btn-warning" routerLink="/Editar_administrador/{{usuario.idUsuario}}"><i class="far fa-edit"></i> Editar</button>
                                                     </form>
+
                                                 </div>
-                                                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                                <div class="btn-group-vertical" role="group"
+                                                    aria-label="Vertical button group">
                                                     <form class="form-inline" method="post" action="">
-                                                        <button class="btn btn-danger" type="submit">Inactivar</button>
+                                                        <!-- <button class="btn btn-danger" (click)="borrar(usuario.idUsuario)"><i class="far fa-trash-alt"></i> Inactivar</button> -->        
+                                                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i> Inactivar</button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="container" *ngIf="listaVacia">
+                                <div class="p-3 mb-2 bg-dark text-white text-center"><h2>{{listaVacia}}</h2></div>
                             </div>
                         </div>
                     </div>
