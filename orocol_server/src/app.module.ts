@@ -4,14 +4,14 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
-import { UsuarioModule } from './usuario/usuario.module';
-import { RolModule } from './rol/rol.module';
-import { AdministradorModule } from './administrador/administrador.module';
-import { MineroModule } from './minero/minero.module';
-import { CompraModule } from './compra/compra.module';
-import { NovedadModule } from './novedad/novedad.module';
-import { ProductoModule } from './producto/producto.module';
-import { VentaModule } from './venta/venta.module';
+import { UsuarioModule } from './modules/usuario/usuario.module';
+import { RolModule } from './modules/rol/rol.module';
+import { AdministradorModule } from './modules/administrador/administrador.module';
+import { MineroModule } from './modules/minero/minero.module';
+import { CompraModule } from './modules/compra/compra.module';
+import { NovedadModule } from './modules/novedad/novedad.module';
+import { ProductoModule } from './modules/producto/producto.module';
+import { VentaModule } from './modules/venta/venta.module';
 
 @Module({
   imports: [
@@ -33,7 +33,7 @@ import { VentaModule } from './venta/venta.module';
         logging: false //true
       }),
       inject: [ConfigService],
-      //CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci;
+      //CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci; 
     }),
     UsuarioModule,
     RolModule,

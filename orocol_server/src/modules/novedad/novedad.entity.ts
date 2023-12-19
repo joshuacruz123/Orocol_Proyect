@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Minero } from '../minero/minero.entity';
-import { Administrador } from 'src/administrador/administrador.entity';
+import { Administrador } from 'src/modules/administrador/administrador.entity';
 
 @Entity({ name: 'novedades' })
 export class Novedad {

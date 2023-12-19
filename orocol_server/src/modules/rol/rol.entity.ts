@@ -1,10 +1,11 @@
 // rol.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { RolNombre } from './rol.enum';
 import { Usuario } from '../usuario/usuario.entity';
 
 @Entity({ name: 'Rol' })
 export class Rol {
+
   @PrimaryGeneratedColumn('increment')
   idRol: number;
 
@@ -14,3 +15,4 @@ export class Rol {
   @ManyToMany(type => Usuario, usuario => usuario.roles)
   usuarios: Usuario[];
 }
+ 

@@ -1,9 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToOne, ManyToOne } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+// , OneToOne, ManyToOne
 import { Rol } from '../rol/rol.entity';
 import { EstadoUsuario } from './usuario.enum';
+import { hash } from 'bcryptjs';
+import { Administrador } from "src/modules/administrador/administrador.entity";
    
   @Entity({ name: 'Usuarios' })
   export class Usuario {
+
     @PrimaryGeneratedColumn('increment') 
     idUsuario: number;
   
@@ -19,7 +23,7 @@ import { EstadoUsuario } from './usuario.enum';
     @Column({ type: 'varchar', length: 255, nullable: false })
     passwordUsuario: string;
   
-    @Column({type: 'varchar', length: 15, nullable: false, unique: true, default: EstadoUsuario.ACTIVO})
+    @Column({type: 'varchar', length: 55, nullable: false, unique: true, default: EstadoUsuario.ACTIVO})
     estadoUsuario: EstadoUsuario;
 
     @ManyToMany(type => Rol, rol => rol.usuarios, {eager: true})
@@ -29,5 +33,15 @@ import { EstadoUsuario } from './usuario.enum';
       inverseJoinColumn: {name: 'rol_id'}
     })
     roles: Rol[];
-    administrador: any;
+    
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPasword() {
+        if(!this.passwordUsuario) return;
+        this.passwordUsuario = await hash(this.passwordUsuario, 55);
+    }
+
+    @OneToOne(() => Administrador, administrador => administrador.usuario)
+    @JoinColumn({ name: 'IdUs_FK' })
+    administrador: Administrador;
 }
