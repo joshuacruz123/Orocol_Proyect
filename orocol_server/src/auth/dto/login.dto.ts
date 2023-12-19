@@ -8,5 +8,5 @@ export class LoginUsuarioDto {
     nombreUsuario: string;
 
     @IsNotBlank({message: 'la contraseña del usuario no puede estar vacía'})
-    password: string;
+    password: string; 
 }

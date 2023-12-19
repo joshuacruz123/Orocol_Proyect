@@ -1,19 +1,19 @@
-import { IsEmail, IsString, MaxLength } from "class-validator";
+import { IsEmail, MaxLength } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 
 export class CreateUsuarioDto {
  
-    @IsString()
-    @MaxLength(10, {message: 'nombre: longitud máxima de 10'})
-    nombre: string;
-
-    @IsNotBlank({message: 'el nombre de usuario no puede estar vacío'})
-    @MaxLength(10, {message: 'nombre de usuario: longitud máxima de 10'})
+    @IsNotBlank({message: 'el nombre no puede estar vacío'})
+    @MaxLength(50, {message: 'nombre: longitud máxima de 50'})
     nombreUsuario: string;
 
+    @IsNotBlank({message: 'el apellido puede estar vacío'})
+    @MaxLength(50, {message: 'apellido: longitud máxima de 50'})
+    apellidosUsuario: string;
+
     @IsEmail()
-    email: string;
+    correoUsuario: string;
 
     @IsNotBlank({message: 'la contraseña del usuario no puede estar vacía'})
-    password: string;
+    passwordUsuario: string;
 }

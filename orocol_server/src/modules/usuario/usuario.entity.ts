@@ -33,7 +33,7 @@ import { Administrador } from "src/modules/administrador/administrador.entity";
       inverseJoinColumn: {name: 'rol_id'}
     })
     roles: Rol[];
-    
+     
     @BeforeInsert()
     @BeforeUpdate()
     async hashPasword() {
