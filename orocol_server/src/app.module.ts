@@ -30,7 +30,7 @@ import { VentaModule } from './modules/venta/venta.module';
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
-        logging: false //true
+        logging: false //true, para ver las sentencias SQL por consola
       }),
       inject: [ConfigService],
       //CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci; 
