@@ -26,8 +26,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: PayloadInterface) {
-        const {nombreUsuario, email} = payload;
-        const usuario = await this.authRepository.findOne({where: [{nombreUsuario: nombreUsuario}, {email: email}]});
+        const {correoUsuario, passwordUsuario} = payload;
+        const usuario = await this.authRepository.findOne({where: [{correoUsuario: correoUsuario}, {passwordUsuario: passwordUsuario}]});
         if(!usuario) return new UnauthorizedException(new MessageDto('credenciales erróneas'));
         return payload;
     }
