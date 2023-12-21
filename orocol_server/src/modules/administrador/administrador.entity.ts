@@ -1,5 +1,5 @@
 // administrador.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { Usuario } from '../usuario/usuario.entity';
 
 @Entity({ name: 'Administradores' })
@@ -10,8 +10,8 @@ export class Administrador {
   @Column({ type: 'varchar', length: 255, nullable: false })
   cargoAdmin: string;  
 
-  @OneToOne(() => Usuario, usuario => usuario.administrador)
+  @ManyToOne(() => Usuario, { eager: true }) // eager loading para cargar el usuario al recuperar un administrador
   @JoinColumn({ name: 'IdUs_FK' })
-  usuario: Usuario; 
+  Usuarios: Usuario;  
 } 
  

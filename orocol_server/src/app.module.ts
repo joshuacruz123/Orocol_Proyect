@@ -12,6 +12,7 @@ import { CompraModule } from './modules/compra/compra.module';
 import { NovedadModule } from './modules/novedad/novedad.module';
 import { ProductoModule } from './modules/producto/producto.module';
 import { VentaModule } from './modules/venta/venta.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,8 +30,8 @@ import { VentaModule } from './modules/venta/venta.module';
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-        logging: false //true, para ver las sentencias SQL por consola
+        synchronize: true, //"true" para crear la base de datos desde aquí (se recomienda importar la base de datos directamente)
+        logging: false //"true" para ver las sentencias SQL por consola
       }),
       inject: [ConfigService],
       //CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci; 
@@ -43,7 +44,7 @@ import { VentaModule } from './modules/venta/venta.module';
     NovedadModule,
     ProductoModule,
     VentaModule,
-    
+    AuthModule,    
   ],
   controllers: [AppController],
   providers: [AppService],
