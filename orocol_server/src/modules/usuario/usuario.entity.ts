@@ -7,7 +7,8 @@ import { hash } from 'bcryptjs';
   @Entity({ name: 'Usuarios' })
   export class Usuario {
 
-    @PrimaryGeneratedColumn('increment') 
+    //@PrimaryGeneratedColumn('increment') 
+    @PrimaryGeneratedColumn('increment')
     idUsuario: number;
   
     @Column({ type: 'varchar', length: 255, nullable: false })

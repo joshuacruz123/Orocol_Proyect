@@ -20,7 +20,7 @@ nest g controller modules/ --no-spec
 .entity.ts
 .repository.ts
 .dto.ts
-
+ 
 npm run start:dev
 
 npm i --save @nestjs/config 

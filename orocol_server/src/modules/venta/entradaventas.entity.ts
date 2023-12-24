@@ -5,7 +5,7 @@ import { EstadoVenta } from './venta.enum';
 @Entity({ name: 'EntradaVentas' })
 export class EntradaVenta {
   @PrimaryGeneratedColumn('increment')
-  idGestionVenta: number;
+  idGestionVenta: number; 
 
   @Column({ type: 'date' })
   fechaExtraccionOro: Date;
