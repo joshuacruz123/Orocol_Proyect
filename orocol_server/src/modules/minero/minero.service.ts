@@ -1,4 +1,93 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MessageDto } from 'src/common/message.dto';
+import { Minero } from './minero.entity';
+import { MineroRepository } from './minero.repository';
+import { mineroDto } from './dto/minero.dto';
+import { TurnoRepository } from './turno.repository';
+import { TurnoDto } from './dto/turno.dto';
+import { TurnoMinero } from './turno.entity';
 
 @Injectable()
-export class MineroService {}
+export class MineroService {
+    constructor(
+        @InjectRepository(Minero)
+        private mineroRepository: MineroRepository,
+        @InjectRepository(TurnoMinero)
+        private turnoRepository: TurnoRepository
+    ) { }
+
+    async getAll(): Promise<Minero[]> {
+        const list = await this.mineroRepository.find();
+        if (!list.length) {
+            throw new NotFoundException(new MessageDto('la lista está vacía'));
+        }
+        return list;
+    }
+
+    async findById(IdMinero: number): Promise<Minero> {
+        const minero = await this.mineroRepository.findOne({ where: { IdMinero: IdMinero } });
+        if (!minero) {
+            throw new NotFoundException(new MessageDto('no existe'));
+        }
+        return minero;
+    }
+
+    async consultarMinero(IdMinero: number): Promise<Minero> {
+        const minero = await this.mineroRepository.findOne({ where: { IdMinero: IdMinero } });
+        if (!minero) {
+            throw new NotFoundException(new MessageDto('no existe'));
+        }
+        return minero;
+    }
+    // Método para 
+
+    async creahte(dto: mineroDto): Promise<any> {
+        const { tipo_documento, numero_documento, telefono, fecha_nacimiento, direccion_vivienda } = dto;
+        const exists = await this.mineroRepository.findOne({ where: [{ tipo_documento: tipo_documento }, { numero_documento: numero_documento }, { telefono: telefono }, { fecha_nacimiento: fecha_nacimiento }, { direccion_vivienda: direccion_vivienda }] });
+        if (exists) throw new BadRequestException(new MessageDto('ese tipo_documento ya existe'));
+        const minero = this.mineroRepository.create(dto);
+        await this.mineroRepository.save(minero);
+        return new MessageDto(`Compra de ${minero.tipo_documento} creada`);
+    }
+
+    async update(IdMinero: number, dto: mineroDto): Promise<any> {
+        const minero = await this.findById(IdMinero);
+        if (!minero)
+            throw new NotFoundException(new MessageDto('no existe'));
+        const exists = await this.mineroRepository.findOne({ where: { IdMinero: IdMinero } });
+        if (exists && exists.IdMinero !== IdMinero) throw new BadRequestException(new MessageDto('ese minero ya existe'));
+        dto.tipo_documento ? minero.tipo_documento = dto.tipo_documento : minero.tipo_documento = minero.tipo_documento;
+        dto.numero_documento ? minero.numero_documento = dto.numero_documento : minero.numero_documento = minero.numero_documento;
+        dto.telefono ? minero.telefono = dto.telefono : minero.telefono = minero.telefono;
+        dto.fecha_nacimiento ? minero.fecha_nacimiento = dto.fecha_nacimiento : minero.fecha_nacimiento = minero.fecha_nacimiento;
+        dto.direccion_vivienda ? minero.direccion_vivienda = dto.direccion_vivienda : minero.direccion_vivienda = minero.direccion_vivienda;
+        await this.mineroRepository.save(minero);
+        return new MessageDto(`Compra de ${minero.tipo_documento} actualizada`);
+    }
+    // Método para  
+
+
+    async delete(IdMinero: number): Promise<any> {
+        const minero = await this.findById(IdMinero);
+        await this.mineroRepository.delete(IdMinero);
+        return new MessageDto(`Compra de ${minero.tipo_documento} eliminada`);
+    }
+    // Método para 
+
+    /*async resSolicitudEditarDoc(mineroData: Minero): Promise<Minero> {
+        const solicitudMinero = this.mineroRepository.create(mineroData);
+        return this.mineroRepository.save(solicitudMinero);
+    }
+    // Método para responder solicitud de administrador */
+
+    async registrarAsistencia(turnoData: TurnoDto): Promise<any> {
+        const { FechaTurno, Asistencia, AsignacionTareas } = turnoData;
+        const exists = await this.turnoRepository.findOne({ where: [{ FechaTurno: FechaTurno }, { Asistencia: Asistencia }, { AsignacionTareas: AsignacionTareas }] });
+        if (exists) throw new BadRequestException(new MessageDto('ese tipo_documento ya existe'));
+        const minero = this.turnoRepository.create(turnoData);
+        await this.turnoRepository.save(minero);
+        return new MessageDto(`Turno registrado con exito`);
+    }
+    // Método para registrar asistencia
+}

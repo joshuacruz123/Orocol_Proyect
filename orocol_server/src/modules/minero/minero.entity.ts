@@ -4,7 +4,7 @@ import { Usuario } from '../usuario/usuario.entity';
 import { CambioDocumento, TipoDocumento } from './minero.enum';
 
 @Entity({ name: 'Mineros' })
-export class Minero {
+export class Minero { 
   @PrimaryGeneratedColumn('increment')
   IdMinero: number;
 

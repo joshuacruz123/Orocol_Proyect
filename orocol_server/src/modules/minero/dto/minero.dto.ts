@@ -6,9 +6,6 @@ export class mineroDto {
 
     @IsNotBlank({message: 'el tipo de documento no puede estar vacío'})
     tipo_documento?: TipoDocumento;  
-    
-    @IsNotBlank({message: 'el nombre no puede estar vacío'})
-    nombre?: string;
 
     @IsNumber()
     @IsNotEmpty()

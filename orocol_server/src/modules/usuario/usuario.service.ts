@@ -39,7 +39,7 @@ export class UsuarioService {
         admin.roles = [rolAdmin, rolMin];
         await this.usuarioRepository.save(admin);
         return new MessageDto('admin creado');
-    }
+    } 
     // Método para  
 
     async consultarUsuario(idUsuario: number): Promise<Usuario> {

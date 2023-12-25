@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 import { Asistencia } from "../turno.enum";
 
-export class mineroDto {
+export class TurnoDto {
     
     @IsNotBlank({message: 'La fecha no puede estar vacía'})
     FechaTurno?: Date;

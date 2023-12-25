@@ -18,4 +18,4 @@ export class SalidaVenta {
   @ManyToOne(() => Administrador, { eager: true }) 
   @JoinColumn({ name: 'IdAdminEV_FK' })
   Administradores: Administrador; 
-} 
+}  

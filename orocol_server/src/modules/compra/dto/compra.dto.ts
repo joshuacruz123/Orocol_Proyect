@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsNumber, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 
-export class ProductoDto {
+export class CompraDto {
 
     @IsNotBlank({message: 'el nombre no puede estar vacío'})
     NombreCompleto?: string;

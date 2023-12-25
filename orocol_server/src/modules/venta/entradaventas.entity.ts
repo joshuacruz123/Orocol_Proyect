@@ -23,4 +23,4 @@ export class EntradaVenta {
   @ManyToOne(() => Minero, { eager: true }) 
   @JoinColumn({ name: 'IdMinEV_FK' })
   Mineros: Minero; 
-} 
+}  
