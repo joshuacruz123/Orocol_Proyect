@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
 import { Novedad } from './novedad.entity';
 import { NovedadRepository } from './novedad.repository';
-import { NovedadDto } from './dto/novedad.dto';
+import { NovedadDto } from '../../dto/novedad.dto';
 
 @Injectable()
 export class NovedadService {
@@ -12,15 +12,15 @@ export class NovedadService {
         private novedadRepository: NovedadRepository
     ) { }
     
-    async findById(idNovedad: number): Promise<Novedad> {
-        const novedad = await this.novedadRepository.findOne({ where: { idNovedad: idNovedad } });
-        if (!novedad) {
-            throw new NotFoundException(new MessageDto('no existe'));
+    async consultarNovedades(): Promise<Novedad[]> {
+        const list = await this.novedadRepository.find();
+        if (!list.length) {
+            throw new NotFoundException(new MessageDto('la lista está vacía'));
         }
-        return novedad;
+        return list;
     }
 
-    async consultarnovedad(idNovedad: number): Promise<Novedad> {
+    async consultarNovedad(idNovedad: number): Promise<Novedad> {
         const novedad = await this.novedadRepository.findOne({ where: { idNovedad: idNovedad } });
         if (!novedad) {
             throw new NotFoundException(new MessageDto('no existe'));
@@ -39,8 +39,8 @@ export class NovedadService {
     }
     // Método para registrar novedad novedad
 
-    async update(idNovedad: number, dto: NovedadDto): Promise<any> {
-        const novedad = await this.findById(idNovedad);
+    async editarNovedad(idNovedad: number, dto: NovedadDto): Promise<any> {
+        const novedad = await this.consultarNovedad(idNovedad);
         if (!novedad)
             throw new NotFoundException(new MessageDto('no existe'));
         const exists = await this.novedadRepository.findOne({ where: { idNovedad: idNovedad } });

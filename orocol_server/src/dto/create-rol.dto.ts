@@ -1,4 +1,4 @@
-import { RolNombre } from './../rol.enum';
+import { RolNombre } from '../modules/rol/rol.enum';
 import { IsEnum } from "class-validator";
 
 export class CreateRolDto {

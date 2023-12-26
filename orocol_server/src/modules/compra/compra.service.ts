@@ -1,4 +1,4 @@
-import { CompraDto } from './dto/compra.dto';
+import { CompraDto } from '../../dto/compra.dto';
 import { ClienteRepository } from './compra.repository';
 import { Cliente } from './cliente.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
@@ -13,7 +13,7 @@ export class CompraService {
         private clienteRepository: ClienteRepository
     ) { }
 
-    async getAll(): Promise<Cliente[]> {
+    async consultarClientes(): Promise<Cliente[]> {
         const list = await this.clienteRepository.find();
         if (!list.length) {
             throw new NotFoundException(new MessageDto('la lista está vacía'));
@@ -21,7 +21,7 @@ export class CompraService {
         return list;
     }
 
-    async findById(IdCliente: number): Promise<Cliente> {
+    async consultarCliente(IdCliente: number): Promise<Cliente> {
         const cliente = await this.clienteRepository.findOne({ where: { IdCliente: IdCliente } });
         if (!cliente) {
             throw new NotFoundException(new MessageDto('no existe'));
@@ -34,7 +34,7 @@ export class CompraService {
         return cliente;
     }
 
-    async create(dto: CompraDto): Promise<any> {
+    async insertarCliente(dto: CompraDto): Promise<any> {
         const { NombreCompleto, Empresa, Pais, CiudadMunicipio, FechaExportacion } = dto;
         const exists = await this.clienteRepository.findOne({ where: [{ NombreCompleto: NombreCompleto }, { Empresa: Empresa }, { Pais: Pais }, { CiudadMunicipio: CiudadMunicipio }, { FechaExportacion: FechaExportacion }] });
         if (exists) throw new BadRequestException(new MessageDto('ese NombreCompleto ya existe'));
@@ -43,8 +43,8 @@ export class CompraService {
         return new MessageDto(`Compra de ${cliente.NombreCompleto} creada`);
     }
 
-    async update(IdCliente: number, dto: CompraDto): Promise<any> {
-        const cliente = await this.findById(IdCliente);
+    async editarCliente(IdCliente: number, dto: CompraDto): Promise<any> {
+        const cliente = await this.consultarCliente(IdCliente);
         if (!cliente)
             throw new NotFoundException(new MessageDto('no existe'));
         const exists = await this.findByNombreCompleto(dto.NombreCompleto);
@@ -59,8 +59,8 @@ export class CompraService {
     }
 
 
-    async delete(IdCliente: number): Promise<any> {
-        const cliente = await this.findById(IdCliente);
+    async anularCompra(IdCliente: number): Promise<any> {
+        const cliente = await this.consultarCliente(IdCliente);
         await this.clienteRepository.delete(IdCliente);
         return new MessageDto(`Compra de ${cliente.NombreCompleto} eliminada`);
     }

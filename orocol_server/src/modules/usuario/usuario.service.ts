@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Rol } from './../rol/rol.entity';
 import { RolRepository } from './../rol/rol.repository';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { CreateUsuarioDto } from '../../dto/create-usuario.dto';
 import { create } from 'domain';
 import { MessageDto } from './../../common/message.dto';
 import { UsuarioRepository } from './usuario.repository';

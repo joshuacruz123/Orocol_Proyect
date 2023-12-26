@@ -1,6 +1,6 @@
-import { TokenDto } from './dto/token.dto';
-import { LoginUsuarioDto } from './dto/login.dto';
-import { NuevoUsuarioDto } from './dto/nuevo-usuario.dto';
+import { TokenDto } from '../dto/token.dto';
+import { LoginUsuarioDto } from '../dto/login.dto';
+import { NuevoUsuarioDto } from '../dto/nuevo-usuario.dto';
 import { AuthService } from './auth.service';
 import { Controller, Get, Post, UsePipes, ValidationPipe, Body } from '@nestjs/common';
 

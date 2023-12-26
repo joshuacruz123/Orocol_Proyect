@@ -1,7 +1,4 @@
-/* 
-
-*/
-import { AdministradorDto } from './dto/administrador.dto';
+import { AdministradorDto } from '../../dto/administrador.dto';
 import { AdministradorRepository } from './administrador.repository';
 import { Administrador } from './administrador.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
@@ -16,7 +13,7 @@ export class AdministradorService {
         private administradorRepository: AdministradorRepository
     ) { }
 
-    async getAll(): Promise<Administrador[]> {
+    async consultarAdministradores(): Promise<Administrador[]> {
         const list = await this.administradorRepository.find();
         if (!list.length) {
             throw new NotFoundException(new MessageDto('la lista está vacía'));
@@ -24,7 +21,7 @@ export class AdministradorService {
         return list;
     }
 
-    async findById(idAdmin: number): Promise<Administrador> {
+    async consultarAdmin(idAdmin: number): Promise<Administrador> {
         const administrador = await this.administradorRepository.findOne({ where: { idAdmin: idAdmin } });
         if (!administrador) {
             throw new NotFoundException(new MessageDto('no existe'));
@@ -37,7 +34,7 @@ export class AdministradorService {
         return administrador;
     }
 
-    async create(dto: AdministradorDto): Promise<any> {
+    async registrarAdmin(dto: AdministradorDto): Promise<any> {
         const exists = await this.findBycargoAdmin(dto.cargoAdmin);
         if (exists) throw new BadRequestException(new MessageDto('ese cargoAdmin ya existe'));
         const administrador = this.administradorRepository.create(dto);
@@ -45,8 +42,8 @@ export class AdministradorService {
         return new MessageDto(`administrador ${administrador.cargoAdmin} creado`);
     }
 
-    async update(idAdmin: number, dto: AdministradorDto): Promise<any> {
-        const administrador = await this.findById(idAdmin);
+    async editarAdmin(idAdmin: number, dto: AdministradorDto): Promise<any> {
+        const administrador = await this.consultarAdmin(idAdmin);
         if (!administrador)
             throw new NotFoundException(new MessageDto('no existe'));
         const exists = await this.findBycargoAdmin(dto.cargoAdmin);
@@ -54,12 +51,6 @@ export class AdministradorService {
         dto.cargoAdmin ? administrador.cargoAdmin = dto.cargoAdmin : administrador.cargoAdmin = administrador.cargoAdmin;
         await this.administradorRepository.save(administrador);
         return new MessageDto(`administrador ${administrador.cargoAdmin} actualizado`);
-    }
-
-    async delete(idAdmin: number): Promise<any> {
-        const administrador = await this.findById(idAdmin);
-        await this.administradorRepository.delete(idAdmin);
-        return new MessageDto(`administrador ${administrador.cargoAdmin} eliminado`);
     }
     // Método para 
 }

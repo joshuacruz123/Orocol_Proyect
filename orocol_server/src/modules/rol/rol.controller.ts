@@ -1,4 +1,4 @@
-import { CreateRolDto } from './dto/create-rol.dto';
+import { CreateRolDto } from '../../dto/create-rol.dto';
 import { RolService } from './rol.service';
 import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 

@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { TokenDto } from './dto/token.dto';
+import { TokenDto } from '../dto/token.dto';
 import { PayloadInterface } from './payload.interface';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
-import { LoginUsuarioDto } from './dto/login.dto';
+import { LoginUsuarioDto } from '../dto/login.dto';
 import { RolRepository } from './../modules/rol/rol.repository';
 import { MessageDto } from './../common/message.dto';
-import { NuevoUsuarioDto } from './dto/nuevo-usuario.dto';
+import { NuevoUsuarioDto } from '../dto/nuevo-usuario.dto';
 import { AuthRepository } from './auth.repository';
 import { Usuario } from './../modules/usuario/usuario.entity';
 import { Rol } from './../modules/rol/rol.entity';

@@ -34,7 +34,7 @@ import { AuthModule } from './auth/auth.module';
         logging: false //"true" para ver las sentencias SQL por consola
       }),
       inject: [ConfigService],
-      //CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci; 
+      // Conexión a la base de datos con TypeOrm 
     }),
     UsuarioModule,
     RolModule,
@@ -44,7 +44,8 @@ import { AuthModule } from './auth/auth.module';
     NovedadModule,
     ProductoModule,
     VentaModule,
-    AuthModule,    
+    AuthModule, 
+    //Importa todos los módulos   
   ],
   controllers: [AppController],
   providers: [AppService],

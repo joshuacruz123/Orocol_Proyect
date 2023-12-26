@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
 import { Minero } from './minero.entity';
 import { MineroRepository } from './minero.repository';
-import { mineroDto } from './dto/minero.dto';
+import { mineroDto } from '../../dto/minero.dto';
 import { TurnoRepository } from './turno.repository';
-import { TurnoDto } from './dto/turno.dto';
+import { TurnoDto } from '../../dto/turno.dto';
 import { TurnoMinero } from './turno.entity';
 
 @Injectable()
@@ -17,20 +17,12 @@ export class MineroService {
         private turnoRepository: TurnoRepository
     ) { }
 
-    async getAll(): Promise<Minero[]> {
+    async consultarMineros(): Promise<Minero[]> {
         const list = await this.mineroRepository.find();
         if (!list.length) {
             throw new NotFoundException(new MessageDto('la lista está vacía'));
         }
         return list;
-    }
-
-    async findById(IdMinero: number): Promise<Minero> {
-        const minero = await this.mineroRepository.findOne({ where: { IdMinero: IdMinero } });
-        if (!minero) {
-            throw new NotFoundException(new MessageDto('no existe'));
-        }
-        return minero;
     }
 
     async consultarMinero(IdMinero: number): Promise<Minero> {
@@ -39,10 +31,9 @@ export class MineroService {
             throw new NotFoundException(new MessageDto('no existe'));
         }
         return minero;
-    }
-    // Método para 
+    } 
 
-    async creahte(dto: mineroDto): Promise<any> {
+    async registrarMinero(dto: mineroDto): Promise<any> {
         const { tipo_documento, numero_documento, telefono, fecha_nacimiento, direccion_vivienda } = dto;
         const exists = await this.mineroRepository.findOne({ where: [{ tipo_documento: tipo_documento }, { numero_documento: numero_documento }, { telefono: telefono }, { fecha_nacimiento: fecha_nacimiento }, { direccion_vivienda: direccion_vivienda }] });
         if (exists) throw new BadRequestException(new MessageDto('ese tipo_documento ya existe'));
@@ -51,8 +42,8 @@ export class MineroService {
         return new MessageDto(`Compra de ${minero.tipo_documento} creada`);
     }
 
-    async update(IdMinero: number, dto: mineroDto): Promise<any> {
-        const minero = await this.findById(IdMinero);
+    async editarMinero(IdMinero: number, dto: mineroDto): Promise<any> {
+        const minero = await this.consultarMinero(IdMinero);
         if (!minero)
             throw new NotFoundException(new MessageDto('no existe'));
         const exists = await this.mineroRepository.findOne({ where: { IdMinero: IdMinero } });
@@ -67,15 +58,15 @@ export class MineroService {
     }
     // Método para  
 
-
+    /*
     async delete(IdMinero: number): Promise<any> {
-        const minero = await this.findById(IdMinero);
+        const minero = await this.consultarMinero(IdMinero);
         await this.mineroRepository.delete(IdMinero);
         return new MessageDto(`Compra de ${minero.tipo_documento} eliminada`);
     }
     // Método para 
 
-    /*async resSolicitudEditarDoc(mineroData: Minero): Promise<Minero> {
+    async resSolicitudEditarDoc(mineroData: Minero): Promise<Minero> {
         const solicitudMinero = this.mineroRepository.create(mineroData);
         return this.mineroRepository.save(solicitudMinero);
     }
@@ -90,4 +81,20 @@ export class MineroService {
         return new MessageDto(`Turno registrado con exito`);
     }
     // Método para registrar asistencia
+
+    async verAsistencias(): Promise<TurnoMinero[]> {
+        const list = await this.turnoRepository.find();
+        if (!list.length) {
+            throw new NotFoundException(new MessageDto('la lista está vacía'));
+        }
+        return list;
+    }
+
+    async consultarAsistencia(idTurno: number): Promise<TurnoMinero> {
+        const turno = await this.turnoRepository.findOne({ where: { idTurno: idTurno } });
+        if (!turno) {
+            throw new NotFoundException(new MessageDto('no existe'));
+        }
+        return turno;
+    } 
 }

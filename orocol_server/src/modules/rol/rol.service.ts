@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from './../../common/message.dto';
 import { Rol } from './rol.entity';
-import { CreateRolDto } from './dto/create-rol.dto';
+import { CreateRolDto } from '../../dto/create-rol.dto';
 import { RolRepository } from './rol.repository';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
-import { TipoDocumento } from "../minero.enum";
+import { TipoDocumento } from "../modules/minero/minero.enum";
 
 export class mineroDto {
 
