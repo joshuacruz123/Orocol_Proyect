@@ -9,7 +9,7 @@ import { RolRepository } from './rol.repository';
 export class RolService {
     constructor(
         @InjectRepository(Rol)
-        private readonly rolRepository: RolRepository
+        protected readonly rolRepository: RolRepository
     ) {}
 
     async getall(): Promise<Rol[]> {

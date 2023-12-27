@@ -11,7 +11,7 @@ export class TurnoMinero {
   @Column({ type: 'datetime', nullable: false })
   FechaTurno: Date;
 
-  @Column({type: 'varchar', length: 15, nullable: false, unique: true})
+  @Column({type: 'varchar', length: 15, nullable: false})
   Asistencia: Asistencia;
 
   @Column({ type: 'varchar', length: 255, nullable: false })

@@ -15,9 +15,9 @@ export class UsuarioService {
 
     constructor(
         @InjectRepository(Rol)
-        private readonly rolRepository: RolRepository,
+        protected readonly rolRepository: RolRepository,
         @InjectRepository(Usuario)
-        private readonly usuarioRepository: UsuarioRepository
+        protected readonly usuarioRepository: UsuarioRepository
     ) { }
     // Llama a los repositorios 
 
@@ -44,7 +44,6 @@ export class UsuarioService {
 
     async consultarUsuario(idUsuario: number): Promise<Usuario> {
         const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: idUsuario } });
-        //const usuario = await this.usuarioRepository.findOne(1);
         if (!usuario) {
             throw new NotFoundException(new MessageDto('no existe'));
         }
@@ -78,5 +77,5 @@ export class UsuarioService {
         await this.usuarioRepository.delete(idUsuario); 
         return new MessageDto(`Usuario ${usuario.nombreUsuario} inactivado`);
     } 
-    // Método para     
-}
+    // Método para      
+}  

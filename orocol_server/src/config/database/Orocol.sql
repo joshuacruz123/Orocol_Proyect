@@ -1,738 +1,455 @@
-CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci;
-use orocol;
-
-create table usuario
-(
-IdUsuario bigint unsigned primary key auto_increment,
-nombreUsuario varchar(255) not null,
-apellidosUsuario varchar (255) null,
-correoUsuario varchar(255) not null,
-passwordUsuario varchar(255) not null,
-estadoUsuario enum('activo','inactivo') default 'activo'
-);
-
-create table rol
-(
-IdRol bigint unsigned primary key auto_increment,
-TipoRol enum('Minero','Administrador')not null,
-EstadoRol enum('activo','inactivo') default 'activo',
-IdUs_FK bigint unsigned not null, foreign key (IdUs_FK) references usuario (IdUsuario)
-);
-
-create table Administrador
-(
-IdAdmin bigint unsigned primary key auto_increment,
-CargoAdmin varchar(255) not null,
-IdUs_FK bigint unsigned not null, foreign key (IdUs_FK) references usuario (IdUsuario)
-);
-
-create table Minero
-(
-IdMinero bigint unsigned primary key auto_increment,
-TipoDoc Enum('Cedula de ciudadania','Cedula de Extranjeria') not null,
-NumeroDoc bigint unique not null,
-Turno int not null,
-Asistencia boolean not null,
-Telefono mediumint not null,
-AsignacionTareas varchar(255) not null,
-FechaNacimiento date not null,
-DireccionVivienda varchar(255),
-Fechapago date not null,
-Novedades varchar(255) null,
-FechaNovedad date null,
-IdUs_FK bigint unsigned not null, foreign key (IdUs_FK) references usuario (IdUsuario)
-);
-
-create table Novedad
-(
-Id_Novedad bigint unsigned primary key auto_increment,
-fecha_Novedad date not null,
-descripcion text not null,
-IdMINERO bigint unsigned not null, foreign key (IdMINERO) references usuario (IdUsuario),
-IdAdmin bigint unsigned not null, foreign key (IdAdmin) references Administrador (IdAdmin)
-);
-create table GestionVentas
-(
-Idgestionventa bigint unsigned primary key auto_increment,
-fechaExtraccionOro date not null,
-precioOro mediumint not null,
-cantidad int not null,
-EstadoVenta enum('activo','inactivo') default 'activo',
-IdMINERO bigint unsigned not null, foreign key (IdMINERO) references usuario (IdUsuario),
-IdADMIN bigint unsigned not null, foreign key (IdADMIN) references Administrador (IdAdmin)
-);
-
-create table Producto
-(
-IdProducto bigint unsigned primary key auto_increment,
-TipoOro varchar(255)not null,
-Estadoproducto enum('activo','inactivo') default 'activo',
-Idgestion_FK bigint unsigned not null, foreign key (Idgestion_FK)  references GestionVentas  (Idgestionventa)
-);
-
-create table SalidaVenta
-(
-IdSVenta bigint unsigned primary key auto_increment,
-PesogrOro float not null,
-IdProducto_FK bigint unsigned not null, foreign key (IdProducto_FK)  references Producto (IdProducto),
-IdADMIN_FK bigint unsigned not null, foreign key (IdADMIN_FK)  references Administrador (IdAdmin)
-);
-
-create table cliente
-(
-Idcliente bigint unsigned primary key auto_increment,
-NombreCompleto varchar(255) not null,
-Empresa varchar(255) null,
-Pais varchar(255)not null,
-Ciudad_Municipio varchar(255)not null,
-Fecha_Exportacion date not null,
-IdSalida bigint unsigned not null, foreign key (IdSalida) references SalidaVenta (IdSVenta)
-);
-
-/* Registros*/
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('1246','Andres Manuel','Hernandez Castillo','hernandez@gmail.com','0125478N','activo');
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('4652','Alezander Antonio','Velazco','alexV@gmail.com','15872L6i','activo');
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('6556','Jesus Alvarez','Sierra Daza','JesusSD@gmail.com','456985L','activo');
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('4482','Anderson ','Perez Silva','Anders@gmail.com','046543h1','activo');
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('5100','Felipe montez','Brievich Gomez','FelipeMZ@gmail.com','235687X7','activo');
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('0027','Brenton parra','Casillas','BrentP@gmail.com','46432132q','activo');
-insert into usuario(IdUsuario,nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,estadoUsuario)
-values('0156','Bernabe Alex','Gamez','AlexisG@gmail.com','slpk1245Z','activo');
-
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('236','Administrador','activo','1246');
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('237','Minero','activo','4652');
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('239','Administrador','activo','4482');
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('240','Minero','activo','5100');
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('241','Administrador','activo','0027');
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('242','Minero','activo','6556');
-insert into rol(IdRol,TipoRol,EstadoRol,IdUs_FK)
-values('243','Administrador','activo','0156');
-
-SET FOREIGN_KEY_CHECKS=0;
-
-insert into Administrador(IdAdmin,CargoAdmin,IdUs_FK)
-values('136','Administracion del sistema','1246');
-insert into Administrador(IdAdmin,CargoAdmin,IdUs_FK)
-values('137','Administracion del sistema','4652');
-insert into Administrador(IdAdmin,CargoAdmin,IdUs_FK)
-values('138','Administracion del sistema','0027');
-insert into Administrador(IdAdmin,CargoAdmin,IdUs_FK)
-values('139','Administracion del sistema','0156');
-
-insert into Minero(IdMinero,TipoDoc,NumeroDoc,Turno,Asistencia,Telefono,AsignacionTareas,FechaNacimiento,DireccionVivienda,Fechapago,Novedades,FechaNovedad,IdUs_FK)
-values('5100','Cedula de ciudadania','1012587523','2','1','3212564','Extraer 240 gr de Oro y registrar la venta','1980-05-12','cra 102 #45-46','2015-11-02','No asiste por motivo de lesion','2016-02-07','0027');
-
-insert into novedad(Id_Novedad,fecha_Novedad,descripcion,IdMINERO,IdAdmin)
-values('10','2014-08-24','Incumple con el horario de trabajo','5100','0027');
-/*
-insert into gestionventas(Idgestionventa,fechaExtraccionOro,precioOro,cantidad,EstadoVenta,IdMINERO)
-values ('001','2008-09-25','450000','40','activo','4652');
-insert into gestionventas(Idgestionventa,fechaExtraccionOro,precioOro,cantidad,EstadoVenta,IdMINERO)
-values ('002','2008-11-09','461000','40','activo','4652');
-insert into gestionventas(Idgestionventa,fechaExtraccionOro,precioOro,cantidad,EstadoVenta,IdMINERO)
-values ('003','2011-08-27','500000','37','activo','5100');
-*/
-
-insert into Producto(IdProducto,TipoOro,Estadoproducto,Idgestion_FK)
-values('1','oro amarillo','activo','001');
-insert into Producto(IdProducto,TipoOro,Estadoproducto,Idgestion_FK)
-values('2','oro amarillo','activo','002');
-insert into Producto(IdProducto,TipoOro,Estadoproducto,Idgestion_FK)
-values('3','oro amarillo','activo','003');
-
-insert into SalidaVenta(IdSVenta,PesogrOro,IdProducto_FK,IdADMIN_FK)
-values('21','2.8','1','136');
-insert into SalidaVenta(IdSVenta,PesogrOro,IdProducto_FK,IdADMIN_FK)
-values('22','3.5','2','138');
-insert into SalidaVenta(IdSVenta,PesogrOro,IdProducto_FK,IdADMIN_FK)
-values('23','1.2','3','138');
-
-insert into cliente(Idcliente,NombreCompleto,Empresa,Pais,Ciudad_Municipio,Fecha_Exportacion,IdSalida)
-values('0054','Timothy Jhohanson MacBech','GatorCorporaton','Colombia','Magdalena','2014-02-15','23');
-
-/* vistas*/
-create view view_Login_Admin
-As select correoUsuario,passwordUsuario,r.TipoRol 
-from usuario US  INNER JOIN  Administrador Ad ON  US.IdUsuario = Ad.IdAdmin INNER JOIN rol r ON  US.IdUsuario = r.IdRol;
-
-create view view_Login_Minero
-As select correoUsuario,passwordUsuario,r.TipoRol 
-from usuario US  INNER JOIN  Minero M ON  US.IdUsuario = M.IdMinero INNER JOIN rol r ON  US.IdUsuario = r.IdRol;  
-
-create view view_Administrador
-As select nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,Ad.CargoAdmin,r.TipoRol,r.EstadoRol 
-from usuario US  INNER JOIN  Administrador Ad ON  US.IdUsuario = Ad.IdAdmin INNER JOIN rol r ON  US.IdUsuario = r.IdRol; 
-
-create view view_Minero
-As select nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario,
-M.TipoDoc,M.NumeroDoc,M.Turno,M.Asistencia,M.Telefono,M.AsignacionTareas,M.FechaNacimiento,M.DireccionVivienda,M.Fechapago,
-r.TipoRol,r.EstadoRol 
-from usuario US  INNER JOIN  Minero M ON  US.IdUsuario = M.IdMinero INNER JOIN rol r ON  US.IdUsuario = r.IdRol;
-
-
-/* procedimientos almacenados*/
-Delimiter //
-create procedure Registro_form(
-nombreUs varchar(255),
-apellidoUs varchar(255),
-correoUs varchar(255),
-passwordUs varchar(255)
-)
-insert into usuario(nombreUsuario,apellidosUsuario,correoUsuario,passwordUsuario) 
-values(nombreUs,apellidoUs,correoUs,passwordUs);
-//
-
-Delimiter //
-create procedure login(
-in email varchar(255),
-in passwordd varchar(255)
-)
-select correoUsuario,passwordUsuario,TipoRol,EstadoRol from usuario Us inner join rol R ON Us.IdUsuario = R.rol  where correoUsuario=email  and passwordUsuario=passwordd and estadoUsuario='activo';
-//
-
-DELIMITER //
-CREATE PROCEDURE RegistrarAdministrador(
-    IN p_nombreUsuario VARCHAR(255),
-    IN p_apellidosUsuario VARCHAR(255),
-    IN p_correoUsuario VARCHAR(255),
-    IN p_passwordUsuario VARCHAR(255),
-    IN p_cargoAdmin VARCHAR(255),
-    IN p_tipoRol ENUM('Minero','Administrador')
-)
-BEGIN
-    DECLARE admin_id BIGINT;
-
-    -- Verificar si el administrador ya existe
-    SELECT IdAdmin INTO admin_id FROM Administrador WHERE IdUs_FK = (SELECT IdUsuario FROM usuario WHERE correoUsuario = p_correoUsuario);
-    
-    -- Si el administrador no existe, insertar los datos
-    IF admin_id IS NULL THEN
-        INSERT INTO usuario (nombreUsuario, apellidosUsuario, correoUsuario, passwordUsuario, estadoUsuario)
-        VALUES (p_nombreUsuario, p_apellidosUsuario, p_correoUsuario, p_passwordUsuario, 'activo');
-        
-        SET admin_id = LAST_INSERT_ID();
-        
-        INSERT INTO Administrador (CargoAdmin, IdUs_FK)
-        VALUES (p_cargoAdmin, admin_id);
-        
-        INSERT INTO rol (TipoRol, IdUs_FK)
-        VALUES (p_tipoRol, admin_id);
-    END IF;
-END//
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE RegistrarMinero(
-    IN p_tipoDoc ENUM('Cedula de ciudadania','Cedula de Extranjeria'),
-    IN p_numeroDoc BIGINT,
-    IN p_turno INT,
-    IN p_asistencia BOOLEAN,
-    IN p_telefono MEDIUMINT,
-    IN p_asignacionTareas VARCHAR(255),
-    IN p_fechaNacimiento DATE,
-    IN p_direccionVivienda VARCHAR(255),
-    IN p_fechaPago DATE,
-    IN p_novedades VARCHAR(255),
-    IN p_fechaNovedad DATE,
-    IN p_nombreUsuario VARCHAR(255),
-    IN p_apellidosUsuario VARCHAR(255),
-    IN p_correoUsuario VARCHAR(255),
-    IN p_passwordUsuario VARCHAR(255)
-)
-BEGIN
-    DECLARE user_id BIGINT;
-    DECLARE minero_id BIGINT;
-
-    -- Verificar si el usuario ya existe
-    SELECT IdUsuario INTO user_id FROM usuario WHERE correoUsuario = p_correoUsuario;
-    
-    -- Si el usuario no existe, insertar los datos
-    IF user_id IS NULL THEN
-        INSERT INTO usuario (nombreUsuario, apellidosUsuario, correoUsuario, passwordUsuario, estadoUsuario)
-        VALUES (p_nombreUsuario, p_apellidosUsuario, p_correoUsuario, p_passwordUsuario, 'activo');
-        
-        SET user_id = LAST_INSERT_ID();
-    END IF;
-    
-    -- Insertar los datos del minero
-    INSERT INTO Minero (TipoDoc, NumeroDoc, Turno, Asistencia, Telefono, AsignacionTareas, FechaNacimiento, DireccionVivienda, Fechapago, Novedades, FechaNovedad, IdUs_FK)
-    VALUES (p_tipoDoc, p_numeroDoc, p_turno, p_asistencia, p_telefono, p_asignacionTareas, p_fechaNacimiento, p_direccionVivienda, p_fechaPago, p_novedades, p_fechaNovedad, user_id);
-    
-    SET minero_id = LAST_INSERT_ID();
-    
-    -- Asignar un rol al minero
-    INSERT INTO rol (TipoRol, IdUs_FK)
-    VALUES ('Minero', minero_id);
-END$$
-DELIMITER ;
-
-Delimiter //
-CREATE PROCEDURE ConsultaPerfil_Min(IN numeroDoc BIGINT)
-BEGIN
-    SELECT * FROM Minero WHERE NumeroDoc = numeroDoc;
-END
-//
-
-DELIMITER //
-
-CREATE PROCEDURE ConsultarEpf_Min(
-    IN p_Nombre VARCHAR(255),
-    IN p_NumeroDoc BIGINT
-)
-BEGIN
-    SELECT *
-    FROM Minero
-    WHERE Nombre = p_Nombre OR NumeroDoc = p_NumeroDoc;
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE ModificarPerfil_Min(
-    IN p_IdMinero BIGINT UNSIGNED,
-    IN p_TipoDoc ENUM('Cedula de ciudadania','Cedula de Extranjeria'),
-    IN p_NumeroDoc BIGINT,
-    IN p_Turno INT,
-    IN p_AsignacionTareas VARCHAR(255),
-    IN p_Telefono MEDIUMINT,
-    IN p_DireccionVivienda VARCHAR(255),
-    IN p_Novedades VARCHAR(255),
-    IN p_FechaNovedad DATE
-)
-BEGIN
-    UPDATE Minero
-    SET TipoDoc = p_TipoDoc,
-        NumeroDoc = p_NumeroDoc,
-        Turno = p_Turno,
-        AsignacionTareas = p_AsignacionTareas,
-        Telefono = p_Telefono,
-        DireccionVivienda = p_DireccionVivienda,
-        Novedades = p_Novedades,
-        FechaNovedad = p_FechaNovedad
-    WHERE IdMinero = p_IdMinero;
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE Inactivar_Min(
-    IN p_IdUsuario BIGINT UNSIGNED
-)
-BEGIN
-    UPDATE usuario
-    SET estadoUsuario = 'inactivo'
-    WHERE IdUsuario = p_IdUsuario;
-END //
-
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE solicitarReactivarMinero(
-    IN email VARCHAR(255)
-)
-BEGIN
-    UPDATE usuario
-    SET estadoUsuario = 'activo'
-    WHERE correoUsuario = email;
-END //
-
-Delimiter //
-create procedure consultaMinPRODUCTO()
-select * from producto where Estadoproducto = "activo";
-//
-
-Delimiter //
-create procedure registrarMin_comprayventa(
-in  F date,
-in  P bigint unsigned,
-in  C smallint unsigned
-)
-insert into GestionVentas(fechaExtraccionOro,precioOro,cantidad) values(F,P,C);
-select * from  GestionVentas;
-//
-
-Delimiter //
-create procedure consultarMin_comprayventa()
-select * from GestionVentas;
-//
-
-Delimiter //
-create procedure consultarMin_cliente()
-select * from cliente ;
-//
-DELIMITER //
-
-CREATE PROCEDURE ConsultarPropioAdmin(
-    IN p_IdAdmin BIGINT UNSIGNED
-)
-BEGIN
-    -- Realizar la lógica para consultar los datos del Administrador, por ejemplo, hacer una consulta JOIN con la tabla usuario
-    SELECT a.IdAdmin, a.CargoAdmin, u.nombreUsuario, u.apellidosUsuario, u.correoUsuario, u.estadoUsuario
-    FROM Administrador a
-    JOIN usuario u ON a.IdUs_FK = u.IdUsuario
-    WHERE a.IdAdmin = p_IdAdmin;
-END //
-
-DELIMITER ;
-
-
-DELIMITER //
-
-CREATE PROCEDURE ModificarPropioAdmin(
-    IN p_IdAdmin BIGINT UNSIGNED,
-    IN p_CargoAdmin VARCHAR(255),
-    IN p_NombreUsuario VARCHAR(255),
-    IN p_ApellidosUsuario VARCHAR(255),
-    IN p_CorreoUsuario VARCHAR(255),
-    IN p_PasswordUsuario VARCHAR(255),
-    IN p_EstadoUsuario ENUM('activo', 'inactivo')
-)
-BEGIN
-    -- Realizar la lógica para modificar los datos del Administrador
-    UPDATE Administrador a
-    JOIN usuario u ON a.IdUs_FK = u.IdUsuario
-    SET a.CargoAdmin = p_CargoAdmin,
-        u.nombreUsuario = p_NombreUsuario,
-        u.apellidosUsuario = p_ApellidosUsuario,
-        u.correoUsuario = p_CorreoUsuario,
-        u.passwordUsuario = p_PasswordUsuario,
-        u.estadoUsuario = p_EstadoUsuario
-    WHERE a.IdAdmin = p_IdAdmin;
-END //
-
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE consultarAdmin_Us()
-BEGIN
-    SELECT * FROM usuario;
-END //
-
-Delimiter //
-create procedure modificarAdmin_Us(
-IN idUsuario BIGINT UNSIGNED,
-    IN nombreUsuario VARCHAR(255),
-    IN apellidosUsuario VARCHAR(255),
-    IN correoUsuario VARCHAR(255),
-    IN passwordUsuario VARCHAR(255),
-    IN estadoUsuario ENUM('activo', 'inactivo')
-)
-BEGIN
-    UPDATE usuario
-    SET nombreUsuario = nombreUsuario,
-        apellidosUsuario = apellidosUsuario,
-        correoUsuario = correoUsuario,
-        passwordUsuario = passwordUsuario,
-        estadoUsuario = estadoUsuario
-    WHERE IdUsuario = idUsuario;
-END
-//
-
-Delimiter //
-CREATE PROCEDURE inactivarAdmin_Us(
-    IN idUsuario BIGINT UNSIGNED
-)
-BEGIN
-    UPDATE usuario
-    SET estadoUsuario = 'inactivo'
-    WHERE IdUsuario = idUsuario;
-END //
-
-DELIMITER //
-CREATE PROCEDURE registrarAdmin_Us(
-    IN nombreUsuario VARCHAR(255),
-    IN apellidosUsuario VARCHAR(255),
-    IN correoUsuario VARCHAR(255),
-    IN passwordUsuario VARCHAR(255),
-    IN estadoUsuario ENUM('activo', 'inactivo') 
-)
-BEGIN
-    INSERT INTO usuario (nombreUsuario, apellidosUsuario, correoUsuario, passwordUsuario, estadoUsuario)
-    VALUES (nombreUsuario, apellidosUsuario, correoUsuario, passwordUsuario, estadoUsuario);
-END //
-
-
-DELIMITER //
-CREATE PROCEDURE consultarAdmin_NovedadesMin(
-    IN idAdmin BIGINT UNSIGNED
-)
-BEGIN
-    SELECT n.Id_Novedad, n.fecha_Novedad, n.descripcion, u.nombreUsuario, u.apellidosUsuario
-    FROM Novedad n
-    INNER JOIN Minero m ON n.IdMINERO = m.IdMinero
-    INNER JOIN usuario u ON m.IdUs_FK = u.IdUsuario
-    WHERE n.IdAdmin = idAdmin;
-END //
-
-
-DELIMITER //
-CREATE TRIGGER verificar_Autorizacion BEFORE UPDATE ON Minero
-FOR EACH ROW
-BEGIN
-    DECLARE autorizado INT;
-    SELECT COUNT(*) INTO autorizado FROM Administrador WHERE IdUs_FK = NEW.IdUs_FK;
-    IF autorizado = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No tiene autorización para modificar el número de documento';
-    END IF;
-END //
-
-DELIMITER //
-
-DELIMITER //
-
-CREATE PROCEDURE ContestarSolicitudCambioDoc_Min(
-    IN p_IdMinero BIGINT UNSIGNED,
-    IN p_Respuesta VARCHAR(255)
-)
-BEGIN
-    DECLARE autorizado INT;
-    SELECT COUNT(*) INTO autorizado FROM Administrador WHERE IdUs_FK = (SELECT IdUs_FK FROM Minero WHERE IdMinero = p_IdMinero);
-    IF autorizado = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No tiene autorización para contestar la solicitud';
-    ELSE
-        -- Realizar la lógica para contestar la solicitud, por ejemplo, actualizar un campo en la tabla Minero
-        UPDATE Minero
-        SET RespuestaSolicitud = p_Respuesta
-        WHERE IdMinero = p_IdMinero;
-        SELECT 'Solicitud contestada correctamente' AS mensaje;
-    END IF;
-END //
-
-DELIMITER ;
-
-
-Delimiter //
-CREATE PROCEDURE modificarNumeroDocAdmin(
-    IN idMinero BIGINT UNSIGNED,
-    IN nuevoNumeroDoc BIGINT
-)
-BEGIN
-    DECLARE autorizado INT;
-    SELECT COUNT(*) INTO autorizado FROM Administrador WHERE IdUs_FK = (SELECT IdUs_FK FROM Minero WHERE IdMinero = idMinero);
-    IF autorizado = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No tiene autorización para modificar el número de documento';
-    ELSE
-        UPDATE Minero
-        SET NumeroDoc = nuevoNumeroDoc
-        WHERE IdMinero = idMinero;
-        SELECT 'Número de documento modificado correctamente' AS mensaje;
-    END IF;
-END //
-
-Delimiter ;
-
-DELIMITER //
-
-CREATE PROCEDURE RegistrarAsistenciaMinero(
-    IN p_IdMinero BIGINT UNSIGNED
-)
-BEGIN
-    -- Realizar la lógica para registrar la asistencia del Minero, por ejemplo, actualizar un campo en la tabla Minero
-    UPDATE Minero
-    SET Asistencia = 1
-    WHERE IdMinero = p_IdMinero;
-    SELECT 'Asistencia registrada correctamente' AS mensaje;
-END //
-
-DELIMITER ;
-
-Delimiter //
-
-CREATE PROCEDURE registrarNovedad_Min (
-    IN p_descripcion TEXT
-)
-BEGIN
-    INSERT INTO Novedad (fecha_Novedad, descripcion)
-    VALUES (CURDATE(), p_descripcion);
-END;
-
-//
-
-DELIMITER //
-
-CREATE PROCEDURE ConsultarNovedades_Min (
-    IN p_IdMinero bigint unsigned
-)
-BEGIN
-    SELECT Id_Novedad, fecha_Novedad, descripcion
-    FROM Novedad
-    WHERE IdMINERO = p_IdMinero;
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE EditarNovedad_Min (
-    IN p_IdNovedad bigint unsigned,
-    IN p_descripcion text
-)
-BEGIN
-    UPDATE Novedad
-    SET descripcion = p_descripcion
-    WHERE Id_Novedad = p_IdNovedad;
-END //
-
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE RegistrarVenta(
-  IN p_fechaExtraccionOro DATE,
-  IN p_precioOro MEDIUMINT,
-  IN p_cantidad INT,
-  IN p_IdMINERO BIGINT UNSIGNED
-)
-BEGIN
-  INSERT INTO GestionVentas (fechaExtraccionOro, precioOro, cantidad, IdMINERO)
-  VALUES (p_fechaExtraccionOro, p_precioOro, p_cantidad, p_IdMINERO);
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE MostrarVentas()
-BEGIN
-  SELECT * FROM GestionVentas;
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE EditarVenta(
-  IN p_Idgestionventa BIGINT UNSIGNED,
-  IN p_fechaExtraccionOro DATE,
-  IN p_precioOro MEDIUMINT,
-  IN p_cantidad INT,
-  IN p_EstadoVenta ENUM('activo', 'inactivo'),
-  IN p_IdMINERO BIGINT UNSIGNED
-)
-BEGIN
-  UPDATE GestionVentas
-  SET fechaExtraccionOro = p_fechaExtraccionOro, precioOro = p_precioOro, cantidad = p_cantidad, EstadoVenta = p_EstadoVenta, IdMINERO = p_IdMINERO
-  WHERE Idgestionventa = p_Idgestionventa;
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE EliminarVenta(
-  IN p_Idgestionventa BIGINT UNSIGNED
-)
-BEGIN
-  DELETE FROM GestionVentas
-  WHERE Idgestionventa = p_Idgestionventa;
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE insertarProducto(
-  IN p_TipoOro VARCHAR(255),
-  IN p_Estadoproducto ENUM('activo', 'inactivo'),
-  IN p_IdGestionVK BIGINT UNSIGNED
-)
-BEGIN
-  INSERT INTO Producto (TipoOro, EstadoProducto, Idgestion_FK)
-  VALUES (p_TipoOro, p_Estadoproducto, p_IdGestionVK);
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE MostrarProductos()
-BEGIN
-  SELECT * FROM Producto;
-END//
-DELIMITER ;
-
-
-
-DELIMITER //
-
-CREATE PROCEDURE EditarProducto(
-    IN p_IdProducto BIGINT UNSIGNED,
-    IN p_TipoOro VARCHAR(255),
-    IN p_EstadoProducto ENUM('activo', 'inactivo'),
-    IN p_IdGestionVentas BIGINT UNSIGNED
-)
-BEGIN
-    UPDATE Producto
-    SET TipoOro = p_TipoOro, Estadoproducto = p_EstadoProducto, Idgestion_FK = p_IdGestionVentas
-    WHERE IdProducto = p_IdProducto;
-END//
-
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE EliminarProducto(
-  IN p_IdProducto BIGINT UNSIGNED
-)
-BEGIN
-  DELETE FROM Producto
-  WHERE IdProducto = p_IdProducto;
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE RegistrarCliente(
-  IN p_NombreCompleto VARCHAR(255),
-  IN p_Empresa VARCHAR(255),
-  IN p_Pais VARCHAR(255),
-  IN p_Ciudad_Municipio VARCHAR(255),
-  IN p_Fecha_Exportacion DATE,
-  IN p_IdSalida BIGINT UNSIGNED
-)
-BEGIN
-  INSERT INTO Cliente (NombreCompleto, Empresa, Pais, Ciudad_Municipio, Fecha_Exportacion, IdSalida)
-  VALUES (p_NombreCompleto, p_Empresa, p_Pais, p_Ciudad_Municipio, p_Fecha_Exportacion, p_IdSalida);
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE MostrarClientes()
-BEGIN
-  SELECT * FROM Cliente;
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE EditarCliente(
-  IN p_IdCliente BIGINT UNSIGNED,
-  IN p_NombreCompleto VARCHAR(255),
-  IN p_Empresa VARCHAR(255),
-  IN p_Pais VARCHAR(255),
-  IN p_Ciudad_Municipio VARCHAR(255),
-  IN p_Fecha_Exportacion DATE,
-  IN p_IdSalida BIGINT UNSIGNED
-)
-BEGIN
-  UPDATE Cliente
-  SET NombreCompleto = p_NombreCompleto, Empresa = p_Empresa, Pais = p_Pais, Ciudad_Municipio = p_Ciudad_Municipio, Fecha_Exportacion = p_Fecha_Exportacion, IdSalida = p_IdSalida
-  WHERE IdCliente = p_IdCliente;
-END//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE EliminarCliente(
-  IN p_IdCliente BIGINT UNSIGNED
-)
-BEGIN
-  DELETE FROM Cliente
-  WHERE IdCliente = p_IdCliente;
-END//
-DELIMITER ;
-
-
-
-
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 26-12-2023 a las 22:15:32
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.1.17
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `orocol`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administradores`
+--
+
+CREATE TABLE `administradores` (
+  `idAdmin` int(11) NOT NULL,
+  `cargoAdmin` varchar(255) NOT NULL,
+  `IdUs_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `administradores`
+--
+
+INSERT INTO `administradores` (`idAdmin`, `cargoAdmin`, `IdUs_FK`) VALUES
+(1, 'Gerente', 1),
+(2, 'Supervisor', 2),
+(3, 'Supervisor', 3),
+(4, 'Supervisor', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clientes`
+--
+
+CREATE TABLE `clientes` (
+  `IdCliente` int(11) NOT NULL,
+  `NombreCompleto` varchar(255) NOT NULL,
+  `Empresa` varchar(255) DEFAULT NULL,
+  `Pais` varchar(255) NOT NULL,
+  `CiudadMunicipio` varchar(255) NOT NULL,
+  `FechaExportacion` date NOT NULL,
+  `estadoCompra` varchar(15) NOT NULL DEFAULT 'Activo',
+  `IdSalidaEV_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`IdCliente`, `NombreCompleto`, `Empresa`, `Pais`, `CiudadMunicipio`, `FechaExportacion`, `estadoCompra`, `IdSalidaEV_FK`) VALUES
+(1, 'Timothy Jhohanson MacBech', 'Gator Corporation', 'Perú ', 'Lima', '2023-12-16', 'Activo', 1),
+(2, 'Juan Manuel Hernandez Cabrera', 'TicSocial', 'Colombia', 'Magdalena', '2023-02-15', 'Activo', 2),
+(3, 'Andres Manuel Lopez Obrador', 'Empresa', 'Colombia', 'Bogotá', '2023-10-25', 'Activo', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entradaventas`
+--
+
+CREATE TABLE `entradaventas` (
+  `idGestionVenta` int(11) NOT NULL,
+  `fechaExtraccionOro` date NOT NULL,
+  `precioOro` mediumint(9) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `estadoVenta` varchar(15) NOT NULL DEFAULT 'Activo',
+  `IdMinEV_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `entradaventas`
+--
+
+INSERT INTO `entradaventas` (`idGestionVenta`, `fechaExtraccionOro`, `precioOro`, `cantidad`, `estadoVenta`, `IdMinEV_FK`) VALUES
+(1, '2023-05-13', 1500000, 15, 'Activo', 1),
+(2, '2023-10-22', 1200000, 5, 'Activo', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mineros`
+--
+
+CREATE TABLE `mineros` (
+  `IdMinero` int(11) NOT NULL,
+  `tipo_documento` varchar(22) NOT NULL,
+  `numero_documento` bigint(20) NOT NULL,
+  `cambio_documento` varchar(15) NOT NULL,
+  `telefono` mediumint(9) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `direccion_vivienda` varchar(255) NOT NULL,
+  `IdUs_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `mineros`
+--
+
+INSERT INTO `mineros` (`IdMinero`, `tipo_documento`, `numero_documento`, `cambio_documento`, `telefono`, `fecha_nacimiento`, `direccion_vivienda`, `IdUs_FK`) VALUES
+(1, 'Cedula de ciudadania', 1012587523, 'Acepto', 3212564, '1993-10-15', 'cra 102 #45-46', 2),
+(2, 'Cedula de ciudadania', 1332778599, 'No acepto', 3186279, '1987-12-08', 'Transversal 1b este # 81d 84 sur', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `novedades`
+--
+
+CREATE TABLE `novedades` (
+  `idNovedad` int(11) NOT NULL,
+  `fechaNovedad` date NOT NULL,
+  `descripcion` text NOT NULL,
+  `IdMinN_FK` int(11) DEFAULT NULL,
+  `IdAdminN_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `novedades`
+--
+
+INSERT INTO `novedades` (`idNovedad`, `fechaNovedad`, `descripcion`, `IdMinN_FK`, `IdAdminN_FK`) VALUES
+(1, '2023-11-30', 'Cumple con el horario de trabajo', 1, 2),
+(2, '2023-07-17', 'No cumple con el horario de trabajo', 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `IdProducto` int(11) NOT NULL,
+  `TipoOro` varchar(255) NOT NULL,
+  `estadoProducto` varchar(15) NOT NULL DEFAULT 'Disponible',
+  `IdEVPr_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`IdProducto`, `TipoOro`, `estadoProducto`, `IdEVPr_FK`) VALUES
+(1, 'oro amarillo', 'Disponible', 1),
+(2, 'oro amarillo', 'Disponible', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `idRol` int(11) NOT NULL,
+  `tipoRol` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`idRol`, `tipoRol`) VALUES
+(1, 'Administrador'),
+(2, 'Minero'),
+(3, 'Administrador'),
+(4, 'Minero'),
+(5, 'Administrador'),
+(6, 'Minero'),
+(7, 'Administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `salidaventas`
+--
+
+CREATE TABLE `salidaventas` (
+  `IdSalidaVenta` int(11) NOT NULL,
+  `PesogrOro` float NOT NULL,
+  `IdProdSV` int(11) DEFAULT NULL,
+  `IdAdminEV_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `salidaventas`
+--
+
+INSERT INTO `salidaventas` (`IdSalidaVenta`, `PesogrOro`, `IdProdSV`, `IdAdminEV_FK`) VALUES
+(1, 2.8, 1, 2),
+(2, 8, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `turnominero`
+--
+
+CREATE TABLE `turnominero` (
+  `idTurno` int(11) NOT NULL,
+  `FechaTurno` datetime NOT NULL,
+  `Asistencia` varchar(15) NOT NULL,
+  `AsignacionTareas` varchar(255) NOT NULL,
+  `IdMinT_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `idUsuario` int(11) NOT NULL,
+  `nombreUsuario` varchar(255) NOT NULL,
+  `apellidosUsuario` varchar(255) DEFAULT NULL,
+  `correoUsuario` varchar(255) NOT NULL,
+  `passwordUsuario` varchar(255) NOT NULL,
+  `estadoUsuario` varchar(55) NOT NULL DEFAULT 'activo',
+  `IdUs_FK` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `nombreUsuario`, `apellidosUsuario`, `correoUsuario`, `passwordUsuario`, `estadoUsuario`, `IdUs_FK`) VALUES
+(1, 'Andres Manuel', 'Hernandez Castillo', 'hernandez@gmail.com', '0125478N', 'activo', NULL),
+(2, 'Alezander Antonio', 'Velazco', 'alexV@gmail.com', '15872L6i', 'activo', NULL),
+(3, 'Jesus Alvarez', 'Sierra Daza', 'JesusSD@gmail.com', '456985L', 'activo', NULL),
+(4, 'Anderson', 'Perez Silva', 'Anders@gmail.com', '046543h1', 'activo', NULL),
+(5, 'Felipe montez', 'Brievich Gomez', 'FelipeMZ@gmail.com', '235687X7', 'activo', NULL),
+(6, 'Brenton parra', 'Casillas', 'BrentP@gmail.com', '46432132q', 'activo', NULL),
+(7, 'Bernabe Alex', 'Gamez', 'AlexisG@gmail.com', 'slpk1245Z', 'activo', NULL);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  ADD PRIMARY KEY (`idAdmin`),
+  ADD KEY `FK_6dff517e229af951e43ea33a5ad` (`IdUs_FK`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`IdCliente`),
+  ADD KEY `FK_016458eaa1347ef62dd35238f20` (`IdSalidaEV_FK`);
+
+--
+-- Indices de la tabla `entradaventas`
+--
+ALTER TABLE `entradaventas`
+  ADD PRIMARY KEY (`idGestionVenta`),
+  ADD KEY `FK_d278b8c80020673bbbc613b904e` (`IdMinEV_FK`);
+
+--
+-- Indices de la tabla `mineros`
+--
+ALTER TABLE `mineros`
+  ADD PRIMARY KEY (`IdMinero`),
+  ADD KEY `FK_c1f749173f0cee7c24d5928aa3c` (`IdUs_FK`);
+
+--
+-- Indices de la tabla `novedades`
+--
+ALTER TABLE `novedades`
+  ADD PRIMARY KEY (`idNovedad`),
+  ADD KEY `FK_4a3f13015c249307343c1ed0c53` (`IdMinN_FK`),
+  ADD KEY `FK_e55fb91d37f8bd053910662c868` (`IdAdminN_FK`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`IdProducto`),
+  ADD KEY `FK_c9b150e130dce37d185abcfe056` (`IdEVPr_FK`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`idRol`);
+
+--
+-- Indices de la tabla `salidaventas`
+--
+ALTER TABLE `salidaventas`
+  ADD PRIMARY KEY (`IdSalidaVenta`),
+  ADD UNIQUE KEY `IDX_a53a87e0a7e1429b9243bbd721` (`PesogrOro`),
+  ADD KEY `FK_ad8004f69f0037896cee993dada` (`IdProdSV`),
+  ADD KEY `FK_5c3ceea4ad2d2bf333757bac282` (`IdAdminEV_FK`);
+
+--
+-- Indices de la tabla `turnominero`
+--
+ALTER TABLE `turnominero`
+  ADD PRIMARY KEY (`idTurno`),
+  ADD KEY `FK_f4faa92902993a0ad8ecc5c9eaf` (`IdMinT_FK`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE KEY `IDX_63b005ad37462db6f8736b95fe` (`correoUsuario`),
+  ADD KEY `FK_8f76c93f47a7da3bc963dee7472` (`IdUs_FK`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `entradaventas`
+--
+ALTER TABLE `entradaventas`
+  MODIFY `idGestionVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `mineros`
+--
+ALTER TABLE `mineros`
+  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `novedades`
+--
+ALTER TABLE `novedades`
+  MODIFY `idNovedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `salidaventas`
+--
+ALTER TABLE `salidaventas`
+  MODIFY `IdSalidaVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `turnominero`
+--
+ALTER TABLE `turnominero`
+  MODIFY `idTurno` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  ADD CONSTRAINT `FK_6dff517e229af951e43ea33a5ad` FOREIGN KEY (`IdUs_FK`) REFERENCES `usuarios` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `FK_016458eaa1347ef62dd35238f20` FOREIGN KEY (`IdSalidaEV_FK`) REFERENCES `salidaventas` (`IdSalidaVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `entradaventas`
+--
+ALTER TABLE `entradaventas`
+  ADD CONSTRAINT `FK_d278b8c80020673bbbc613b904e` FOREIGN KEY (`IdMinEV_FK`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `mineros`
+--
+ALTER TABLE `mineros`
+  ADD CONSTRAINT `FK_c1f749173f0cee7c24d5928aa3c` FOREIGN KEY (`IdUs_FK`) REFERENCES `usuarios` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `novedades`
+--
+ALTER TABLE `novedades`
+  ADD CONSTRAINT `FK_4a3f13015c249307343c1ed0c53` FOREIGN KEY (`IdMinN_FK`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_e55fb91d37f8bd053910662c868` FOREIGN KEY (`IdAdminN_FK`) REFERENCES `administradores` (`idAdmin`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `FK_c9b150e130dce37d185abcfe056` FOREIGN KEY (`IdEVPr_FK`) REFERENCES `entradaventas` (`idGestionVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `salidaventas`
+--
+ALTER TABLE `salidaventas`
+  ADD CONSTRAINT `FK_5c3ceea4ad2d2bf333757bac282` FOREIGN KEY (`IdAdminEV_FK`) REFERENCES `administradores` (`idAdmin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_ad8004f69f0037896cee993dada` FOREIGN KEY (`IdProdSV`) REFERENCES `productos` (`IdProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `turnominero`
+--
+ALTER TABLE `turnominero`
+  ADD CONSTRAINT `FK_f4faa92902993a0ad8ecc5c9eaf` FOREIGN KEY (`IdMinT_FK`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `FK_8f76c93f47a7da3bc963dee7472` FOREIGN KEY (`IdUs_FK`) REFERENCES `rol` (`idRol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

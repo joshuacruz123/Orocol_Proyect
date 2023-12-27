@@ -23,7 +23,7 @@ import { hash } from 'bcryptjs';
     @Column({ type: 'varchar', length: 255, nullable: false })
     passwordUsuario: string;
   
-    @Column({type: 'varchar', length: 55, nullable: false, unique: true, default: EstadoUsuario.ACTIVO})
+    @Column({type: 'varchar', length: 55, nullable: false, default: EstadoUsuario.ACTIVO})
     estadoUsuario: EstadoUsuario;
 
     @ManyToOne(() => Rol, rol => rol.usuarios)

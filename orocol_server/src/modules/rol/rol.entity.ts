@@ -9,7 +9,7 @@ export class Rol {
   @PrimaryGeneratedColumn('increment')
   idRol: number;
 
-  @Column({type: 'varchar', length: 15, nullable: false, unique: true})
+  @Column({type: 'varchar', length: 15, nullable: false})
   tipoRol: RolNombre; 
 
   @OneToMany(() => Usuario, usuario => usuario.roles)

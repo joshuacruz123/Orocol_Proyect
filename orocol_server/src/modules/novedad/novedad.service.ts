@@ -4,13 +4,33 @@ import { MessageDto } from 'src/common/message.dto';
 import { Novedad } from './novedad.entity';
 import { NovedadRepository } from './novedad.repository';
 import { NovedadDto } from '../../dto/novedad.dto';
+import { MineroService } from '../minero/minero.service';
+
+import { Minero } from '../minero/minero.entity';
+import { MineroRepository } from '../minero/minero.repository';
+import { TurnoMinero } from '../minero/turno.entity';
+import { TurnoRepository } from '../minero/turno.repository';
+import { Rol } from '../rol/rol.entity';
+import { RolRepository } from '../rol/rol.repository';
+import { Usuario } from '../usuario/usuario.entity';
+import { UsuarioRepository } from '../usuario/usuario.repository';
 
 @Injectable()
-export class NovedadService {
+export class NovedadService extends MineroService {
     constructor(
         @InjectRepository(Novedad)
-        private novedadRepository: NovedadRepository
-    ) { }
+        private readonly novedadRepository: NovedadRepository,
+        @InjectRepository(Minero)
+        protected readonly mineroRepository: MineroRepository,
+        @InjectRepository(TurnoMinero)
+        protected readonly turnoRepository: TurnoRepository,
+        @InjectRepository(Rol)
+        protected readonly rolRepository: RolRepository,
+        @InjectRepository(Usuario)
+        protected readonly usuarioRepository: UsuarioRepository,
+    ) {
+        super(mineroRepository, turnoRepository, rolRepository, usuarioRepository)
+     }
     
     async consultarNovedades(): Promise<Novedad[]> {
         const list = await this.novedadRepository.find();

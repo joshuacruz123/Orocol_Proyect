@@ -8,13 +8,13 @@ export class Minero {
   @PrimaryGeneratedColumn('increment')
   IdMinero: number;
 
-  @Column({type: 'varchar', length: 22, nullable: false, unique: true})
+  @Column({type: 'varchar', length: 22, nullable: false})
   tipo_documento: TipoDocumento;
 
-  @Column({ type: 'bigint', unique: true })
+  @Column({ type: 'bigint' })
   numero_documento: number;
 
-  @Column({type: 'varchar', length: 15, nullable: false, unique: true})
+  @Column({type: 'varchar', length: 15, nullable: false})
   cambio_documento: CambioDocumento;
   
   @Column({ type: 'mediumint' })

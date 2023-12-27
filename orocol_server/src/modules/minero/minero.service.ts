@@ -7,15 +7,26 @@ import { mineroDto } from '../../dto/minero.dto';
 import { TurnoRepository } from './turno.repository';
 import { TurnoDto } from '../../dto/turno.dto';
 import { TurnoMinero } from './turno.entity';
+import { Rol } from '../rol/rol.entity';
+import { RolRepository } from '../rol/rol.repository';
+import { Usuario } from '../usuario/usuario.entity';
+import { UsuarioRepository } from '../usuario/usuario.repository';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Injectable()
-export class MineroService {
+export class MineroService extends UsuarioService {
     constructor(
         @InjectRepository(Minero)
-        private mineroRepository: MineroRepository,
+        protected readonly mineroRepository: MineroRepository,
         @InjectRepository(TurnoMinero)
-        private turnoRepository: TurnoRepository
-    ) { }
+        protected readonly turnoRepository: TurnoRepository,
+        @InjectRepository(Rol)
+        protected readonly rolRepository: RolRepository,
+        @InjectRepository(Usuario)
+        protected readonly usuarioRepository: UsuarioRepository, 
+    ) { 
+        super(rolRepository, usuarioRepository);
+    }
 
     async consultarMineros(): Promise<Minero[]> {
         const list = await this.mineroRepository.find();

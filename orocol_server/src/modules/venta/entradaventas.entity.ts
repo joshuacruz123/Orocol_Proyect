@@ -16,7 +16,7 @@ export class EntradaVenta {
   @Column({ type: 'int', nullable: false })
   cantidad: number;
 
-  @Column({type: 'varchar', length: 15, nullable: false, unique: true, default: EstadoVenta.ACTIVO})
+  @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})
   estadoVenta: EstadoVenta;
   
 

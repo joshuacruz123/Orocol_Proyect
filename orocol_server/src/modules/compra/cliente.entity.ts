@@ -22,7 +22,7 @@ export class Cliente {
   @Column({ type: 'date' })
   FechaExportacion: Date;
 
-  @Column({type: 'varchar', length: 15, nullable: false, unique: true, default: EstadoCompra.ACTIVO})
+  @Column({type: 'varchar', length: 15, nullable: false, default: EstadoCompra.ACTIVO})
   estadoCompra: EstadoCompra;
 
   @ManyToOne(() => SalidaVenta, { eager: true }) 

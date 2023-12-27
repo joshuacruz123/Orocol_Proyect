@@ -4,14 +4,25 @@ import { Administrador } from './administrador.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
+import { UsuarioService } from '../usuario/usuario.service';
+import { Rol } from './../rol/rol.entity';
+import { RolRepository } from './../rol/rol.repository';
+import { Usuario } from '../usuario/usuario.entity';
+import { UsuarioRepository } from '../usuario/usuario.repository';
 
 @Injectable()
-export class AdministradorService {
+export class AdministradorService extends UsuarioService {
 
     constructor(
         @InjectRepository(Administrador)
-        private administradorRepository: AdministradorRepository
-    ) { }
+        private readonly administradorRepository: AdministradorRepository,
+        @InjectRepository(Rol)
+        protected readonly rolRepository: RolRepository,
+        @InjectRepository(Usuario)
+        protected readonly usuarioRepository: UsuarioRepository, 
+    ) { 
+        super(rolRepository, usuarioRepository);
+    }
 
     async consultarAdministradores(): Promise<Administrador[]> {
         const list = await this.administradorRepository.find();

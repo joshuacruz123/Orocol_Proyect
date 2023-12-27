@@ -10,7 +10,7 @@ export class Producto {
   @Column({ type: 'varchar', length: 255, nullable: false })
   TipoOro: string;   
 
-  @Column({type: 'varchar', length: 15, nullable: false, unique: true, default: EstadoProducto.ACTIVO})
+  @Column({type: 'varchar', length: 15, nullable: false, default: EstadoProducto.ACTIVO})
   estadoProducto: EstadoProducto;
 
   @ManyToOne(() => EntradaVenta, { eager: true }) 
