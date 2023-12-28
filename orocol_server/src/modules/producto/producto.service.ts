@@ -1,9 +1,9 @@
 import { ProductoDto } from '../../dto/producto.dto';
-import { ProductoRepository } from './producto.repository';
 import { Producto } from './producto.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
+import { Repository } from 'typeorm'; // Repository<>
 
 @Injectable()
 export class ProductoService {
@@ -11,7 +11,7 @@ export class ProductoService {
 
     constructor(
         @InjectRepository(Producto)
-        private productoRepository: ProductoRepository
+        private productoRepository: Repository<Producto>
     ) { }
 
     async consultarProductos(): Promise<Producto[]> {

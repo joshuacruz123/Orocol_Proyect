@@ -16,4 +16,4 @@ export class CreateUsuarioDto {
 
     @IsNotBlank({message: 'la contraseña del usuario no puede estar vacía'})
     passwordUsuario: string;
-}
+} 

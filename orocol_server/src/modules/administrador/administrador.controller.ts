@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, ValidationPipe, UsePipes, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe } from '@nestjs/common';
 import { AdministradorService } from './administrador.service';
 import { AdministradorDto } from '../../dto/administrador.dto';
 

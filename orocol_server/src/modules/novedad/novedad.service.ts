@@ -2,32 +2,27 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
 import { Novedad } from './novedad.entity';
-import { NovedadRepository } from './novedad.repository';
 import { NovedadDto } from '../../dto/novedad.dto';
 import { MineroService } from '../minero/minero.service';
-
 import { Minero } from '../minero/minero.entity';
-import { MineroRepository } from '../minero/minero.repository';
 import { TurnoMinero } from '../minero/turno.entity';
-import { TurnoRepository } from '../minero/turno.repository';
 import { Rol } from '../rol/rol.entity';
-import { RolRepository } from '../rol/rol.repository';
 import { Usuario } from '../usuario/usuario.entity';
-import { UsuarioRepository } from '../usuario/usuario.repository';
+import { Repository } from 'typeorm'; // Repository<>
 
 @Injectable()
 export class NovedadService extends MineroService {
     constructor(
         @InjectRepository(Novedad)
-        private readonly novedadRepository: NovedadRepository,
+        private readonly novedadRepository: Repository<Novedad>,
         @InjectRepository(Minero)
-        protected readonly mineroRepository: MineroRepository,
+        protected readonly mineroRepository: Repository<Minero>,
         @InjectRepository(TurnoMinero)
-        protected readonly turnoRepository: TurnoRepository,
+        protected readonly turnoRepository: Repository<TurnoMinero>,
         @InjectRepository(Rol)
-        protected readonly rolRepository: RolRepository,
+        protected readonly rolRepository: Repository<Rol>,
         @InjectRepository(Usuario)
-        protected readonly usuarioRepository: UsuarioRepository,
+        protected readonly usuarioRepository: Repository<Usuario>,
     ) {
         super(mineroRepository, turnoRepository, rolRepository, usuarioRepository)
      }

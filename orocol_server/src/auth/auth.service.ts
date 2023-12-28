@@ -4,7 +4,6 @@ import { PayloadInterface } from './payload.interface';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 import { LoginUsuarioDto } from '../dto/login.dto';
-import { RolRepository } from './../modules/rol/rol.repository';
 import { MessageDto } from './../common/message.dto';
 import { NuevoUsuarioDto } from '../dto/nuevo-usuario.dto';
 import { AuthRepository } from './auth.repository';
@@ -12,13 +11,14 @@ import { Usuario } from './../modules/usuario/usuario.entity';
 import { Rol } from './../modules/rol/rol.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RolNombre } from 'src/modules/rol/rol.enum';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
 
     constructor(
         @InjectRepository(Rol)
-        private readonly rolRepository: RolRepository,
+        private readonly rolRepository: Repository<Rol>,
         @InjectRepository(Usuario)
         private readonly authRepository: AuthRepository,
         private readonly jwtService: JwtService

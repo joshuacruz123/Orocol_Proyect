@@ -1,13 +1,12 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Rol } from './../rol/rol.entity';
-import { RolRepository } from './../rol/rol.repository';
 import { CreateUsuarioDto } from '../../dto/create-usuario.dto';
 import { create } from 'domain';
 import { MessageDto } from './../../common/message.dto';
-import { UsuarioRepository } from './usuario.repository';
 import { Usuario } from './usuario.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RolNombre } from 'src/modules/rol/rol.enum';
+import { Repository } from 'typeorm'; // Repository<>
 // Importa las dependencias y archivos necesarios
 
 @Injectable()
@@ -15,14 +14,15 @@ export class UsuarioService {
 
     constructor(
         @InjectRepository(Rol)
-        protected readonly rolRepository: RolRepository,
+        protected readonly rolRepository: Repository<Rol>,
         @InjectRepository(Usuario)
-        protected readonly usuarioRepository: UsuarioRepository
+        protected readonly usuarioRepository: Repository<Usuario>,
     ) { }
     // Llama a los repositorios 
 
-    async getall(): Promise<Usuario[]> {
-        const usuarios = await this.usuarioRepository.find();
+    // En UsuarioService
+    async consultarUsuarios(): Promise<Usuario[]> {
+        const usuarios = await this.usuarioRepository.find({ relations: ['roles'] });
         if (!usuarios.length) throw new NotFoundException(new MessageDto('no hay usuarios en la lista'));
         return usuarios;
     }
@@ -57,7 +57,6 @@ export class UsuarioService {
             throw new NotFoundException(new MessageDto('No existe el usuario'));
         }
         const existingUsuario = await this.usuarioRepository.findOne({ where: { nombreUsuario: dto.nombreUsuario } });
-
         if (existingUsuario && existingUsuario.idUsuario !== idUsuario) {
             throw new BadRequestException(new MessageDto('El nombre de usuario ya existe'));
         }

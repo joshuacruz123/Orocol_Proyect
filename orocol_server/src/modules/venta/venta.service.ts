@@ -3,18 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
 import { EntradaVenta } from './entradaventas.entity';
 import { SalidaVenta } from './salidaventas.entity';
-import { EntradaVentaRepository } from './venta.repository';
-import { SalidaVentaRepository } from './venta.repository';
 import { EntradaDto } from '../../dto/entrada.dto';
 import { SalidaDto } from '../../dto/salida.dto';
+import { Repository } from 'typeorm'; // Repository<>
 
 @Injectable()
 export class VentaService {
     constructor(
         @InjectRepository(EntradaVenta)
-        private entradaVentaRepository: EntradaVentaRepository,
+        private entradaVentaRepository: Repository<EntradaVenta>,
         @InjectRepository(SalidaVenta)
-        private salidaVentaRepository: SalidaVentaRepository
+        private salidaVentaRepository: Repository<SalidaVenta>
     ) { }
 
     async insertarVentaEntrada(dto: EntradaDto): Promise<any> {

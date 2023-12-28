@@ -9,14 +9,14 @@ export class UsuarioController {
 
     @Get()
     getAll() {
-        return this.usuarioService.getall();
+        return this.usuarioService.consultarUsuarios();
     }
 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Post()
     registrarUsuario(@Body() dto: CreateUsuarioDto) {
         return this.usuarioService.registrarUsuario(dto);
-    }    
+    }     
 
 
     @UsePipes(new ValidationPipe({whitelist: true}))

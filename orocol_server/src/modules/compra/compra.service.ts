@@ -1,16 +1,16 @@
 import { CompraDto } from '../../dto/compra.dto';
-import { ClienteRepository } from './compra.repository';
 import { Cliente } from './cliente.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
+import { Repository } from 'typeorm'; // Repository<>
 
 @Injectable()
 export class CompraService {
 
-    constructor(
+    constructor( 
         @InjectRepository(Cliente)
-        private clienteRepository: ClienteRepository
+        private clienteRepository: Repository<Cliente>
     ) { }
 
     async consultarClientes(): Promise<Cliente[]> {
