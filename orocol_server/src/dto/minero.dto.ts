@@ -24,4 +24,9 @@ export class mineroDto {
     
     @IsNotBlank({message: 'La dirección no puede estar vacía'})
     direccion_vivienda?: string;
+
+    nombreUsuario: string; // Agrega estas propiedades
+    apellidosUsuario: string;
+    correoUsuario: string;
+    passwordUsuario: string;
 } 
