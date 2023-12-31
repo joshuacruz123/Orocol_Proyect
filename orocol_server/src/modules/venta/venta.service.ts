@@ -23,11 +23,11 @@ export class VentaService extends MineroService {
         protected readonly entradaVentaRepository: Repository<EntradaVenta>,
         @InjectRepository(SalidaVenta)
         protected readonly salidaVentaRepository: Repository<SalidaVenta>,
+        @InjectRepository(Producto) protected readonly productoRepository: Repository<Producto>,
+        protected readonly productoService: ProductoService,
         @InjectRepository(Minero) protected readonly mineroRepository: Repository<Minero>,
         protected readonly mineroService: MineroService,
         @InjectRepository(TurnoMinero) protected readonly turnoRepository: Repository<TurnoMinero>,
-        @InjectRepository(Producto) protected readonly productoRepository: Repository<Producto>,
-        protected readonly productoService: ProductoService,
         @InjectRepository(Rol) protected readonly rolRepository: Repository<Rol>,
         @InjectRepository(Usuario) protected readonly usuarioRepository: Repository<Usuario>,
         protected readonly usuarioService: UsuarioService,
