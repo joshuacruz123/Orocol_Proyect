@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Minero } from '../minero/minero.entity';
 import { EstadoVenta } from './venta.enum';
+import { Producto } from '../producto/producto.entity';
 
 @Entity({ name: 'EntradaVentas' })
 export class EntradaVenta {
@@ -18,9 +19,13 @@ export class EntradaVenta {
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})
   estadoVenta: EstadoVenta;
-  
+   
 
-  @ManyToOne(() => Minero, { eager: true }) 
-  @JoinColumn({ name: 'IdMinEV_FK' })
-  Mineros: Minero; 
-}  
+  @ManyToOne(type => Minero)
+  @JoinColumn({ name: 'mineroId' })
+  Mineros: Minero;
+
+  @ManyToOne(type => Producto)
+  @JoinColumn({ name: 'productoId' })
+  Productos: Producto;
+}   

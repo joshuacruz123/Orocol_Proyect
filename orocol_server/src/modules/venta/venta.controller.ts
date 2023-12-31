@@ -8,7 +8,7 @@ export class VentaController {
  
     constructor(private readonly ventaService: VentaService) {}
 
-    @Get()
+    @Get() 
     async consultarVentas() {
         return await this.ventaService.consultarVentas();
     }

@@ -29,8 +29,8 @@ export class UsuarioService {
     // Método para  
 
     async registrarUsuario(dto: CreateUsuarioDto): Promise<any> {
-        const { nombreUsuario, apellidosUsuario, correoUsuario } = dto;
-        const exists = await this.usuarioRepository.findOne({ where: [{ nombreUsuario: nombreUsuario }, { apellidosUsuario: apellidosUsuario }, { correoUsuario: correoUsuario }] });
+        const { correoUsuario } = dto;
+        const exists = await this.usuarioRepository.findOne({ where: [{ correoUsuario: correoUsuario }] });
         if (exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
         const rolAdmin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.ADMINISTRADOR } });
         const rolMin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.MINERO } });

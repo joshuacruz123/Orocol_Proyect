@@ -15,4 +15,7 @@ export class EntradaDto {
     @IsNotEmpty()
     @Max(10, {message: 'La cantidad de Oro debe de ser maximo de 10'})
     cantidad?: number;
+
+    @IsNotBlank({message: 'el tipo de oro no puede estar vacío'})
+    TipoOro?: string;
 }  

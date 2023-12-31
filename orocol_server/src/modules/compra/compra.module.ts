@@ -7,3 +7,4 @@ import { CompraController } from './compra.controller';
   controllers: [CompraController]
 })
 export class CompraModule {}
+ 

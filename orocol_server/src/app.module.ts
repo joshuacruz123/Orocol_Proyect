@@ -30,7 +30,7 @@ import { AuthModule } from './auth/auth.module';
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: false,
+        synchronize: false, //"true" para reestructurar y agregar tablas a la base de datos 
         logging: false //"true" para ver las sentencias SQL por consola
       }),
       inject: [ConfigService],

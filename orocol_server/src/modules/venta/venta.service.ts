@@ -9,20 +9,25 @@ import { Repository } from 'typeorm';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Minero } from '../minero/minero.entity';
 import { TurnoMinero } from '../minero/turno.entity';
+import { Producto } from '../producto/producto.entity';
 import { Rol } from '../rol/rol.entity';
 import { Usuario } from '../usuario/usuario.entity';
 import { MineroService } from '../minero/minero.service';
+import { ProductoService } from '../producto/producto.service';
+import { ProductoDto } from 'src/dto/producto.dto';
 
 @Injectable()
 export class VentaService extends MineroService {
     constructor(
         @InjectRepository(EntradaVenta)
-        private entradaVentaRepository: Repository<EntradaVenta>,
+        protected readonly entradaVentaRepository: Repository<EntradaVenta>,
         @InjectRepository(SalidaVenta)
-        private salidaVentaRepository: Repository<SalidaVenta>,
+        protected readonly salidaVentaRepository: Repository<SalidaVenta>,
         @InjectRepository(Minero) protected readonly mineroRepository: Repository<Minero>,
         protected readonly mineroService: MineroService,
         @InjectRepository(TurnoMinero) protected readonly turnoRepository: Repository<TurnoMinero>,
+        @InjectRepository(Producto) protected readonly productoRepository: Repository<Producto>,
+        protected readonly productoService: ProductoService,
         @InjectRepository(Rol) protected readonly rolRepository: Repository<Rol>,
         @InjectRepository(Usuario) protected readonly usuarioRepository: Repository<Usuario>,
         protected readonly usuarioService: UsuarioService,
@@ -31,12 +36,12 @@ export class VentaService extends MineroService {
     }
 
     async insertarVentaEntrada(dto: EntradaDto): Promise<any> {
-        const { fechaExtraccionOro, precioOro, cantidad } = dto;
-        const exists = await this.entradaVentaRepository.findOne({ where: [{ fechaExtraccionOro: fechaExtraccionOro }, { precioOro: precioOro }, { cantidad: cantidad }] });
-        if (exists) throw new BadRequestException(new MessageDto('ese fechaExtraccionOro ya existe'));
+        const productoDto: ProductoDto = {
+            TipoOro: dto.TipoOro,
+        };
+        await this.productoService.insertarProducto(productoDto);
         const entrada = this.entradaVentaRepository.create(dto);
         await this.entradaVentaRepository.save(entrada);
-        return new MessageDto(`Compra de ${entrada.fechaExtraccionOro} creada`);
     }
     // Método para registrar las ventas de entrada
 
@@ -47,9 +52,14 @@ export class VentaService extends MineroService {
 
     async consultarVentas(): Promise<EntradaVenta[]> {
         const mineros: Minero[] = await this.consultarMineros();
-        const lista = mineros.filter(
+        const productos: Producto[] = await this.productoService.consultarProductos();
+        const listaEntrada = mineros.filter(
             minero => minero instanceof EntradaVenta
         ) as unknown as EntradaVenta[];
+        const listaProducto = productos.filter(
+            producto => producto instanceof EntradaVenta
+        ) as unknown as EntradaVenta[];
+        const lista: EntradaVenta[] = [...listaEntrada, ...listaProducto];
         if (!lista.length) {
             throw new NotFoundException(new MessageDto('La lista de ventas está vacía'));
         }
@@ -58,12 +68,23 @@ export class VentaService extends MineroService {
     // Método para consultar las ventas de entrada
 
     async consultarVenta(idGestionVenta: number): Promise<EntradaVenta> {
-        const mineros: Minero = await this.consultarMinero(idGestionVenta);
-        const venta = await this.entradaVentaRepository.findOne({ where: { idGestionVenta: mineros.IdMinero } });
-        if (!venta) {
-            throw new NotFoundException(new MessageDto('No existe la venta'));
+        const minero: Minero = await this.consultarMinero(idGestionVenta);
+        const producto: Producto = await this.productoService.consultarProducto(idGestionVenta);
+        if (!minero || !producto) {
+            throw new NotFoundException(new MessageDto('No se encontró el minero o el producto'));
         }
-        return venta;
+        const entradaVenta: EntradaVenta = await this.entradaVentaRepository.findOne({
+            where: {
+                Mineros: { IdMinero: minero.IdMinero },
+                Productos: { IdProducto: producto.IdProducto }
+            },
+            relations: ['Mineros', 'Productos']
+            
+        });
+        if (!entradaVenta) {
+            throw new NotFoundException(new MessageDto('No hay ningún registro en la lista')); 
+        }
+        return entradaVenta;
     }
 
     async consultarSalidaVenta(IdSalidaVenta: number): Promise<SalidaVenta> {
@@ -97,18 +118,23 @@ export class VentaService extends MineroService {
         await this.salidaVentaRepository.delete(idAdmin);
         return new MessageDto(`venta ${venta.PesogrOro} eliminado`);
     }
-    // Método para inactivar las ventas 
+    // Método para inactivar las ventas  
 
     async generarReporteVenta(): Promise<EntradaVenta[]> {
         const mineros: Minero[] = await this.consultarMineros();
+        const productos: Producto[] = await this.productoService.consultarProductos();
         const salidas: SalidaVenta[] = await this.consultarSalidaVentas();
         const listaEntrada = mineros.filter(
             minero => minero instanceof EntradaVenta
-        ) as unknown as EntradaVenta[];    
+        ) as unknown as EntradaVenta[];
+        const listaProducto = productos.filter(
+            producto => producto instanceof EntradaVenta
+        ) as unknown as EntradaVenta[];
         const listaSalida = salidas.filter(
             salida => salida instanceof EntradaVenta
         ) as unknown as EntradaVenta[];
-        const lista: EntradaVenta[] = [...listaEntrada, ...listaSalida];
+        const lista: EntradaVenta[] = [...listaEntrada, ...listaProducto, ...listaSalida];
         return lista;
     }
 }
+ 

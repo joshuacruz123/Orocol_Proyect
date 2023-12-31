@@ -8,7 +8,7 @@ export class SalidaVenta {
   @PrimaryGeneratedColumn('increment')
   IdSalidaVenta: number;
 
-  @Column({ type: 'float', unique: true })
+  @Column({ type: 'float' })
   PesogrOro: number;
 
   @ManyToOne(() => Producto, { eager: true }) 

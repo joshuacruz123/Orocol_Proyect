@@ -13,11 +13,9 @@ export class Producto {
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoProducto.ACTIVO})
   estadoProducto: EstadoProducto;
 
-  @ManyToOne(() => EntradaVenta, { eager: true }) 
-  @JoinColumn({ name: 'IdEVPr_FK' })
-  EntradaVentas: EntradaVenta; 
-}
  
+}
+  
 /*
 create table Producto
 (
