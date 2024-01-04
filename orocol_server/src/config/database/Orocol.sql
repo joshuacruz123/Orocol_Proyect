@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-12-2023 a las 22:15:32
+-- Tiempo de generación: 02-01-2024 a las 00:35:32
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -39,9 +39,9 @@ CREATE TABLE `administradores` (
 
 INSERT INTO `administradores` (`idAdmin`, `cargoAdmin`, `IdUs_FK`) VALUES
 (1, 'Gerente', 1),
-(2, 'Supervisor', 2),
-(3, 'Supervisor', 3),
-(4, 'Supervisor', 4);
+(2, 'Supervisor', 3),
+(3, 'Supervisor', 5),
+(4, 'Supervisor', 7);
 
 -- --------------------------------------------------------
 
@@ -65,9 +65,9 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`IdCliente`, `NombreCompleto`, `Empresa`, `Pais`, `CiudadMunicipio`, `FechaExportacion`, `estadoCompra`, `IdSalidaEV_FK`) VALUES
-(1, 'Timothy Jhohanson MacBech', 'Gator Corporation', 'Perú ', 'Lima', '2023-12-16', 'Activo', 1),
-(2, 'Juan Manuel Hernandez Cabrera', 'TicSocial', 'Colombia', 'Magdalena', '2023-02-15', 'Activo', 2),
-(3, 'Andres Manuel Lopez Obrador', 'Empresa', 'Colombia', 'Bogotá', '2023-10-25', 'Activo', 2);
+(1, 'Timothy Jhohanson MacBech', 'Gator Corporation', 'Perú', 'Lima', '2023-12-16', 'Activo', 1),
+(2, 'Juan Manuel Hernandez Cabrera', 'GoldSocial', 'Colombia', 'Tolima', '2023-02-15', 'Activo', 2),
+(3, 'Andres Manuel Lopez Obrador', 'MexiJoyas', 'México', 'Ciudad de México', '2023-12-19', 'Activo', 2);
 
 -- --------------------------------------------------------
 
@@ -81,16 +81,17 @@ CREATE TABLE `entradaventas` (
   `precioOro` mediumint(9) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `estadoVenta` varchar(15) NOT NULL DEFAULT 'Activo',
-  `IdMinEV_FK` int(11) DEFAULT NULL
+  `mineroId` int(11) DEFAULT NULL,
+  `productoId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `entradaventas`
 --
 
-INSERT INTO `entradaventas` (`idGestionVenta`, `fechaExtraccionOro`, `precioOro`, `cantidad`, `estadoVenta`, `IdMinEV_FK`) VALUES
-(1, '2023-05-13', 1500000, 15, 'Activo', 1),
-(2, '2023-10-22', 1200000, 5, 'Activo', 2);
+INSERT INTO `entradaventas` (`idGestionVenta`, `fechaExtraccionOro`, `precioOro`, `cantidad`, `estadoVenta`, `mineroId`, `productoId`) VALUES
+(1, '2023-05-13', 1500000, 15, 'Activo', 1, 1),
+(2, '2023-10-22', 1200000, 5, 'Activo', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,8 @@ CREATE TABLE `mineros` (
 
 INSERT INTO `mineros` (`IdMinero`, `tipo_documento`, `numero_documento`, `cambio_documento`, `telefono`, `fecha_nacimiento`, `direccion_vivienda`, `IdUs_FK`) VALUES
 (1, 'Cedula de ciudadania', 1012587523, 'Acepto', 3212564, '1993-10-15', 'cra 102 #45-46', 2),
-(2, 'Cedula de ciudadania', 1332778599, 'No acepto', 3186279, '1987-12-08', 'Transversal 1b este # 81d 84 sur', 4);
+(2, 'Cedula de ciudadania', 1332778599, 'No acepto', 3186279, '1987-12-08', 'Transversal 1b este # 81d 84 sur', 4),
+(3, 'Cedula de ciudadania', 1312587790, 'Acepto', 3182777, '1996-08-12', 'Av C.Cali #64 sur', 6);
 
 -- --------------------------------------------------------
 
@@ -136,7 +138,7 @@ CREATE TABLE `novedades` (
 --
 
 INSERT INTO `novedades` (`idNovedad`, `fechaNovedad`, `descripcion`, `IdMinN_FK`, `IdAdminN_FK`) VALUES
-(1, '2023-11-30', 'Cumple con el horario de trabajo', 1, 2),
+(1, '2023-11-30', 'No pude cumplir con mi horario de trabajo por calamidad domestica.', 1, 2),
 (2, '2023-07-17', 'No cumple con el horario de trabajo', 2, 4);
 
 -- --------------------------------------------------------
@@ -148,17 +150,16 @@ INSERT INTO `novedades` (`idNovedad`, `fechaNovedad`, `descripcion`, `IdMinN_FK`
 CREATE TABLE `productos` (
   `IdProducto` int(11) NOT NULL,
   `TipoOro` varchar(255) NOT NULL,
-  `estadoProducto` varchar(15) NOT NULL DEFAULT 'Disponible',
-  `IdEVPr_FK` int(11) DEFAULT NULL
+  `estadoProducto` varchar(15) NOT NULL DEFAULT 'Disponible'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`IdProducto`, `TipoOro`, `estadoProducto`, `IdEVPr_FK`) VALUES
-(1, 'oro amarillo', 'Disponible', 1),
-(2, 'oro amarillo', 'Disponible', 2);
+INSERT INTO `productos` (`IdProducto`, `TipoOro`, `estadoProducto`) VALUES
+(1, 'oro amarillo', 'Disponible'),
+(2, 'oro amarillo', 'Disponible');
 
 -- --------------------------------------------------------
 
@@ -219,6 +220,14 @@ CREATE TABLE `turnominero` (
   `IdMinT_FK` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `turnominero`
+--
+
+INSERT INTO `turnominero` (`idTurno`, `FechaTurno`, `Asistencia`, `AsignacionTareas`, `IdMinT_FK`) VALUES
+(1, '2023-01-12 13:00:00', 'Nó asistió', 'Recolección de oro', 1),
+(2, '2023-01-12 07:00:00', 'Sí asistió', 'Carga de materiales', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -271,7 +280,8 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `entradaventas`
   ADD PRIMARY KEY (`idGestionVenta`),
-  ADD KEY `FK_d278b8c80020673bbbc613b904e` (`IdMinEV_FK`);
+  ADD KEY `FK_c1becf60a403e779fb391392887` (`mineroId`),
+  ADD KEY `FK_9590e24cf99b59b0a928a2205c6` (`productoId`);
 
 --
 -- Indices de la tabla `mineros`
@@ -292,8 +302,7 @@ ALTER TABLE `novedades`
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`IdProducto`),
-  ADD KEY `FK_c9b150e130dce37d185abcfe056` (`IdEVPr_FK`);
+  ADD PRIMARY KEY (`IdProducto`);
 
 --
 -- Indices de la tabla `rol`
@@ -306,7 +315,6 @@ ALTER TABLE `rol`
 --
 ALTER TABLE `salidaventas`
   ADD PRIMARY KEY (`IdSalidaVenta`),
-  ADD UNIQUE KEY `IDX_a53a87e0a7e1429b9243bbd721` (`PesogrOro`),
   ADD KEY `FK_ad8004f69f0037896cee993dada` (`IdProdSV`),
   ADD KEY `FK_5c3ceea4ad2d2bf333757bac282` (`IdAdminEV_FK`);
 
@@ -339,7 +347,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `entradaventas`
@@ -351,7 +359,7 @@ ALTER TABLE `entradaventas`
 -- AUTO_INCREMENT de la tabla `mineros`
 --
 ALTER TABLE `mineros`
-  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `novedades`
@@ -381,13 +389,13 @@ ALTER TABLE `salidaventas`
 -- AUTO_INCREMENT de la tabla `turnominero`
 --
 ALTER TABLE `turnominero`
-  MODIFY `idTurno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTurno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
@@ -409,7 +417,8 @@ ALTER TABLE `clientes`
 -- Filtros para la tabla `entradaventas`
 --
 ALTER TABLE `entradaventas`
-  ADD CONSTRAINT `FK_d278b8c80020673bbbc613b904e` FOREIGN KEY (`IdMinEV_FK`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_9590e24cf99b59b0a928a2205c6` FOREIGN KEY (`productoId`) REFERENCES `productos` (`IdProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_c1becf60a403e779fb391392887` FOREIGN KEY (`mineroId`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `mineros`
@@ -423,12 +432,6 @@ ALTER TABLE `mineros`
 ALTER TABLE `novedades`
   ADD CONSTRAINT `FK_4a3f13015c249307343c1ed0c53` FOREIGN KEY (`IdMinN_FK`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_e55fb91d37f8bd053910662c868` FOREIGN KEY (`IdAdminN_FK`) REFERENCES `administradores` (`idAdmin`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `FK_c9b150e130dce37d185abcfe056` FOREIGN KEY (`IdEVPr_FK`) REFERENCES `entradaventas` (`idGestionVenta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `salidaventas`
