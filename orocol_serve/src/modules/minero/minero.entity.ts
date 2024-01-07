@@ -11,7 +11,7 @@ export class Minero {
   @Column({type: 'varchar', length: 22, nullable: false})
   tipo_documento: TipoDocumento;
 
-  @Column({ type: 'bigint' })
+  @Column({ type: 'bigint', unique: true })
   numero_documento: number;
 
   @Column({type: 'varchar', length: 15, nullable: false})

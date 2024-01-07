@@ -51,3 +51,53 @@ import { AuthModule } from './auth/auth.module';
   providers: [AppService],
 })
 export class AppModule {}
+
+/*
+nest new orocol_server
+
+npm i --save @nestjs/config
+npm install --save @nestjs/typeorm typeorm mysql2
+npm i class-validator class-transformer
+
+npm i @nestjs/passport passport passport-local
+npm i @types/passport-local -D
+npm i @nestjs/jwt passport-jwt
+npm i @types/passport-jwt
+
+# development --------
+$ npm run start 
+# watch mode ---------
+$ npm run start:dev
+# production mode ----
+$ npm run start:prod
+
+usuario rol administrador minero novedad venta producto compra auth
+nest g module modules/
+nest g service modules/ --no-spec
+nest g controller modules/ --no-spec
+.entity.ts
+.repository.ts
+.dto.ts
+
+*/
+
+/* 
+Endpoints:
+http://localhost:8080/usuario
+
+http://localhost:8080/rol
+
+http://localhost:8080/administrador
+
+http://localhost:8080/minero
+
+http://localhost:8080/novedad
+
+http://localhost:8080/producto
+http://localhost:8080/producto/2
+
+http://localhost:8080/venta
+
+http://localhost:8080/compra
+
+*/

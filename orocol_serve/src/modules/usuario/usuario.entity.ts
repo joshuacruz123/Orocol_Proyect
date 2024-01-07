@@ -1,4 +1,4 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 // , OneToOne, OneToMany, JoinTable, ManyToMany
 import { Rol } from '../rol/rol.entity';
 import { EstadoUsuario } from './usuario.enum';
@@ -6,8 +6,7 @@ import { hash } from 'bcryptjs';
    
   @Entity({ name: 'Usuarios' })
   export class Usuario {
-
-    //@PrimaryGeneratedColumn('increment') 
+ 
     @PrimaryGeneratedColumn('increment')
     idUsuario: number;
   
@@ -29,7 +28,7 @@ import { hash } from 'bcryptjs';
     @ManyToOne(() => Rol, rol => rol.usuarios)
     @JoinColumn({ name: 'IdUs_FK' })
     roles: Rol[];
-     
+    
     @BeforeInsert()
     @BeforeUpdate()
     async hashPasword() {
@@ -37,3 +36,17 @@ import { hash } from 'bcryptjs';
         this.passwordUsuario = await hash(this.passwordUsuario, 55);
     }
 }
+    
+/*
+    @ManyToOne(() => Rol, rol => rol.usuarios)
+    @JoinColumn({ name: 'IdUs_FK' })
+    roles: Rol[];
+
+    @ManyToMany(() => Rol, { eager: true })
+    @JoinTable({
+      name: 'Usuario_Rol',
+      joinColumn: { name: 'idUsuario', referencedColumnName: 'idUsuario' },
+      inverseJoinColumn: { name: 'idRol', referencedColumnName: 'idRol' },
+    })
+    roles: Rol[];
+*/

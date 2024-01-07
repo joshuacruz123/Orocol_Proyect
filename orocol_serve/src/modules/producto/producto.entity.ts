@@ -7,13 +7,13 @@ export class Producto {
   @PrimaryGeneratedColumn('increment')
   IdProducto: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
   TipoOro: string;   
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoProducto.ACTIVO})
   estadoProducto: EstadoProducto;
 
- 
+  
 }
   
 /*

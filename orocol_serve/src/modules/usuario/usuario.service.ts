@@ -13,7 +13,7 @@ import { Repository } from 'typeorm'; // Repository<>
 export class UsuarioService {
 
     constructor(
-        @InjectRepository(Rol)
+        @InjectRepository(Rol) 
         protected readonly rolRepository: Repository<Rol>,
         @InjectRepository(Usuario)
         protected readonly usuarioRepository: Repository<Usuario>,
