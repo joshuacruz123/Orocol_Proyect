@@ -1,6 +1,7 @@
-import { CreateUsuarioDto } from 'src/dto/administrador.dto';
+import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
 import { UsuarioService } from './usuario.service';
-import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { InactivarUsuarioDto } from 'src/dto/inactivar.dto';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -16,5 +17,16 @@ export class UsuarioController {
     @Post()
     registrarUsuario(@Body() dto: CreateUsuarioDto) {
         return this.usuarioService.registrarUsuario(dto);
+    }
+
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Put(':idUsuario')
+    async editarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: CreateUsuarioDto) {
+        return await this.usuarioService.editarUsuario(idUsuario, dto);
+    }
+
+    @Put(':idUsuario')
+    async inactivarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: InactivarUsuarioDto){
+        return await this.usuarioService.inactivarUsuario(idUsuario, dto);
     }
 }

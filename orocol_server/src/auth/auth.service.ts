@@ -24,25 +24,50 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) {}
 
-    async getall(): Promise<UsuarioEntity[]> {
+    async consultarUsuarios(): Promise<UsuarioEntity[]> {
         const usuarios = await this.authRepository.find();
         if(!usuarios.length) throw new NotFoundException(new MessageDto('no hay usuarios en la lista'));
         return usuarios;
     }
 
-    async create(dto: NuevoUsuarioDto): Promise<any> {
+    async registrarUsuario(dto: NuevoUsuarioDto): Promise<any> {
         const {correoUsuario} = dto;
         const exists = await this.authRepository.findOne({where: [{correoUsuario: correoUsuario}]});
         if(exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
         const rolMinero = await this.rolRepository.findOne({where: {tipoRol: RolNombre.MINERO}});
         if(!rolMinero) throw new InternalServerErrorException(new MessageDto('los roles aún no han sido creados'));
-        const user = this.authRepository.create(dto);
-        user.roles = [rolMinero];
-        await this.authRepository.save(user);
-        return new MessageDto('usuario creado');
-    } // usuario_rol  rol.usuarios
+        const minero = this.authRepository.create(dto);
+        minero.roles = [rolMinero];
+        return this.authRepository.save(minero);
+    } 
+    // Método para registrar usuario 
 
-    async login(dto: LoginUsuarioDto): Promise<any> {
+    async consultarUsuario(idUsuario: number): Promise<UsuarioEntity> {
+        const usuario = await this.authRepository.findOne({ where: { idUsuario: idUsuario } });
+        if (!usuario) {
+            throw new NotFoundException(new MessageDto('no existe'));
+        }
+        return usuario;
+    }
+    // Método para consultar usuarios
+
+    async editarUsuario(idUsuario: number, dto: NuevoUsuarioDto): Promise<any> {
+        const usuario = await this.consultarUsuario(idUsuario);
+        if (!usuario) {
+            throw new NotFoundException(new MessageDto('No existe el usuario'));
+        }
+        const existingUsuario = await this.authRepository.findOne({ where: { nombreUsuario: dto.nombreUsuario } });
+        if (existingUsuario && existingUsuario.idUsuario !== idUsuario) {
+            throw new BadRequestException(new MessageDto('El nombre de usuario ya existe'));
+        }
+        usuario.nombreUsuario = dto.nombreUsuario || usuario.nombreUsuario;
+        usuario.apellidosUsuario = dto.apellidosUsuario || usuario.apellidosUsuario;
+        usuario.correoUsuario = dto.correoUsuario || usuario.correoUsuario;
+        usuario.passwordUsuario = dto.passwordUsuario || usuario.passwordUsuario;
+        return this.authRepository.save(usuario);
+    } 
+
+    async ingrrsarAlSistema(dto: LoginUsuarioDto): Promise<any> {
         const {correoUsuario} = dto;
         const usuario = await this.authRepository.findOne({where: [{correoUsuario: correoUsuario}]}); 
         if(!usuario) return new UnauthorizedException(new MessageDto('no existe el usuario'));

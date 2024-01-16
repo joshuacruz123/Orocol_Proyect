@@ -29,4 +29,4 @@ export class MineroEntity {
   @ManyToOne(() => UsuarioEntity, { eager: true }) // eager loading para cargar el usuario al recuperar un administrador
   @JoinColumn({ name: 'IdUs_FK' })
   Usuarios: UsuarioEntity; 
-} 
+}  

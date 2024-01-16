@@ -28,7 +28,7 @@ export class mineroDto {
     @IsEnum(CambioDocumento)
     cambio_documento: CambioDocumento;
 
-    nombreUsuario: string; // Agrega estas propiedades
+    nombreUsuario: string; 
     apellidosUsuario: string;
     correoUsuario: string;
     passwordUsuario: string;

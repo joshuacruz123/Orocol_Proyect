@@ -35,12 +35,10 @@ export class UsuarioService {
         const exists = await this.usuarioRepository.findOne({where: [{correoUsuario: correoUsuario}]});
         if(exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
         const rolAdministrador = await this.rolRepository.findOne({where: {tipoRol: RolNombre.ADMINISTRADOR}});
-        const rolMinero = await this.rolRepository.findOne({where: {tipoRol: RolNombre.MINERO}});
-        if(!rolAdministrador || !rolMinero) throw new InternalServerErrorException(new MessageDto('los roles aún no han sido creados'));
+        if(!rolAdministrador) throw new InternalServerErrorException(new MessageDto('El rol aún no han sido creados'));
         const admin = this.usuarioRepository.create(dto);
-        admin.roles = [rolAdministrador, rolMinero];
-        await this.usuarioRepository.save(admin);
-        return new MessageDto('Administador creado');
+        admin.roles = [rolAdministrador];
+        return this.usuarioRepository.save(admin);
     } 
     // Método para registrar usuario
 
@@ -66,8 +64,7 @@ export class UsuarioService {
         usuario.apellidosUsuario = dto.apellidosUsuario || usuario.apellidosUsuario;
         usuario.correoUsuario = dto.correoUsuario || usuario.correoUsuario;
         usuario.passwordUsuario = dto.passwordUsuario || usuario.passwordUsuario;
-        await this.usuarioRepository.save(usuario);
-        return new MessageDto(`Usuario ${usuario.nombreUsuario} actualizado`);
+        return this.usuarioRepository.save(usuario);
     }
     // Método para editar usuarios
 

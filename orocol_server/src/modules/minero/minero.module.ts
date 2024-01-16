@@ -7,16 +7,18 @@ import { TurnoMineroEntity } from './turno.entity';
 import { RolEntity } from '../rol/rol.entity';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { RolModule } from '../rol/rol.module';
-import { UsuarioModule } from '../usuario/usuario.module';
+import { AuthModule } from 'src/auth/auth.module';
 import { RolService } from '../rol/rol.service';
-import { UsuarioService } from '../usuario/usuario.service';
+import { AuthService } from 'src/auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([MineroEntity, TurnoMineroEntity, RolEntity, UsuarioEntity]),
-    RolModule, UsuarioModule,
+    RolModule, AuthModule,
   ],
-  providers: [MineroService, RolService, UsuarioService],
+  providers: [MineroService, RolService, AuthService, JwtService],
   controllers: [MineroController]
 })
 export class MineroModule {}
+ 

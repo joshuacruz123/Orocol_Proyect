@@ -14,4 +14,4 @@ export class AdministradorEntity {
   @JoinColumn({ name: 'IdUs_FK' })
   Usuarios: UsuarioEntity;  
 } 
- 
+  
