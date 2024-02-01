@@ -13,15 +13,14 @@ export class NovedadEntity {
   @Column({ type: 'text', nullable: false })
   descripcion: string;
 
-  @ManyToOne(() => MineroEntity, { eager: true }) 
-  @JoinColumn({ name: 'IdMinN_FK' })
-  mineros: MineroEntity;
+  @ManyToOne(() => MineroEntity, (minero) => minero.novedad, { cascade: true })
+  @JoinColumn({ name: 'IdMinero' })
+  minero: MineroEntity;
 
-  @ManyToOne(() => AdministradorEntity, { eager: true }) 
-  @JoinColumn({ name: 'IdAdminN_FK' })
-  administradores: AdministradorEntity;
-}  
-
+  @ManyToOne(() => AdministradorEntity, (administrador) => administrador.novedad, { cascade: true })
+  @JoinColumn({ name: 'idAdmin' })
+  administrador: AdministradorEntity;
+} 
 
 /* 
 create table Novedad

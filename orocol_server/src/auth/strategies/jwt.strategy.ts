@@ -3,7 +3,7 @@ import { MessageDto } from './../../common/message.dto';
 import { JWT_SECRET } from './../../config/constants';
 import { ConfigService } from '@nestjs/config';
 import { UsuarioEntity } from 'src/modules/usuario/usuario.entity';
-import { AuthRepository } from './../auth.repository';
+import { UsuarioRepository } from 'src/modules/usuario/usuario.repository';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -15,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     constructor(
         @InjectRepository(UsuarioEntity)
-        private readonly authRepository: AuthRepository,
+        private readonly usuarioRepository: UsuarioRepository,
         private readonly configService: ConfigService
     ) {
         super({
@@ -27,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     async validate(payload: PayloadInterface) {
         const {correoUsuario} = payload;
-        const usuario = await this.authRepository.findOne({where: [{correoUsuario: correoUsuario}]});
+        const usuario = await this.usuarioRepository.findOne({where: {correoUsuario: correoUsuario}});
         if(!usuario) return new UnauthorizedException(new MessageDto('credenciales erróneas'));
         return payload;
     }

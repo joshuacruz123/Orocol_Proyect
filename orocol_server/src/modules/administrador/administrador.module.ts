@@ -9,12 +9,13 @@ import { RolModule } from '../rol/rol.module';
 import { UsuarioModule } from '../usuario/usuario.module';
 import { RolService } from '../rol/rol.service';
 import { UsuarioService } from '../usuario/usuario.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AdministradorEntity, RolEntity, UsuarioEntity]),
   RolModule, UsuarioModule],
-  providers: [AdministradorService, RolService, UsuarioService],
+  providers: [AdministradorService, RolService, UsuarioService, JwtService],
   controllers: [AdministradorController]
 })
 export class AdministradorModule {}
- 
+  

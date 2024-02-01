@@ -17,9 +17,9 @@ export class TurnoMineroEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   AsignacionTareas: string;
 
-  @ManyToOne(() => MineroEntity, { eager: true }) // eager loading para cargar el Minero al recuperar un rol
-  @JoinColumn({ name: 'IdMinT_FK' })
-  mineros: MineroEntity;
+  @ManyToOne(() => MineroEntity, (minero) => minero.turno, { cascade: true })
+  @JoinColumn({ name: 'IdMinero' })
+  minero: MineroEntity; 
 }  
 
 /* 

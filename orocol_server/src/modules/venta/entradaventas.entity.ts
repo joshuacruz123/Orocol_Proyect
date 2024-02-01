@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { MineroEntity } from '../minero/minero.entity';
 import { EstadoVenta } from './venta.enum';
 import { ProductoEntity } from '../producto/producto.entity';
+import { SalidaVentaEntity } from './salidaventas.entity';
 
 @Entity({ name: 'EntradaVentas' })
 export class EntradaVentaEntity {
@@ -11,7 +12,7 @@ export class EntradaVentaEntity {
   @Column({ type: 'date' })
   fechaExtraccionOro: Date;
 
-  @Column({ type: 'mediumint', nullable: false })
+  @Column({ type: 'int', nullable: false })
   precioOro: number;
 
   @Column({ type: 'int', nullable: false })
@@ -19,13 +20,15 @@ export class EntradaVentaEntity {
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})
   estadoVenta: EstadoVenta;
-   
+ 
+  @ManyToOne(() => MineroEntity, (minero) => minero.entradaVentas, { cascade: true })
+  @JoinColumn({ name: 'IdMinero' })
+  minero: MineroEntity;
+  
+  @ManyToOne(() => ProductoEntity, (producto) => producto.entradaVentas, { cascade: true })
+  @JoinColumn({ name: 'IdProducto' })
+  producto: ProductoEntity;
 
-  @ManyToOne(type => MineroEntity)
-  @JoinColumn({ name: 'mineroId' })
-  Mineros: MineroEntity;
-
-  @ManyToOne(type => ProductoEntity)
-  @JoinColumn({ name: 'productoId' })
-  Productos: ProductoEntity;
-}   
+  @OneToOne(() => SalidaVentaEntity, (salida) => salida.entrada)
+  salida: SalidaVentaEntity;
+}

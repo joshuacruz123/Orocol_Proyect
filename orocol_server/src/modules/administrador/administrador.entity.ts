@@ -1,17 +1,24 @@
 // administrador.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne, OneToOne, OneToMany } from 'typeorm';
 import { UsuarioEntity } from '../usuario/usuario.entity';
+import { NovedadEntity } from '../novedad/novedad.entity';
+import { SalidaVentaEntity } from '../venta/salidaventas.entity';
 
 @Entity({ name: 'Administradores' })
 export class AdministradorEntity {
   @PrimaryGeneratedColumn('increment')
   idAdmin: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column({ type: 'varchar', length: 60, nullable: false })
   cargoAdmin: string;  
 
-  @ManyToOne(() => UsuarioEntity, { eager: true }) // eager loading para cargar el usuario al recuperar un administrador
-  @JoinColumn({ name: 'IdUs_FK' })
-  Usuarios: UsuarioEntity;  
-} 
-  
+  @OneToOne(() => UsuarioEntity, { cascade: true })
+  @JoinColumn({ name: 'idUsuario' })
+  usuario: UsuarioEntity;
+
+  @OneToMany(() => NovedadEntity, (novedad) => novedad.administrador)
+  novedad: NovedadEntity[];
+
+  @OneToMany(() => SalidaVentaEntity, (salida) => salida.administrador)
+  salida: SalidaVentaEntity[];
+}

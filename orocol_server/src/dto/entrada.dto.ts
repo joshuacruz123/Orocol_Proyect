@@ -8,14 +8,11 @@ export class EntradaDto {
 
     @IsNumber()
     @IsNotEmpty()
-    @Min(10, {message: 'el precio debe de ser al menos de 10 $'})
+    @IsNotBlank({message: 'El precio no puede estar vacío'})
     precioOro?: number;
 
     @IsNumber()
     @IsNotEmpty()
-    @Max(10, {message: 'La cantidad de Oro debe de ser maximo de 10'})
+    @IsNotBlank({message: 'La cantidad de oro no puede estar vacía'})
     cantidad?: number;
-
-    @IsNotBlank({message: 'el tipo de oro no puede estar vacío'})
-    TipoOro?: string;
 }  

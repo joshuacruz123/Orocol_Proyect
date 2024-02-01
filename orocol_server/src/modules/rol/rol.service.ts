@@ -17,12 +17,12 @@ export class RolService {
         const roles = await this.rolRepository.find();
         if(!roles.length) throw new NotFoundException(new MessageDto('no hay roles en la lista'));
         return roles;
-    }
+    }  
 
-    async create(dto: CreateRolDto): Promise<any> {
+   async create(dto: CreateRolDto): Promise<any> {
         const exists = await this.rolRepository.findOne({where: {tipoRol: dto.tipoRol}});
         if(exists) throw new BadRequestException(new MessageDto('ese rol ya existe'));
         await this.rolRepository.save(dto as RolEntity);
         return new MessageDto('rol creado');
-    }
+    } 
 }

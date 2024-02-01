@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
@@ -12,7 +11,6 @@ import { NovedadModule } from './modules/novedad/novedad.module';
 import { VentaModule } from './modules/venta/venta.module';
 import { ProductoModule } from './modules/producto/producto.module';
 import { CompraModule } from './modules/compra/compra.module';
-import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -36,9 +34,8 @@ import { AuthModule } from 'src/auth/auth.module';
       inject: [ConfigService],
       // Conexión a la base de datos con TypeOrm 
     }),
-    UsuarioModule, RolModule, AdministradorModule, MineroModule, NovedadModule, VentaModule, ProductoModule, CompraModule, AuthModule],
+    UsuarioModule, RolModule, AdministradorModule, MineroModule, NovedadModule, VentaModule, ProductoModule, CompraModule],
   //Importa todos los módulos 
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

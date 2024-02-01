@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { EntradaVentaEntity } from '../venta/entradaventas.entity';
 import { EstadoProducto } from './producto.enum';
 
@@ -7,13 +7,14 @@ export class ProductoEntity {
   @PrimaryGeneratedColumn('increment')
   IdProducto: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
+  @Column({ type: 'varchar', length: 60, nullable: false, unique: true })
   TipoOro: string;   
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoProducto.ACTIVO})
   estadoProducto: EstadoProducto;
-
   
+  @OneToMany(() => EntradaVentaEntity, (entradaVentas) => entradaVentas.producto)
+  entradaVentas: EntradaVentaEntity[];
 }
   
 /*

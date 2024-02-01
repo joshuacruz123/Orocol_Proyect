@@ -6,19 +6,54 @@ import { MessageDto } from 'src/common/message.dto';
 import { AdministradorDto } from 'src/dto/administrador.dto';
 import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
 import { UsuarioService } from '../usuario/usuario.service';
+import { RolNombre } from '../rol/rol.enum';
+import { UsuarioEntity } from '../usuario/usuario.entity';
+import { RolEntity } from '../rol/rol.entity';
+import { RolRepository } from '../rol/rol.repository';
+import { UsuarioRepository } from '../usuario/usuario.repository';
 
 @Injectable()
 export class AdministradorService {
     constructor(
         @InjectRepository(AdministradorEntity)
         private administradorRepository: Repository<AdministradorEntity>,
+        @InjectRepository(RolEntity)
+        private readonly rolRepository: RolRepository,
+        @InjectRepository(UsuarioEntity)
+        private readonly usuarioRepository: UsuarioRepository,
         private readonly usuarioService: UsuarioService, // Inyecta la instancia de UsuarioService
     ) { }
 
+    
+    async registrarUsuarioAdministrador(dto: AdministradorDto): Promise<MessageDto> {
+        const rolAdmin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.ADMINISTRADOR} });
+        if(!rolAdmin) throw new BadRequestException(new MessageDto('El rol de administrador no existe.'));
+        const {correoUsuario} = dto;
+        const exists = await this.usuarioRepository.findOne({ where: {correoUsuario: correoUsuario} });
+        if(exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
+        const nuevoUsuario = new UsuarioEntity();
+        nuevoUsuario.nombreUsuario = dto.nombreUsuario;
+        nuevoUsuario.apellidosUsuario = dto.apellidosUsuario;
+        nuevoUsuario.correoUsuario = dto.correoUsuario;
+        nuevoUsuario.passwordUsuario = dto.passwordUsuario;
+        nuevoUsuario.roles = rolAdmin;
+        const nuevoAdmin = new AdministradorEntity();
+        nuevoAdmin.cargoAdmin = dto.cargoAdmin;
+        nuevoAdmin.usuario = nuevoUsuario;
+        try {
+            await this.usuarioRepository.save(nuevoUsuario);
+            await this.administradorRepository.save(nuevoAdmin);
+            return new MessageDto(`Usuario ${nuevoUsuario.nombreUsuario} registrado.`)
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto(`Error al registrar usuario`))
+        }
+    }
+    // Método para registrar usuario administrador
+      
     async consultarAdministradores(): Promise<AdministradorEntity[]> {
         const lista = await this.administradorRepository.find({ relations: ['Usuarios'] });
         if (!lista.length) {
-            throw new NotFoundException(new MessageDto('No hay usuarios administradors'));
+            throw new NotFoundException(new MessageDto('No hay usuarios administradores'));
         }
         return lista;
     }
@@ -33,29 +68,6 @@ export class AdministradorService {
         }
         return administrador;
     }
-
-
-    async registrarAdministrador(dto: AdministradorDto): Promise<any> {
-        const AdministradorDto: CreateUsuarioDto = {
-            nombreUsuario: dto.nombreUsuario,
-            apellidosUsuario: dto.apellidosUsuario,
-            correoUsuario: dto.correoUsuario,
-            passwordUsuario: dto.passwordUsuario,
-        }; // Registrar el usuario usuarioistrador utilizando UsuarioService
-        const usuario = await this.usuarioService.registrarUsuario(AdministradorDto);
-        const administrador = this.administradorRepository.create({
-            cargoAdmin: dto.cargoAdmin,
-            Usuarios: usuario, // Asociar el usuario usuarioistrador al administrador
-        });
-        try {
-            // Guardar el administrador en la base de datos
-            await this.administradorRepository.save(administrador);
-            return new MessageDto(`Usuario ${usuario.nombreUsuario} registrado.`);
-        } catch (error) {
-            throw new InternalServerErrorException(new MessageDto('Error al guardar el usuario'));
-        }
-    }
-
 
     async editarAdministrador(idAdmin: number, dto: AdministradorDto): Promise<any> {
         const administrador = await this.consultarAdministrador(idAdmin);
