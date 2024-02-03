@@ -18,35 +18,17 @@ export class UsuarioController {
         return this.usuarioService.consultarUsuarios();
     }
 
-    /*
     @UsePipes(new ValidationPipe({whitelist: true}))
-    @Post()
-    registrarUsuario(@Body() dto: CreateUsuarioDto, rolNombre: RolNombre) {
-        return this.usuarioService.registrarUsuario(dto, rolNombre);
-    } */
-    @Post('registrar-administrador')
-    async registrarUsuarioAdministrador(@Body() dto: AdministradorDto): Promise<UsuarioEntity> {
-        return this.usuarioService.registrarUsuarioAdministrador(dto);
-    }
-
-
-    @UsePipes(new ValidationPipe({whitelist: true}))
-    @Put(':idUsuario')
-    async editarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: CreateUsuarioDto) {
-        return await this.usuarioService.editarUsuario(idUsuario, dto);
-    }
-
     @Put(':idUsuario')
     async inactivarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: InactivarUsuarioDto){
         return await this.usuarioService.inactivarUsuario(idUsuario, dto);
     }
 
-    /*
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Post('login')
     ingresarAlSistema(@Body() dto: LoginUsuarioDto) {
         return this.usuarioService.ingresarAlSistema(dto);
-    } */ 
+    }
 
     @Post('refresh')
     refresh(@Body() dto: TokenDto) {

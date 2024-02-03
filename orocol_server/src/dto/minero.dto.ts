@@ -7,12 +7,12 @@ export class mineroDto extends CreateUsuarioDto {
 
     @IsNotBlank({message: 'el tipo de documento no puede estar vacío'})
     @MaxLength(30, {message: 'apellido: longitud máxima de 30'})
-    tipo_documento?: TipoDocumento;  
+    tipo_documento: TipoDocumento;  
 
     @IsNumber()
     @IsNotEmpty()
     @Min(10, {message: 'el numero de documento debe tener 10 digitos'})
-    numero_documento?: number;
+    numero_documento: number;
 
     @IsNumber()
     @IsNotEmpty()
@@ -21,12 +21,12 @@ export class mineroDto extends CreateUsuarioDto {
  
     
     @IsNotBlank({message: 'La fecha no puede estar vacía'})
-    fecha_nacimiento?: Date;
+    fecha_nacimiento: Date;
 
     
     @IsNotBlank({message: 'La dirección no puede estar vacía'})
     @MaxLength(55, {message: 'direccion de vivienda: longitud máxima de 55'})
-    direccion_vivienda?: string;
+    direccion_vivienda: string;
 
     @IsEnum(CambioDocumento)
     cambio_documento: CambioDocumento;

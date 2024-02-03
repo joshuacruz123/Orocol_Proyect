@@ -31,7 +31,7 @@ export class MineroEntity {
 
   @OneToOne(() => UsuarioEntity, { cascade: true })
   @JoinColumn({ name: 'idUsuario' })
-  usuario: UsuarioEntity;
+  usuario: UsuarioEntity; 
 
   @OneToMany(() => EntradaVentaEntity, (entradaVentas) => entradaVentas.minero)
   entradaVentas: EntradaVentaEntity[];

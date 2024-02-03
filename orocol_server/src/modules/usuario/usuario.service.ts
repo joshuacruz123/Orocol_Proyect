@@ -15,8 +15,6 @@ import { LoginUsuarioDto } from 'src/dto/login.dto';
 import { compare } from 'bcryptjs';
 import { PayloadInterface } from 'src/auth/payload.interface';
 import { TokenDto } from 'src/dto/token.dto';
-import { AdministradorEntity } from '../administrador/administrador.entity';
-import { AdministradorDto } from 'src/dto/administrador.dto';
 // Importamos las librerias necesarias
  
 @Injectable()
@@ -30,31 +28,6 @@ export class UsuarioService {
         private readonly jwtService: JwtService
     ) {}
     // Instanciamos la clase con el constructor
-    
-    async registrarUsuarioAdministrador(dto: AdministradorDto): Promise<UsuarioEntity> {
-        const {correoUsuario} = dto;
-        const exists = await this.usuarioRepository.findOne({where: {correoUsuario: correoUsuario}});
-        if(exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
-        const nuevoUsuario = new UsuarioEntity();
-        nuevoUsuario.nombreUsuario = dto.nombreUsuario;
-        nuevoUsuario.apellidosUsuario = dto.apellidosUsuario;
-        nuevoUsuario.correoUsuario = dto.correoUsuario;
-        nuevoUsuario.passwordUsuario = dto.passwordUsuario; // Crear el rol 'Administrador'
-        const rolAdministrador = await this.rolRepository.findOne({
-          where: { tipoRol: RolNombre.ADMINISTRADOR },
-        });
-        if (!rolAdministrador) { // lanzar un error si el rol no existe
-            throw new BadRequestException(new MessageDto('El rol de administrador no existe.'));
-        }
-        nuevoUsuario.roles = rolAdministrador; // Crear la entidad Administrador y asociarla al usuario
-        const nuevoAdministrador = new AdministradorEntity();
-        nuevoAdministrador.cargoAdmin = dto.cargoAdmin;
-        nuevoAdministrador.usuario = nuevoUsuario;
-        nuevoUsuario.administrador = nuevoAdministrador; // Guardar el usuario y la entidad relacionada
-        await this.usuarioRepository.save(nuevoUsuario);
-        return nuevoUsuario;  
-    }
-
 
     async consultarUsuarios(): Promise<UsuarioEntity[]> {
         const usuarios = await this.usuarioRepository.find();
@@ -77,9 +50,8 @@ export class UsuarioService {
         if (!usuario) {
             throw new NotFoundException(new MessageDto('No existe el usuario'));
         }
-        const existingUsuario = await this.usuarioRepository.findOne({ where: { nombreUsuario: dto.nombreUsuario } });
-        if (existingUsuario && existingUsuario.idUsuario !== idUsuario) {
-            throw new BadRequestException(new MessageDto('El nombre de usuario ya existe'));
+        if (idUsuario !== idUsuario) {
+            throw new BadRequestException(new MessageDto('El usuario ya existe'));
         }
         usuario.nombreUsuario = dto.nombreUsuario || usuario.nombreUsuario;
         usuario.apellidosUsuario = dto.apellidosUsuario || usuario.apellidosUsuario;
@@ -99,25 +71,42 @@ export class UsuarioService {
         }
         usuario.estadoUsuario = EstadoUsuario.INACTIVO;
         await this.usuarioRepository.save(usuario);
-        return new MessageDto(`Usuario ${usuario.nombreUsuario} inactivado`);
+        return new MessageDto(`Usuario ${usuario.nombreUsuario} ${usuario.apellidosUsuario} inactivado`);
     }
     // Método para inactivar usuarios
-
-    /* async ingresarAlSistema(dto: LoginUsuarioDto): Promise<any> {
-        const {correoUsuario} = dto;
-        const usuario = await this.usuarioRepository.findOne({where: {correoUsuario: correoUsuario}}); 
-        if(!usuario) return new UnauthorizedException(new MessageDto('no existe el usuario'));
+    
+    
+    async ingresarAlSistema(dto: LoginUsuarioDto): Promise<any> {
+        const usuario = await this.usuarioRepository.findOne({ 
+            where: { correoUsuario: dto.correoUsuario },
+            relations: ['roles'], 
+        });
+        if (!usuario) {
+            throw new UnauthorizedException(new MessageDto('No existe ese usuario'));
+        }
+        if (usuario.estadoUsuario === EstadoUsuario.INACTIVO) {
+            throw new BadRequestException(new MessageDto('El usuario ya no está activo en el sistema'));
+        }
         const passwordOK = await compare(dto.passwordUsuario, usuario.passwordUsuario);
-        if(!passwordOK) return new UnauthorizedException(new MessageDto('contraseña errónea'));
+        if (!passwordOK) {
+            throw new UnauthorizedException(new MessageDto('Correo o contraseña incorrecta'));
+        }
+        if (!usuario.roles || !usuario.roles.tipoRol) {
+            throw new InternalServerErrorException(new MessageDto('Error al obtener el rol del usuario'))
+        }
         const payload: PayloadInterface = {
             idUsuario: usuario.idUsuario,
             correoUsuario: usuario.correoUsuario,
-            roles: usuario.roles.map(rol => rol.tipoRol as RolNombre)
+            roles: [usuario.roles.tipoRol as RolNombre], // Accedemos directamente a la propiedad roles
+        };
+        try {
+            const token = await this.jwtService.sign(payload);
+            return { token }; 
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto(`Error al iniciar sesión`))
         }
-        const token = await this.jwtService.sign(payload);
-        return {token};
     }
-    // Método para login de usuarios */
+    // Método para login de usuarios
 
     async refresh(dto: TokenDto): Promise<any> {
         const usuario = await this.jwtService.decode(dto.token);

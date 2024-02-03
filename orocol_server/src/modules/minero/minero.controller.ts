@@ -18,11 +18,11 @@ export class MineroController {
         return await this.mineroService.consultarMinero(IdMinero);
     }
 
-    /* @UsePipes(new ValidationPipe({whitelist: true}))
+    @UsePipes(new ValidationPipe({whitelist: true}))
     @Post()
-    async registrarMinero(@Body() dto: mineroDto) {
-        return await this.mineroService.registrarMinero(dto);
-    } */
+    async registrarUsuarioAdministrador(@Body() dto: mineroDto) {
+        return await this.mineroService.registrarUsuarioMinero(dto);
+    }
     
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':IdMinero')

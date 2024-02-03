@@ -20,5 +20,5 @@ export class AdministradorEntity {
   novedad: NovedadEntity[];
 
   @OneToMany(() => SalidaVentaEntity, (salida) => salida.administrador)
-  salida: SalidaVentaEntity[];
+  salida: SalidaVentaEntity[]; 
 }

@@ -1,8 +1,7 @@
 import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe } from '@nestjs/common';
 import { AdministradorService } from './administrador.service';
 import { AdministradorDto } from '../../dto/administrador.dto';
-import { UsuarioEntity } from '../usuario/usuario.entity';
-import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
+import { InactivarUsuarioDto } from 'src/dto/inactivar.dto';
 
 @Controller('administrador')
 export class AdministradorController {
@@ -24,13 +23,6 @@ export class AdministradorController {
     async registrarUsuarioAdministrador(@Body() dto: AdministradorDto) {
         return await this.administradorService.registrarUsuarioAdministrador(dto);
     } 
-
-    /*
-    @UsePipes(new ValidationPipe({whitelist: true}))
-    @Post()
-    async registrarAdministrador(@Body() dto: AdministradorDto) {
-        return await this.administradorService.registrarAdministrador(dto);
-    } */
     
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':idAdmin')
@@ -38,6 +30,11 @@ export class AdministradorController {
         return await this.administradorService.editarAdministrador(idAdmin, dto);
     }
 
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Put('activar/:idUsuario')
+    async activarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: InactivarUsuarioDto){
+        return await this.administradorService.activarUsuario(idUsuario, dto);
+    }
     /*
     @Delete(':idAdmin')
     async delete(@Param('idAdmin', ParseIntPipe) idAdmin: number){

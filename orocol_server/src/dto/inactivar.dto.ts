@@ -6,3 +6,7 @@ export class InactivarUsuarioDto {
     estadoUsuario: EstadoUsuario;
 }
 
+export class ActivarUsuarioDto {
+    @IsEnum(EstadoUsuario)
+    estadoUsuario: EstadoUsuario;
+}
