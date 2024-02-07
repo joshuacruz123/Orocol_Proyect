@@ -1,4 +1,4 @@
 export enum EstadoCompra {
-    ACTIVO = 'Activo',
-    INACTIVO = 'Terminado', 
+    ACTIVO = 'En proceso',
+    INACTIVO = 'Terminada', 
 }

@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe } from '@nestjs/common';
 import { AdministradorService } from './administrador.service';
 import { AdministradorDto } from '../../dto/administrador.dto';
-import { InactivarUsuarioDto } from 'src/dto/inactivar.dto';
+import { InactivarUsuarioDto } from 'src/dto/enum.dto';
 
 @Controller('administrador')
 export class AdministradorController {

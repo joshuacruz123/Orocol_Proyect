@@ -27,5 +27,5 @@ export class ClienteEntity {
 
   @ManyToOne(() => SalidaVentaEntity, (SalidaVentas) => SalidaVentas.compras, { cascade: true })
   @JoinColumn({ name: 'IdSalidaVenta' })
-  SalidaVentas: SalidaVentaEntity;
+  salidaVentas: SalidaVentaEntity;
 } 

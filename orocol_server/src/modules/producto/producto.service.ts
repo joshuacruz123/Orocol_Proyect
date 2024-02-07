@@ -3,14 +3,16 @@ import { ProductoEntity } from './producto.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageDto } from 'src/common/message.dto';
+import { EstadoProductoDto } from 'src/dto/enum.dto';
 import { Repository } from 'typeorm'; 
+import { EstadoProducto } from './producto.enum';
 
 @Injectable()
 export class ProductoService {
 
     constructor(
         @InjectRepository(ProductoEntity)
-        protected readonly productoRepository: Repository<ProductoEntity>
+        private readonly productoRepository: Repository<ProductoEntity>
     ) { } 
 
     async consultarProductos(): Promise<ProductoEntity[]> {
@@ -20,38 +22,49 @@ export class ProductoService {
         }
         return list;
     }
+    // Método para consultar productos
 
-    async findById(IdProducto: number): Promise<ProductoEntity> {
-        const producto = await this.productoRepository.findOne({ where: { IdProducto }});
+    async consultarProducto(IdProducto: number): Promise<ProductoEntity> {
+        const producto = await this.productoRepository.findOne({ where: { IdProducto: IdProducto } });
         if (!producto) {
             throw new NotFoundException(new MessageDto('no existe'));
         }
         return producto;
     }
-
-    async consultarProducto(IdProducto: number): Promise<ProductoEntity> {
-        const producto = await this.productoRepository.findOne({ where: { IdProducto: IdProducto } });
-        return producto;
-    }
+    // Método para consultar producto
 
     async insertarProducto(dto: ProductoDto): Promise<any> {
         const producto = this.productoRepository.create(dto);
         await this.productoRepository.save(producto);
-        return new MessageDto(`producto ${producto.TipoOro} creado`);
+        return new MessageDto(`Producto ${producto.TipoOro} creado`);
     }
+    // Método para registrar productos
 
-    async editarProducto(IdProducto: number, dto: ProductoDto): Promise<any> {
-        const producto = await this.findById(IdProducto);
-        if (!producto)
-            throw new NotFoundException(new MessageDto('no existe'));
-        dto.TipoOro ? producto.TipoOro = dto.TipoOro : producto.TipoOro = producto.TipoOro;
+    async desactivarProducto(IdProducto: number, dto: EstadoProductoDto): Promise<any> {
+        const producto = await this.consultarProducto(IdProducto);
+        if (!producto) {
+            throw new NotFoundException(new MessageDto('No existe el producto'));
+        }
+        if (producto.estadoProducto === EstadoProducto.INACTIVO) {
+            throw new BadRequestException(new MessageDto('El producto ya está inactivo'));
+        }
+        producto.estadoProducto = EstadoProducto.INACTIVO;
         await this.productoRepository.save(producto);
-        return new MessageDto(`producto ${producto.TipoOro} actualizado`);
+        return new MessageDto(`Producto de ${producto.TipoOro} inactivado`);
     }
+    // Método para inactivar productos
 
-    async anularProducto(IdProducto: number): Promise<any> {
-        const producto = await this.findById(IdProducto);
-        await this.productoRepository.delete(IdProducto);
-        return new MessageDto(`producto ${producto.TipoOro} eliminado`);
+    async activarProducto(IdProducto: number, dto: EstadoProductoDto): Promise<any> {
+        const producto = await this.consultarProducto(IdProducto);
+        if (!producto) {
+            throw new NotFoundException(new MessageDto('No existe el producto'));
+        }
+        if (producto.estadoProducto === EstadoProducto.ACTIVO) {
+            throw new BadRequestException(new MessageDto('El producto ya está activo'));
+        }
+        producto.estadoProducto = EstadoProducto.ACTIVO;
+        await this.productoRepository.save(producto);
+        return new MessageDto(`Producto de ${producto.TipoOro} activado`);
     }
+    // Método para reactivar productos
 }

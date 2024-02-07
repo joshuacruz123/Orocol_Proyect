@@ -13,14 +13,15 @@ export class SalidaVentaEntity {
   @Column({ type: 'float' })
   PesogrOro: number;
 
-  @OneToOne(() => EntradaVentaEntity, { cascade: true })
+  @OneToOne(() => EntradaVentaEntity)
   @JoinColumn({ name: 'idGestionVenta' })
   entrada: EntradaVentaEntity; 
 
-  @ManyToOne(() => AdministradorEntity, (administrador) => administrador.salida, { cascade: true })
+  @ManyToOne(() => AdministradorEntity, (administrador) => administrador.salida)
   @JoinColumn({ name: 'idAdmin' })
   administrador: AdministradorEntity;
 
-  @OneToMany(() => ClienteEntity, (compras) => compras.SalidaVentas)
+  @OneToMany(() => ClienteEntity, (compras) => compras.salidaVentas)
   compras: ClienteEntity[];
+    salidaVenta: ClienteEntity;
 }   

@@ -29,6 +29,7 @@
           "cargoAdmin": "Supervisor"
         }
     ],
+
     "Minero": [
       {
         "nombreUsuario": "Alezander Antonio",
@@ -67,23 +68,24 @@
         "direccion_vivienda": "Av C.Cali #64 sur"
       }
   ],
-  "Turnominero": [
+  
+  "turnominero": [
     {
-      
+      "idTurno": 1,
+      "FechaTurno": "2023-01-12 13:00:00",
+      "Asistencia": "Nó asistió",
+      "AsignacionTareas": "Recolección de oro",
+      "IdMinT_FK": 1
     },
     {
-      
-    },
-    {
-      
-    },
-    {
-      
-    },
-    {
-      
+      "idTurno": 2,
+      "FechaTurno": "2023-01-12 07:00:00",
+      "Asistencia": "Sí asistió",
+      "AsignacionTareas": "Carga de materiales",
+      "IdMinT_FK": 2
     }
   ],
+
   "Novedad": [
     {
       "idNovedad": 1,
@@ -103,68 +105,73 @@
       
     }
     ],
+    
     "productos": [
-      {
-        "IdProducto": 1,
-        "TipoOro": "oro amarillo",
-        "estadoProducto": "Disponible"
-      },
-      {
-        "IdProducto": 2,
-        "TipoOro": "oro amarillo",
-        "estadoProducto": "Disponible"
-      }
+      { "TipoOro": "Oro de 24 quilates" },
+      { "TipoOro": "Oro de 22 quilates" },
+      { "TipoOro": "Oro de 18 quilates" },
+      { "TipoOro": "Oro de 14 quilates" },
+      { "TipoOro": "Oro de 10 quilates" }
     ],
-    "turnominero": [
-      {
-        "idTurno": 1,
-        "FechaTurno": "2023-01-12 13:00:00",
-        "Asistencia": "Nó asistió",
-        "AsignacionTareas": "Recolección de oro",
-        "IdMinT_FK": 1
-      },
-      {
-        "idTurno": 2,
-        "FechaTurno": "2023-01-12 07:00:00",
-        "Asistencia": "Sí asistió",
-        "AsignacionTareas": "Carga de materiales",
-        "IdMinT_FK": 2
-      }
-    ],
+
     "entradaventas": [
-      {
-        "idGestionVenta": 1,
-        "fechaExtraccionOro": "2023-05-13",
-        "precioOro": 1500000,
-        "cantidad": 15,
-        "estadoVenta": "Activo",
-        "mineroId": 1,
-        "productoId": 1
-      },
-      {
-        "idGestionVenta": 2,
-        "fechaExtraccionOro": "2023-10-22",
-        "precioOro": 1200000,
-        "cantidad": 5,
-        "estadoVenta": "Activo",
-        "mineroId": 2,
-        "productoId": 2
-      }
+    {
+      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "fechaExtraccionOro": "2023-10-05",
+      "precioOro": 7000000,
+      "cantidad": 400
+    },
+    {
+      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "fechaExtraccionOro": "2023-10-05",
+      "precioOro": 7000000,
+      "cantidad": 400
+    },
+    {
+      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "fechaExtraccionOro": "2023-10-05",
+      "precioOro": 7000000,
+      "cantidad": 400
+    },
+
+
+    {
+      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "fechaExtraccionOro": "2023-10-09",
+      "precioOro": 10000000,
+      "cantidad": 700
+    },
+    {
+      "url": "http://localhost:8080/venta/1332778599/Oro de 22 quilates",
+      "fechaExtraccionOro": "2023-10-09",
+      "precioOro": 9000000,
+      "cantidad": 500
+    }
     ],
+
     "salidaventas": [
       {
-        "IdSalidaVenta": 1,
-        "PesogrOro": 2.8,
-        "IdProdSV": 1,
-        "IdAdminEV_FK": 2
+        "url": "http://localhost:8080/venta/1/salida/1",
+        "PesogrOro": 5.0
       },
       {
-        "IdSalidaVenta": 2,
-        "PesogrOro": 8,
-        "IdProdSV": 2,
-        "IdAdminEV_FK": 3
+        "url": "http://localhost:8080/venta/2/salida/2",
+        "PesogrOro": 6.0
+      },
+      {
+        "url": "http://localhost:8080/venta/3/salida/3",
+        "PesogrOro": 7.8
+      },
+      {
+        "url": "http://localhost:8080/venta/4/salida/4",
+        "PesogrOro": 4.5
+      },
+      {
+        "url": "http://localhost:8080/venta/5/salida/5",
+        "PesogrOro": 5.3
       }
     ],
+
     "clientes": [
       {
         "IdCliente": 1,

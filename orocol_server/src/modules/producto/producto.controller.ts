@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body, Put, Delete, ValidationPipe, UsePipes, ParseIntPipe } from '@nestjs/common';
 import { ProductoService } from './producto.service';
 import { ProductoDto } from '../../dto/producto.dto';
+import { EstadoProductoDto } from 'src/dto/enum.dto';
 
 @Controller('producto')
 export class ProductoController {
@@ -22,15 +23,16 @@ export class ProductoController {
     async insertarProducto(@Body() dto: ProductoDto) {
         return await this.productoService.insertarProducto(dto);
     } 
-    
+
     @UsePipes(new ValidationPipe({whitelist: true}))
-    @Put(':IdProducto')
-    async editarProducto(@Param('IdProducto', ParseIntPipe) IdProducto: number, @Body() dto: ProductoDto) {
-        return await this.productoService.editarProducto(IdProducto, dto);
+    @Put('desactivar/:IdProducto')
+    async desactivarProducto(@Param('IdProducto', ParseIntPipe) IdProducto: number, @Body() dto: EstadoProductoDto){
+        return await this.productoService.desactivarProducto(IdProducto, dto);
     }
 
-    @Delete(':IdProducto')
-    async anularProducto(@Param('IdProducto', ParseIntPipe) IdProducto: number){
-        return await this.productoService.anularProducto(IdProducto) 
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Put('activar/:IdProducto')
+    async activarProducto(@Param('IdProducto', ParseIntPipe) IdProducto: number, @Body() dto: EstadoProductoDto){
+        return await this.productoService.activarProducto(IdProducto, dto);
     }
 }

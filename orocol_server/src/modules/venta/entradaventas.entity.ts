@@ -21,11 +21,11 @@ export class EntradaVentaEntity {
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})
   estadoVenta: EstadoVenta;
  
-  @ManyToOne(() => MineroEntity, (minero) => minero.entradaVentas, { cascade: true })
+  @ManyToOne(() => MineroEntity, (minero) => minero.entradaVentas)
   @JoinColumn({ name: 'IdMinero' })
   minero: MineroEntity;
   
-  @ManyToOne(() => ProductoEntity, (producto) => producto.entradaVentas, { cascade: true })
+  @ManyToOne(() => ProductoEntity, (producto) => producto.entradaVentas)
   @JoinColumn({ name: 'IdProducto' })
   producto: ProductoEntity;
 

@@ -5,14 +5,14 @@ import { Asistencia } from "../modules/minero/turno.enum";
 export class TurnoDto {
     
     @IsNotBlank({message: 'La fecha no puede estar vacía'})
-    FechaTurno?: Date;
+    FechaTurno: Date;
 
 
     @IsNotBlank({message: 'La asistencia no puede estar vacía'})
-    Asistencia?: Asistencia;  
+    Asistencia: Asistencia;  
 
 
     @IsNotBlank({message: 'La dirección no puede estar vacía'})
     @MaxLength(255, {message: 'nombre: longitud máxima de 255'})
-    AsignacionTareas?: string;
+    AsignacionTareas: string;
 } 

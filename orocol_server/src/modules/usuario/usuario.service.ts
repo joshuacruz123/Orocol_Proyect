@@ -8,7 +8,7 @@ import { UsuarioEntity } from './usuario.entity';
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RolNombre } from 'src/modules/rol/rol.enum';
-import { InactivarUsuarioDto } from 'src/dto/inactivar.dto';
+import { InactivarUsuarioDto } from 'src/dto/enum.dto';
 import { EstadoUsuario } from './usuario.enum';
 import { JwtService } from '@nestjs/jwt';
 import { LoginUsuarioDto } from 'src/dto/login.dto';

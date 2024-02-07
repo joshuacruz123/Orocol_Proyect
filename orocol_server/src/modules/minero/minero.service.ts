@@ -11,12 +11,16 @@ import { RolEntity } from '../rol/rol.entity';
 import { RolRepository } from '../rol/rol.repository';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { UsuarioRepository } from '../usuario/usuario.repository';
+import { TurnoMineroEntity } from './turno.entity';
+import { TurnoDto } from 'src/dto/turno.dto';
 
 @Injectable()
 export class MineroService {
     constructor(
         @InjectRepository(MineroEntity)
         private mineroRepository: Repository<MineroEntity>,
+        @InjectRepository(TurnoMineroEntity)
+        private turnoRepository: Repository<TurnoMineroEntity>,
         @InjectRepository(RolEntity)
         private readonly rolRepository: RolRepository,
         @InjectRepository(UsuarioEntity)
@@ -29,7 +33,7 @@ export class MineroService {
         if (!lista.length) {
             throw new NotFoundException(new MessageDto('No hay usuarios mineros'));
         }
-        return lista;
+        return lista; 
     } 
 
     async consultarMinero(IdMinero: number): Promise<MineroEntity> {
@@ -98,5 +102,78 @@ export class MineroService {
             throw new InternalServerErrorException(new MessageDto('Error al editar la información'));
         }
     } 
-    // Método para editar usuario minero  
+    // Método para editar usuario minero   
+
+    async registrarTurnos(IdMinero: number, dto: TurnoDto): Promise<any> {
+        const minero: MineroEntity = await this.consultarMinero(IdMinero);
+        if (!minero) {
+            throw new InternalServerErrorException(
+              new MessageDto('Ese usuario no existe'),
+            );
+        }
+        const turno: TurnoMineroEntity = new TurnoMineroEntity();
+        turno.FechaTurno = dto.FechaTurno;
+        turno.Asistencia = dto.Asistencia;
+        turno.AsignacionTareas = dto.AsignacionTareas;
+        turno.minero = minero;
+        try { // Guardar en la base de datos
+            await this.turnoRepository.save(turno);
+            await this.mineroRepository.save(minero);
+            return new MessageDto(`Turno de ${minero.usuario} registrado`);
+        } catch (error) {
+            throw new InternalServerErrorException(
+                new MessageDto(`Error al registrar el turno: ${error.message || error}`),
+            );
+        }
+    }
+    // Método para registrar las salidas de las turnos
+
+    async consultarTurnos(): Promise<TurnoMineroEntity[]> {
+        const turnos = await this.turnoRepository.find({
+            relations: ['minero.usuario']
+        });
+        if (!turnos || turnos.length === 0) {
+            throw new NotFoundException(new MessageDto('No hay turnos registrados en el sistema'));
+        }
+        return turnos;
+    }
+    // Método para consultar las turnos
+    
+    async consultarTurno(idTurno: number): Promise<TurnoMineroEntity> {
+        const minero: MineroEntity = await this.consultarMinero(idTurno);
+        if (!minero) {
+            throw new NotFoundException(new MessageDto('No se encontró el minero al usuario'));
+        }
+        const turno: TurnoMineroEntity = await this.turnoRepository.findOne({
+            where: {
+                minero: { IdMinero: minero.IdMinero }
+            },
+            relations: ['minero.usuario']    
+        });
+        if (!turno) {
+            throw new NotFoundException(new MessageDto('No existe ese registro')); 
+        }
+        return turno;
+    }
+    // Método para consultar una turno
+
+    async editarTurno(idTurno: number, dto: TurnoDto): Promise<any> {
+        const turno = await this.consultarTurno(idTurno);
+        if (!turno) {
+            throw new NotFoundException(new MessageDto('No existe el turno'));
+        }
+        if (turno !== turno) {
+            throw new BadRequestException(new MessageDto('El turno ya existe'));
+        }
+        turno.FechaTurno = dto.FechaTurno;
+        turno.Asistencia = dto.Asistencia;
+        turno.AsignacionTareas = dto.AsignacionTareas;
+        try {
+            await this.turnoRepository.save(turno);
+            return new MessageDto('Datos del turno actualizados exitosamente');
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al editar la turno'));
+        }
+    }
+    // Método para editar el turno del usuario minero
 }

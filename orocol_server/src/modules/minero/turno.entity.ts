@@ -17,7 +17,7 @@ export class TurnoMineroEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   AsignacionTareas: string;
 
-  @ManyToOne(() => MineroEntity, (minero) => minero.turno, { cascade: true })
+  @ManyToOne(() => MineroEntity, (minero) => minero.turno)
   @JoinColumn({ name: 'IdMinero' })
   minero: MineroEntity; 
 }  

@@ -20,7 +20,7 @@ export class MineroController {
 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Post()
-    async registrarUsuarioAdministrador(@Body() dto: mineroDto) {
+    async registrarUsuarioMinero(@Body() dto: mineroDto) {
         return await this.mineroService.registrarUsuarioMinero(dto);
     }
     
@@ -28,5 +28,28 @@ export class MineroController {
     @Put(':IdMinero')
     async editarMinero(@Param('IdMinero', ParseIntPipe) IdMinero: number, @Body() dto: mineroDto) {
         return await this.mineroService.editarMinero(IdMinero, dto);
+    }
+    
+    @Get('turno')
+    async consultarTurnos() {
+        return await this.mineroService.consultarTurnos();
+    } 
+
+    @Get('turno/:idTurno')
+    async consultarTurno(@Param('idTurno', ParseIntPipe) idTurno: number) {
+        return await this.mineroService.consultarTurno(idTurno);
+    }
+
+    @Post('turno/:IdMinero')
+    async registrarTurnos(@Param('IdMinero') IdMinero: number,
+        @Body() dto: TurnoDto,
+    ): Promise<any> {
+        return this.mineroService.registrarTurnos(IdMinero, dto);
+    }
+    
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Put('turno/:idTurno')
+    async editarTurno(@Param('idTurno', ParseIntPipe) idTurno: number, @Body() dto: TurnoDto) {
+        return await this.mineroService.editarTurno(idTurno, dto);
     }
 }

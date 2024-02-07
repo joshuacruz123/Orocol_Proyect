@@ -11,7 +11,7 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { RolEntity } from '../rol/rol.entity';
 import { RolRepository } from '../rol/rol.repository';
 import { UsuarioRepository } from '../usuario/usuario.repository';
-import { ActivarUsuarioDto } from 'src/dto/inactivar.dto';
+import { ActivarUsuarioDto } from 'src/dto/enum.dto';
 import { EstadoUsuario } from '../usuario/usuario.enum';
 
 @Injectable()
@@ -108,4 +108,4 @@ export class AdministradorService {
     }
     // Método para reactivar usuarios
 }
- 
+  

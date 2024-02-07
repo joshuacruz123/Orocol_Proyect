@@ -1,7 +1,7 @@
 import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
 import { UsuarioService } from './usuario.service';
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
-import { InactivarUsuarioDto } from 'src/dto/inactivar.dto';
+import { InactivarUsuarioDto } from 'src/dto/enum.dto';
 import { RolNombre } from '../rol/rol.enum';
 import { LoginUsuarioDto } from 'src/dto/login.dto';
 import { TokenDto } from 'src/dto/token.dto';
