@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { AdministradorEntity } from './administrador.entity';
 import { MessageDto } from 'src/common/message.dto';
 import { AdministradorDto } from 'src/dto/administrador.dto';
-import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
+import { CreateUsuarioDto } from 'src/dto/usuario.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { UsuarioEntity } from '../usuario/usuario.entity';
@@ -13,6 +13,7 @@ import { RolRepository } from '../rol/rol.repository';
 import { UsuarioRepository } from '../usuario/usuario.repository';
 import { ActivarUsuarioDto } from 'src/dto/enum.dto';
 import { EstadoUsuario } from '../usuario/usuario.enum';
+import { mineroDto } from 'src/dto/minero.dto';
 
 @Injectable()
 export class AdministradorService {
@@ -106,6 +107,6 @@ export class AdministradorService {
         await this.usuarioRepository.save(usuario);
         return new MessageDto(`Usuario ${usuario.nombreUsuario} ${usuario.apellidosUsuario} activado`);
     }
-    // Método para reactivar usuarios
+    // Método para reactivar usuarios 
 }
   

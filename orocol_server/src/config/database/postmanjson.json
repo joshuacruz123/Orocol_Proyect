@@ -4,7 +4,7 @@
           "nombreUsuario": "Andres Manuel",
           "apellidosUsuario": "Hernandez Castillo",
           "correoUsuario": "hernandez@gmail.com",
-          "passwordUsuario": "0125478N",
+          "passwordUsuario": "AmHC5123",
           "cargoAdmin": "Gerente"
         },
         {
@@ -19,13 +19,20 @@
           "apellidosUsuario": "Brievich Gomez",
           "correoUsuario": "FelipeMZ@gmail.com",
           "passwordUsuario": "235687X7",
-          "cargoAdmin": "Supervisor"
+          "cargoAdmin": "Supervisor" 
         },
         {
           "nombreUsuario": "Bernabe Alex",
           "apellidosUsuario": "Gamez",
           "correoUsuario": "AlexisG@gmail.com",
           "passwordUsuario": "slpk1245Z",
+          "cargoAdmin": "Supervisor"
+        },
+        {
+          "nombreUsuario": "Angelina Marcela", 
+          "apellidosUsuario": "Cruz Fierro",
+          "correoUsuario": "amcruzf04@gmail.com",
+          "passwordUsuario": "ajskahdjsjs",
           "cargoAdmin": "Supervisor"
         }
     ],
@@ -66,40 +73,41 @@
         "telefono": 3182777,
         "fecha_nacimiento": "1996-08-12",
         "direccion_vivienda": "Av C.Cali #64 sur"
+      },
+      {
+        "nombreUsuario": "Joshua Sebastian",
+        "apellidosUsuario": "Cruz Fierro",
+        "correoUsuario": "joshuacruz@gmail.com",
+        "passwordUsuario": "JoshuaDeveloper2506",
+        "tipo_documento": "Cedula de ciudadania",
+        "numero_documento": 1032678564,
+        "cambio_documento": "Acepto",
+        "telefono": 3186279600,
+        "fecha_nacimiento": "2006-01-25",
+        "direccion_vivienda": "Transversal 1b este #81d 84 sur"
       }
   ],
   
   "turnominero": [
     {
-      "idTurno": 1,
-      "FechaTurno": "2023-01-12 13:00:00",
-      "Asistencia": "Nó asistió",
-      "AsignacionTareas": "Recolección de oro",
-      "IdMinT_FK": 1
+      "url": "http://localhost:8080/turno/1",
+      "FechaTurno": "2023-01-12 13:00:00", "Asistencia": "Nó asistió", "AsignacionTareas": "Recolección de oro"
     },
     {
-      "idTurno": 2,
-      "FechaTurno": "2023-01-12 07:00:00",
-      "Asistencia": "Sí asistió",
-      "AsignacionTareas": "Carga de materiales",
-      "IdMinT_FK": 2
-    }
+      
+      "url": "http://localhost:8080/turno/2",
+      "FechaTurno": "2023-01-12 07:00:00", "Asistencia": "Sí asistió", "AsignacionTareas": "Carga de materiales"
+    }  
   ],
 
   "Novedad": [
     {
-      "idNovedad": 1,
-      "fechaNovedad": "2023-11-30",
-      "descripcion": "No pude cumplir con mi horario de trabajo por calamidad domestica.",
-      "IdMinN_FK": 1,
-      "IdAdminN_FK": 2
+      "url": "http://localhost:8080/novedad/1",
+      "fechaNovedad": "2023-11-30", "descripcion": "No pude cumplir con mi horario de trabajo por calamidad domestica." 
     },
     {
-      "idNovedad": 2,
-      "fechaNovedad": "2023-07-17",
-      "descripcion": "No cumple con el horario de trabajo",
-      "IdMinN_FK": 2,
-      "IdAdminN_FK": 4
+      "url": "http://localhost:8080/novedad/2",
+      "fechaNovedad": "2023-07-17", "descripcion": "No cumple con el horario de trabajo"
     },
     {
       
@@ -151,57 +159,39 @@
 
     "salidaventas": [
       {
-        "url": "http://localhost:8080/venta/1/salida/1",
+        "url": "http://localhost:8080/salida/1/1",
         "PesogrOro": 5.0
       },
       {
-        "url": "http://localhost:8080/venta/2/salida/2",
+        "url": "http://localhost:8080/salida/2/2",
         "PesogrOro": 6.0
       },
       {
-        "url": "http://localhost:8080/venta/3/salida/3",
+        "url": "http://localhost:8080/salida/3/3",
         "PesogrOro": 7.8
       },
       {
-        "url": "http://localhost:8080/venta/4/salida/4",
+        "url": "http://localhost:8080/salida/4/4",
         "PesogrOro": 4.5
       },
       {
-        "url": "http://localhost:8080/venta/5/salida/5",
+        "url": "http://localhost:8080/salida/5/5",
         "PesogrOro": 5.3
       }
     ],
 
     "clientes": [
       {
-        "IdCliente": 1,
-        "NombreCompleto": "Timothy Jhohanson MacBech",
-        "Empresa": "Gator Corporation",
-        "Pais": "Perú",
-        "CiudadMunicipio": "Lima",
-        "FechaExportacion": "2023-12-16",
-        "estadoCompra": "Activo",
-        "IdSalidaEV_FK": 1
+        "url": "http://localhost:8080/compra/1",
+        "NombreCompleto": "Timothy Jhohanson MacBech", "Empresa": "Gator Corporation", "Pais": "Perú", "CiudadMunicipio": "Lima", "FechaExportacion": "2023-12-16"
       },
       {
-        "IdCliente": 2,
-        "NombreCompleto": "Juan Manuel Hernandez Cabrera",
-        "Empresa": "GoldSocial",
-        "Pais": "Colombia",
-        "CiudadMunicipio": "Tolima",
-        "FechaExportacion": "2023-02-15",
-        "estadoCompra": "Activo",
-        "IdSalidaEV_FK": 2
+        "url": "http://localhost:8080/compra/2",
+        "NombreCompleto": "Juan Manuel Hernandez Cabrera", "Empresa": "GoldSocial", "Pais": "Colombia", "CiudadMunicipio": "Tolima", "FechaExportacion": "2023-02-15"
       },
       {
-        "IdCliente": 3,
-        "NombreCompleto": "Andres Manuel Lopez Obrador",
-        "Empresa": "MexiJoyas",
-        "Pais": "México",
-        "CiudadMunicipio": "Ciudad de México",
-        "FechaExportacion": "2023-12-19",
-        "estadoCompra": "Activo",
-        "IdSalidaEV_FK": 2
+        "url": "http://localhost:8080/compra/3",
+        "NombreCompleto": "Andres Manuel Lopez Obrador", "Empresa": "MexiJoyas", "Pais": "México","CiudadMunicipio": "Ciudad de México", "FechaExportacion": "2023-12-19"
       }
     ]
   }

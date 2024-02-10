@@ -1,6 +1,6 @@
 import { RolEntity } from './../rol/rol.entity';
 import { RolRepository } from './../rol/rol.repository';
-import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
+import { CreateUsuarioDto } from 'src/dto/usuario.dto';
 import { create } from 'domain';
 import { MessageDto } from './../../common/message.dto';
 import { UsuarioRepository } from './usuario.repository';

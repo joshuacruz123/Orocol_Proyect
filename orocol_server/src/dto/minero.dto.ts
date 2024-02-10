@@ -1,7 +1,7 @@
 import { IsEnum, IsNotEmpty, IsNumber, MaxLength, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 import { CambioDocumento, TipoDocumento } from "../modules/minero/minero.enum";
-import { CreateUsuarioDto } from "./create-usuario.dto";
+import { CreateUsuarioDto } from "./usuario.dto";
 
 export class mineroDto extends CreateUsuarioDto {
 

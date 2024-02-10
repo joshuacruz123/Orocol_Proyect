@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { MineroEntity } from '../minero/minero.entity';
 import { MessageDto } from 'src/common/message.dto';
 import { mineroDto } from 'src/dto/minero.dto';
-import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
+import { CreateUsuarioDto } from 'src/dto/usuario.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { RolEntity } from '../rol/rol.entity';
@@ -48,7 +48,7 @@ export class NovedadService {
         try { // Guardar en la base de datos
             await this.novedadRepository.save(novedad);
             await this.mineroRepository.save(minero);
-            return new MessageDto(`novedad de ${minero.usuario} registrada`);
+            return new MessageDto(`novedad de ${minero.usuario.nombreUsuario} ${minero.usuario.apellidosUsuario} registrada`);
         } catch (error) {
             throw new InternalServerErrorException(
                 new MessageDto(`Error al registrar la novedad: ${error.message || error}`),

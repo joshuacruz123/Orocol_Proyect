@@ -11,6 +11,7 @@ import { UsuarioModule } from '../usuario/usuario.module';
 import { RolService } from '../rol/rol.service';
 import { UsuarioService } from '../usuario/usuario.service';
 import { JwtService } from '@nestjs/jwt';
+import { TurnoController } from './turno.controller';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { JwtService } from '@nestjs/jwt';
     RolModule, UsuarioModule,
   ],
   providers: [MineroService, RolService, UsuarioService, JwtService],
-  controllers: [MineroController]
+  controllers: [MineroController, TurnoController]
 })
 export class MineroModule {}

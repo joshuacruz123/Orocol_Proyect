@@ -19,12 +19,14 @@ import { AdministradorService } from '../administrador/administrador.service';
 import { RolEntity } from '../rol/rol.entity';
 import { JwtService } from '@nestjs/jwt';
 import { TurnoMineroEntity } from '../minero/turno.entity';
+import { SalidaVentaController } from './salidaventa.controller';
+import { ReportesVentasController } from './reporteventa.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntradaVentaEntity, SalidaVentaEntity, ProductoEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity]),
   ProductoModule, MineroModule, AdministradorModule, UsuarioModule,
   ],
   providers: [VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService],
-  controllers: [VentaController]
+  controllers: [VentaController, SalidaVentaController, ReportesVentasController]
 })
 export class VentaModule {}

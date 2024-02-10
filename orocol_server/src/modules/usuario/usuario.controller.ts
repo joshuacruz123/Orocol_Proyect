@@ -1,23 +1,20 @@
-import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
 import { UsuarioService } from './usuario.service';
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InactivarUsuarioDto } from 'src/dto/enum.dto';
 import { RolNombre } from '../rol/rol.enum';
 import { LoginUsuarioDto } from 'src/dto/login.dto';
 import { TokenDto } from 'src/dto/token.dto';
-import { AdministradorDto } from 'src/dto/administrador.dto';
-import { UsuarioEntity } from './usuario.entity';
+import { RolDecorator } from 'src/decorators/rol.decorator';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { RolesGuard } from 'src/guards/rol.guard';
 
 @Controller('usuario')
 export class UsuarioController {
 
     constructor(private readonly usuarioService: UsuarioService) {}
 
-    @Get()
-    consultarUsuarios() {
-        return this.usuarioService.consultarUsuarios();
-    }
-
+    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':idUsuario')
     async inactivarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: InactivarUsuarioDto){

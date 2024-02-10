@@ -1,4 +1,4 @@
-import { CreateRolDto } from 'src/dto/create-rol.dto';
+import { CreateRolDto } from 'src/dto/rol.dto';
 import { MessageDto } from './../../common/message.dto';
 import { RolEntity } from './rol.entity';
 import { RolRepository } from './rol.repository';

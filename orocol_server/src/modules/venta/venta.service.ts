@@ -155,7 +155,7 @@ export class VentaService {
 
     async consultarSalidaVentas(): Promise<SalidaVentaEntity[]> {
         const salida = await this.salidaVentaRepository.find({
-            relations: ['entrada']
+            relations: ['entrada.producto']
         });
 
         if (!salida || salida.length === 0) {

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { MineroEntity } from './minero.entity';
 import { MessageDto } from 'src/common/message.dto';
 import { mineroDto } from 'src/dto/minero.dto';
-import { CreateUsuarioDto } from 'src/dto/create-usuario.dto';
+import { CreateUsuarioDto } from 'src/dto/usuario.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { RolEntity } from '../rol/rol.entity';
@@ -13,6 +13,7 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { UsuarioRepository } from '../usuario/usuario.repository';
 import { TurnoMineroEntity } from './turno.entity';
 import { TurnoDto } from 'src/dto/turno.dto';
+import { CambioDocumento } from './minero.enum';
 
 @Injectable()
 export class MineroService {
@@ -119,7 +120,7 @@ export class MineroService {
         try { // Guardar en la base de datos
             await this.turnoRepository.save(turno);
             await this.mineroRepository.save(minero);
-            return new MessageDto(`Turno de ${minero.usuario} registrado`);
+            return new MessageDto(`Turno de ${minero.usuario.nombreUsuario} registrado`);
         } catch (error) {
             throw new InternalServerErrorException(
                 new MessageDto(`Error al registrar el turno: ${error.message || error}`),
@@ -176,4 +177,31 @@ export class MineroService {
         }
     }
     // Método para editar el turno del usuario minero
+
+    async editarMineroPorAdmin(IdMinero: number, dto: mineroDto): Promise<any> {
+        const minero = await this.consultarMinero(IdMinero);
+        if (!minero)
+            throw new NotFoundException(new MessageDto('no existe'));
+        await this.usuarioService.editarUsuario(IdMinero, {
+            nombreUsuario: dto.nombreUsuario, apellidosUsuario: dto.apellidosUsuario,
+            correoUsuario: dto.correoUsuario, passwordUsuario: dto.passwordUsuario,
+        });
+        const exists = await this.mineroRepository.findOne({ where: { IdMinero } });
+        if (exists && exists.IdMinero !== IdMinero) throw new BadRequestException(new MessageDto('ese minero ya existe'));
+        dto.telefono ? minero.telefono = dto.telefono : minero.telefono = minero.telefono;
+        dto.fecha_nacimiento ? minero.fecha_nacimiento = dto.fecha_nacimiento : minero.fecha_nacimiento = minero.fecha_nacimiento;
+        dto.direccion_vivienda ? minero.direccion_vivienda = dto.direccion_vivienda : minero.direccion_vivienda = minero.direccion_vivienda;
+        if (minero.cambio_documento === CambioDocumento.Acepto) {
+        dto.tipo_documento ? minero.tipo_documento = dto.tipo_documento : minero.tipo_documento = minero.tipo_documento;
+        dto.numero_documento ? minero.numero_documento = dto.numero_documento : minero.numero_documento = minero.numero_documento;
+        }
+        try {
+            // Guardar el minero en la base de datos
+            await this.mineroRepository.save(minero);
+            return new MessageDto('Datos del usuario editados exitosamente');
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al editar la información'));
+        }
+    } 
+    // Método para editar usuario minero por usuario administrador
 }

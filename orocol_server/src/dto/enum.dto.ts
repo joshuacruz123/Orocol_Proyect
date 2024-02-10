@@ -16,7 +16,7 @@ export class ActivarUsuarioDto {
 
 export class EstadoProductoDto {
     @IsEnum(EstadoProducto)
-    estadoUsuario: EstadoProducto;
+    estadoProducto: EstadoProducto;
 }
 
 export class EstadoVentaDto {
