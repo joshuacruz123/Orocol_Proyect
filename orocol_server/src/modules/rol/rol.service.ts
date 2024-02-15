@@ -1,16 +1,16 @@
 import { CreateRolDto } from 'src/dto/rol.dto';
-import { MessageDto } from './../../common/message.dto';
+import { MessageDto } from '../../dto/common/message.dto';
 import { RolEntity } from './rol.entity';
-import { RolRepository } from './rol.repository';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RolService {
  
     constructor(
         @InjectRepository(RolEntity)
-        private readonly rolRepository: RolRepository
+        private readonly rolRepository: Repository<RolEntity>
     ) {}
 
     async getall(): Promise<RolEntity[]> {

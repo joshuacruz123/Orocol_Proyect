@@ -1,7 +1,7 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { MessageDto } from 'src/common/message.dto';
+import { MessageDto } from 'src/dto/common/message.dto';
 import { EntradaVentaEntity } from './entradaventas.entity';
 import { SalidaVentaEntity } from './salidaventas.entity';
 import { ProductoEntity } from '../producto/producto.entity';
@@ -10,14 +10,11 @@ import { MineroEntity } from '../minero/minero.entity';
 import { MineroService } from '../minero/minero.service';
 import { AdministradorEntity } from '../administrador/administrador.entity';
 import { UsuarioEntity } from '../usuario/usuario.entity';
-import { UsuarioRepository } from '../usuario/usuario.repository';
 import { EntradaDto } from 'src/dto/entrada.dto';
 import { EstadoProducto } from '../producto/producto.enum';
 import { AdministradorService } from '../administrador/administrador.service';
 import { RolEntity } from '../rol/rol.entity';
-import { RolRepository } from '../rol/rol.repository';
 import { UsuarioService } from '../usuario/usuario.service';
-import { SalidaDto } from 'src/dto/salida.dto';
 import { EstadoVentaDto } from 'src/dto/enum.dto';
 import { EstadoVenta } from './venta.enum';
 
@@ -38,9 +35,9 @@ export class VentaService {
         private administradorRepository: Repository<AdministradorEntity>,
         private readonly administradorService: AdministradorService,
         @InjectRepository(RolEntity)
-        private readonly rolRepository: RolRepository,
+        private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: UsuarioRepository,
+        private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly usuarioService: UsuarioService, 
     ) { }
     
@@ -184,50 +181,6 @@ export class VentaService {
     }
     // Método para consultar la salida de la venta
     
-    async registrarSalidaVenta(idGestionVenta: number, idAdmin: number, dto: SalidaDto): Promise<any> {
-        const entradaVenta: EntradaVentaEntity = await this.consultarVenta(idGestionVenta); // Obtener la entrada de venta 
-        const administrador: AdministradorEntity = await this.administradorRepository.findOne({ where: {idAdmin}}); // Obtener el administrador
-        if (!entradaVenta || !administrador) {
-            throw new InternalServerErrorException(
-              new MessageDto('Entrada de venta o administrador no encontrados'),
-            );
-        }
-        if (!entradaVenta || entradaVenta.estadoVenta === EstadoVenta.INACTIVO) {
-            throw new NotFoundException('Venta no encontrada o no disponible');
-        }
-        const salidaVenta: SalidaVentaEntity = new SalidaVentaEntity(); // Crear instancia de SalidaVentaEntity
-        salidaVenta.PesogrOro = dto.PesogrOro;
-        salidaVenta.administrador = administrador;
-        entradaVenta.salida = salidaVenta; // Asignar la salida de venta a la entrada de venta
-        try { // Guardar en la base de datos
-            await this.salidaVentaRepository.save(salidaVenta);
-            await this.entradaVentaRepository.save(entradaVenta);
-            return new MessageDto(`Información del detalle venta de ${entradaVenta.producto.TipoOro} registrada`);
-        } catch (error) {
-            throw new InternalServerErrorException(
-                new MessageDto(`Error al registrar la venta: ${error.message || error}`),
-            );
-        }
-    }
-    // Método para registrar las salidas de las ventas
-
-    async editarSalidaVenta(IdSalidaVenta: number, dto: SalidaDto): Promise<any> {
-        const salidaVenta = await this.consultarSalidaVenta(IdSalidaVenta);
-        if (!salidaVenta) {
-            throw new NotFoundException(new MessageDto('No existe la venta'));
-        }
-        if (salidaVenta !== salidaVenta) {
-            throw new BadRequestException(new MessageDto('La venta ya existe'));
-        }
-        salidaVenta.PesogrOro = dto.PesogrOro || salidaVenta.PesogrOro;
-        try {
-            await this.salidaVentaRepository.save(salidaVenta);
-            return new MessageDto('Detalle de la venta editado exitosamente');
-        } catch (error) {
-            throw new InternalServerErrorException(new MessageDto('Error al editar la venta'));
-        }
-    }
-    // Método para editar la salida de la venta
 
     async generarReporteVenta(): Promise<EntradaVentaEntity[]> {
         const reporte = await this.entradaVentaRepository.find({

@@ -4,29 +4,29 @@
           "nombreUsuario": "Andres Manuel",
           "apellidosUsuario": "Hernandez Castillo",
           "correoUsuario": "hernandez@gmail.com",
-          "passwordUsuario": "AmHC5123",
+          "passwordUsuario": "AmHC5456",
           "cargoAdmin": "Gerente"
         },
         {
           "nombreUsuario": "Jesus Alvarez", 
           "apellidosUsuario": "Sierra Daza",
-          "correoUsuario": "JesusSD@gmail.com",
+          "correoUsuario": "jesusSierra@gmail.com",
           "passwordUsuario": "456985L",
           "cargoAdmin": "Supervisor"
         },
         {
-          "nombreUsuario": "Felipe montez",
+          "nombreUsuario": "Felipe monte",
           "apellidosUsuario": "Brievich Gomez",
           "correoUsuario": "FelipeMZ@gmail.com",
-          "passwordUsuario": "235687X7",
+          "passwordUsuario": "235687XXX",
           "cargoAdmin": "Supervisor" 
         },
         {
           "nombreUsuario": "Bernabe Alex",
-          "apellidosUsuario": "Gamez",
-          "correoUsuario": "AlexisG@gmail.com",
+          "apellidosUsuario": "Gamez Prieto",
+          "correoUsuario": "alexisGe@gmail.com",
           "passwordUsuario": "slpk1245Z",
-          "cargoAdmin": "Supervisor"
+          "cargoAdmin": "Jefe de minas"
         },
         {
           "nombreUsuario": "Angelina Marcela", 
@@ -39,16 +39,16 @@
 
     "Minero": [
       {
+        "tipo_documento": "Cedula de ciudadania",
+        "numero_documento": 1012587523,
+        "telefono": 3212564,
+        "fecha_nacimiento": "1993-10-15",
+        "direccion_vivienda": "cra 102 #45-46",
+        "cambio_documento": "Acepto",
         "nombreUsuario": "Alezander Antonio",
         "apellidosUsuario": "Velazco",
         "correoUsuario": "alexV@gmail.com",
-        "passwordUsuario": "15872L6i",
-        "tipo_documento": "Cedula de ciudadania",
-        "numero_documento": 1012587523,
-        "cambio_documento": "Acepto",
-        "telefono": 3212564,
-        "fecha_nacimiento": "1993-10-15",
-        "direccion_vivienda": "cra 102 #45-46"
+        "passwordUsuario": "15872L6i"
       },
       {
         "nombreUsuario": "Anderson",
@@ -63,8 +63,8 @@
         "direccion_vivienda": "Transversal 1b este # 81d 84 sur"
       },
       {
-        "nombreUsuario": "Brenton parra",
-        "apellidosUsuario": "Casillas",
+        "nombreUsuario": "Brenton Para",
+        "apellidosUsuario": "Casillas Aguilar",
         "correoUsuario": "BrentP@gmail.com",
         "passwordUsuario": "46432132q",
         "tipo_documento": "Cedula de ciudadania",
@@ -87,6 +87,16 @@
         "direccion_vivienda": "Transversal 1b este #81d 84 sur"
       }
   ],
+
+  "login": [
+    {"correoUsuario": "hernandez@gmail.com", "passwordUsuario": "AmHC5123", "rol": "Administrador"},
+    {"correoUsuario": "alexV@gmail.com", "passwordUsuario": "456985L", "rol": "Minero"},
+    {"correoUsuario": "jesusSierra@gmail.com", "passwordUsuario": "456985L", "rol": "Administrador"},
+    {"correoUsuario": "Anders@gmail.com", "passwordUsuario": "046543h1", "rol": "Minero"},
+    {"correoUsuario": "FelipeMZ@gmail.com", "passwordUsuario": "235687XXX", "rol": "Administrador"},
+    {"correoUsuario": "BrentP@gmail.com", "passwordUsuario": "46432132q", "rol": "Minero"},
+    {"correoUsuario": "alexisGe@gmail.com", "passwordUsuario": "slpk1245Z", "rol": "Administrador"}
+],
   
   "turnominero": [
     {
@@ -124,22 +134,22 @@
 
     "entradaventas": [
     {
-      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "url": "http://localhost:8080/venta/1012587523/Oro de 24 quilates",
       "fechaExtraccionOro": "2023-10-05",
       "precioOro": 7000000,
       "cantidad": 400
     },
     {
-      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "url": "http://localhost:8080/venta/1332778599/Oro de 24 quilates",
       "fechaExtraccionOro": "2023-10-05",
       "precioOro": 7000000,
       "cantidad": 400
     },
     {
-      "url": "http://localhost:8080/venta/1012587523/Oro de 18 quilates",
+      "url": "http://localhost:8080/venta/1312587790/Oro de 18 quilates",
       "fechaExtraccionOro": "2023-10-05",
-      "precioOro": 7000000,
-      "cantidad": 400
+      "precioOro": 8000000,
+      "cantidad": 450
     },
 
 
@@ -182,15 +192,15 @@
 
     "clientes": [
       {
-        "url": "http://localhost:8080/compra/1",
-        "NombreCompleto": "Timothy Jhohanson MacBech", "Empresa": "Gator Corporation", "Pais": "Perú", "CiudadMunicipio": "Lima", "FechaExportacion": "2023-12-16"
+        "url": "http://localhost:8080/compra/1/1",
+        "NombreCompleto": "Timothy Jhohanson MacBech", "Empresa": "Gator Corporation", "Pais": "Perú", "CiudadMunicipio": "Lima", "FechaExportacion": "2023-12-16", "PesogrOro": 5.0
       },
       {
-        "url": "http://localhost:8080/compra/2",
-        "NombreCompleto": "Juan Manuel Hernandez Cabrera", "Empresa": "GoldSocial", "Pais": "Colombia", "CiudadMunicipio": "Tolima", "FechaExportacion": "2023-02-15"
+        "url": "http://localhost:8080/compra/2/2",
+        "NombreCompleto": "Juan Manuel Hernandez Cabrera", "Empresa": "GoldSocial", "Pais": "Colombia", "CiudadMunicipio": "Tolima", "FechaExportacion": "2023-02-15", "PesogrOro": 6.0
       },
       {
-        "url": "http://localhost:8080/compra/3",
+        "url": "http://localhost:8080/compra/3/3",
         "NombreCompleto": "Andres Manuel Lopez Obrador", "Empresa": "MexiJoyas", "Pais": "México","CiudadMunicipio": "Ciudad de México", "FechaExportacion": "2023-12-19"
       }
     ]

@@ -2,7 +2,7 @@ import { ProductoDto } from '../../dto/producto.dto';
 import { ProductoEntity } from './producto.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MessageDto } from 'src/common/message.dto';
+import { MessageDto } from 'src/dto/common/message.dto';
 import { EstadoProductoDto } from 'src/dto/enum.dto';
 import { Repository } from 'typeorm'; 
 import { EstadoProducto } from './producto.enum';

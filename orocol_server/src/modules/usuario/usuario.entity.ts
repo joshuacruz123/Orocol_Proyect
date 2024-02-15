@@ -4,6 +4,7 @@ import { EstadoUsuario } from './usuario.enum';
 import { hash } from 'bcryptjs';
 import { MineroEntity } from "../minero/minero.entity";
 import { AdministradorEntity } from "../administrador/administrador.entity";
+import { PerfilEntity } from "./perfil.entity";
    
   @Entity({ name: 'Usuarios' })
   export class UsuarioEntity {
@@ -36,6 +37,9 @@ import { AdministradorEntity } from "../administrador/administrador.entity";
     @OneToOne(() => MineroEntity, (minero) => minero.usuario)
     minero: MineroEntity;
     
+    @OneToOne(() => PerfilEntity, (perfil) => perfil.usuario)
+    perfil: PerfilEntity; 
+
     @BeforeInsert()
     @BeforeUpdate()
     async hashPassword() {

@@ -1,9 +1,9 @@
 import { IsEnum, IsNotEmpty, IsNumber, MaxLength, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 import { CambioDocumento, TipoDocumento } from "../modules/minero/minero.enum";
-import { CreateUsuarioDto } from "./usuario.dto";
+import { UsuarioDto } from "./usuario.dto";
 
-export class mineroDto extends CreateUsuarioDto {
+export class mineroDto extends UsuarioDto {
 
     @IsNotBlank({message: 'el tipo de documento no puede estar vacío'})
     @MaxLength(30, {message: 'apellido: longitud máxima de 30'})

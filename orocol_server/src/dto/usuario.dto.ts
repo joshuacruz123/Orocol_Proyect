@@ -1,7 +1,7 @@
 import { IsEmail, MaxLength } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 
-export class CreateUsuarioDto {
+export class UsuarioDto {
  
     @IsNotBlank({message: 'el nombre no puede estar vacío'})
     @MaxLength(60, {message: 'nombre: longitud máxima de 60'})

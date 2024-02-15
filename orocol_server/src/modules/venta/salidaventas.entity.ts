@@ -13,9 +13,9 @@ export class SalidaVentaEntity {
   @Column({ type: 'float' })
   PesogrOro: number;
 
-  @OneToOne(() => EntradaVentaEntity)
+  @OneToOne(() => EntradaVentaEntity, { cascade: true })
   @JoinColumn({ name: 'idGestionVenta' })
-  entrada: EntradaVentaEntity; 
+  entrada: EntradaVentaEntity;  
 
   @ManyToOne(() => AdministradorEntity, (administrador) => administrador.salida)
   @JoinColumn({ name: 'idAdmin' })

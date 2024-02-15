@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2024 a las 16:19:12
+-- Tiempo de generación: 15-02-2024 a las 05:34:36
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -41,8 +41,7 @@ INSERT INTO `administradores` (`idAdmin`, `cargoAdmin`, `idUsuario`) VALUES
 (1, 'Gerente', 1),
 (2, 'Supervisor', 3),
 (3, 'Supervisor', 5),
-(4, 'Supervisor', 7),
-(5, 'Supervisor', 11);
+(4, 'Jefe de minas', 7);
 
 -- --------------------------------------------------------
 
@@ -57,7 +56,7 @@ CREATE TABLE `clientes` (
   `Pais` varchar(55) NOT NULL,
   `CiudadMunicipio` varchar(80) NOT NULL,
   `FechaExportacion` date NOT NULL,
-  `estadoCompra` varchar(15) NOT NULL DEFAULT 'Activo',
+  `estadoCompra` varchar(15) NOT NULL DEFAULT 'En proceso',
   `IdSalidaVenta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -66,8 +65,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`IdCliente`, `NombreCompleto`, `Empresa`, `Pais`, `CiudadMunicipio`, `FechaExportacion`, `estadoCompra`, `IdSalidaVenta`) VALUES
-(1, 'Juan Manuel Hernandez Cabrera', 'GoldSocial', 'Colombia', 'Tolima', '2023-02-15', 'Activo', 2),
-(2, 'Juan Manuel Hernandez Cabrera', 'GoldSocial', 'Colombia', 'Tolima', '2023-02-15', 'Activo', 1);
+(1, 'Timothy Jhohanson MacBech', 'Gator Corporation', 'Perú', 'Lima', '2023-12-16', 'En proceso', 1),
+(2, 'Juan Manuel Hernandez Cabrera', 'GoldSocial', 'Colombia', 'Tolima', '2023-02-15', 'En proceso', 2);
 
 -- --------------------------------------------------------
 
@@ -90,11 +89,10 @@ CREATE TABLE `entradaventas` (
 --
 
 INSERT INTO `entradaventas` (`idGestionVenta`, `fechaExtraccionOro`, `precioOro`, `cantidad`, `estadoVenta`, `IdMinero`, `IdProducto`) VALUES
-(1, '2023-10-03', 9000000, 500, 'Activo', 1, 1),
-(2, '2023-10-05', 7000000, 400, 'Activo', 2, 2),
-(3, '2023-10-09', 10000000, 700, 'Activo', 1, 3),
-(4, '2023-10-09', 10000000, 700, 'Activo', 1, 3),
-(5, '2023-10-09', 9000000, 500, 'Activo', 2, 2);
+(1, '2023-10-05', 7000000, 400, 'Activo', 1, 2),
+(2, '2023-10-05', 7000000, 400, 'Activo', 2, 1),
+(3, '2023-10-05', 8000000, 450, 'Activo', 3, 3),
+(4, '2023-10-05', 8000000, 450, 'Activo', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -120,8 +118,7 @@ CREATE TABLE `mineros` (
 INSERT INTO `mineros` (`IdMinero`, `tipo_documento`, `numero_documento`, `cambio_documento`, `telefono`, `fecha_nacimiento`, `direccion_vivienda`, `idUsuario`) VALUES
 (1, 'Cedula de ciudadania', 1012587523, 'Acepto', 3212564, '1993-10-15', 'cra 102 #45-46', 2),
 (2, 'Cedula de ciudadania', 1332778599, 'No acepto', 3186279, '1987-12-08', 'Transversal 1b este # 81d 84 sur', 4),
-(3, 'Cedula de ciudadania', 1312587790, 'Acepto', 3182777, '1996-08-12', 'Av C.Cali #64 sur', 6),
-(4, 'Cedula de ciudadania', 1032678006, 'Acepto', 8388607, '2006-01-25', 'Transversal 1b este #81d 84 sur', 10);
+(3, 'Cedula de ciudadania', 1312587790, 'Acepto', 3182777, '1996-08-12', 'Av C.Cali #64 sur', 6);
 
 -- --------------------------------------------------------
 
@@ -164,9 +161,7 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`IdProducto`, `TipoOro`, `estadoProducto`) VALUES
 (1, 'Oro de 24 quilates', 'Disponible'),
 (2, 'Oro de 22 quilates', 'Disponible'),
-(3, 'Oro de 18 quilates', 'Disponible'),
-(4, 'Oro de 14 quilates', 'Disponible'),
-(5, 'Oro de 10 quilates', 'Disponible');
+(3, 'Oro de 18 quilates', 'Disponible');
 
 -- --------------------------------------------------------
 
@@ -205,8 +200,8 @@ CREATE TABLE `salidaventas` (
 --
 
 INSERT INTO `salidaventas` (`IdSalidaVenta`, `PesogrOro`, `idGestionVenta`, `idAdmin`) VALUES
-(1, 5.1, 1, 1),
-(2, 6.2, 2, 2);
+(1, 5, 1, 1),
+(2, 6, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -251,15 +246,13 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `nombreUsuario`, `apellidosUsuario`, `correoUsuario`, `passwordUsuario`, `estadoUsuario`, `idRol`) VALUES
-(1, 'Andres Manuel', 'Hernandez Castillo', 'hernandez@gmail.com', '$2a$10$gcmqwb.SnhjuRRMrUE5bWeY.KBYPzpeHvIcEAvXjUaV1sSVnTcRBO', 'activo', 1),
-(2, 'Alezander Antonio', 'Velazco', 'alexV@gmail.com', '$2a$10$b.QIKrwQPqDADWWg0nizGOaPaSpKhRGdqF.xV/dswOT5Uo4uqjZmO', 'activo', 2),
-(3, 'Jesus Alvarez', 'Sierra Daza', 'JesusSD@gmail.com', '$2a$10$PGX9jyNwNFxOQ12zjCB2NuLR8xpSD61nDF6.3zzf9S.NGBAJx4cou', 'activo', 1),
-(4, 'Joshua Santiago', 'Cruz Fierro', 'Santicruz@gmail.com', '$2a$10$jyLibU4YAkVROx6BCHiDo.P/QFRNLKBuBepT9CcM3HnuV1KkcU/O2', 'activo', 2),
-(5, 'Felipe montez', 'Brievich Gomez', 'FelipeMZ@gmail.com', '$2a$10$9THMWi4TwxdgHgF8Q59.p.Jxp7Z8S2ZgpZZbMRk0Wk6wzzIsIisYO', 'activo', 1),
-(6, 'Brenton parra', 'Casillas', 'BrentP@gmail.com', '$2a$10$R9KnEyz94i9DpTWujWJQU.ntm07we2msnI757OAJ6wXJ6N.oqdeK.', 'activo', 2),
-(7, 'Bernabe Alex', 'Gamez', 'AlexisG@gmail.com', '$2a$10$iMo.spvHY7Th.OE2qZi8uOrnrRxLR9BcOBf6A3l0je6v0MKiixJQu', 'activo', 1),
-(10, 'Joshua Sebastian', 'Cruz Fierro', 'joshuacruz@gmail.com', '$2a$10$Q7CKUMCbWDv6vQfHcvMTH.WbPtoTTA9vDYNVnIlM9mZsUv5yT3vAy', 'activo', 2),
-(11, 'Angelina Marcela', 'Cruz Fierro', 'amcruzf04@gmail.com', '$2a$10$VrnLHf3liGIJypj9j/0FCe.85ndtX0GVOxpE4TSnr7YMm.Ox7yzgi', 'activo', 1);
+(1, 'Andres Manuel', 'Hernandez Castillo', 'hernandez@gmail.com', '$2a$10$AFRot/NXzCPHgjw.unAK0OpYNhrvlMZVxLbIRWOuw/slZoR3MF6Du', 'activo', 1),
+(2, 'Alezander Antonio', 'Velazco', 'alexV@gmail.com', '$2a$10$ogs/omLmP.5fiOwY0xPhV.Umsx/TJo8miPCPceny0Sp3O0uX.Lm46', 'activo', 2),
+(3, 'Jesus Alvarez', 'Sierra Daza', 'jesusSierra@gmail.com', '$2a$10$qp5hW8LrB5KfsmRvxSwHC.W.wHvkxH1bbNig5OrgkKR.3rlwlJC0a', 'activo', 1),
+(4, 'Anderson', 'Perez Silva', 'Anders@gmail.com', '$2a$10$atYPHA6NFXnmrfbLi5k.3.iBfHMCymF6Xs2L0MBza5fWhIhbkwmpi', 'activo', 2),
+(5, 'Felipe montez', 'Brievich Gomez', 'FelipeMZ@gmail.com', '$2a$10$pw5cZQCgfORtJc/yk.VRTuaB0dgfow10sxuFJoHulfDfFivyeQQiS', 'activo', 1),
+(6, 'Brenton Parra', 'Casillas Aguilar', 'BrentP@gmail.com', '$2a$10$BgH346cLpQMaYStrKSzffepXleeTW5HlNTBn51wphCdCaSQSADILS', 'activo', 2),
+(7, 'Bernabe Alex', 'Gamez Prieto', 'alexisGe@gmail.com', '$2a$10$vUBrKTfLOLzOtX.hGKYkTek.U1fTjfLqLDat9Ecb07PPqh6VKXjnG', 'activo', 1);
 
 --
 -- Índices para tablas volcadas
@@ -347,7 +340,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -359,25 +352,25 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `entradaventas`
 --
 ALTER TABLE `entradaventas`
-  MODIFY `idGestionVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idGestionVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `mineros`
 --
 ALTER TABLE `mineros`
-  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `novedades`
 --
 ALTER TABLE `novedades`
-  MODIFY `idNovedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idNovedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -389,7 +382,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `salidaventas`
 --
 ALTER TABLE `salidaventas`
-  MODIFY `IdSalidaVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdSalidaVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `turnominero`
@@ -401,7 +394,7 @@ ALTER TABLE `turnominero`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

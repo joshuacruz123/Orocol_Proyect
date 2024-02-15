@@ -4,9 +4,12 @@ import { CompraDto } from 'src/dto/compra.dto';
 import { EstadoCompraDto } from 'src/dto/enum.dto';
 import { RolNombre } from '../rol/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
-import { JwtAuthGuard } from 'src/guards/jwt.guard';
-import { RolesGuard } from 'src/guards/rol.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { RolesGuard } from 'src/auth/guards/rol.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Clientes y compras')
 @Controller('compra')
 export class CompraController {
 
@@ -18,33 +21,33 @@ export class CompraController {
     async consultarCompras() {
         return await this.compraService.consultarCompras();
     } 
-
+    
     @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard) 
     @Get(':IdCliente')
     async consultarCompra(@Param('IdCliente', ParseIntPipe) IdCliente: number) {
         return await this.compraService.consultarCompra(IdCliente);
     }
 
     @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Post(':IdSalidaVenta')
-    async insertarCompra(@Param('IdSalidaVenta') IdSalidaVenta: number,
+    @UseGuards(JwtAuthGuard, RolesGuard) 
+    @Post(':idGestionVenta')
+    async registrarCompra(@Param('idGestionVenta') idGestionVenta: number, @Param('idAdmin') idAdmin: number,
         @Body() dto: CompraDto,
     ): Promise<any> {
-        return this.compraService.insertarCompra(IdSalidaVenta, dto);
+        return this.compraService.registrarCompra(idGestionVenta, idAdmin, dto);
     }
     
     @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard) 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':IdCliente')
     async editarNovedad(@Param('IdCliente', ParseIntPipe) IdCliente: number, @Body() dto: CompraDto) {
         return await this.compraService.editarCompra(IdCliente, dto);
     }  
 
-    @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard)
+     @RolDecorator(RolNombre.ADMINISTRADOR)
+    @UseGuards(JwtAuthGuard, RolesGuard) 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put('compra/:IdCliente')
     async terminarCompra(@Param('IdCliente', ParseIntPipe) IdCliente: number, @Body() dto: EstadoCompraDto){

@@ -2,19 +2,16 @@ import { BadRequestException, Injectable, InternalServerErrorException, NotFound
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MineroEntity } from '../minero/minero.entity';
-import { MessageDto } from 'src/common/message.dto';
-import { mineroDto } from 'src/dto/minero.dto';
-import { CreateUsuarioDto } from 'src/dto/usuario.dto';
+import { MessageDto } from 'src/dto/common/message.dto';
 import { UsuarioService } from '../usuario/usuario.service';
-import { RolNombre } from '../rol/rol.enum';
 import { RolEntity } from '../rol/rol.entity';
-import { RolRepository } from '../rol/rol.repository';
 import { UsuarioEntity } from '../usuario/usuario.entity';
-import { UsuarioRepository } from '../usuario/usuario.repository';
 import { NovedadEntity } from './novedad.entity';
 import { NovedadDto } from 'src/dto/novedad.dto';
 import { MineroService } from '../minero/minero.service';
 import { TurnoMineroEntity } from '../minero/turno.entity';
+import { AdministradorEntity } from '../administrador/administrador.entity';
+import { AdministradorService } from '../administrador/administrador.service';
 
 @Injectable()
 export class NovedadService {
@@ -27,16 +24,20 @@ export class NovedadService {
         private readonly mineroService: MineroService,
         @InjectRepository(TurnoMineroEntity)
         private turnoRepository: Repository<TurnoMineroEntity>,
+        @InjectRepository(AdministradorEntity)
+        private administradorRepository: Repository<AdministradorEntity>,
+        private readonly administradorService: AdministradorService,
         @InjectRepository(RolEntity)
-        private readonly rolRepository: RolRepository,
+        private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: UsuarioRepository,
+        private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly usuarioService: UsuarioService,
     ) { }
 
-    async registrarNovedad(IdMinero: number, dto: NovedadDto): Promise<any> {
+    async registrarNovedad(IdMinero: number, idAdmin: number, dto: NovedadDto): Promise<any> {
         const minero: MineroEntity = await this.mineroService.consultarMinero(IdMinero);
-        if (!minero) {
+        const administrador: AdministradorEntity = await this.administradorService.consultarAdministrador(idAdmin);
+        if (!minero || !administrador) {
             throw new InternalServerErrorException(
               new MessageDto('Ese usuario no existe'),
             );
@@ -45,9 +46,11 @@ export class NovedadService {
         novedad.fechaNovedad = dto.fechaNovedad;
         novedad.descripcion = dto.descripcion;
         novedad.minero = minero;
+        novedad.administrador = administrador;
         try { // Guardar en la base de datos
             await this.novedadRepository.save(novedad);
             await this.mineroRepository.save(minero);
+            await this.administradorRepository.save(administrador);
             return new MessageDto(`novedad de ${minero.usuario.nombreUsuario} ${minero.usuario.apellidosUsuario} registrada`);
         } catch (error) {
             throw new InternalServerErrorException(

@@ -4,24 +4,28 @@ import { AdministradorDto } from '../../dto/administrador.dto';
 import { InactivarUsuarioDto } from 'src/dto/enum.dto'; //
 import { RolNombre } from '../rol/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
-import { JwtAuthGuard } from 'src/guards/jwt.guard';
-import { RolesGuard } from 'src/guards/rol.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { RolesGuard } from 'src/auth/guards/rol.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Usuarios administradores')
 @Controller('administrador')
 export class AdministradorController {
 
     constructor(private readonly administradorService: AdministradorService) {}
 
+    @ApiBearerAuth()
+    @Get()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    @Get()
     async consultarAdministradores() {
         return await this.administradorService.consultarAdministradores();
-    } 
-    /*
-    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
-    @UseGuards(JwtAuthGuard, RolesGuard) */
+    }
+    
+    @ApiBearerAuth()
     @Get(':idAdmin')
+    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     async consultarAdministrador(@Param('idAdmin', ParseIntPipe) idAdmin: number) {
         return await this.administradorService.consultarAdministrador(idAdmin);
     }
@@ -31,17 +35,19 @@ export class AdministradorController {
     async registrarUsuarioAdministrador(@Body() dto: AdministradorDto) {
         return await this.administradorService.registrarUsuarioAdministrador(dto);
     } 
-    /*
+    
+    @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard) */
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':idAdmin')
     async editarAdministrador(@Param('idAdmin', ParseIntPipe) idAdmin: number, @Body() dto: AdministradorDto) {
         return await this.administradorService.editarAdministrador(idAdmin, dto);
     }
-    /*
+    
+    @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard) */
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put('activar/:idUsuario')
     async activarUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: InactivarUsuarioDto){

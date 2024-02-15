@@ -1,7 +1,9 @@
 import { CreateRolDto } from 'src/dto/rol.dto';
 import { RolService } from './rol.service';
 import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Roles de usuarios')
 @Controller('rol')
 export class RolController {
 

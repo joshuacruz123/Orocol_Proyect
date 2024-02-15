@@ -23,4 +23,10 @@ export class CompraDto {
     @IsNotEmpty()
     @IsNotBlank({message: 'El La fecha no puede estar vacía'})
     FechaExportacion: Date;
-} 
+
+    @IsNumber()
+    @IsNotEmpty()
+    @IsNotBlank({message: 'El peso del oro no puede estar vacío'})
+    @Min(1, {message: 'el peso debe de ser al menos de 1 gramo'})
+    PesogrOro: number;
+}  

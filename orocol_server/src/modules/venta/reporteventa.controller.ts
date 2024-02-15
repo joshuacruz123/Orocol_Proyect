@@ -2,9 +2,12 @@ import { Controller, Get, UseGuards } from '@nestjs/common';
 import { VentaService } from './venta.service';
 import { RolNombre } from '../rol/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
-import { JwtAuthGuard } from 'src/guards/jwt.guard';
-import { RolesGuard } from 'src/guards/rol.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { RolesGuard } from 'src/auth/guards/rol.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Reportes de ventas')
 @Controller('reportes')
 export class ReportesVentasController {
    

@@ -2,18 +2,14 @@ import { BadRequestException, Injectable, InternalServerErrorException, NotFound
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AdministradorEntity } from './administrador.entity';
-import { MessageDto } from 'src/common/message.dto';
+import { MessageDto } from 'src/dto/common/message.dto';
 import { AdministradorDto } from 'src/dto/administrador.dto';
-import { CreateUsuarioDto } from 'src/dto/usuario.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { RolEntity } from '../rol/rol.entity';
-import { RolRepository } from '../rol/rol.repository';
-import { UsuarioRepository } from '../usuario/usuario.repository';
 import { ActivarUsuarioDto } from 'src/dto/enum.dto';
 import { EstadoUsuario } from '../usuario/usuario.enum';
-import { mineroDto } from 'src/dto/minero.dto';
 
 @Injectable()
 export class AdministradorService {
@@ -21,9 +17,9 @@ export class AdministradorService {
         @InjectRepository(AdministradorEntity)
         private administradorRepository: Repository<AdministradorEntity>,
         @InjectRepository(RolEntity)
-        private readonly rolRepository: RolRepository,
+        private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: UsuarioRepository,
+        private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly usuarioService: UsuarioService, // Inyecta la instancia de UsuarioService
     ) { }
 
@@ -55,44 +51,48 @@ export class AdministradorService {
       
     async consultarAdministradores(): Promise<AdministradorEntity[]> {
         const lista = await this.administradorRepository.find({
-            relations: ['usuario'],
+            relations: ['usuario.perfil'],
           });
         if (!lista.length) {
             throw new NotFoundException(new MessageDto('No hay usuarios administradores'));
         }
         return lista;
     }
+    // Método para consultar usuarios administradores
 
     async consultarAdministrador(idAdmin: number): Promise<AdministradorEntity> {
         const administrador = await this.administradorRepository.findOne({
             where: { idAdmin },
-            relations: ['usuario.roles'],
+            relations: ['usuario.roles', 'usuario.perfil'],
         }); 
         if (!administrador) {
             throw new NotFoundException('Usuario administrador no encontrado');
         }
         return administrador;
     }
+    // Método para consultar un usuario administrador
 
     async editarAdministrador(idAdmin: number, dto: AdministradorDto): Promise<any> {
         const administrador = await this.consultarAdministrador(idAdmin);
-        if (!administrador)
-            throw new NotFoundException(new MessageDto('No existe'));
-        await this.usuarioService.editarUsuario(idAdmin, {
-            nombreUsuario: dto.nombreUsuario, apellidosUsuario: dto.apellidosUsuario,
-            correoUsuario: dto.correoUsuario, passwordUsuario: dto.passwordUsuario,
-        });
-        const exists = await this.administradorRepository.findOne({ where: { idAdmin } });
-        if (exists && exists.idAdmin !== idAdmin) throw new BadRequestException(new MessageDto('ese administrador ya existe'));
-        dto.cargoAdmin ? administrador.cargoAdmin = dto.cargoAdmin : administrador.cargoAdmin = administrador.cargoAdmin;
+        if (!administrador) {
+            throw new NotFoundException(new MessageDto('No existe el usuario'));
+        }
+        if (idAdmin !== idAdmin) {
+            throw new BadRequestException(new MessageDto('El usuario ya existe'));
+        }
+        dto.nombreUsuario ? administrador.usuario.nombreUsuario = dto.nombreUsuario : administrador.usuario.nombreUsuario;
+        dto.apellidosUsuario ? administrador.usuario.apellidosUsuario = dto.apellidosUsuario : administrador.usuario.apellidosUsuario;
+        dto.correoUsuario ? administrador.usuario.correoUsuario = dto.correoUsuario : administrador.usuario.correoUsuario;
+        dto.passwordUsuario ? administrador.usuario.passwordUsuario = dto.passwordUsuario : administrador.usuario.passwordUsuario;
+        dto.cargoAdmin ? administrador.cargoAdmin = dto.cargoAdmin : administrador.cargoAdmin;
         try {
             // Guardar el administrador en la base de datos
             await this.administradorRepository.save(administrador);
-            return new MessageDto('Los datos fueron editados exitosamente');
+            return new MessageDto(`Los datos del usuario ${administrador.usuario.nombreUsuario} fueron editados exitosamente`);
         } catch (error) {
             throw new InternalServerErrorException(new MessageDto('Error al editar la información'));
-        }
-    } 
+        } 
+    }
     // Método para editar usuario administrador 
 
     async activarUsuario(idUsuario: number, dto: ActivarUsuarioDto): Promise<any> {

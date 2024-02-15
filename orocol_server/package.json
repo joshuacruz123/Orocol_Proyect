@@ -2,7 +2,7 @@
   "name": "orocol_server",
   "version": "0.0.1",
   "description": "Gold purchase and sale management project for the Orocol company.",
-  "author": "Joshua Sebastian Cruz Fierro, Andres , Sofia ",
+  "author": "Joshua Sebastian Cruz Fierro, Andres Felipe Leal Banquet, Yuranis Sofia Sierra Daza",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -26,6 +26,7 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/swagger": "^7.3.0",
     "@nestjs/typeorm": "^10.0.1",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
@@ -37,6 +38,7 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
+    "swagger-ui-express": "^5.0.0",
     "typeorm": "^0.3.19"
   },
   "devDependencies": {

@@ -12,12 +12,16 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { UsuarioService } from '../usuario/usuario.service';
 import { JwtService } from '@nestjs/jwt';
 import { TurnoMineroEntity } from '../minero/turno.entity';
+import { AdministradorModule } from '../administrador/administrador.module';
+import { AdministradorEntity } from '../administrador/administrador.entity';
+import { AdministradorService } from '../administrador/administrador.service';
+import { PerfilEntity } from '../usuario/perfil.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([NovedadEntity, MineroEntity, TurnoMineroEntity, RolEntity, UsuarioEntity]),
-  MineroModule, UsuarioModule,
+  imports: [TypeOrmModule.forFeature([NovedadEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity]),
+  MineroModule, AdministradorModule, UsuarioModule,
 ],
-  providers: [NovedadService, MineroService, UsuarioService, JwtService],
+  providers: [NovedadService, MineroService, AdministradorService, UsuarioService, JwtService],
   controllers: [NovedadController]
 })
 export class NovedadModule {}

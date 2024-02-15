@@ -21,9 +21,10 @@ import { JwtService } from '@nestjs/jwt';
 import { TurnoMineroEntity } from '../minero/turno.entity';
 import { SalidaVentaController } from './salidaventa.controller';
 import { ReportesVentasController } from './reporteventa.controller';
+import { PerfilEntity } from '../usuario/perfil.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntradaVentaEntity, SalidaVentaEntity, ProductoEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity]),
+  imports: [TypeOrmModule.forFeature([EntradaVentaEntity, SalidaVentaEntity, ProductoEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity]),
   ProductoModule, MineroModule, AdministradorModule, UsuarioModule,
   ],
   providers: [VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService],

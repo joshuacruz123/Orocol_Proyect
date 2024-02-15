@@ -2,18 +2,14 @@ import { BadRequestException, Injectable, InternalServerErrorException, NotFound
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MineroEntity } from './minero.entity';
-import { MessageDto } from 'src/common/message.dto';
+import { MessageDto } from 'src/dto/common/message.dto';
 import { mineroDto } from 'src/dto/minero.dto';
-import { CreateUsuarioDto } from 'src/dto/usuario.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { RolEntity } from '../rol/rol.entity';
-import { RolRepository } from '../rol/rol.repository';
 import { UsuarioEntity } from '../usuario/usuario.entity';
-import { UsuarioRepository } from '../usuario/usuario.repository';
 import { TurnoMineroEntity } from './turno.entity';
 import { TurnoDto } from 'src/dto/turno.dto';
-import { CambioDocumento } from './minero.enum';
 
 @Injectable()
 export class MineroService {
@@ -23,31 +19,32 @@ export class MineroService {
         @InjectRepository(TurnoMineroEntity)
         private turnoRepository: Repository<TurnoMineroEntity>,
         @InjectRepository(RolEntity)
-        private readonly rolRepository: RolRepository,
+        private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: UsuarioRepository,
+        private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly usuarioService: UsuarioService,
     ) { }
 
     async consultarMineros(): Promise<MineroEntity[]> {
-        const lista = await this.mineroRepository.find({ relations: ['usuario'] });
+        const lista = await this.mineroRepository.find({ relations: ['usuario.perfil'] });
         if (!lista.length) {
             throw new NotFoundException(new MessageDto('No hay usuarios mineros'));
         }
         return lista; 
     } 
+    // Método para consultar usuarios mineros
 
     async consultarMinero(IdMinero: number): Promise<MineroEntity> {
         const minero = await this.mineroRepository.findOne({
             where: { IdMinero: IdMinero },
-            relations: ['usuario.roles'],
+            relations: ['usuario.roles', 'usuario.perfil'],
         }); 
         if (!minero) {
             throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
         }
         return minero;
     } 
-
+    // Método para consultar un usuarios minero
 
     async registrarUsuarioMinero(dto: mineroDto): Promise<MessageDto> {
         const rolAdmin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.MINERO} });
@@ -78,32 +75,34 @@ export class MineroService {
         }
     }
     // Método para registrar usuario administrador
-
-
+  
     async editarMinero(IdMinero: number, dto: mineroDto): Promise<any> {
         const minero = await this.consultarMinero(IdMinero);
-        if (!minero)
-            throw new NotFoundException(new MessageDto('no existe'));
-        await this.usuarioService.editarUsuario(IdMinero, {
-            nombreUsuario: dto.nombreUsuario, apellidosUsuario: dto.apellidosUsuario,
-            correoUsuario: dto.correoUsuario, passwordUsuario: dto.passwordUsuario,
-        });
-        const exists = await this.mineroRepository.findOne({ where: { IdMinero } });
-        if (exists && exists.IdMinero !== IdMinero) throw new BadRequestException(new MessageDto('ese minero ya existe'));
-        dto.tipo_documento ? minero.tipo_documento = dto.tipo_documento : minero.tipo_documento = minero.tipo_documento;
-        dto.numero_documento ? minero.numero_documento = dto.numero_documento : minero.numero_documento = minero.numero_documento;
-        dto.telefono ? minero.telefono = dto.telefono : minero.telefono = minero.telefono;
-        dto.fecha_nacimiento ? minero.fecha_nacimiento = dto.fecha_nacimiento : minero.fecha_nacimiento = minero.fecha_nacimiento;
-        dto.direccion_vivienda ? minero.direccion_vivienda = dto.direccion_vivienda : minero.direccion_vivienda = minero.direccion_vivienda;
+        if (!minero) {
+            throw new NotFoundException(new MessageDto('No existe el usuario'));
+        }
+        if (IdMinero !== IdMinero) {
+            throw new BadRequestException(new MessageDto('El usuario ya existe'));
+        }
+        dto.nombreUsuario ? minero.usuario.nombreUsuario = dto.nombreUsuario : minero.usuario.nombreUsuario;
+        dto.apellidosUsuario ? minero.usuario.apellidosUsuario = dto.apellidosUsuario : minero.usuario.apellidosUsuario;
+        dto.correoUsuario ? minero.usuario.correoUsuario = dto.correoUsuario : minero.usuario.correoUsuario;
+        dto.passwordUsuario ? minero.usuario.passwordUsuario = dto.passwordUsuario : minero.usuario.passwordUsuario;
+        dto.tipo_documento ? minero.tipo_documento = dto.tipo_documento : minero.tipo_documento;
+        dto.numero_documento ? minero.numero_documento = dto.numero_documento : minero.numero_documento;
+        dto.cambio_documento ? minero.cambio_documento = dto.cambio_documento : minero.cambio_documento;
+        dto.telefono ? minero.telefono = dto.telefono : minero.telefono;
+        dto.fecha_nacimiento ? minero.fecha_nacimiento = dto.fecha_nacimiento : minero.fecha_nacimiento;
+        dto.direccion_vivienda ? minero.direccion_vivienda = dto.direccion_vivienda : minero.direccion_vivienda;
         try {
             // Guardar el minero en la base de datos
             await this.mineroRepository.save(minero);
-            return new MessageDto('Datos del usuario editados exitosamente');
+            return new MessageDto(`Datos del usuario ${minero.usuario.nombreUsuario} editados exitosamente`);
         } catch (error) {
             throw new InternalServerErrorException(new MessageDto('Error al editar la información'));
         }
-    } 
-    // Método para editar usuario minero   
+    }
+    // Método para editar usuario minero 
 
     async registrarTurnos(IdMinero: number, dto: TurnoDto): Promise<any> {
         const minero: MineroEntity = await this.consultarMinero(IdMinero);
@@ -177,31 +176,4 @@ export class MineroService {
         }
     }
     // Método para editar el turno del usuario minero
-
-    async editarMineroPorAdmin(IdMinero: number, dto: mineroDto): Promise<any> {
-        const minero = await this.consultarMinero(IdMinero);
-        if (!minero)
-            throw new NotFoundException(new MessageDto('no existe'));
-        await this.usuarioService.editarUsuario(IdMinero, {
-            nombreUsuario: dto.nombreUsuario, apellidosUsuario: dto.apellidosUsuario,
-            correoUsuario: dto.correoUsuario, passwordUsuario: dto.passwordUsuario,
-        });
-        const exists = await this.mineroRepository.findOne({ where: { IdMinero } });
-        if (exists && exists.IdMinero !== IdMinero) throw new BadRequestException(new MessageDto('ese minero ya existe'));
-        dto.telefono ? minero.telefono = dto.telefono : minero.telefono = minero.telefono;
-        dto.fecha_nacimiento ? minero.fecha_nacimiento = dto.fecha_nacimiento : minero.fecha_nacimiento = minero.fecha_nacimiento;
-        dto.direccion_vivienda ? minero.direccion_vivienda = dto.direccion_vivienda : minero.direccion_vivienda = minero.direccion_vivienda;
-        if (minero.cambio_documento === CambioDocumento.Acepto) {
-        dto.tipo_documento ? minero.tipo_documento = dto.tipo_documento : minero.tipo_documento = minero.tipo_documento;
-        dto.numero_documento ? minero.numero_documento = dto.numero_documento : minero.numero_documento = minero.numero_documento;
-        }
-        try {
-            // Guardar el minero en la base de datos
-            await this.mineroRepository.save(minero);
-            return new MessageDto('Datos del usuario editados exitosamente');
-        } catch (error) {
-            throw new InternalServerErrorException(new MessageDto('Error al editar la información'));
-        }
-    } 
-    // Método para editar usuario minero por usuario administrador
 }

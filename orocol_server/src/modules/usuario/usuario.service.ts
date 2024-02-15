@@ -1,9 +1,5 @@
 import { RolEntity } from './../rol/rol.entity';
-import { RolRepository } from './../rol/rol.repository';
-import { CreateUsuarioDto } from 'src/dto/usuario.dto';
-import { create } from 'domain';
-import { MessageDto } from './../../common/message.dto';
-import { UsuarioRepository } from './usuario.repository';
+import { MessageDto } from '../../dto/common/message.dto';
 import { UsuarioEntity } from './usuario.entity';
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,6 +11,9 @@ import { LoginUsuarioDto } from 'src/dto/login.dto';
 import { compare } from 'bcryptjs';
 import { PayloadInterface } from 'src/auth/payload.interface';
 import { TokenDto } from 'src/dto/token.dto';
+import { PerfilEntity } from './perfil.entity';
+import { PerfilDto } from 'src/dto/perfil.dto';
+import { Repository } from 'typeorm';
 // Importamos las librerias necesarias
  
 @Injectable()
@@ -22,10 +21,12 @@ export class UsuarioService {
  
     constructor(
         @InjectRepository(RolEntity)
-        private readonly rolRepository: RolRepository,
+        private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: UsuarioRepository,
-        private readonly jwtService: JwtService
+        private readonly usuarioRepository: Repository<UsuarioEntity>,
+        private readonly jwtService: JwtService,
+        @InjectRepository(PerfilEntity)
+        private readonly perfilRepository: PerfilEntity,
     ) {}
     // Instanciamos la clase con el constructor
 
@@ -45,21 +46,6 @@ export class UsuarioService {
     }
     // Método para consultar usuarios
 
-    async editarUsuario(idUsuario: number, dto: CreateUsuarioDto): Promise<any> {
-        const usuario = await this.consultarUsuario(idUsuario);
-        if (!usuario) {
-            throw new NotFoundException(new MessageDto('No existe el usuario'));
-        }
-        if (idUsuario !== idUsuario) {
-            throw new BadRequestException(new MessageDto('El usuario ya existe'));
-        }
-        usuario.nombreUsuario = dto.nombreUsuario || usuario.nombreUsuario;
-        usuario.apellidosUsuario = dto.apellidosUsuario || usuario.apellidosUsuario;
-        usuario.correoUsuario = dto.correoUsuario || usuario.correoUsuario;
-        usuario.passwordUsuario = dto.passwordUsuario || usuario.passwordUsuario;
-        return this.usuarioRepository.save(usuario);
-    }
-    // Método para editar usuarios
 
     async inactivarUsuario(idUsuario: number, dto: InactivarUsuarioDto): Promise<any> {
         const usuario = await this.consultarUsuario(idUsuario);
@@ -118,4 +104,21 @@ export class UsuarioService {
         const token = await this.jwtService.sign(payload);
         return {token};
     }
+
+    async registrarPerfilUsuario(idUsuario: number, dto: PerfilDto): Promise<MessageDto> {
+        const usuario: UsuarioEntity = await this.usuarioRepository.findOne({ where: {idUsuario}}); // Obtener la entrada de venta
+        if (!usuario || usuario.estadoUsuario === EstadoUsuario.INACTIVO) {
+            throw new NotFoundException('Usuario no disponible');
+        }
+        const perfil = new PerfilEntity();
+        perfil.fotoPerfil = dto.fotoPerfil;
+        perfil.usuario = usuario;
+        try {
+            await this.perfilRepository.save(perfil);
+            return new MessageDto(`Foto de perfil de ${usuario.nombreUsuario} creado`)
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto(`Error al crear el perfil: ${error.message || error}`))
+        }
+    } 
+    // Método para registrar 
 }
