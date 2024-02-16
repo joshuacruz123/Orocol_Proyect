@@ -1,0 +1,95 @@
+<h2 mat-dialog-title>Agregar usuario</h2>+
+<form [formGroup]="form" (ngSubmit)="addEditUsuario()">
+<mat-dialog-content>
+    <div class="row">
+        <div class="column">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre:</mat-label>
+                <input formControlName="nombre" matInput placeholder="Ingresa nombre" autocomplete="off">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              </mat-form-field>
+              <div class="error">
+                <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+                  El nombre es un campo <strong>requerido</strong></span>
+                  <span *ngIf="form.get('nombre')?.hasError('maxlength')"> 
+                    El nombre no bebe tener mas de <strong>20 caracteres</strong></span>
+              </div>
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="column">  
+            <mat-form-field appearance="fill">
+                <mat-label>Apellido:</mat-label>
+                <input formControlName="apellido" matInput placeholder="Ingresa apellido" autocomplete="off">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            <div class="error">
+                <span *ngIf="form.get('apellido')?.hasError('maxlength')"> 
+                  El apellido no bebe tener mas de <strong>20 caracteres</strong></span>
+            </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="column">  
+            <mat-form-field appearance="fill">
+                <mat-label>Correo:</mat-label>
+                <input formControlName="correo" matInput placeholder="Ingresa correo" autocomplete="off">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            <div class="error">
+              <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
+                El correo es un campo <strong>requerido</strong></span>
+                <span *ngIf="form.get('correo')?.hasError('email') && form.get('correo')?.touched"> 
+                  El correo es <strong>invalido</strong></span>
+            </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">  
+      </div>
+      <mat-form-field>
+        <mat-label>Tipo documento</mat-label>
+        <mat-select formControlName="tipoDocumento">
+          <mat-option *ngFor="let item of tipoDocumento" [value]="item">{{ item }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="column"> 
+        <mat-form-field appearance="fill">
+            <mat-label>Número documento:</mat-label>
+            <input formControlName="documento" matInput placeholder="Ingresa documento" autocomplete="off">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field> 
+        <div class="error">
+          <span *ngIf="form.get('documento')?.hasError('required') && form.get('documento')?.touched">
+            El documento es <strong>requerido</strong></span>
+            <span *ngIf="form.get('documento')?.hasError('pattern')"> 
+              El documento solo debe tener <strong>números</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="column">  
+            <mat-form-field class="example-full-width">
+                <mat-label>Fecha nacimiento</mat-label>
+                <input [max]="maxDate" formControlName="fechaNacimiento" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="error">
+              <span *ngIf="form.get('fechaNacimiento')?.hasError('required') && form.get('fechaNacimiento')?.touched">
+                La fecha es un campo <strong>requerido</strong></span>
+            </div>
+      </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" (click)="cancelar()" mat-button >Cancelar</button>
+  <button [disabled]="form.invalid" type="submit" mat-button cdkFocusInitial>Agregar</button>
+</mat-dialog-actions>
+</form>

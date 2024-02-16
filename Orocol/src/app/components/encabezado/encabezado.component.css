@@ -1,0 +1,14 @@
+.Logotipo{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    background-color: #19150C;
+    width: 100%;
+    height: 100%;
+  } 
+  
+  .Logotipo img{
+    width: 40%;
+    height: 100%;
+  } 
+  

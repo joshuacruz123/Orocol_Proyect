@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<body>
+    <header>
+        <img class="logo" src="../../../assets/img/logo-orocol.jpg" alt="Orocol">
+        <button id="abrir" class="abrirMenu"><i class="bi bi-list"></i></button>
+        <nav id="menu" class="menuPrincipal">
+            <button id="cerrar" class="cerrarMenu"><i class="bi bi-three-dots"></i></button>
+            <ul class="listaMenu">
+                <li><a href=""><i class="fas fa-arrow-left"></i> Regresar</a></li>
+            </ul>  
+        </nav>
+    </header>
+    <br><br><br>
+    <div class="container-fluid">
+        <div class="container py-5">
+            <br>
+            <div class="contenedor">
+                <div class="div-formulario">
+                    <h3>Registrarse</h3><br>
+                    <div class="radios">
+                        <label>
+                            <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario"> Como administrador
+                        </label>
+                        <label>
+                            <input type="radio" name="tipoUsuario" value="Trabajador" [(ngModel)]="tipoUsuario"> Como empleado
+                        </label>
+                    </div>
+
+                    <div *ngIf="tipoUsuario === 'Administrador'">
+                        <!-- Formulario para el tipo de usuario Administrador -->
+                        <app-formulario-administrador></app-formulario-administrador>
+                    </div>
+
+                    <div *ngIf="tipoUsuario === 'Trabajador'">
+                        <!-- Formulario para el tipo de usuario Trabajador -->
+                        <app-formulario-minero></app-formulario-minero>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <app-pie></app-pie>
+
+  
+</body>
