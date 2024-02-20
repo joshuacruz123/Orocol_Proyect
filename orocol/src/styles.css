@@ -1,3 +1,16 @@
-@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+
+.btn-info:hover{
+    box-shadow: #00ffdd5f 3px 3px 10px 10px;
+  }
+  
+.btn-light:hover{
+    box-shadow: #ff000058 3px 3px 10px 10px;
+  }
+  
+.btn-light:hover{
+    margin-top: 10px;
+  }

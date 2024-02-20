@@ -33,5 +33,5 @@ export const routes: Routes = [
     {path: 'novedades', title: 'Novedades', component: NovedadesComponent},
     {path: 'turnos', title: 'Turnos', component: TurnosComponent},
     {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent},
-    //{path: '/', component:},
+    //{path: '/', title: '', component: },
 ];
