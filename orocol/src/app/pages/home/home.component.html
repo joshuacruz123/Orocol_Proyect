@@ -1,24 +1,38 @@
+<body [class.colorClass]="color">
 <header>
-    <img class="logo" src="/assets/images/logo-orocol.jpg" alt="Logo de Orocol" />
-    <button id="abrir" class="abrirMenu"><i class="bi bi-list"></i></button>
-    <nav id="menu" class="menuPrincipal">
-    <button id="cerrar" class="cerrarMenu"><i class="bi bi-three-dots"></i></button>
-        <ul class="listaMenu">
-          <li><a (click)="descargarPDF()" role="button"><i class="fas fa-download"></i> Manual Usuario</a></li>
-          <li><a href="Registro"><i class="fas fa-user-plus"></i> Registrarse</a></li>
-          <li><a href="Iniciar_sesión"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
-        </ul>
-    </nav>
-</header> 
-
-<body>
-  <br>
-  <br>
-  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-3">
+        <div class="logo">
+          <img class="imagen" src="/assets/images/logo-orocol.jpg" alt="Logo de Orocol" />
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-9 col-9 text-end">
+        <div class="menu_icon" [class.menu_icon_Class]="menu_icon_variable" (click)="abrirMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu" [class.menuClass]="menuVariable">
+          <ul>
+            <li>¿Quienes somos?</li>
+            <li><i class="fas fa-download"></i> Manual Usuario</li>
+            <li><a routerLink="/registro"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+            <li><a routerLink="/iniciar_sesion"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+          </ul>
+          <img class="imagenlogo" src="/assets/images/orocol.png" alt="Orocol" />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+  <br/>
+  <br/>
+  <br/>
   <h1>Te damos la bienvenida a {{ titulo }}</h1>
-  <br>
-  <br>
-  <br>
+  <br/>
+  <br/>
+  <br/>
   <div id="Id_Intro" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button data-bs-target="#Id_Intro" data-bs-slide-to="0" class="active" 
@@ -68,15 +82,15 @@
       <span class="carousel-control-next-icon"></span>
     </button> 
   </div> 
-<br>
-<button type="button" class="btn btn-info btn-lg">Ingresar</button>
-<br>
-<br>
-<br>
+<br/>
+<a routerLink="/iniciar_sesion" type="button" class="btn btn-info btn-lg">Ingresar</a>
+<br/>
+<br/>
+<br/>
 </body>
 <app-pie />
 
-<script src="header.js"></script>
+<script src="./header.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 

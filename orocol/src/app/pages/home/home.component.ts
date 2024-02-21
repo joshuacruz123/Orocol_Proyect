@@ -1,36 +1,38 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, /*ElementRef, ViewChild*/ } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../pie/pie.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PieComponent, NgOptimizedImage], // ngSrc
+  imports: [CommonModule, RouterOutlet, PieComponent, NgOptimizedImage, RouterLink], // ngSrc
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   
-  @ViewChild('navegacion') navegacion!: ElementRef;
+  constructor(){}
 
-  constructor() {}
+  menuVariable: boolean = false;
+
+  menu_icon_variable:boolean = false;
+
+  color:boolean = false;
 
   abrirMenu() {
-    this.navegacion.nativeElement.classList.add('visible');
-  }
+    this.menuVariable =! this.menuVariable;
+    this.menu_icon_variable =! this.menu_icon_variable;
+    this.color =! this.color;
+  } // Menú responsive
 
-  cerrarMenu() {
-    this.navegacion.nativeElement.classList.remove('visible');
-  }
-
-  titulo = 'Orocol';
+  titulo = 'Orocol'; // Título
 
   imagenes: string[] = [
     'assets/images/images/barraOro.jpg',
     'assets/images/images/extraccion.jpg',
     'assets/images/images/flechaOro.jpg',
-  ];
+  ]; // Inagenes usadas carousel
   
   descargarPDF(): void {
     const url = `assets/images/Manual_orocol.pdf`; 
@@ -43,7 +45,7 @@ export class HomeComponent {
     link.click();
 
     document.body.removeChild(link);
-  }
+  } // Descargar PDF
 
   
 }
