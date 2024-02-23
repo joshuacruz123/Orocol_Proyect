@@ -1,0 +1,144 @@
+<form>
+    <div class="form-group">
+        <label class="obligatorio">*Obligatorio</label>
+            <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
+            <div class="input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><i class="fas fa-user-plus"></i></font></span>
+                </div>
+                <input  type="text" class="inputt" placeholder="Nombre"  required="">
+                
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="apellidosUsuario">Apellido(s)</label>
+            <div class="input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><i class="fas fa-user-plus"></i></font></span>
+                </div>
+                <input class="inputt nobligatorio" type="text" placeholder="Apellido" >
+                
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="correoUsuario">Correo <font color="red">*</font></label>
+            <div class="input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><i class="fas fa-user-plus"></i></font></span>
+                </div>
+                <input  type="email" class="inputt" placeholder="Correo" required placeholder="Te falta digitar el correo electronico." >
+                
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="passwordUsuario">Contraseña <font color="red">*</font></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white"><font color="white"><i class="fas fa-user-plus"></i></font></span>            
+                </div>
+ 
+                <input  type="password" class="inputt" placeholder="Crear contraseña" id="pwd" required >
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Cargo <font color="red">*</font></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-white">
+                        <font color="white"><i class="fas fa-user-plus"></i></font>
+                    </span>
+                </div>
+                <input type="text" class="inputt" required placeholder="Tu cargo en la empresa" name="registroCargoAd">
+            </div>
+        </div>
+            <br>  
+            <div class="botones">
+                <button class="btn btn-light active text-danger" type="reset">Borrar </button>
+            <br>
+         <button class="btn btn-warning btn-lg" type="submit">Enviar </button>
+    </div>
+</form>
+
+<!--
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+            <label class="obligatorio">*Obligatorio</label>
+                <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
+                <div class="input-group">
+    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>person</mat-icon></font></span>
+                    </div>
+                    <input  type="text" class="inputt" placeholder="Nombre" formControlName="nombreUsuario" required="">
+                    
+                </div>
+    
+            </div>
+    
+            <div class="form-group">
+                <label for="apellidosUsuario">Apellido(s)</label>
+                <div class="input-group">
+    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>person</mat-icon></font></span>
+                    </div>
+                    <input class="apellido" type="text" class="nobligatorio" placeholder="Apellido" formControlName="apellidosUsuario">
+                    
+                </div>
+    
+            </div>
+    
+            <div class="form-group">
+                <label for="correoUsuario">Correo <font color="red">*</font></label>
+                <div class="input-group">
+    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>mail</mat-icon></font></span>
+                    </div>
+                    <input  type="email" class="inputt" placeholder="Correo" formControlName="correoUsuario" required placeholder="Te falta digitar el correo electronico." >
+                    
+                </div>
+    
+            </div>
+    
+            <div class="form-group">
+                <label for="passwordUsuario">Contraseña <font color="red">*</font></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>key</mat-icon></font></span>            
+                    </div>
+     
+                    <input  type="password" class="inputt" placeholder="Crear contraseña" id="pwd" required="" formControlName="passwordUsuario">
+                    </div>
+            </div>  
+    
+            <div class="form-group">
+                <label for="">Cargo <font color="red">*</font></label>
+                <div class="input-group">
+    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-dark text-white"><font color="white"><mat-icon>home_repair_service</mat-icon></font></span>
+                    </div>
+                    <input  type="text" class="inputt" placeholder="Tu cargo en la empresa" name="registroCargoAd">
+                    
+                </div> 
+    
+            </div>
+            <br>  
+            <div class="botones">
+                <button class="btn btn-light active text-danger" type="reset">Borrar <i class="fa-solid fa-delete-left"></i></button>
+            <br>
+         <button class="btn btn-primary btn-lg" type="submit">Enviar</button>
+    </div>
+</form>
+-->

@@ -1,5 +1,49 @@
-<p>iniciar-sesion works!</p>
-
-
-
+<body>
+    <header>
+        <img class="logo" src="/assets/images/logo-orocol.jpg" alt="Orocol">
+        <button id="abrir" class="abrirMenu"><i class="bi bi-list"></i></button>
+        <nav id="menu" class="menuPrincipal">
+        <button id="cerrar" class="cerrarMenu"><i class="bi bi-three-dots"></i></button>
+            <ul class="listaMenu">
+                <li><a href=""><i class="fas fa-arrow-left"></i> Regresar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form class="form" name="login" class="login" action="/login" method="post">
+        <h1>Iniciar Sesión</h1>
+        <label>Correo</label><br>
+        <input type="text" required placeholder="Correo electronico" pattern=".*\S+.*" title="Campo obligatorio" id="usuario" minlength="4" maxlength="20">
+        <span class="error-message" id="usuario-error">Campo obligatorio (4-20 caracteres)</span><br>
+        
+        <label>Contraseña</label><br>
+        <input type="password" required placeholder="Digite su contraseña" pattern=".*\S+.*" title="Campo obligatorio" id="contrasena" minlength="6" maxlength="15">
+        <span class="error-message" id="contrasena-error">Campo obligatorio (6-15 caracteres)</span><br>
+        
+        <input type="submit" value="Enviar" onclick="return validarFormulario()">
+    </form>
+    
+        <script>
+            function validarFormulario() {
+                var usuario = document.getElementById('usuario');
+                var contrasena = document.getElementById('contrasena');
+                var usuarioError = document.getElementById('usuario-error');
+                var contrasenaError = document.getElementById('contrasena-error');
+        
+                if (!usuario.validity.valid) {
+                    usuarioError.style.display = 'inline';
+                } else {
+                    usuarioError.style.display = 'none';
+                }
+        
+                if (!contrasena.validity.valid) {
+                    contrasenaError.style.display = 'inline';
+                } else {
+                    contrasenaError.style.display = 'none';
+                }
+        
+                return usuario.validity.valid && contrasena.validity.valid;
+            }
+        </script>
+    <app-pie></app-pie>
+</body>
 <router-outlet />

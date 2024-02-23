@@ -1,5 +1,62 @@
-<p>registro works!</p>
-
-
-
+<body>
+    <header>
+        <img class="logo" src="/assets/images/logo-orocol.jpg" alt="Orocol">
+        <button id="abrir" class="abrirMenu"><i class="bi bi-list"></i></button>
+        <nav id="menu" class="menuPrincipal">
+            <button id="cerrar" class="cerrarMenu"><i class="bi bi-three-dots"></i></button>
+            <ul class="listaMenu">
+                <li><a href=""><i class="fas fa-arrow-left"></i> Regresar</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container-fluid">
+        <div class="container py-5">
+            <br>
+            <div class="contenedor">
+                <div class="div-formulario">
+                    <h3>Registrarse</h3><br>
+                    <div class="radios">
+                        <label>
+                            <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario"> Como
+                            administrador
+                        </label>
+                        <label>
+                            <input type="radio" name="tipoUsuario" value="Minero" [(ngModel)]="tipoUsuario">
+                            Como empleado (Minero)
+                        </label>
+                    </div>
+                    <div>
+                    @if (tipoUsuario === 'Administrador') {
+                    <app-formulario-administrador></app-formulario-administrador>
+                    } </div>
+                    <div>
+                    @if (tipoUsuario === 'Minero') {
+                    <app-formulario-minero></app-formulario-minero>
+                    }</div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <app-pie></app-pie>
+</body>
 <router-outlet />

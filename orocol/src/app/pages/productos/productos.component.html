@@ -1,5 +1,89 @@
-<p>productos works!</p>
-
-
-
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-8 barra">
+                <nav class="stilnav">
+                    <div class="col-8 barra">
+                        <li><a href="Administrador"><img src="../../../assets/img/logo.jpg" alt="" class="logo" ></a></li>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-4 text-right barra">
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+                            <a class="dropdown-item menuperfil cerrar" href="Editar_administrador">Perfil</a>
+                            <a class="dropdown-item menuperfil cerrar" href="#">Salir</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h4>Gestion Productos</h4>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="barra-lateral col-12 col-sm-auto">
+                <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
+                    <a href="Usuarios"><i class="fas fa-user text-white"></i><span>Gestion Usuarios</span></a>
+                    <a href="Gestionar_venta"><i class="fas fa-cart-plus text-white"></i><span>Gestion Ventas</span></a>
+                    <a href="Gestionar_clientes"><i class="fas fa-users text-white"></i><span>Gestion clientes</span></a>
+                    <a href="Gestionar_productos"><i class="fas fa-box-open text-white"></i><span>Gestion Productos </span></a>
+                    <a href="Ver_novedades_admin"><i class="fas fa-bell text-white"></i><span>Ver Novedades</span></a>
+                </nav>
+            </div>
+            <main class="main col">
+                <nav class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
+                    <button class="search-button" id="search-button">Buscar</button>
+                </nav>
+                <script>
+                    function buscar() {
+                        var input = document.getElementById('search-input').value;
+                        alert('Has buscado: ' + input);
+                    }
+                    document.getElementById('search-button').addEventListener('click', buscar);
+                </script>
+                <br>
+                <div class="contenendorstyle" class="container">
+                    <div class="row">
+                        
+                        <div class="col-md-7"> 
+                            <div id="tablaVents">
+                                <a type="button" class="btn btn-info btn-lg">Registrar producto</a>
+                                <table class="tabla table table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tipo de Oro</th>
+                                            <th scope="col">Estado de producto</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Item</td>
+                                            <td>Item</td>
+                                            <td>
+                                                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                                    <form class="form-inline" method="post" action="">
+                                                        <button class="btn btn-danger" type="submit">Inactivar</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <app-pie></app-pie>
+</body> 
 <router-outlet />

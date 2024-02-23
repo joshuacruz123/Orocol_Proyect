@@ -15,8 +15,8 @@
         </div>
         <div class="menu" [class.menuClass]="menuVariable">
           <ul>
-            <li>¿Quienes somos?</li>
-            <li><i class="fas fa-download"></i> Manual Usuario</li>
+            <li><a routerLink="/">¿Quienes somos?</a></li>
+            <li><a routerLink="/manual_usuario"><i class="fas fa-download"></i> Manual Usuario</a></li>
             <li><a routerLink="/registro"><i class="fas fa-user-plus"></i> Registrarse</a></li>
             <li><a routerLink="/iniciar_sesion"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
           </ul>
@@ -49,7 +49,7 @@
             Oro de la mejor calidad
           </p>
           <h2 class="display-1 fw-bolder text-capitalize">Adquirir producto</h2>
-          <a href="https://api.whatsapp.com/send?phone=573242232662"><button class="btn btn-warning px-5 py-2 fs-5 mt-5">Contáctenos</button></a>
+          <a href="#"><button class="btn btn-warning px-5 py-2 fs-5 mt-5">Contáctenos</button></a>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
             Trabajamos día y noche para hacer llegar nuestros productos
           </p>
           <h2 class="display-1 fw-bolder text-capitalize">Adquirir producto</h2>
-          <a href="https://api.whatsapp.com/send?phone=573242232662"><button class="btn btn-warning px-5 py-2 fs-5 mt-5">Contáctenos</button></a>
+          <a href="#"><button class="btn btn-warning px-5 py-2 fs-5 mt-5">Contáctenos</button></a>
         </div>
       </div>
 
@@ -71,7 +71,7 @@
             Exportación nacional e internacional
           </p>
           <h2 class="display-1 fw-bolder text-capitalize">Adquirir producto</h2>
-          <a href="https://api.whatsapp.com/send?phone=573242232662"><button class="btn btn-warning px-5 py-2 fs-5 mt-5">Contáctenos</button></a>
+          <a href="#"><button class="btn btn-warning px-5 py-2 fs-5 mt-5">Contáctenos</button></a>
         </div>
       </div>
     </div>
@@ -83,14 +83,16 @@
     </button> 
   </div> 
 <br/>
-<a routerLink="/iniciar_sesion" type="button" class="btn btn-info btn-lg">Ingresar</a>
 <br/>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a routerLink="/iniciar_sesion" type="button" class="btn btn-info btn-lg">Iniciar sesión</a>
+</div>
 <br/>
 <br/>
 </body>
 <app-pie />
 
-<script src="./header.js"></script>
+<script src="src/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 

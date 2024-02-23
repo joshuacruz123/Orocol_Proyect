@@ -1,0 +1,9 @@
+.card{
+    background-color: #252121;
+    color: white;
+    padding: 2%;
+}
+
+form button a{
+    text-decoration: none;
+}

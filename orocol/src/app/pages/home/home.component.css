@@ -12,7 +12,7 @@ body{
 /* INICIO */
 .logo, .imagen {
   max-width: 22rem;
-  margin-left: 4px;
+  margin-left: -20px;
 }
 
 header {
@@ -34,15 +34,23 @@ header {
   margin: 0;
 }
 
-.menu ul li{
+.menu ul li {
   list-style-type: none;
-  color: #fff;
   display: inline-block;
-  font-size: 20px;
   margin-left: 24px;
 }
 
-.menu ul li:hover {
+a {
+  color: #fff;
+}
+
+.menu ul li a{
+  font-size: 20px;
+  margin-left: 24px;
+  text-decoration: none;
+}
+
+.menu ul li a:hover {
   color: rgb(239, 244, 83);
   transition: 0.6s ease-in-out;
 }

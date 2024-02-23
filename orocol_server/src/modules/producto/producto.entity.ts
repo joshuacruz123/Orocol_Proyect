@@ -16,7 +16,7 @@ export class ProductoEntity {
   @OneToMany(() => EntradaVentaEntity, (entradaVentas) => entradaVentas.producto)
   entradaVentas: EntradaVentaEntity[];
 }
-  
+   
 /*
 create table Producto
 (
