@@ -33,7 +33,7 @@ export class ProductoController {
     @UseGuards(JwtAuthGuard, RolesGuard) */
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Post()
-    async insertarProducto(@Body() dto: ProductoDto) {
+    async registrarProducto(@Body() dto: ProductoDto) {
         return await this.productoService.insertarProducto(dto);
     } 
 

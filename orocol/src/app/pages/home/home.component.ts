@@ -2,17 +2,23 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, /*ElementRef, ViewChild*/ } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../pie/pie.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PieComponent, NgOptimizedImage, RouterLink], // ngSrc
+  imports: [CommonModule, RouterOutlet, PieComponent, NgOptimizedImage, RouterLink, MatIconModule], // ngSrc
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   
-  constructor(){}
+  constructor(private toastr: ToastrService) { }
+
+  mostrarToast() {
+    this.toastr.success('Este es un mensaje de éxito', 'Éxito');
+  }
 
   menuVariable: boolean = false;
 

@@ -3,9 +3,7 @@
 }
   
 body{ 
-  background: #f9f9da; /*
-  background: -webkit-linear-gradient(to right, #f8b500, #fceabb);  
-  background: linear-gradient(to right, #f8b500, #fceabb); */
+  background: #f9f9da; 
   height: 1200px;
 } 
   

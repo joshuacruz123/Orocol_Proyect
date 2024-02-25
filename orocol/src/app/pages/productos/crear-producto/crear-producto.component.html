@@ -4,12 +4,12 @@
             Agregar Producto
         </div>
         <div class="card" class="card-body">
-            <form method="post" action="" class="form">
+            <form (ngSubmit)="crearProducto()" novalidate class="form">
                 <div class="mb-3">
                     <label for="" class="form-label">Tipo de Oro</label>
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" required  placeholder="Digite el tipo de Oro">
+                    <input type="text" class="form-control" name="tipo de oro" id="tipooro" aria-describedby="helpId" required  placeholder="Digite el tipo de Oro" [(ngModel)]="TipoOro" >
                 </div>
-                <input name="" id="" class="btn btn-primary" style="background-color: white; color:black;" type="submit" value="Agregar +">
+                <input name="" id="" class="btn btn-primary" style="background-color: white; color:black;" type="submit" value="Agregar +" [disabled]="!f.valid">
             </form>
         </div>
         <div class="card-footer text-muted">

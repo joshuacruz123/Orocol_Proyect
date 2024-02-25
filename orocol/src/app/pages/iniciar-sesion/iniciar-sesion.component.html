@@ -19,31 +19,9 @@
         <input type="password" required placeholder="Digite su contraseña" pattern=".*\S+.*" title="Campo obligatorio" id="contrasena" minlength="6" maxlength="15">
         <span class="error-message" id="contrasena-error">Campo obligatorio (6-15 caracteres)</span><br>
         
-        <input type="submit" value="Enviar" onclick="return validarFormulario()">
+        <button class="btn btn-dark btn-lg" type="submit">Ingresar <mat-icon>arrow_forward</mat-icon></button>
     </form>
     
-        <script>
-            function validarFormulario() {
-                var usuario = document.getElementById('usuario');
-                var contrasena = document.getElementById('contrasena');
-                var usuarioError = document.getElementById('usuario-error');
-                var contrasenaError = document.getElementById('contrasena-error');
-        
-                if (!usuario.validity.valid) {
-                    usuarioError.style.display = 'inline';
-                } else {
-                    usuarioError.style.display = 'none';
-                }
-        
-                if (!contrasena.validity.valid) {
-                    contrasenaError.style.display = 'inline';
-                } else {
-                    contrasenaError.style.display = 'none';
-                }
-        
-                return usuario.validity.valid && contrasena.validity.valid;
-            }
-        </script>
     <app-pie></app-pie>
 </body>
 <router-outlet />

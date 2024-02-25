@@ -90,33 +90,23 @@ color:#ffffff;
 font-size: 20px;
 }
 body {
-    background: url(/assets/images/fondo2.jpg);
-    background-repeat: no-repeat;
+	  background:url(/assets/images/magdalena.jpg);
     background-size: cover;
-    height: 150vh;
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:0;
+    padding:0; 
+    width:100%;
+    height:120%;
 }
 
-input[type="submit"] {
-    background-color: #000000cd; 
-    border: none; 
-    color: rgb(255, 255, 255); 
-    padding: 12px 24px; 
-    text-align: center; 
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 16px; 
-    margin: 4px 2px;
-    cursor: pointer; 
-    border-radius: 6px; 
-    width: 100px;
-    border: 1px solid white;
-    margin-top: 10px;
+.btn-dark {
+  border: 1px solid #ffffff;
+  margin-top: 20px;
+  margin-left: 35%;
+  margin-bottom: 40px;
 }
 
-input[type="submit"]:hover {
-    background-color: rgb(250, 253, 39);
-    color: rgb(0, 0, 0); 
-}
 
 .error-message {
     color: red;

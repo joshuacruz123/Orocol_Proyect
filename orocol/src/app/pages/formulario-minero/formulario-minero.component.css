@@ -22,6 +22,10 @@ form{
     gap: 1rem;
 }
 
+form .form-group {
+    padding-left: 30px;
+}
+
 form .form-group .input-group .inputt{
     width: 80%;
     padding-left: 15px;
@@ -41,7 +45,6 @@ form .form-group .input-group .inputt:hover{
     width: 80%;
     padding-left: 15px;
     border-bottom: 1px solid #ffb700;
-
     transition: all 2s ease;
 }
 
@@ -93,6 +96,11 @@ form .form-group .input-group .apellido:valid{
     flex-direction: column;
 }
 
+button{
+    width: 150px;
+    margin: 20px;
+}
+
 .contenedor .div-formulario form label{
     color: whitesmoke;
 }
@@ -102,10 +110,6 @@ form label{
     color: white;
 }
 
-button{
-    display:flex;
-    width: 150px;
-}
 
 form div select{
     background-color: transparent;

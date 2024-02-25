@@ -15,6 +15,7 @@ import { RepoteVentasComponent } from './pages/repote-ventas/repote-ventas.compo
 import { NovedadesComponent } from './pages/novedades/novedades.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
 import { IndicadoresFinancierosComponent } from './pages/indicadores-financieros/indicadores-financieros.component';
+import { CrearProductoComponent } from './pages/productos/crear-producto/crear-producto.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ export const routes: Routes = [
     {path: 'editar_administrador', title: 'Editar usuario', component: EditarAdministradorComponent},
     {path: 'editar_minero', title: 'Editar usuario', component: EditarMineroComponent},
     {path: 'productos', title: 'Productos', component: ProductosComponent},
+    {path: 'nuevo_producto', title: 'Nuevo producto', component: CrearProductoComponent},
     {path: 'ventas', title: 'Ventas', component: VentasComponent},
     {path: 'compras', title: 'Compras', component: ComprasComponent},
     {path: 'repote_ventas', title: 'Reportes de ventas', component: RepoteVentasComponent},
@@ -33,5 +35,6 @@ export const routes: Routes = [
     {path: 'novedades', title: 'Novedades', component: NovedadesComponent},
     {path: 'turnos', title: 'Turnos', component: TurnosComponent},
     {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent},
-    //{path: '/', title: '', component: },
+    //{path: '', title: '', component: },
+    {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

@@ -1,21 +1,43 @@
 /* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+@import 'ngx-toastr/toastr';
 
 html, body { height: 100%; }
 body { margin: 0; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
 
 .btn-info:hover{
-    box-shadow: #00ffdd5f 3px 3px 10px 10px;
+    box-shadow: 0px 0px 20px 5px rgb(0, 252, 252);
   }
   
 .btn-light:hover{
-    box-shadow: #ff000058 3px 3px 10px 10px;
+    box-shadow: 0px 0px 20px 5px #fd3939dc;
+    background: #fff;
   }
-  
-.btn-light:hover{
-    margin-top: 10px;
-  }
+
+.btn-danger:hover {
+  box-shadow: 0px 0px 20px 5px rgb(252, 0, 0);
+}
+
+.btn-primary:hover {
+  box-shadow: 0px 0px 10px 5px rgb(0, 147, 252);
+}
+
+.btn-warning:hover {
+  box-shadow: 0px 0px 15px 5px rgb(229, 249, 12);
+}
+
+.btn-dark:hover {
+  box-shadow: 0px 0px 10px 5px rgb(229, 249, 12);
+}
 
 a {
   cursor: pointer;
   text-decoration: none;
+}
+
+button {
+  font-size: 10px;
+}
+
+mat-icon {
+  padding-top: 3px;
 }

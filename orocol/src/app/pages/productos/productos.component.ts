@@ -1,17 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../pie/pie.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { Productos } from '../../models/productos';
+import { ProductoService } from '../../services/producto.service';
+import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, BrowserAnimationsModule, ToastrModule, PieComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, MatIconModule, PieComponent],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
-})
-export class ProductosComponent {
+}) 
+export class ProductosComponent implements OnInit {
 
+  productos: Productos[] = [];
+
+  constructor(
+    private productoService: ProductoService,
+    private toastr: ToastrService
+  ) {}
+
+  ngOnInit(): void {
+      
+  }
+
+  listarProductos(): void {
+    this.productoService.consultarProductos().subscribe(
+      data => {
+        this.productos = data;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }
