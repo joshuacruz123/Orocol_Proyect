@@ -7,15 +7,8 @@ nav li{
     display: inline;
 
 }
-/*Estilo de tabla*/
-.tabla{
-    background-color: #252121;
-    color: white;
-    width: 130%;
-    align-items: center;
-    border-collapse: collapse;
-}
- /*Estilos formulario de registro*/
+
+/*Estilos formulario de registro*/
 .contenendorstyle{
     width: 60%;
 }
@@ -130,70 +123,17 @@ h2{
     padding-right: 40px;
 }
 
-
-/*mediaquerys*/
-
-@media screen and (max-width:1300px) {
-    .barra-lateral {
-        min-width: auto;
-    }
-    .barra-lateral .menu a span {
-        display: none;
-    }
-    .barra-lateral .menu a i {
-        margin: 0;
-    }
-    .barra {
-        min-width: auto;
-    }
-    .dropdown-menu {
-        margin: 20px -79px 0px;
-    }
-}
-
-@media screen and (max-width:575px) {
-    .barra-lateral {
-        min-height: auto;
-    }
-    .barra-lateral .menu a {
-        display: inline-block;
-        border-bottom: none;
-    }
-    .dropdown-menu {
-        margin: 20px -78px 0px;
-    }
-    .logocppe {
-        width: 100%;
-    }
-    body {
-        background: #a49123;
-        font-size: 16px;
-        overflow: visible;
-    }
-}
-
-
-
-@media screen and (max-width:575px) {
-    .barra-lateral {
-        height: auto;
-    }
-    .barra-lateral.menu a {
-        display: inline-block;
-        border-bottom: none;
-    }
-    .dropdown-menu {
-        margin: 20px -78 0px;
-    }
-    body {
-        font-size: 16px;
-        overflow: visible;
-    }
-}
-table{
+/*Estilo de tabla*/
+.listavacia {
     background-color:#252121 ;
     color: white;
-    width: 650px;
+    width: 1000px;
+    height: 500px;
+    align-items: center;
+}
+
+table {
+    width: 1000px;
 }
 
 .my-button {

@@ -4,7 +4,7 @@
             <div class="col-8 barra">
                 <nav class="stilnav">
                     <div class="col-8 barra">
-                        <li><a href="Administrador"><img src="../../../assets/img/logo.jpg" alt="" class="logo" ></a></li>
+                        <li><a href="Administrador"><img src="/assets/images/logo-orocol.jpg" alt="" class="logo" ></a></li>
                     </div>
                 </nav>
             </div>
@@ -43,10 +43,10 @@
                 <div class="contenendorstyle" class="container">
                     <div class="row">
                         
-                        <div class="col-md-7"> 
+                        <div class="col-md-10"> 
                             <div id="tablaVents">
                                 <a type="button" class="btn btn-info btn-lg" routerLink="/nuevo_producto"><mat-icon>plus</mat-icon> Registrar producto</a>
-                                <table class="tabla table table-dark">
+                                <table class="table table-hover table-dark">
                                     <thead>
                                         <tr>
                                             <th scope="col">Tipo de Oro</th>
@@ -55,19 +55,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for (producto of productos; track producto.IdProducto) {
+                                        @for (item of productList; track $index) {
                                         <tr>
-                                            <td>{{ producto.TipoOro }}</td>
-                                                <td>{{ producto.estadoProducto }}</td>
-                                                <td>
-                                                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                                        <form class="form-inline" method="post" action="">
-                                                            <button class="btn btn-danger" type="submit">Inactivar</button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
+                                            <th scope="row"> {{item.TipoOro}}</th>
+                                            <td> {{item.estadoProducto}} </td>
+                                            <td>
+                                                @if (item.estadoProducto === 'No disponible') {
+                                                    <button class="btn btn-success" type="button" (click)="activarProducto(item.IdProducto)"> Activar </button>
+                                                } @else {
+                                                    <button class="btn btn-danger" type="button" (click)="inactivarProducto(item.IdProducto)">Inactivar</button>
+                                                }
+                                            </td>                                    
+                                        </tr>
+                                    }
                                     </tbody>
                                 </table>
                             </div>

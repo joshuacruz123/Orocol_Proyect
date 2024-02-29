@@ -36,5 +36,5 @@ export const routes: Routes = [
     {path: 'turnos', title: 'Turnos', component: TurnosComponent},
     {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent},
     //{path: '', title: '', component: },
-    {path: '**', redirectTo: '', pathMatch: 'full'}
+    {path: '**', redirectTo: '', pathMatch: 'full'} 
 ];

@@ -8,3 +8,4 @@ export class Productos {
         this.estadoProducto = estadoProducto;
     }
 } 
+ 

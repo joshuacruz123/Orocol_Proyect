@@ -8,7 +8,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@ApiBearerAuth()
+//@ApiBearerAuth()
 @ApiTags('Productos')
 @Controller('producto')
 export class ProductoController {

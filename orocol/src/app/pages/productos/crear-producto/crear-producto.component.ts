@@ -1,52 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductoService } from '../../../services/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Productos } from '../../../models/productos';
-import { FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+//import { Productos } from '../../../models/productos';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-producto',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './crear-producto.component.html',
   styleUrl: './crear-producto.component.css'
 })
-export class CrearProductoComponent  implements OnInit {
+export class CrearProductoComponent {
  
-  TipoOro = '';
-  
-  f: FormGroup;
+  form!: FormGroup;
 
   constructor(
     private productoService: ProductoService,
     private toastr: ToastrService,
     private router: Router,
-    private formBuilder: FormBuilder
-    ) { 
-      this.f = this.formBuilder.group({
-        TipoOro: ['', Validators.required] 
-      });
-    }
+    ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.form = new FormGroup({
+      TipoOro: new FormControl('', [Validators.required])
+    });
   }
 
-  crearProducto(): void {
-    const producto = new Productos(this.TipoOro);
-    this.productoService.registrarProducto(producto).subscribe(
-      data => {
-        this.toastr.success('Producto Creado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
-        });
-        this.router.navigate(['/']);
-      },
-      err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
-        });
-        this.router.navigate(['/productos']);
-      }
-    );
+  get f(){
+    return this.form.controls;
+  }
+
+  crearProducto(){
+    console.log(this.form.value);
+    this.productoService.registrarProducto(this.form.value).subscribe((res:any) => {
+      this.toastr.success('Producto Creado', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+      this.router.navigate(['/productos']);
+    })
   }
 }
