@@ -35,7 +35,7 @@ export class UsuarioController {
     refresh(@Body() dto: TokenDto) {
         return this.usuarioService.refresh(dto);
     }
-
+ 
     @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard)
@@ -43,5 +43,5 @@ export class UsuarioController {
     @Post('perfil/:idUsuario')
     registrarPerfilUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PerfilDto) {
         return this.usuarioService.registrarPerfilUsuario(idUsuario, dto);
-    }
+    } 
 }

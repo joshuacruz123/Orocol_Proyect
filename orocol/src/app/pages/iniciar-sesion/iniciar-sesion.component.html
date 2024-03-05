@@ -9,19 +9,17 @@
             </ul>
         </nav>
     </header>
-    <form class="form" name="login" class="login" action="/login" method="post">
+    <form class="form login" (ngSubmit)="iniciarSesion()">
         <h1>Iniciar Sesión</h1>
         <label>Correo</label><br>
-        <input type="text" required placeholder="Correo electronico" pattern=".*\S+.*" title="Campo obligatorio" id="usuario" minlength="4" maxlength="20">
-        <span class="error-message" id="usuario-error">Campo obligatorio (4-20 caracteres)</span><br>
+        <input type="email" name="correoUsuario" [(ngModel)]="correoUsuario" required placeholder="Correo electrónico">
         
         <label>Contraseña</label><br>
-        <input type="password" required placeholder="Digite su contraseña" pattern=".*\S+.*" title="Campo obligatorio" id="contrasena" minlength="6" maxlength="15">
-        <span class="error-message" id="contrasena-error">Campo obligatorio (6-15 caracteres)</span><br>
-        
-        <button class="btn btn-dark btn-lg" type="submit">Ingresar <mat-icon>arrow_forward</mat-icon></button>
-    </form>
+        <input type="password" name="passwordUsuario" [(ngModel)]="passwordUsuario" required placeholder="Digite su contraseña">
+        <br/>
+        <button class="btn btn-dark btn-lg" type="submit">Iniciar sesión <mat-icon>arrow_forward</mat-icon></button>
+    </form>      
     
     <app-pie></app-pie>
 </body>
-<router-outlet />
+<router-outlet /> 

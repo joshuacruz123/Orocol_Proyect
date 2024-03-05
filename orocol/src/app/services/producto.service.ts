@@ -52,44 +52,6 @@ export class ProductoService {
         catchError(this.errorHandler)
       );
   }  
-  /*
-  public consultarProductos(): Observable<Productos[]> {
-    return this.http.get<Productos[]>(`${this.productosURL}`);
-  } 
-  
-  public registrarProducto(producto: Productos): Observable<any> {
-    return this.http.post<any>(`${this.productosURL}`, producto);
-  }
-  
-  public consultarProducto(IdProducto: number): Observable<Productos> {
-    return this.http.get<Productos>(`${this.productosURL}${IdProducto}`);
-  }
-  */
-
-  /*public editar(IdProducto: number, producto: Productos): Observable<any> {
-    return this.http.put<any>(`${this.productosURL}${IdProducto}`, producto);
-  } 
-  
-  public desactivarProducto(IdProducto: number, producto: Productos): Observable<any> {
-    return this.http.put<any>(this.productosURL + `desactivar/${IdProducto}`, producto);
-  }
-
-  public activarProducto(IdProducto: number, producto: Productos): Observable<any> {
-    return this.http.put<any>(this.productosURL + `activar/${IdProducto}`, producto);
-  }
-
-Failed to load resource: the server responded with a status of 400 (Bad Request)
-core.mjs:7473 ERROR Error Code: 400
-Message: Http failure response for http://localhost:8080/producto/desactivar/1: 400 Bad Request
-:8080/producto/activar/2:1 
-            
-Failed to load resource: the server responded with a status of 400 (Bad Request)
-core.mjs:7473 ERROR Error Code: 400
-Message: Http failure response for http://localhost:8080/producto/activar/2: 400 Bad Request
-
-http://localhost:8080/producto/desactivar/:IdProducto
-*/
-
 
   errorHandler(error:any) {
     let errorMessage = '';

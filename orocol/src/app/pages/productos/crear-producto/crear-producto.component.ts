@@ -37,7 +37,7 @@ export class CrearProductoComponent {
     console.log(this.form.value);
     this.productoService.registrarProducto(this.form.value).subscribe((res:any) => {
       this.toastr.success('Producto Creado', 'OK', {
-        timeOut: 3000, positionClass: 'toast-top-center'
+        timeOut: 3000
       });
       this.router.navigate(['/productos']);
     })

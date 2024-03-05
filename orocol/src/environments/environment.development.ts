@@ -1,13 +1,13 @@
 export const environment = {
-    // http://localhost:8080/usuario/
-    // http://localhost:8080/administrador/
-    // http://localhost:8080/minero/
-    // http://localhost:8080/turno/
-    // http://localhost:8080/novedad/
-    // http://localhost:8080/venta/
-    // http://localhost:8080/salida/
-    // http://localhost:8080/reportes/
-    // http://localhost:8080/compra/
     production: false,
-    productosURL: 'http://localhost:8080/producto/'
+    usuarioURL: 'http://localhost:3000/usuario/', 
+    adminURL: 'http://localhost:3000/administrador/',
+    mineroURL: 'http://localhost:3000/minero/',
+    productosURL: 'http://localhost:3000/producto/',
+    turnoURL: 'http://localhost:3000/turno/',
+    novedadURL: 'http://localhost:3000/novedad/',
+    ventaURL: 'http://localhost:3000/venta/',
+    salidaURL: 'http://localhost:3000/salida/',
+    reportesURL: 'http://localhost:3000/reportes/',
+    compraURL: 'http://localhost:3000/compra/'
 };

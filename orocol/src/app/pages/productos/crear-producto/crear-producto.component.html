@@ -4,7 +4,7 @@
     <form [formGroup]="form" (ngSubmit)="crearProducto()">
         <div class="form-group">
             <label for="TipoOro">Tipo de oro</label>
-            <input formControlName="TipoOro" id="TipoOro" class="form-control" type="text">
+            <input formControlName="TipoOro" id="TipoOro" class="form-control" type="text" autocomplete="off">
             <div *ngIf="f['TipoOro'].touched && f['TipoOro'].invalid" class="alert alert-danger">
                 <div *ngIf="f['TipoOro'].errors && f['TipoOro'].errors['required']">Diligenciar el tipo de producto.
                 </div>
@@ -15,7 +15,7 @@
 </div>
 <!--
 <div class="col-md-5">
-    <div class="card">
+    <div class="card"> 
         <div class="card-header">
             Agregar Producto
         </div>
