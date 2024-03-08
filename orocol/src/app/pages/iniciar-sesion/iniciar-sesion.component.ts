@@ -36,7 +36,7 @@ export class IniciarSesionComponent {
       },
       (error) => {
         console.error('Error:', error);
-      }
+      } 
     );
   }
 }

@@ -1,139 +1,37 @@
-<form>
-    <div class="form-group">
-        <label class="obligatorio">*Obligatorio</label>
-        <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
-        <div class="input-group">
+<form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
+    <label for="nombreUsuario">Nombre:</label>
+    <input type="text" id="nombreUsuario" formControlName="nombreUsuario">
 
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>person</mat-icon></font>
-                </span>
-            </div>
-            <input autocomplete="off" type="text" class="inputt" placeholder="Nombre" required="">
+    <label for="apellidosUsuario">Apellidos:</label>
+    <input type="text" id="apellidosUsuario" formControlName="apellidosUsuario">
 
-        </div>
+    <label for="correoUsuario">Correo Electrónico:</label>
+    <input type="email" id="correoUsuario" formControlName="correoUsuario">
 
-    </div>
+    <label for="passwordUsuario">Contraseña:</label>
+    <input type="password" id="passwordUsuario" formControlName="passwordUsuario">
 
-    <div class="form-group">
-        <label for="apellidosUsuario">Apellido(s)</label>
-        <div class="input-group">
+    <label for="tipo_documento">Tipo de Documento:</label>
+    <select id="tipo_documento" formControlName="tipo_documento">
+        <option value="Cedula de ciudadania">Cedula de ciudadania</option>
+        <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+    </select>
 
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>person</mat-icon></font>
-                </span>
-            </div>
-            <input autocomplete="off" class="inputt nobligatorio" type="text" placeholder="Apellido">
+    <label for="numero_documento">Número de Documento:</label>
+    <input type="number" id="numero_documento" formControlName="numero_documento">
 
-        </div>
+    <label for="telefono">Teléfono:</label>
+    <input type="number" id="telefono" formControlName="telefono">
 
-    </div>
+    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+    <input type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento">
 
-    <div class="form-group">
-        <label for="correoUsuario">Correo <font color="red">*</font></label>
-        <div class="input-group">
+    <label for="direccion_vivienda">Dirección de Vivienda:</label>
+    <input type="text" id="direccion_vivienda" formControlName="direccion_vivienda">
 
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>mail</mat-icon></font>
-                </span>
-            </div>
-            <input autocomplete="off" type="email" class="inputt" placeholder="Correo" required
-                placeholder="Correo electronico.">
+    <label>Cambio de Documento:</label>
+    <label><input type="radio" formControlName="cambio_documento" value="Acepto"> Acepto</label>
+    <label><input type="radio" formControlName="cambio_documento" value="No acepto"> No acepto</label>
 
-        </div>
-
-    </div>
-
-    <div class="form-group">
-        <label for="passwordUsuario">Contraseña <font color="red">*</font></label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>key</mat-icon></font>
-                </span>
-            </div>
-
-            <input autocomplete="off" type="password" class="inputt" placeholder="Crear contraseña" id="pwd" required="">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="pwd">Tipo de documento <font color="red">*</font></label>
-        <div class="input-group">
-            <span class="input-group-text bg-dark text-white">
-                <font color="white"><mat-icon>badge</mat-icon></font>
-            </span>
-                <select class="inputt form-select">
-                    <option selected>Seleccionar</option>
-                    <option value="1">Cédula de ciudadanía</option>
-                    <option value="2">Cédula de extranjería</option>
-                </select>
-        </div>
-
-    </div>
-
-    <div class="form-group">
-        <label for="pwd">Número de documento <font color="red">*</font></label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>assignment_ind</mat-icon></font>
-                </span>
-            </div>
-
-            <input autocomplete="off" type="number" class="inputt" placeholder="Número de documento" id="dc" required=""
-                name="registroNuDoc">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="pwd">Número de teléfono <font color="red">*</font></label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>phone_iphone</mat-icon></font>
-                </span>
-            </div>
-
-            <input autocomplete="off" type="tel" class="inputt" placeholder="Telefono coordinador" id="Telefono" required=""
-                name="registroNuDoc">
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label for="pwd">Fecha de nacimiento <font color="red">*</font></label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>calendar_month</mat-icon></font>
-                </span>
-            </div>
-
-            <input autocomplete="off" type="date" class="inputt" placeholder="Número telefónico" id="FN" required="" name="registroTel">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="usuario">Direccion de vivienda</label>
-        <div class="input-group">
-
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-white">
-                    <font color="white"><mat-icon>home_pin</mat-icon></font>
-                </span>
-            </div>
-            <input autocomplete="off" class="inputt nobligatorio" type="text" required placeholder="Direccion vivienda"
-                name="registroApellidoAd">
-
-        </div>
-
-    </div>
-    <br>
-    <div class="botones">
-        <button class="btn btn-primary btn-lg" type="submit" onclick="mensaje()">Registrarse <mat-icon>send</mat-icon></button>
-        <button class="btn btn-light active text-danger" type="reset">Borrar formulario</button>
-    </div>
+    <button type="submit" [disabled]="!registroForm.valid">Resgistrar</button>
 </form>

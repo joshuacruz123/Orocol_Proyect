@@ -1,4 +1,5 @@
-<form>
+<form (ngSubmit)="registrarUsuario()">
+
     <div class="form-group">
         <label class="obligatorio">*Obligatorio</label>
         <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
@@ -9,10 +10,8 @@
                     <font color="white"><mat-icon>person</mat-icon></font>
                 </span>
             </div>
-            <input autocomplete="off" type="text" class="inputt" placeholder="Nombre" required="">
-
+            <input autocomplete="off" type="text" class="inputt" placeholder="Nombre" required name="nombreUsuario" [(ngModel)]="nombreUsuario">
         </div>
-
     </div>
 
     <div class="form-group">
@@ -24,8 +23,8 @@
                     <font color="white"><mat-icon>person</mat-icon></font>
                 </span>
             </div>
-            <input autocomplete="off" class="inputt nobligatorio" type="text" placeholder="Apellido">
-
+            <input autocomplete="off" class="inputt nobligatorio" type="text" placeholder="Apellido" 
+                name="apellidosUsuario" [(ngModel)]="apellidosUsuario">
         </div>
 
     </div>
@@ -33,17 +32,14 @@
     <div class="form-group">
         <label for="correoUsuario">Correo <font color="red">*</font></label>
         <div class="input-group">
-
             <div class="input-group-prepend">
                 <span class="input-group-text bg-dark text-white">
                     <font color="white"><mat-icon>mail</mat-icon></font>
                 </span>
             </div>
             <input autocomplete="off" type="email" class="inputt" placeholder="Correo" required
-                placeholder="Correo electronico.">
-
+                placeholder="Correo electronico." name="correoUsuario" [(ngModel)]="correoUsuario">
         </div>
-
     </div>
 
     <div class="form-group">
@@ -55,7 +51,8 @@
                 </span>
             </div>
 
-            <input autocomplete="off" type="password" class="inputt" placeholder="Crear contraseña" id="pwd" required>
+            <input autocomplete="off" type="password" class="inputt" placeholder="Crear contraseña" id="pwd" 
+                required name="passwordUsuario" [(ngModel)]="passwordUsuario">
         </div>
     </div>
 
@@ -67,12 +64,13 @@
                     <font color="white"><mat-icon>home_repair_service</mat-icon></font>
                 </span>
             </div>
-            <input autocomplete="off" type="text" class="inputt" required placeholder="Tu cargo en la empresa" name="registroCargoAd">
+            <input autocomplete="off" type="text" class="inputt" required placeholder="Tu cargo en la empresa"
+                name="cargoAdmin" [(ngModel)]="cargoAdmin">
         </div>
     </div>
     <br>
     <div class="botones">
-        <button class="btn btn-primary btn-lg"  onclick="mensaje()">Registrarse <mat-icon>person_add</mat-icon></button>
+        <button class="btn btn-primary btn-lg" type="submit">Registrarse <mat-icon>person_add</mat-icon></button>
         <button class="btn btn-light active text-danger" type="reset">Borrar formulario</button>
     </div>
 </form> 

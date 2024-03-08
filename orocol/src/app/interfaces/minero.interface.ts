@@ -1,11 +1,11 @@
 import { UsuarioInterface } from "./usuario.interface";
 
 export interface MineroInterface extends UsuarioInterface {
-    IdMinero: number;
+    IdMinero?: number;
     tipo_documento: string;
-    numero_documento: number;
-    cambio_documento: string;
-    telefono: number;
-    fecha_nacimiento: Date;
+    numero_documento: null;
+    telefono: null;
+    fecha_nacimiento: null;
     direccion_vivienda: string;
+    cambio_documento: string;
 }
