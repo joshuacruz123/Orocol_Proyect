@@ -16,12 +16,13 @@ import { NovedadesComponent } from './pages/novedades/novedades.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
 import { IndicadoresFinancierosComponent } from './pages/indicadores-financieros/indicadores-financieros.component';
 import { CrearProductoComponent } from './pages/productos/crear-producto/crear-producto.component';
+import { LoginGuard } from './auth/guards/login.guard';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'manual_usuario', title: 'Manual de usuario', component: ManualUsuarioComponent},
-    {path: 'registro', title: 'Registro', component: RegistroComponent},
-    {path: 'iniciar_sesion', title: 'Iniciar sesión', component: IniciarSesionComponent},
+    {path: 'manual_usuario', title: 'Manual de usuario', component: ManualUsuarioComponent, canActivate: [LoginGuard]},
+    {path: 'registro', title: 'Registro', component: RegistroComponent, canActivate: [LoginGuard]},
+    {path: 'iniciar_sesion', title: 'Iniciar sesión', component: IniciarSesionComponent, canActivate: [LoginGuard]},
     {path: 'administrador', title: 'Administrador', component: AdministradorComponent},
     {path: 'minero', title: 'Minero', component: MineroComponent},
     {path: 'editar_administrador', title: 'Editar usuario', component: EditarAdministradorComponent},
@@ -37,5 +38,5 @@ export const routes: Routes = [
     {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent},
     //{path: '', title: '', component: },
     { path: '', redirectTo: '', pathMatch: 'full' },
-    { path: '**', redirectTo: '/iniciar_sesion' }
+    { path: '**', redirectTo: '/iniciar_sesion' } 
 ];

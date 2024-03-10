@@ -9,9 +9,9 @@
                     <li>
                         <a action="/#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
 
+                        <button class="btn btn-dark btn-lg" (click)="cerrar()">Cerrar sesión <mat-icon>arrow_forward</mat-icon></button>
                         <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
                             <a class="dropdown-item menuperfil cerrar" action="/editar_administrador">Perfil</a>
-                            <a class="dropdown-item menuperfil cerrar" action="/#">Salir</a>
                         </div>
                     </li>
                 </ul>
@@ -32,12 +32,20 @@
             <main class="main col">
                 <div class="row justify-content-center align-content-center text-center">
                     <div class="columna col-lg-6">
-                        <h1>Administrador Nombre completo completo completo</h1>
+                        <br>
+                        <br>
+                        <br>
+                        <h1>{{nombreUsuario}} {{apellidosUsuario}}</h1>
+                        <br>
+                        <ul>
+                            <li>{{correoUsuario}}</li>
+                            <li>{{estadoUsuario}}</li>
+                            <li>{{roles}}</li>
+                        </ul>
                         <br>
                         <br>
                         <br>
                         <br>
-                        <h3>Hola</h3>
                     </div>
                 </div>
 

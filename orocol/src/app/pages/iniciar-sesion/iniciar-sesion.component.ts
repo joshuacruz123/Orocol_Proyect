@@ -24,8 +24,8 @@ export class IniciarSesionComponent {
 
   constructor(
     private usuarioService: UsuarioService,
-    //private tokenService: TokenService,
-    private toastrService: ToastrService,
+    private tokenService: TokenService,
+    private toastr: ToastrService,
     private router: Router,
   ) { }
 
@@ -33,10 +33,20 @@ export class IniciarSesionComponent {
     this.usuarioService.login(this.correoUsuario, this.passwordUsuario).subscribe(
       (response) => {
         console.log('JWT:', response.token);
+        if (!response.token) {
+          this.toastr.error(response.error.message, 'Error', {
+            timeOut: 3000
+          });
+        } else {
+          this.tokenService.setToken(response.token);
+          this.router.navigate(['/administrador']);
+        }
       },
-      (error) => {
-        console.error('Error:', error);
-      } 
+      err => {
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000
+        });
+      }
     );
   }
 }

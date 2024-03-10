@@ -1,43 +1,52 @@
-import { Component, /*inject*/ } from '@angular/core';
+import { Component, OnInit, /*inject*/ } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router, RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-administrador',
   standalone: true,
-  imports: [MatIconModule, CommonModule, FormsModule, RouterOutlet],
+  imports: [MatIconModule, CommonModule, RouterOutlet, ReactiveFormsModule],
   templateUrl: './formulario-administrador.component.html',
   styleUrl: './formulario-administrador.component.css'
 })
-export class FormularioAdministradorComponent {
-
-  cargoAdmin: string ='';
-  nombreUsuario: string ='';
-  apellidosUsuario: string ='';
-  correoUsuario: string = '';
-  passwordUsuario: string = '';
+export class FormularioAdministradorComponent implements OnInit {
+  registroForm: FormGroup = new FormGroup({});
 
   constructor(
+    private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private toastr: ToastrService,
     private router: Router,
   ) {}
+
+  ngOnInit(): void {
+    this.registroForm = this.formBuilder.group({
+      cargoAdmin: ['', Validators.required],
+      nombreUsuario: ['', Validators.required],
+      apellidosUsuario: [''],
+      correoUsuario: ['', [Validators.required, Validators.email]],
+      passwordUsuario: ['', Validators.required]
+    });
+  }
   
   registrarUsuario() {
-    this.usuarioService.registrarAdministrador(this.cargoAdmin, this.nombreUsuario, this.apellidosUsuario, this.correoUsuario, this.passwordUsuario).subscribe(
-      (response) => {
-        this.toastr.success('Usuario creado', 'OK', {
-          timeOut: 3000
-        });
-        this.router.navigate(['/iniciar_sesion']);
-      },
-      (error) => {
-        console.error('Error:', error);
-      } 
-    );
+    if (this.registroForm.valid) {
+      this.usuarioService.registrarAdministrador(this.registroForm.value)
+        .subscribe(
+          response => {
+            this.router.navigate(['/iniciar_sesion']);
+            this.toastr.success('Usuario creado', 'OK', {
+              timeOut: 3000
+            });
+          },
+          error => {
+            console.error('Error al registrar usuario', error);
+          }
+        );
+    }
   }
 }

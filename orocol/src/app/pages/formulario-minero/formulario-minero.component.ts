@@ -33,7 +33,7 @@ export class FormularioMineroComponent implements OnInit {
       direccion_vivienda: ['', Validators.required],
       cambio_documento: ['', Validators.required],
       nombreUsuario: ['', Validators.required],
-      apellidosUsuario: ['', Validators.required],
+      apellidosUsuario: [''],
       correoUsuario: ['', [Validators.required, Validators.email]],
       passwordUsuario: ['', Validators.required]
     });
@@ -44,12 +44,14 @@ export class FormularioMineroComponent implements OnInit {
       this.usuarioService.registrarMinero(this.registroForm.value)
         .subscribe(
           response => {
-            console.log('Usuario registrado con éxito', response);
-            // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+            this.router.navigate(['/iniciar_sesion']);
+            this.toastr.success('Usuario creado', 'OK', {
+              timeOut: 3000
+            });
           },
           error => {
             console.error('Error al registrar usuario', error);
-            // Aquí puedes mostrar un mensaje de error al usuario
+            // Aquí puedes mostrar un mensaje de error al usuario si lo deseas
           }
         );
     }

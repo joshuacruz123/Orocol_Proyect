@@ -16,10 +16,6 @@ export class HomeComponent {
   
   constructor(private toastr: ToastrService) { }
 
-  mostrarToast() {
-    this.toastr.success('Este es un mensaje de éxito', 'Éxito');
-  }
-
   menuVariable: boolean = false;
 
   menu_icon_variable:boolean = false;

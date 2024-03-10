@@ -26,16 +26,8 @@ export class UsuarioService {
     return this.http.post(`${this.usuarioURL}refresh`, token);
   }
 
-  registrarAdministrador(cargoAdmin: string, nombreUsuario: string, apellidosUsuario: string, 
-    correoUsuario: string, passwordUsuario: string): Observable<any> {
-    const body = {
-      cargoAdmin: cargoAdmin,
-      nombreUsuario: nombreUsuario,
-      apellidosUsuario: apellidosUsuario,
-      correoUsuario: correoUsuario,
-      passwordUsuario: passwordUsuario
-    };
-    return this.http.post(this.adminURL, body);
+  registrarAdministrador (usuarioData: any) {
+    return this.http.post(this.adminURL, usuarioData);
   }
 
   registrarMinero (usuarioData: any) {
