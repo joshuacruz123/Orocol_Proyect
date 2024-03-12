@@ -11,11 +11,13 @@ export interface PayloadInterface {
 
 export interface AdministradorPayload {
     tipoRol: RolNombre.ADMINISTRADOR;
+    idAdmin: number;
     cargoAdmin: string;
 }
 
 export interface MineroPayload {
     tipoRol: RolNombre.MINERO;
+    IdMinero: number;
     tipo_documento: string;
     numero_documento: number;
     telefono: number;

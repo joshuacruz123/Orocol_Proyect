@@ -65,7 +65,7 @@ export class UsuarioService {
     async ingresarAlSistema(dto: LoginUsuarioDto): Promise<any> {
         const usuario = await this.usuarioRepository.findOne({
             where: { correoUsuario: dto.correoUsuario },
-            relations: ['roles'],
+            relations: ['roles', 'administrador', 'minero'],
         });
         if (!usuario) {
             throw new UnauthorizedException(new MessageDto('No existe ese usuario'));
@@ -80,13 +80,33 @@ export class UsuarioService {
         if (!usuario.roles || !usuario.roles.tipoRol) {
             throw new InternalServerErrorException(new MessageDto('Error al obtener el rol del usuario'))
         }
+        let camposEspecificos;
+        if (usuario.roles.tipoRol === RolNombre.ADMINISTRADOR && usuario.administrador) {
+            camposEspecificos = {
+                idAdmin: usuario.administrador.idAdmin,
+                cargoAdmin: usuario.administrador.cargoAdmin,
+            };
+        } else if (usuario.roles.tipoRol === RolNombre.MINERO && usuario.minero) {
+            camposEspecificos = {
+                IdMinero: usuario.minero.IdMinero,
+                tipo_documento: usuario.minero.tipo_documento,
+                numero_documento: usuario.minero.numero_documento,
+                cambio_documento: usuario.minero.cambio_documento,
+                telefono: usuario.minero.telefono,
+                fecha_nacimiento: usuario.minero.fecha_nacimiento,
+                direccion_vivienda: usuario.minero.direccion_vivienda,
+            };
+        } else {
+            throw new InternalServerErrorException(new MessageDto('Error al obtener los datos específicos del usuario'));
+        }
         const payload: PayloadInterface = {
             idUsuario: usuario.idUsuario,
             nombreUsuario: usuario.nombreUsuario,
             apellidosUsuario: usuario.apellidosUsuario,
             correoUsuario: usuario.correoUsuario,
             estadoUsuario: usuario.estadoUsuario,
-            roles: [usuario.roles.tipoRol as RolNombre], // Accedemos directamente a la propiedad roles
+            roles: [usuario.roles.tipoRol as RolNombre],
+            ...camposEspecificos, // Agregar campos específicos según el tipo de usuario
         };
         try {
             const token = await this.jwtService.sign(payload);
@@ -99,63 +119,34 @@ export class UsuarioService {
 
     async refresh(dto: TokenDto): Promise<any> {
         const usuario = await this.jwtService.decode(dto.token);
-        let payload: PayloadInterface; // Comprobar si el usuario tiene un rol específico
-        if (usuario.roles && usuario.roles.tipoRol) {
-            switch (usuario.roles.tipoRol) {
-                case RolNombre.ADMINISTRADOR:
-                    payload = {
-                        idUsuario: usuario.idUsuario,
-                        nombreUsuario: usuario.nombreUsuario,
-                        apellidosUsuario: usuario.apellidosUsuario,
-                        correoUsuario: usuario.correoUsuario,
-                        estadoUsuario: usuario.estadoUsuario,
-                        roles: {
-                            tipoRol: usuario.roles.tipoRol,
-                            cargoAdmin: usuario.administrador.cargoAdmin
-                        }
-                    };
-                    break;
-                case RolNombre.MINERO:
-                    payload = {
-                        idUsuario: usuario.idUsuario,
-                        nombreUsuario: usuario.nombreUsuario,
-                        apellidosUsuario: usuario.apellidosUsuario,
-                        correoUsuario: usuario.correoUsuario,
-                        estadoUsuario: usuario.estadoUsuario,
-                        roles: {
-                            tipoRol: usuario.roles.tipoRol,
-                            tipo_documento: usuario.minero.tipo_documento,
-                            numero_documento: usuario.minero.numero_documento,
-                            telefono: usuario.minero.telefono,
-                            fecha_nacimiento: usuario.fecha_nacimiento, 
-                            direccion_vivienda: usuario.direccion_vivienda, 
-                            cambio_documento: usuario.cambio_documento // cambio_documento
-                        }
-                    };
-                    break;
-                default: // Manejar otros roles o escenarios si es necesario
-                    payload = {
-                        idUsuario: usuario.idUsuario,
-                        nombreUsuario: usuario.nombreUsuario,
-                        apellidosUsuario: usuario.apellidosUsuario,
-                        correoUsuario: usuario.correoUsuario,
-                        estadoUsuario: usuario.estadoUsuario,
-                        roles: []
-                    };
-                    break;
+        let otrosCampos;
+        if(usuario[`roles`] === RolNombre.ADMINISTRADOR){
+            otrosCampos = {
+                idAdmin: usuario[`idAdmin`],
+                cargoAdmin: usuario[`cargoAdmin`]
             }
-        } else { // Si el usuario no tiene un rol específico, se asigna un arreglo vacío a roles
-            payload = {
-                idUsuario: usuario.idUsuario,
-                nombreUsuario: usuario.nombreUsuario,
-                apellidosUsuario: usuario.apellidosUsuario,
-                correoUsuario: usuario.correoUsuario,
-                estadoUsuario: usuario.estadoUsuario,
-                roles: []
-            };
+        } else if(usuario[`roles`] === RolNombre.MINERO){
+            otrosCampos = {
+                IdMinero: usuario['IdMinero'],
+                tipo_documento: usuario['tipo_documento'],
+                numero_documento: usuario['numero_documento'],
+                telefono: usuario['telefono'],
+                fecha_nacimiento: usuario['fecha_nacimiento'], 
+                direccion_vivienda: usuario['direccion_vivienda'], 
+                cambio_documento: usuario['cambio_documento']
+            }
+        }
+        const payload: PayloadInterface = {
+            idUsuario: usuario[`idUsuario`],
+            nombreUsuario: usuario[`nombreUsuario`],
+            apellidosUsuario: usuario[`apellidosUsuario`],
+            correoUsuario: usuario[`correoUsuario`],
+            estadoUsuario: usuario[`estadoUsuario`],
+            roles: usuario[`roles`],
+            ...otrosCampos,
         }
         const token = await this.jwtService.sign(payload);
-        return { token };
+        return {token};
     }
     // Método para encriptar datos del usuario al token
 

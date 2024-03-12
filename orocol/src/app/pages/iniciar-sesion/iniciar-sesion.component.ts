@@ -22,6 +22,8 @@ export class IniciarSesionComponent {
   correoUsuario: string = '';
   passwordUsuario: string = '';
 
+  roles: string ='';
+
   constructor(
     private usuarioService: UsuarioService,
     private tokenService: TokenService,
@@ -39,7 +41,13 @@ export class IniciarSesionComponent {
           });
         } else {
           this.tokenService.setToken(response.token);
-          this.router.navigate(['/administrador']);
+          const rolUsuario = this.tokenService.isRoles();
+          const rol = this.roles = rolUsuario.roles;
+          if (rol.indexOf('Minero') >= 0) {
+            this.router.navigate(['/minero']);
+          } else if (rol.indexOf('Administrador') >= 0) {
+            this.router.navigate(['/administrador']);
+          }
         }
       },
       err => {
@@ -48,5 +56,5 @@ export class IniciarSesionComponent {
         });
       }
     );
-  }
+  }  
 }

@@ -9,7 +9,7 @@ import { NovedadEntity } from '../novedad/novedad.entity';
 @Entity({ name: 'Mineros' })
 export class MineroEntity { 
   @PrimaryGeneratedColumn('increment')
-  IdMinero: number;
+  IdMinero: number; 
 
   @Column({type: 'varchar', length: 30, nullable: false})
   tipo_documento: TipoDocumento;

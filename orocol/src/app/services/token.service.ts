@@ -49,19 +49,30 @@ export class TokenService {
   logOut(): void {
     localStorage.clear();
   }
-  /*
+  
   isAdmin(): boolean {
     if (!this.isLogged()) {
-      return null;
+      return false; 
     }
     const token = this.getToken();
     const payload = token.split('.')[1];
     const values = atob(payload);
     const valuesJson = JSON.parse(values);
     const roles = valuesJson.roles;
-    if (roles.indexOf('admin') < 0) {
+    if (roles.indexOf('Administrador') < 0) {
       return false;
     }
     return true;
-  } */
+  } 
+
+  isRoles() {
+    const token = this.getToken();
+    const payload = token.split('.')[1];
+    const values = atob(payload);
+    const valuesJson = JSON.parse(values);
+    const roles = valuesJson.roles;
+    return {
+      roles: valuesJson.roles
+    };
+  }
 } 
