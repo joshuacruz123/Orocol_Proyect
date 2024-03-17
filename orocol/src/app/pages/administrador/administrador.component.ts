@@ -15,29 +15,32 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdministradorComponent implements OnInit{
 
+  idUsuario!: number | undefined;
   nombreUsuario: string ='';
   apellidosUsuario: string ='';
   correoUsuario: string ='';
   estadoUsuario: string ='';
   roles: string ='';
+  idAdmin!: number | undefined;
+  cargoAdmin: string ='';
 
-  //isLogged: boolean; // Error: Property 'isLogged' has no initializer and is not definitely assigned in the constructor.ts(2564) (property) AdministradorComponent.isLogged: boolean
 
   constructor(
     private tokenService: TokenService,
     private router: Router
-  ) { 
-    //this.isLogged = false;
-  }
+  ) { }
 
   ngOnInit(): void {
     const user = this.tokenService.getUser();
       if (user) {
+        this.idUsuario = user.idUsuario;
         this.nombreUsuario = user.nombreUsuario || '';
         this.apellidosUsuario = user.apellidosUsuario || '';
         this.correoUsuario = user.correoUsuario || '';
         this.estadoUsuario = user.estadoUsuario || '';
         this.roles = user.roles || '';
+        this.idAdmin = user.idAdmin;
+        this.cargoAdmin = user.cargoAdmin || '';
       }
     //this.isLogged = this.tokenService.isLogged();
   }

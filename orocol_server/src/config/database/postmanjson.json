@@ -96,7 +96,10 @@
     {"correoUsuario": "Anders@gmail.com", "passwordUsuario": "046543h1", "rol": "Minero"},
     {"correoUsuario": "FelipeMZ@gmail.com", "passwordUsuario": "235687XXX", "rol": "Administrador"},
     {"correoUsuario": "BrentP@gmail.com", "passwordUsuario": "46432132q", "rol": "Minero"},
-    {"correoUsuario": "alexisGe@gmail.com", "passwordUsuario": "slpk1245Z", "rol": "Administrador"}
+    {"correoUsuario": "alexisGe@gmail.com", "passwordUsuario": "slpk1245Z", "rol": "Administrador"},
+    {"correoUsuario": "joshuacruz@gmail.com", "passwordUsuario": "JoshuaDeveloper2506", "rol": "Minero"},
+    
+    {"correoUsuario": "amcruzf04@gmail.com", "passwordUsuario": "ajskahdjsjs", "rol": "Administrador"}
 ],
   
   "turnominero": [

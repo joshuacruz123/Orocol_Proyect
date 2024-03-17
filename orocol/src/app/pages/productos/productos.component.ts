@@ -6,13 +6,11 @@ import { ProductoService } from '../../services/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductosInterface } from '../../interfaces/producto.interface';
-import { interceptorProvider } from '../../auth/interceptor/rutas.interceptor';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, MatIconModule, PieComponent],
-  providers: [interceptorProvider],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 }) 

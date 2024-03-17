@@ -23,12 +23,22 @@ export class TokenService {
   }
 
   getUser(): { 
+    idUsuario: number;
     nombreUsuario: string;
     apellidosUsuario: string;
     correoUsuario: string;
     estadoUsuario: string;
-    roles: string;
-  } | null { 
+    roles: string; 
+    idAdmin?: number;
+    cargoAdmin?: string;
+    IdMinero?: number; // Make IdMinero optional
+    tipo_documento?: string;
+    numero_documento?: number;
+    telefono?: number;
+    fecha_nacimiento?: Date;
+    direccion_vivienda?: string;
+    cambio_documento?: string;
+  } | null {
     if (!this.isLogged()) {
       return null;
     }
@@ -36,12 +46,31 @@ export class TokenService {
     const payload = token.split('.')[1];
     const values = atob(payload);
     const valuesJson = JSON.parse(values);
+    let camposEspecificos;
+    if (valuesJson.roles.indexOf('Minero') >= 0) {
+      camposEspecificos = {
+        IdMinero: valuesJson.IdMinero,
+        tipo_documento: valuesJson.tipo_documento,
+        numero_documento: valuesJson.numero_documento,
+        cambio_documento: valuesJson.cambio_documento,
+        telefono: valuesJson.telefono,
+        fecha_nacimiento: valuesJson.fecha_nacimiento,
+        direccion_vivienda: valuesJson.direccion_vivienda,
+    };
+    } else if (valuesJson.roles.indexOf('Administrador') >= 0) {
+      camposEspecificos = {
+        idAdmin: valuesJson.idAdmin,
+        cargoAdmin: valuesJson.cargoAdmin,
+    };
+    }
     const datosUsuario = {
+      idUsuario: valuesJson.idUsuario,
       nombreUsuario: valuesJson.nombreUsuario,
       apellidosUsuario: valuesJson.apellidosUsuario,
       correoUsuario: valuesJson.correoUsuario,
       estadoUsuario: valuesJson.estadoUsuario,
-      roles: valuesJson.roles
+      roles: valuesJson.roles,
+      ...camposEspecificos
     };
     return datosUsuario;
   }
