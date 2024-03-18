@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { PieComponent } from '../pie/pie.component';
+import { PieComponent } from '../../shared/footer/pie.component';
 import { ProductosComponent } from '../productos/productos.component';
-import { TokenService } from '../../services/token.service';
+import { TokenService } from '../../core/services/token.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

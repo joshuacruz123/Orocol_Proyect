@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PieComponent } from '../pie/pie.component';
-import { FormularioAdministradorComponent } from '../formulario-administrador/formulario-administrador.component';
-import { FormularioMineroComponent } from '../formulario-minero/formulario-minero.component';
+import { PieComponent } from '../../shared/footer/pie.component';
+import { FormularioAdministradorComponent } from './formulario-administrador/formulario-administrador.component';
+import { FormularioMineroComponent } from './formulario-minero/formulario-minero.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

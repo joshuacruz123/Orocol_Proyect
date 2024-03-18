@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { PieComponent } from '../pie/pie.component';
-import { ProductoService } from '../../services/producto.service';
+import { PieComponent } from '../../shared/footer/pie.component';
+import { ProductoService } from '../../core/services/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
-import { ProductosInterface } from '../../interfaces/producto.interface';
+import { ProductosInterface } from '../../core/interfaces/producto.interface';
 
 @Component({
   selector: 'app-productos',

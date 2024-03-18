@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductoService } from '../../../services/producto.service';
+import { ProductoService } from '../../../core/services/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 //import { Productos } from '../../../models/productos';

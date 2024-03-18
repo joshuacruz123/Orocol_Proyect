@@ -16,7 +16,7 @@ import { NovedadesComponent } from './pages/novedades/novedades.component';
 import { TurnosComponent } from './pages/turnos/turnos.component';
 import { IndicadoresFinancierosComponent } from './pages/indicadores-financieros/indicadores-financieros.component';
 import { CrearProductoComponent } from './pages/productos/crear-producto/crear-producto.component';
-import { LoginGuard } from './auth/guards/login.guard';
+import { LoginGuard } from './core/guards/login.guard';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},

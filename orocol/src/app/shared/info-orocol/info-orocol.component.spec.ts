@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrocolComponent } from './orocol.component';
+import { InfoOrocolComponent } from './info-orocol.component';
 
-describe('OrocolComponent', () => {
-  let component: OrocolComponent;
-  let fixture: ComponentFixture<OrocolComponent>;
+describe('InfoOrocolComponent', () => {
+  let component: InfoOrocolComponent;
+  let fixture: ComponentFixture<InfoOrocolComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrocolComponent]
+      imports: [InfoOrocolComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(OrocolComponent);
+    fixture = TestBed.createComponent(InfoOrocolComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

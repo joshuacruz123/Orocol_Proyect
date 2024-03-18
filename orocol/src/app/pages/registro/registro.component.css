@@ -53,8 +53,8 @@
 body{
   height: 1600px; 
   background: #fceabb; 
-  background: -webkit-linear-gradient(to right, #f8b500, #fceabb);  
-  background: linear-gradient(to right, #f8b500, #fceabb);
+  background: -webkit-linear-gradient(to bottom, #faebc7, #ffbb00);  
+  background: linear-gradient(to bottom, #faebc7, #ffbb00);
 }
 
 .div-titulo{
@@ -85,7 +85,7 @@ body{
     width: 60%;
     height: 135%;
     margin: 15px 15px;
-    background-color: #000000cd; 
+    background-color: #000000d7; 
     flex-direction: column;
     justify-content: center;
     align-items: center;

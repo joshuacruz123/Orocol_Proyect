@@ -15,10 +15,10 @@
         </div>
         <div class="menu" [class.menuClass]="menuVariable">
           <ul>
-            <li><a routerLink="/">¿Quienes somos?</a></li>
-            <li><a routerLink="/manual_usuario"><mat-icon>description</mat-icon> Manual Usuario</a></li>
+            <li><a routerLink="/" (click)="openDialog()">¿Quienes somos?</a></li>
+            <li><a routerLink="/manual_usuario"><mat-icon>description</mat-icon> Manual usuario</a></li>
             <li><a routerLink="/registro"><mat-icon>person_add</mat-icon> Registrarse</a></li>
-            <li><a routerLink="/iniciar_sesion"><mat-icon>login</mat-icon> Iniciar Sesión</a></li>
+            <li><a routerLink="/iniciar_sesion"><mat-icon>login</mat-icon> Iniciar sesión</a></li>
           </ul>
           <img class="imagenlogo" src="/assets/images/orocol.png" alt="Orocol" />
         </div>

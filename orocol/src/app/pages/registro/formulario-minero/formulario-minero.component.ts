@@ -1,19 +1,20 @@
-import { Component, OnInit, /*inject*/ } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { UsuarioService } from '../../services/usuario.service';
+import { ToastrService } from 'ngx-toastr';
+import { UsuarioService } from '../../../core/services/usuario.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MineroInterface } from '../../../core/interfaces/minero.interface';
 
 @Component({
-  selector: 'app-formulario-administrador',
+  selector: 'app-formulario-minero',
   standalone: true,
   imports: [MatIconModule, CommonModule, RouterOutlet, ReactiveFormsModule],
-  templateUrl: './formulario-administrador.component.html',
-  styleUrl: './formulario-administrador.component.css'
+  templateUrl: './formulario-minero.component.html',
+  styleUrl: './formulario-minero.component.css'
 })
-export class FormularioAdministradorComponent implements OnInit {
+export class FormularioMineroComponent implements OnInit {
   registroForm: FormGroup = new FormGroup({});
 
   constructor(
@@ -25,7 +26,12 @@ export class FormularioAdministradorComponent implements OnInit {
 
   ngOnInit(): void {
     this.registroForm = this.formBuilder.group({
-      cargoAdmin: ['', Validators.required],
+      tipo_documento: ['', Validators.required],
+      numero_documento: ['', Validators.required],
+      telefono: ['', Validators.required],
+      fecha_nacimiento: ['', Validators.required],
+      direccion_vivienda: ['', Validators.required],
+      cambio_documento: ['', Validators.required],
       nombreUsuario: ['', Validators.required],
       apellidosUsuario: [''],
       correoUsuario: ['', [Validators.required, Validators.email]],
@@ -35,7 +41,7 @@ export class FormularioAdministradorComponent implements OnInit {
   
   registrarUsuario() {
     if (this.registroForm.valid) {
-      this.usuarioService.registrarAdministrador(this.registroForm.value)
+      this.usuarioService.registrarMinero(this.registroForm.value)
         .subscribe(
           response => {
             this.router.navigate(['/iniciar_sesion']);
@@ -45,6 +51,7 @@ export class FormularioAdministradorComponent implements OnInit {
           },
           error => {
             console.error('Error al registrar usuario', error);
+            // Aquí puedes mostrar un mensaje de error al usuario si lo deseas
           }
         );
     }
