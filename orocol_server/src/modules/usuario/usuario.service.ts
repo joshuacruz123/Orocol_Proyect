@@ -84,27 +84,16 @@ export class UsuarioService {
         if (usuario.roles.tipoRol === RolNombre.ADMINISTRADOR && usuario.administrador) {
             camposEspecificos = {
                 idAdmin: usuario.administrador.idAdmin,
-                cargoAdmin: usuario.administrador.cargoAdmin,
             };
         } else if (usuario.roles.tipoRol === RolNombre.MINERO && usuario.minero) {
             camposEspecificos = {
                 IdMinero: usuario.minero.IdMinero,
-                tipo_documento: usuario.minero.tipo_documento,
-                numero_documento: usuario.minero.numero_documento,
-                cambio_documento: usuario.minero.cambio_documento,
-                telefono: usuario.minero.telefono,
-                fecha_nacimiento: usuario.minero.fecha_nacimiento,
-                direccion_vivienda: usuario.minero.direccion_vivienda,
             };
         } else {
             throw new InternalServerErrorException(new MessageDto('Error al obtener los datos específicos del usuario'));
         }
         const payload: PayloadInterface = {
             idUsuario: usuario.idUsuario,
-            nombreUsuario: usuario.nombreUsuario,
-            apellidosUsuario: usuario.apellidosUsuario,
-            correoUsuario: usuario.correoUsuario,
-            estadoUsuario: usuario.estadoUsuario,
             roles: [usuario.roles.tipoRol as RolNombre],
             ...camposEspecificos, // Agregar campos específicos según el tipo de usuario
         };
@@ -120,35 +109,24 @@ export class UsuarioService {
     async refresh(dto: TokenDto): Promise<any> {
         const usuario = await this.jwtService.decode(dto.token);
         let otrosCampos;
-        if(usuario[`roles`] === RolNombre.ADMINISTRADOR){
+        if(usuario['roles'][0] === RolNombre.ADMINISTRADOR){
             otrosCampos = {
-                idAdmin: usuario[`idAdmin`],
-                cargoAdmin: usuario[`cargoAdmin`]
+                idAdmin: usuario['idAdmin']
             }
-        } else if(usuario[`roles`] === RolNombre.MINERO){
+        } else if(usuario['roles'][0] === RolNombre.MINERO){
             otrosCampos = {
-                IdMinero: usuario['IdMinero'],
-                tipo_documento: usuario['tipo_documento'],
-                numero_documento: usuario['numero_documento'],
-                telefono: usuario['telefono'],
-                fecha_nacimiento: usuario['fecha_nacimiento'], 
-                direccion_vivienda: usuario['direccion_vivienda'], 
-                cambio_documento: usuario['cambio_documento']
+                IdMinero: usuario['IdMinero']
             }
         }
         const payload: PayloadInterface = {
-            idUsuario: usuario[`idUsuario`],
-            nombreUsuario: usuario[`nombreUsuario`],
-            apellidosUsuario: usuario[`apellidosUsuario`],
-            correoUsuario: usuario[`correoUsuario`],
-            estadoUsuario: usuario[`estadoUsuario`],
-            roles: usuario[`roles`],
+            idUsuario: usuario['idUsuario'],
+            roles: usuario['roles'],
             ...otrosCampos,
         }
         const token = await this.jwtService.sign(payload);
         return {token};
-    }
-    // Método para encriptar datos del usuario al token
+    }    
+    // Método para refrescar el token del usuario
 
     async registrarPerfilUsuario(idUsuario: number, dto: PerfilDto): Promise<MessageDto> {
         const usuario: UsuarioEntity = await this.usuarioRepository.findOne({ where: { idUsuario } }); // Obtener la entrada de venta

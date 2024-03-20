@@ -1,7 +1,7 @@
 import { Component, OnInit, /*inject*/ } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
-import { UsuarioService } from '../../../core/services/usuario.service';
+import { UsuarioService } from '../../../../core/services/usuario.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';

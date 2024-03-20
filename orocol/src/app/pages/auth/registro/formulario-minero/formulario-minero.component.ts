@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
-import { UsuarioService } from '../../../core/services/usuario.service';
+import { UsuarioService } from '../../../../core/services/usuario.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MineroInterface } from '../../../core/interfaces/minero.interface';
+import { MineroInterface } from '../../../../core/interfaces/minero.interface';
 
 @Component({
   selector: 'app-formulario-minero',

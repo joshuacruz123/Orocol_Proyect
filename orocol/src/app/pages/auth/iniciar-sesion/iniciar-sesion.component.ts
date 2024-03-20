@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { PieComponent } from '../../shared/footer/pie.component';
+import { PieComponent } from '../../../shared/footer/pie.component';
 import { MatIconModule } from '@angular/material/icon';
-import { UsuarioService } from '../../core/services/usuario.service';
+import { UsuarioService } from '../../../core/services/usuario.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { TokenService } from '../../core/services/token.service';
+import { TokenService } from '../../../core/services/token.service';
 import { ToastrService } from 'ngx-toastr';
-import { LoginUsuarioDto } from '../../core/models/login-usuarios.dto';
+import { LoginUsuarioDto } from '../../../core/models/login-usuarios.dto';
 
 @Component({
   selector: 'app-iniciar-sesion',

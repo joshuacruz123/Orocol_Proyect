@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row justify-content-center align-content-center">
+        <div class="col-8 barra">
+            <li><a action="/Administrador"><img src="/assets/images/logo-orocol.jpg" alt="" class="logo" ></a></li>
+        </div>
+        <div class="col-4 text-right barra">
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a action="/#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
+
+                    <button class="btn btn-dark btn-lg" (click)="cerrar()">Cerrar sesión <mat-icon>arrow_forward</mat-icon></button>
+                    <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+                        <a class="dropdown-item menuperfil cerrar" action="/editar_administrador">Perfil</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

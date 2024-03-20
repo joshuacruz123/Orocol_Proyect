@@ -2,49 +2,49 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../../shared/footer/pie.component';
-import { ProductosComponent } from '../productos/productos.component';
 import { TokenService } from '../../core/services/token.service';
 import { MatIconModule } from '@angular/material/icon';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { NavAdminComponent } from '../../shared/navbar-usuarios/nav-admin.component';
+import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
 
 @Component({
   selector: 'app-administrador',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PieComponent, ProductosComponent, RouterLink, MatIconModule],
+  imports: [CommonModule, EncabezadoComponent, PieComponent, NavAdminComponent, MatIconModule, RouterLink, RouterOutlet],
   templateUrl: './administrador.component.html',
   styleUrl: './administrador.component.css'
 })
 export class AdministradorComponent implements OnInit{
 
-  idUsuario!: number | undefined;
-  nombreUsuario: string ='';
-  apellidosUsuario: string ='';
-  correoUsuario: string ='';
-  estadoUsuario: string ='';
-  roles: string ='';
-  idAdmin!: number | undefined;
-  cargoAdmin: string ='';
-
+  administrador: any;
 
   constructor(
+    public usuarioService: UsuarioService,
     private tokenService: TokenService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    // Obtener el idAdmin del usuario actual
     const user = this.tokenService.getUser();
-      if (user) {
-        this.idUsuario = user.idUsuario;
-        this.nombreUsuario = user.nombreUsuario || '';
-        this.apellidosUsuario = user.apellidosUsuario || '';
-        this.correoUsuario = user.correoUsuario || '';
-        this.estadoUsuario = user.estadoUsuario || '';
-        this.roles = user.roles || '';
-        this.idAdmin = user.idAdmin;
-        this.cargoAdmin = user.cargoAdmin || '';
-      }
-    //this.isLogged = this.tokenService.isLogged();
+    if (user && user.idAdmin) {
+      const idAdmin = user.idAdmin;
+      // Llamar al método consultarAdministrador para obtener los datos del administrador
+      this.usuarioService.consultarAdministrador(idAdmin).subscribe(
+        (data) => {
+          // Asignar los datos del administrador obtenidos a la variable administrador
+          this.administrador = data;
+        },
+        (error) => {
+          console.error('Error al obtener los datos del administrador:', error);
+        }
+      );
+    } else {
+      console.error('El usuario actual no es un administrador.');
+    }
   }
-
+    
   cerrar(): void {
     this.tokenService.logOut();
     this.router.navigate(['/iniciar_sesion'])

@@ -34,7 +34,7 @@ header {
 
 .menu ul li {
   list-style-type: none;
-  display: inline-block;
+  display: inline-block; 
   margin-left: 24px;
 }
 

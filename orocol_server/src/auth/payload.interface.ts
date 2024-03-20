@@ -2,26 +2,16 @@ import { RolNombre } from "src/modules/rol/rol.enum";
 
 export interface PayloadInterface {
     idUsuario: number;
-    nombreUsuario: string;
-    apellidosUsuario: string;
     correoUsuario: string;
-    estadoUsuario: string;
     roles: AdministradorPayload | MineroPayload | RolNombre[];
 } 
 
 export interface AdministradorPayload {
     tipoRol: RolNombre.ADMINISTRADOR;
     idAdmin: number;
-    cargoAdmin: string;
 }
 
 export interface MineroPayload {
     tipoRol: RolNombre.MINERO;
     IdMinero: number;
-    tipo_documento: string;
-    numero_documento: number;
-    telefono: number;
-    fecha_nacimiento: Date;
-    direccion_vivienda: string;
-    cambio_documento: string;
 }

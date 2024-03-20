@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, /*ElementRef, ViewChild*/ } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../../shared/footer/pie.component';
@@ -10,7 +10,7 @@ import { InfoOrocolComponent } from '../../shared/info-orocol/info-orocol.compon
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PieComponent, NgOptimizedImage, RouterLink, MatIconModule, MatDialogModule],
+  imports: [CommonModule, RouterOutlet, PieComponent, RouterLink, MatIconModule, MatDialogModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
