@@ -1,0 +1,51 @@
+.logo {
+    max-width: 22rem;
+    margin-left: 4px;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem;
+    background-color: #010101;
+  }
+  
+  .listaMenu {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .listaMenu li a {
+    text-decoration: none;
+    color: rgb(206, 227, 247);
+    font-size: 25px;
+    margin-left: 12px;
+  }
+
+  .listaMenu li a:hover {
+    color: rgb(220, 255, 46);
+  }
+  
+  .abrirMenu, .cerrarMenu {
+    display: none;
+  }
+  
+  p {
+    margin: 15px;
+    padding: 15px;
+    font-size: 20px;
+  }
+  
+  @media only screen and (max-width: 912px) {
+    .logo {
+      max-width: 12rem;
+      margin-left: 2px;
+    }
+
+    .listaMenu li a {
+        font-size: 15px;
+        margin-left: 8px;
+    } 
+  }

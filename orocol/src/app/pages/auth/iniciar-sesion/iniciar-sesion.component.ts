@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { PieComponent } from '../../../shared/footer/pie.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UsuarioService } from '../../../core/services/usuario.service';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { TokenService } from '../../../core/services/token.service';
 import { ToastrService } from 'ngx-toastr';
-import { LoginUsuarioDto } from '../../../core/models/login-usuarios.dto';
+import { RegresarHomeComponent } from '../../../shared/regresar-home/regresar-home.component';
 
 @Component({
   selector: 'app-iniciar-sesion',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, PieComponent, MatIconModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, PieComponent, RegresarHomeComponent, MatIconModule],
   templateUrl: './iniciar-sesion.component.html',
   styleUrl: './iniciar-sesion.component.css'
 })

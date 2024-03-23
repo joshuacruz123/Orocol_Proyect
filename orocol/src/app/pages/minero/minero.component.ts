@@ -2,14 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../../shared/footer/pie.component';
+import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
+import { NavMineroComponent } from '../../shared/navbar-usuarios/nav-minero.component';
 import { MatIconModule } from '@angular/material/icon';
+
 import { TokenService } from '../../core/services/token.service';
 import { UsuarioService } from '../../core/services/usuario.service';
 
 @Component({
   selector: 'app-minero',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PieComponent, RouterLink, MatIconModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavMineroComponent, PieComponent, MatIconModule],
   templateUrl: './minero.component.html',
   styleUrl: './minero.component.css'
 })

@@ -1,20 +1,35 @@
-<br>
-<br>
-<br>
-<h2>Datos del minero {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</h2>
-<ul>
-    <li><strong>Correo:</strong> {{ minero.usuario.correoUsuario }}</li>
-    <li><strong>Estado:</strong> {{ minero.usuario.estadoUsuario }}</li>
-    <li><strong>Tipo de documento:</strong> {{ minero.tipo_documento }}</li>
-    <li><strong>Número de documento:</strong> {{ minero.numero_documento }}</li>
-    <li><strong>Número de teléfono:</strong> {{ minero.telefono }}</li>
-    <li><strong>Fecha de nacimiento:</strong> {{ minero.fecha_nacimiento }}</li>
-    <li><strong>Dirección de vivienda:</strong> {{ minero.direccion_vivienda }}</li>
-    <li><strong>Cambio de documento:</strong> {{ minero.cambio_documento }}</li>
-</ul>
-<br>
-<br>
-<br>
-<br>
-<button class="btn btn-dark btn-lg" (click)="cerrar()">Cerrar sesión <mat-icon>arrow_forward</mat-icon></button>
+<body>
+    <app-encabezado></app-encabezado>
+        <div class="row">
+            <div class="barra-lateral col-6 col-sm-auto">
+                <app-nav-minero></app-nav-minero>
+            </div>
+            <main class="main col">
+                <div class="row justify-content-center align-content-center text-center">
+                    <div class="columna col-lg-6">
+                        <br>
+                        <br>
+                        <br> 
+                        <br> 
+                        <h2>Datos del minero {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</h2>
+                        <ul>
+                            <li><strong>Correo:</strong> {{ minero.usuario.correoUsuario }}</li>
+                            <li><strong>Estado:</strong> {{ minero.usuario.estadoUsuario }}</li>
+                            <li><strong>Tipo de documento:</strong> {{ minero.tipo_documento }}</li>
+                            <li><strong>Número de documento:</strong> {{ minero.numero_documento }}</li>
+                            <li><strong>Número de teléfono:</strong> {{ minero.telefono }}</li>
+                            <li><strong>Fecha de nacimiento:</strong> {{ minero.fecha_nacimiento }}</li>
+                            <li><strong>Dirección de vivienda:</strong> {{ minero.direccion_vivienda }}</li>
+                            <li><strong>Cambio de documento:</strong> {{ minero.cambio_documento }}</li>
+                        </ul> 
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </main> 
+        </div> 
+    <app-pie></app-pie>
+</body>
 <router-outlet />

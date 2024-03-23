@@ -1,6 +1,10 @@
 /* @import "~bootstrap/dist/css/bootstrap.min.css"; */
 @import 'ngx-toastr/toastr';
 
+header {
+  width: 100%;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
 
@@ -25,8 +29,9 @@ body { margin: 0; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Gran
   box-shadow: 0px 0px 15px 5px rgb(229, 249, 12);
 }
 
-.btn-dark:hover {
-  box-shadow: 0px 0px 10px 5px rgb(229, 249, 12);
+.btn-dark:hover, .btn-outline-dark:hover {
+  box-shadow: 0px 0px 5px 2px rgb(229, 249, 12);
+  color: rgb(229, 249, 12);
 }
 
 .btn-success:hover {
@@ -49,4 +54,33 @@ button {
 
 mat-icon {
   padding-top: 3px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
+/* Menú de opciones de usuario logueado */
+.barra-lateral {
+  background: #010101;
+  color: #fff;
+  min-width: 250px;
+  min-height: 100vh;
+  padding: 0;
+}
+
+@media screen and (max-width:1300px) {
+  .barra-lateral {
+      min-width: auto;
+  }
+}
+
+@media screen and (max-width:575px) {
+  .barra-lateral {
+      min-height: auto;
+  }
+}
+
+@media screen and (max-width:575px) {
+  .barra-lateral {
+      height: auto;
+  }
+}
+/* fin */

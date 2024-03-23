@@ -116,6 +116,37 @@ form div select{
     color: white;
 }
 
+form .form-group .input-group select{
+    width: 80%;
+    padding-left: 15px;
+    background-color: transparent;
+    color:#ffffff;
+    border: none;
+    outline: 0px;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+form .form-group .input-group select::placeholder{
+    color: #c7c7c7;
+}
+
+form .form-group .input-group select:hover{
+    content: '';
+    width: 80%;
+    padding-left: 15px;
+    border-bottom: 1px solid #ffb700;
+    transition: all 2s ease;
+}
+
+form .form-group .input-group select option {
+    background-color: transparent;
+}
+
+form .form-group .input-group select:focus, 
+form .form-group .input-group select:valid{
+    border-bottom: 1px solid #ffb700;
+}
+
 div{
     background-color: transparent;
 }

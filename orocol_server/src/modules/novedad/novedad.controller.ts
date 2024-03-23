@@ -50,5 +50,5 @@ export class NovedadController {
     @Delete(':idNovedad')
     async eliminarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number){
         return await this.novedadService.eliminarNovedad(idNovedad)
-    }
+    } 
 }

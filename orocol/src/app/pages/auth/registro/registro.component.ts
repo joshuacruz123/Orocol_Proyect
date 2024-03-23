@@ -6,11 +6,12 @@ import { PieComponent } from '../../../shared/footer/pie.component';
 import { FormularioAdministradorComponent } from './formulario-administrador/formulario-administrador.component';
 import { FormularioMineroComponent } from './formulario-minero/formulario-minero.component';
 import { MatIconModule } from '@angular/material/icon';
+import { RegresarHomeComponent } from '../../../shared/regresar-home/regresar-home.component';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule, MatIconModule, PieComponent, FormularioAdministradorComponent, FormularioMineroComponent],
+  imports: [CommonModule, RouterOutlet, FormsModule, MatIconModule, RegresarHomeComponent, PieComponent, FormularioAdministradorComponent, FormularioMineroComponent],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })

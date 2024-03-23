@@ -37,7 +37,7 @@ export class MineroService {
     async consultarMinero(IdMinero: number): Promise<MineroEntity> {
         const minero = await this.mineroRepository.findOne({
             where: { IdMinero: IdMinero },
-            relations: ['usuario.roles', 'usuario.perfil'],
+            relations: ['usuario.roles'],
         }); 
         if (!minero) {
             throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);

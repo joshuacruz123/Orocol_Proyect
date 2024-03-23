@@ -1,14 +1,5 @@
 <body>
-    <header>
-        <img class="logo" src="/assets/images/logo-orocol.jpg" alt="Orocol">
-        <button id="abrir" class="abrirMenu"><i class="bi bi-list"></i></button>
-        <nav id="menu" class="menuPrincipal">
-        <button id="cerrar" class="cerrarMenu"><i class="bi bi-three-dots"></i></button>
-            <ul class="listaMenu">
-                <li><a href=""><i class="fas fa-arrow-left"></i> Regresar</a></li>
-            </ul>
-        </nav>
-    </header>
+    <app-regresar-home></app-regresar-home>
     <form class="form login" (ngSubmit)="iniciarSesion()">
         <h1>Iniciar Sesión</h1>
         <label>Correo</label><br>
@@ -17,9 +8,14 @@
         <label>Contraseña</label><br>
         <input type="password" name="passwordUsuario" [(ngModel)]="passwordUsuario" required placeholder="Digite su contraseña">
         <br/>
-        <button class="btn btn-dark btn-lg" type="submit">Iniciar sesión <mat-icon>arrow_forward</mat-icon></button>
+        <button class="btn btn-outline-dark btn-lg" type="submit">Iniciar sesión <mat-icon>login</mat-icon></button>
+        <br/>
+        <button type="button" class="btn btn-link" routerLink="/registro">¿No estas registrado?</button>
+        <br/>
+        <br/>
+        <button type="button" class="btn btn-link" routerLink="/recuperar_contrasena">¿Olvidaste tu contraseña?</button>
+        <br/>
     </form>      
-    
     <app-pie></app-pie>
 </body>
 <router-outlet /> 

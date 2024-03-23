@@ -63,7 +63,7 @@ export class AdministradorService {
     async consultarAdministrador(idAdmin: number): Promise<AdministradorEntity> {
         const administrador = await this.administradorRepository.findOne({
             where: { idAdmin },
-            relations: ['usuario.roles', 'usuario.perfil'],
+            relations: ['usuario.roles'],
         }); 
         if (!administrador) {
             throw new NotFoundException('Usuario administrador no encontrado');

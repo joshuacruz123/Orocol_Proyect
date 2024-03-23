@@ -14,7 +14,8 @@ import { TokenDto } from 'src/dto/token.dto';
 import { PerfilEntity } from './perfil.entity';
 import { PerfilDto } from 'src/dto/perfil.dto';
 import { Repository } from 'typeorm';
-// Importamos las librerias necesarias
+import { UsuarioDto } from 'src/dto/usuario.dto';
+// Importamos los archivos necesarios
 
 @Injectable()
 export class UsuarioService {
@@ -26,7 +27,7 @@ export class UsuarioService {
         private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly jwtService: JwtService,
         @InjectRepository(PerfilEntity)
-        private readonly perfilRepository: PerfilEntity,
+        private readonly perfilRepository: Repository<PerfilEntity>,
     ) { }
     // Instanciamos la clase con el constructor
 
@@ -61,7 +62,9 @@ export class UsuarioService {
     }
     // Método para inactivar usuarios
 
-
+    /*
+    Inicio de sesión de los usuarios usuario
+    */
     async ingresarAlSistema(dto: LoginUsuarioDto): Promise<any> {
         const usuario = await this.usuarioRepository.findOne({
             where: { correoUsuario: dto.correoUsuario },
@@ -106,7 +109,7 @@ export class UsuarioService {
     }
     // Método para login de usuarios
 
-    async refresh(dto: TokenDto): Promise<any> {
+    async refresh (dto: TokenDto): Promise<any> {
         const usuario = await this.jwtService.decode(dto.token);
         let otrosCampos;
         if(usuario['roles'][0] === RolNombre.ADMINISTRADOR){
@@ -127,21 +130,72 @@ export class UsuarioService {
         return {token};
     }    
     // Método para refrescar el token del usuario
+    
 
-    async registrarPerfilUsuario(idUsuario: number, dto: PerfilDto): Promise<MessageDto> {
+    async recuperarPassword (correoUsuario: string, dto: UsuarioDto): Promise<any> {
+        const correo = await this.usuarioRepository.findOne({
+            where: { correoUsuario },
+        });
+        if (!correo) {
+            throw new NotFoundException(new MessageDto('No existe esa contraseña'));
+        }
+        correo.passwordUsuario = dto.passwordUsuario;
+        try {
+            await this.usuarioRepository.save(correo);
+            return new MessageDto('Tu contraseña fue actualizada exitosamente');
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al cambiar la contraseña'));
+        }
+    }    
+    // Método para recuperar la contraseña del usuario del usuario
+
+    /*
+    Gestionar perfil propio de usuario
+    */
+    async registrarFotoPerfil (idUsuario: number, dto: PerfilDto): Promise<MessageDto> {
         const usuario: UsuarioEntity = await this.usuarioRepository.findOne({ where: { idUsuario } }); // Obtener la entrada de venta
         if (!usuario || usuario.estadoUsuario === EstadoUsuario.INACTIVO) {
             throw new NotFoundException('Usuario no disponible');
         }
+        const {fotoPerfil} = dto;
+        const exists = await this.perfilRepository.findOne({ where: {fotoPerfil: fotoPerfil} });
+        if(exists) throw new BadRequestException(new MessageDto('ese perfil ya existe'));
         const perfil = new PerfilEntity();
         perfil.fotoPerfil = dto.fotoPerfil;
         perfil.usuario = usuario;
         try {
             await this.perfilRepository.save(perfil);
-            return new MessageDto(`Foto de perfil de ${usuario.nombreUsuario} creado`)
+            return new MessageDto(`Foto de perfil creada`)
         } catch (error) {
             throw new InternalServerErrorException(new MessageDto(`Error al crear el perfil: ${error.message || error}`))
         }
     }
     // Método para registrar perfil de usuario
+
+    async consultarPerfil(idUsuario: number): Promise<UsuarioEntity> {
+        const perfil = await this.usuarioRepository.findOne({
+            where: { idUsuario },
+            relations: ['perfil'],
+        });
+        return perfil;
+    }
+    // Método para consultar el perfil del usuario 
+
+    async editarFotoPerfil(idUsuario: number, dto: PerfilDto): Promise<any> {
+        const perfil = await this.consultarPerfil(idUsuario);
+        if (!perfil) {
+            throw new NotFoundException(new MessageDto('No existe el usuario'));
+        }
+        if (perfil !== perfil) {
+            throw new BadRequestException(new MessageDto('El perfil ya existe'));
+        }
+        perfil.perfil.fotoPerfil = dto.fotoPerfil;
+        try {
+            await this.usuarioRepository.save(perfil);
+            return new MessageDto('Tu foto de perfil fue actualizada exitosamente');
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al cambiar la foto'));
+        }
+    }
+    // Método para editar la foto de perfil del usuario
 }

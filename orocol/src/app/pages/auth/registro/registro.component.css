@@ -1,60 +1,9 @@
-.logo {
-    max-width: 22rem;
-    margin-left: 4px;
-  }
-  
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 3rem;
-    background-color: #010101;
-  }
-  
-  .listaMenu {
-    list-style-type: none;
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .listaMenu li a {
-    text-decoration: none;
-    color: rgb(206, 227, 247);
-    font-size: 25px;
-    margin-left: 12px;
-  }
-
-  .listaMenu li a:hover {
-    color: rgb(220, 255, 46);
-  }
-  
-  .abrirMenu, .cerrarMenu {
-    display: none;
-  }
-  
-  p {
-    margin: 15px;
-    padding: 15px;
-    font-size: 20px;
-  }
-  
-  @media only screen and (max-width: 912px) {
-    .logo {
-      max-width: 12rem;
-      margin-left: 2px;
-    }
-
-    .listaMenu li a {
-        font-size: 25px;
-        margin-left: 8px;
-    } 
-  }
 /* PÁGINA DE REGISTRO*/
 body{
   height: 1600px; 
   background: #fceabb; 
-  background: -webkit-linear-gradient(to bottom, #faebc7, #ffbb00);  
-  background: linear-gradient(to bottom, #faebc7, #ffbb00);
+  background: -webkit-linear-gradient(to bottom, #fcf2da, #f8c331);  
+  background: linear-gradient(to bottom, #fcf2da, #f8c331);
 }
 
 .div-titulo{
@@ -73,7 +22,7 @@ body{
 
 .contenedor{
     position: relative;
-    left: -10%;
+    left: -11%;
     width: 99vw;
     height: 150vh;
     display: flex;
@@ -90,11 +39,6 @@ body{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-}
-
-.contenedor .div-formulario:hover{
-    box-shadow: #f3ba286b 3pt 3pt 10pt 10pt;
-    transition: all 3s ease;
 }
 
 .contenedor .div-formulario h3{

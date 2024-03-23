@@ -14,92 +14,140 @@ h1{
      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
  
- .logo{
-    padding: 15px;
-    margin-right: 120px;
-    width: 35%;
-    background: #010101;
-} 
-
-.barra {
-   background: #010101;
-   padding-top: 10px;
-   padding-bottom: 10px;
-   margin-bottom: 0;
-   z-index: 5;
-}
-
-.dropdown-menu {
-    margin: 17px;
-    background: #010101;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
-}
-
-.menuperfil {
-    color: white;
-}
-
-.menuperfil:focus {
-    background: #aea023;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
-}
-.menuperfil:hover{
-    background-color: #aea023;
-}
-
-.cerrar:hover {
-    background-color: #a49123;
-}
-
-.user {
-    font-size: 40px;
-    padding: 10px;
-}
-
-table{
-    background-color:#010101 ;
-    color: white;
-    width: 650px;
-}
-
-.my-button {
-    padding: 10px ;
+ /* INICIO */
+.logo, .imagen {
+    max-width: 20rem;
+    margin-left: -30px;
+  }
+  
+  header {
+    padding: 20px 0;
     background-color: #010101;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border: 1px solid rgb(255, 255, 255);
-}
+    z-index: 120;
+  }
+  
+  .menu ul li .perfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .menu {
+    margin-top: 12px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-.my-button:hover {
-    background-color: #aea023;
-}
+  .menu ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu ul li {
+    list-style-type: none;
+    display: inline-block; 
+    margin-left: 24px;
+    color: #ffff;
+    font-size: 20px;
+  }
 
-.my-button:active {
-    background-color: #aea023;
-}
-
-@media screen and (max-width:1300px) {
-
-    .barra {
-        min-width: auto;
+  a {
+    margin-left: 100px;
+    color: #ffff;
+  }
+  
+  a:hover {
+    color: rgb(239, 244, 83);
+    transition: 0.6s ease-in-out;
+  }
+  
+  @media only screen and (max-width: 912px) {
+    .menu {
+      position: fixed;
+      right: -280px;
+      top: 64px;
+      width: 287px;
+      height: 100%;
+      background: #010101;
+      z-index: 12;
     }
-}
-
-@media screen and (max-width:575px) {
-    .dropdown-menu {
-        margin: 20px -78px 0px;
+  
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 5;
     }
-    .logocppe {
-        width: 100%;
+  
+    .logo, .imagen {
+      max-width: 12rem;
+      margin-left: 2px;
     }
-}
-
-
-
-@media screen and (max-width:575px) {
-    .dropdown-menu {
-        margin: 20px -78 0px;
+  
+    .menu ul li .perfil {
+      visibility: visible;
+      max-width: 12rem;
+      margin-right: 50px;
+      margin-top: 50px;
     }
-}
+  
+    .menu ul li {
+      display: block;
+      text-align: left;
+      margin: 0;
+      padding: 10px 0 10px 26px;
+      border-bottom: 1px solid #312f2f;
+    }
+  
+    .menu_icon {
+      display: inline-block;
+      position: relative;
+      right: 0;
+      top: 10px;
+    }
+    
+    .menu_icon span {
+      width: 32px;
+      height: 3px;
+      background: #fff;
+      display: block;
+      transition: 0.2s ease-in-out;
+    }
+  
+    .menu_icon {
+      cursor: pointer;
+    }
+  
+    .menu_icon_Class span:nth-child(2){
+      display: none;
+    }
+  
+    .menu_icon_Class span:nth-child(1){
+      transform: rotate(40deg);
+    }
+  
+    .menu_icon_Class span:nth-child(3){
+      transform: rotate(-40deg);
+      margin-top: -3px;
+    }
+  
+    .menu_icon span:nth-child(2){
+      margin: 4px 0;
+    }
+  
+    .menuClass {
+      right: 0;
+      transition: 0.4s ease-in-out;
+    }
+  
+    .colorClass {
+      background: #888874
+    }
+  
+    h1 {
+      margin-top: 10px;
+      font-size: 30px;
+    }
+  }
+  /* FIN */

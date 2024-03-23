@@ -13,11 +13,6 @@ nav li{
     width: 60%;
 }
 
-body {
-    background-image: url("/assets/images/bakground_2.jpg");
-    background-repeat: no-repeat;
-    background-size: cover  
-}
 h4{
    text-align: center;
    color: white;
@@ -66,49 +61,6 @@ h2{
 .user {
     font-size: 40px;
     padding: 10px;
-}
-
-
-/*BARRA LATERAL*/
-
-.barra-lateral {
-    background: #252121;
-    color: #fff;
-    min-width: 250px;
-    min-height: 100vh;
-    padding: 0;
-}
-
-.barra-lateral a {
-    color: #fff;
-}
-
-
-/*ESTILOS MENU*/
-
-.barra-lateral .menu a {
-    display: block;
-    padding: 20px;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    border-bottom: #a49123;
-}
-
-.barra-lateral .menu a:hover {
-    background-color:  #a49123;
-    text-decoration: none;
-}
-
-.active {
-    background:  #a49123;;
-}
-
-.barra-lateral .menu {
-    border-top: 5px #fff solid;
-}
-
-.barra-lateral .menu a i {
-    margin-right: 20px;
 }
 
 

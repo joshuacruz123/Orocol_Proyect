@@ -92,10 +92,7 @@ export class NovedadService {
     async editarNovedad(idNovedad: number, dto: NovedadDto): Promise<any> {
         const novedad = await this.consultarNovedad(idNovedad);
         if (!novedad) {
-            throw new NotFoundException(new MessageDto('No existe el novedad'));
-        }
-        if (novedad !== novedad) {
-            throw new BadRequestException(new MessageDto('El novedad ya existe'));
+            throw new NotFoundException(new MessageDto('No existe la novedad'));
         }
         novedad.fechaNovedad = dto.fechaNovedad;
         novedad.descripcion = dto.descripcion;

@@ -18,7 +18,16 @@ export class EncabezadoComponent {
   ) { }
     
   cerrar(): void {
-    this.tokenService.logOut();
-    this.router.navigate(['/iniciar_sesion'])
+    let terminarSesion;
+    do {
+        terminarSesion = confirm("¿Deseas terminar la sesión?");
+
+        if (terminarSesion) {
+            this.tokenService.logOut();
+            this.router.navigate(['/iniciar_sesion'])
+        } else {
+            break;
+        }
+    } while (!terminarSesion); 
   }
 }

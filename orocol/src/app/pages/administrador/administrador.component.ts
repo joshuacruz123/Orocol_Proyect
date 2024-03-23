@@ -26,14 +26,11 @@ export class AdministradorComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    // Obtener el idAdmin del usuario actual
     const user = this.tokenService.getUser();
     if (user && user.idAdmin) {
       const idAdmin = user.idAdmin;
-      // Llamar al método consultarAdministrador para obtener los datos del administrador
       this.usuarioService.consultarAdministrador(idAdmin).subscribe(
         (data) => {
-          // Asignar los datos del administrador obtenidos a la variable administrador
           this.administrador = data;
         },
         (error) => {

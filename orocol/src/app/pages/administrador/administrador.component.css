@@ -1,29 +1,5 @@
-.barra-lateral {
-    background: #010101;
-    color: #fff;
-    min-width: 250px;
-    min-height: 100vh;
-    padding: 0;
-    margin-top: -5px;
-}
-
-.row {
-    margin: 0;
-    padding: 0;
-}
-
-@media screen and (max-width:1300px) {
-    .barra-lateral {
-        min-width: auto;
-    }
-}
-
 @media screen and (max-width:575px) {
-    .barra-lateral {
-        min-height: auto;
-    }
     body {
-        background: #a49123;
         font-size: 16px;
         overflow: visible;
     }
@@ -32,9 +8,6 @@
 
 
 @media screen and (max-width:575px) {
-    .barra-lateral {
-        height: auto;
-    }
     body {
         font-size: 16px;
         overflow: visible;

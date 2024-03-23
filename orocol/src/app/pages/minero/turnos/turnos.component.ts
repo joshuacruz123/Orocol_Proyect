@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { PieComponent } from '../../../shared/footer/pie.component';
+import { EncabezadoComponent } from '../../../shared/encabezado/encabezado.component';
+import { NavAdminComponent } from '../../../shared/navbar-usuarios/nav-admin.component';
+import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-turnos',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavAdminComponent, PieComponent, MatIconModule],
   templateUrl: './turnos.component.html',
   styleUrl: './turnos.component.css'
 })

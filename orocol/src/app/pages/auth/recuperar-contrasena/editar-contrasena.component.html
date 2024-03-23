@@ -1,0 +1,39 @@
+<body>
+    <app-regresar-home></app-regresar-home>
+    <br>
+    <form class="p-5 bg-light">
+        <div class="card-header text-center">
+            Crea una nueva contraseña
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="usuario">Nueva contraseña:</label>
+            <div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><mat-icon>password</mat-icon></span><!--bootstrap y fontawesome-->				
+				</div>
+                <input type="password" class="form-control inputt" placeholder="Contraseña" id="correo" name="correo">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="usuario">Confirma tu contraseña:</label>
+            <div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><mat-icon>lock</mat-icon></span><!--bootstrap y fontawesome-->				
+				</div>
+                <input type="password" class="form-control inputt" placeholder="Confirmar contraseña" id="correo"
+                    name="correo">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-warning btn-lg">Crear nueva
+            contraseña <mat-icon>edit</mat-icon></button>
+        <br />
+        <br />
+        <div id="advertencia"></div>
+        <br />
+    </form>
+    <br>
+    <br>
+    <app-pie></app-pie>
+</body>
+<router-outlet />

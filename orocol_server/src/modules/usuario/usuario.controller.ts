@@ -1,5 +1,5 @@
 import { UsuarioService } from './usuario.service';
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InactivarUsuarioDto } from 'src/dto/enum.dto';
 import { RolNombre } from '../rol/rol.enum';
 import { LoginUsuarioDto } from 'src/dto/login.dto';
@@ -9,6 +9,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { PerfilDto } from 'src/dto/perfil.dto';
+import { UsuarioDto } from 'src/dto/usuario.dto';
 
 @ApiTags('Usuarios')
 @Controller('usuario')
@@ -35,13 +36,40 @@ export class UsuarioController {
     refresh(@Body() dto: TokenDto) {
         return this.usuarioService.refresh(dto);
     }
+
+    @Get()
+    async consultarUsuarios() {
+        return await this.usuarioService.consultarUsuarios();
+    }
+
+    @Put('recuperarPass/:correoUsuario')
+    async recuperarPassword(@Param('correoUsuario', ParseIntPipe) correoUsuario: string, @Body() dto: UsuarioDto) {
+        return await this.usuarioService.recuperarPassword(correoUsuario, dto);
+    } 
  
     @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Post('perfil/:idUsuario')
-    registrarPerfilUsuario(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PerfilDto) {
-        return this.usuarioService.registrarPerfilUsuario(idUsuario, dto);
+    registrarFotoPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PerfilDto) {
+        return this.usuarioService.registrarFotoPerfil(idUsuario, dto);
     } 
+
+    @ApiBearerAuth()
+    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('perfil/:idUsuario')
+    async consultarPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number) {
+        return await this.usuarioService.consultarPerfil(idUsuario);
+    }
+
+    @ApiBearerAuth()
+    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
+    @UseGuards(JwtAuthGuard, RolesGuard) 
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Put('perfil/:idUsuario')
+    async editarFotoPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PerfilDto) {
+        return await this.usuarioService.editarFotoPerfil(idUsuario, dto);
+    }  
 }
