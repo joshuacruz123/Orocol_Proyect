@@ -91,9 +91,6 @@
       "idUsuario": 2,
       "nombreUsuario": "Alezander Antonio",
       "apellidosUsuario": "Velazco",
-      "correoUsuario": "alexV@gmail.com",
-      "passwordUsuario": "$2a$10$GQ3JH9B8.AxIGBUZLXPcUuzmGixAUUIGS2RtSn4j/12W0vagatbQe",
-      "estadoUsuario": "activo",
       "perfil": {
         "idPerfil": 3,
         "fotoPerfil": "https://compressor.io/login"
@@ -116,7 +113,7 @@
     },
     {
       "correoUsuario": "jesusSierra@gmail.com",
-      "passwordUsuario": "456985L",
+      "passwordUsuario": "lasierrajesus4566",
       "rol": "Administrador"
     },
     {

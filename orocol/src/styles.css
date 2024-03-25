@@ -54,8 +54,6 @@ button {
 
 mat-icon {
   padding-top: 3px;
-  margin-left: 4px;
-  margin-right: 4px;
 }
 /* Menú de opciones de usuario logueado */
 .barra-lateral {
@@ -83,4 +81,48 @@ mat-icon {
       height: auto;
   }
 }
+
+@media screen and (max-width:575px) {
+  body {
+      font-size: 16px;
+      overflow: visible;
+  }
+}
+
+@media screen and (max-width:575px) {
+  body {
+      font-size: 16px;
+      overflow: visible;
+  }
+}
+
+/*MAIN*/
+
+.main {
+   padding-top: 40px;
+}
+
+.main .columna {
+   padding-left: 20px;
+   padding-right: 20px;
+}
 /* fin */
+
+.informacion-usuarios img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #ee7b00;
+  cursor: pointer;
+}
+
+.informacion-usuarios img:hover {
+  border: 2px solid #0e0e8e;
+  transition: 0.1s;
+}
+
+.informacion-usuarios {
+  padding: 20px;
+  border: 2px solid #f1f839;
+  background-color: #f9f9a0;
+}

@@ -1,42 +1,42 @@
 <body [class.colorClass]="color">
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-3 col-3">
-        <div class="logo">
-          <img class="imagen" src="/assets/images/logo-orocol.jpg" alt="Logo de Orocol" />
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-3">
+          <div class="logo">
+            <img class="imagen" src="/assets/images/logo-orocol.jpg" alt="Logo de Orocol" />
+          </div>
         </div>
-      </div>
-      <div class="col-md-9 col-sm-9 col-9 text-end">
-        <div class="menu_icon" [class.menu_icon_Class]="menu_icon_variable" (click)="abrirMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu" [class.menuClass]="menuVariable">
-          <ul>
-            <li><a routerLink="/" (click)="openDialog()">¿Quienes somos?</a></li>
-            <li><a routerLink="/manual_usuario"><mat-icon>description</mat-icon> Manual usuario</a></li>
-            <li><a routerLink="/registro"><mat-icon>person_add</mat-icon> Registrarse</a></li>
-            <li><a routerLink="/iniciar_sesion"><mat-icon>login</mat-icon> Iniciar sesión</a></li>
-          </ul>
-          <img class="imagenlogo" src="/assets/images/orocol.jpg" alt="Orocol" />
+        <div class="col-md-9 col-sm-9 col-9 text-end">
+          <div class="menu_icon" [class.menu_icon_Class]="menu_icon_variable" (click)="abrirMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="menu" [class.menuClass]="menuVariable">
+            <ul>
+              <li><a routerLink="/" (click)="openDialog()">¿Quienes somos?</a></li>
+              <li><a routerLink="/manual_usuario"><mat-icon>description</mat-icon> Manual usuario</a></li>
+              <li><a routerLink="/registro"><mat-icon>person_add</mat-icon> Registrarse</a></li>
+              <li><a routerLink="/iniciar_sesion"><mat-icon>login</mat-icon> Iniciar sesión</a></li>
+            </ul>
+            <img class="imagenlogo" src="/assets/images/orocol.jpg" alt="Orocol" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
-  <br/>
-  <br/>
-  <br/>
+  </header>
+  <br />
+  <br />
+  <br />
   <h1>Te damos la bienvenida a {{ titulo }}</h1>
-  <br/>
-  <br/>
-  <br/>
+  <br />
+  <br />
+  <hr />
+  <br />
   <div id="Id_Intro" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button data-bs-target="#Id_Intro" data-bs-slide-to="0" class="active" 
-      aria-label="Slide 1"></button>
+      <button data-bs-target="#Id_Intro" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
       <button data-bs-target="#Id_Intro" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button data-bs-target="#Id_Intro" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
@@ -101,19 +101,33 @@
     </button>
     <button class="carousel-control-next" data-bs-target="#Id_Intro" data-bs-slide="next">
       <span class="carousel-control-next-icon"></span>
-    </button> 
-  </div> 
-<br/>
-<br/>
-<div class="d-grid gap-2 col-6 mx-auto">
-  <a routerLink="/iniciar_sesion" type="button" class="btn btn-primary btn-lg">Iniciar sesión </a>
-</div>
-<br/>
-<br/>
+    </button>
+  </div>
+  <br />
+  <br />
+  <hr />
+  <br />
+  <br />
+  <article>
+    <br />
+    <br />
+    <br />
+    <p>¿Ya te registraste?</p>
+    <a routerLink="/iniciar_sesion" type="button" class="btn btn-primary btn-lg">Haz click aquí <mat-icon>person_add</mat-icon></a>
+    <br />
+    <br />
+    <p>¿No te haz registrado?</p>
+    <a routerLink="/iniciar_sesion" type="button" class="btn btn-primary btn-lg">Haz click aquí <mat-icon>login</mat-icon></a>
+    <br />
+    <br />
+    <br />
+  </article>
+  <br />
+  <br />
+  <br />
+  <hr />
+  <br />
+  <br />
+  <app-pie />
 </body>
-<app-pie />
 <router-outlet />
-<!-- 
-    <a routerLink="/">Home</a>
-    <a routerLink="/user">User</a>
---> 

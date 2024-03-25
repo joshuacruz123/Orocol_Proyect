@@ -26,6 +26,18 @@ export class UsuarioService {
     return this.http.post(`${this.usuarioURL}refresh`, token);
   }
 
+  consultarPerfil(idUsuario: number) {
+    return this.http.get<any>(`${this.usuarioURL}${idUsuario}/perfil`);
+  }
+
+  subirFotoPerfil(idUsuario:number, fotoPerfil: File) {
+    const formData = new FormData();
+    formData.append('fotoPerfil', fotoPerfil);
+    return this.http.post(`${this.usuarioURL}${idUsuario}/perfil`, formData);
+  } /*  http://localhost:3000/usuario/1/perfil
+  Failed to load resource: the server responded with a status of 500 (Internal Server Error) :3000/usuario/1/perfil:1
+  administrador.component.ts:64 Error al subir la foto de perfil: HttpErrorResponse administrador.component.ts:64 */
+
   registrarAdministrador (usuarioData: any) {
     return this.http.post(this.adminURL, usuarioData);
   }

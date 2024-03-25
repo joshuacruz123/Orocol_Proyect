@@ -1,27 +1,5 @@
-@media screen and (max-width:575px) {
-    body {
-        font-size: 16px;
-        overflow: visible;
-    }
+body {
+  background-color: #f8f8b8;
+  height: 800px;
 }
-
-
-
-@media screen and (max-width:575px) {
-    body {
-        font-size: 16px;
-        overflow: visible;
-    }
-}
-
-/*MAIN*/
- 
- .main {
-     padding-top: 40px;
- }
- 
- .main .columna {
-     padding-left: 40px;
-     padding-right: 40px;
- }
  

@@ -4,7 +4,7 @@
   
 body{ 
   background: #f9f9da; 
-  height: 1200px;
+  height: 1600px;
 } 
   
 /* INICIO */
@@ -172,4 +172,19 @@ a {
     padding-bottom: 20px;
   }
   
+  article{
+    width: 60%;
+    margin-left: 25%;
+    padding: 20px;
+    border: 4px double #f7f738;
+    background-color: #f9f9b2;
+}
   
+article a, article p{
+  margin-left: 35%;
+}
+
+article p{
+  color: #28283b;
+  font-size: 23px;
+}

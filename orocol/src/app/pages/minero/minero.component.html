@@ -1,17 +1,21 @@
 <body>
     <app-encabezado></app-encabezado>
-        <div class="row">
-            <div class="barra-lateral col-6 col-sm-auto">
-                <app-nav-minero></app-nav-minero>
-            </div>
-            <main class="main col">
-                <div class="row justify-content-center align-content-center text-center">
-                    <div class="columna col-lg-6">
+    <div class="row">
+        <div class="barra-lateral col-6 col-sm-auto">
+            <app-nav-minero></app-nav-minero>
+        </div>
+        <main class="main col">
+            <div class="row justify-content-center align-content-center text-center">
+                <div class="columna col-lg-6">
+                    <br>
+                    <br>
+                    <article class="informacion-usuarios">
+                        <br>
+                        <img class="imagen" src="/assets/images/perfil_usuario.jpg" alt="Logo de Orocol" />
                         <br>
                         <br>
-                        <br> 
-                        <br> 
-                        <h2>Datos del minero {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</h2>
+                        <h2>Usuario minero {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}
+                        </h2>
                         <ul>
                             <li><strong>Correo:</strong> {{ minero.usuario.correoUsuario }}</li>
                             <li><strong>Estado:</strong> {{ minero.usuario.estadoUsuario }}</li>
@@ -21,15 +25,17 @@
                             <li><strong>Fecha de nacimiento:</strong> {{ minero.fecha_nacimiento }}</li>
                             <li><strong>Dirección de vivienda:</strong> {{ minero.direccion_vivienda }}</li>
                             <li><strong>Cambio de documento:</strong> {{ minero.cambio_documento }}</li>
-                        </ul> 
+                        </ul>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
+                    </article>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
-            </main> 
-        </div> 
+            </div>
+        </main>
+    </div>
     <app-pie></app-pie>
 </body>
 <router-outlet />

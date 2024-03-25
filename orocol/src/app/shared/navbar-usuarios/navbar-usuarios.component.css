@@ -5,7 +5,6 @@
      text-decoration: none;
  }
  
- 
  /*ESTILOS MENU*/
  
  .menu a {
@@ -26,7 +25,7 @@
  }
  
  .menu a i {
-     margin-right: 20px;
+     margin-right: 10px;
  }
  
  /*mediaquerys*/

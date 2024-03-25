@@ -9,16 +9,21 @@
                     <div class="columna col-lg-6">
                         <br>
                         <br>
-                        <br> 
-                        <br> 
-                            <h2>Datos del administrador {{ administrador.usuario.nombreUsuario }} {{ administrador.usuario.apellidosUsuario }}</h2>
+                        <article class="informacion-usuarios">
+                            <br>
+                            <img class="imagen" [src]="perfil?.fotoPerfil || '/assets/images/perfil_usuario.jpg'" alt="Tu perfil de usuario" />
+                            <br>
+                            <input type="file" (change)="onFileSelect($event)" />
+                            <button (click)="subirFoto()">Subir Foto</button>
+                            <br>
+                            <h2>Administrador {{ administrador.usuario.nombreUsuario }} {{ administrador.usuario.apellidosUsuario }}</h2>
                             <ul>
                               <li><strong>Cargo:</strong> {{ administrador.cargoAdmin }}</li>
-                              <li><strong>Nombre:</strong> {{ administrador.usuario.nombreUsuario }}</li>
-                              <li><strong>Apellidos:</strong> {{ administrador.usuario.apellidosUsuario }}</li>
                               <li><strong>Correo:</strong> {{ administrador.usuario.correoUsuario }}</li>
                               <li><strong>Estado:</strong> {{ administrador.usuario.estadoUsuario }}</li>
                             </ul> 
+                            <br>
+                        </article>
                         <br>
                         <br>
                         <br>

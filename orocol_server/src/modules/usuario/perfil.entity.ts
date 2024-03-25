@@ -3,15 +3,11 @@ import { UsuarioEntity } from './usuario.entity';
 
 @Entity({ name: 'perfil' })
 export class PerfilEntity {
-  save(perfil: PerfilEntity) {
-      throw new Error('Method not implemented.');
-  }
-
   @PrimaryGeneratedColumn('increment')
   idPerfil: number;
 
   @Column()
-  fotoPerfil: string;
+  fotoPerfil: string; // Aquí se almacenará la ruta de la foto de perfil
 
   @OneToOne(() => UsuarioEntity)
   @JoinColumn({ name: 'idUsuario' })

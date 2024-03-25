@@ -10,8 +10,8 @@
             <div class="col-md-9 col-sm-9 col-9 text-end">
                 <div class="menu">
                     <ul>
-                        <li><img class="perfil" src="/assets/images/perfil_usuario.jpg" alt="Tu perfil de usuario" /></li>
-                        <li>Nombre Usuario Nombre Usuario</li>
+                        <li><img class="perfil" src="/assets/images/perfil.jpg" alt="Tu perfil de usuario" /></li>
+                        <li>{{ perfil.nombreUsuario }} {{ perfil.apellidosUsuario }}</li>
                         <li><a type="button" class="btn btn-outline-dark btn-lg" (click)="cerrar()">Cerrar sesión
                                 <mat-icon>logout</mat-icon></a></li>
                     </ul>
