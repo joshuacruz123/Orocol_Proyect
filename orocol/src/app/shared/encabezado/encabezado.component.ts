@@ -13,7 +13,9 @@ import { TokenService } from '../../core/services/token.service';
 })
 export class EncabezadoComponent implements OnInit{
 
-  perfil: any;
+  imagenPerfilUrl: string = '/assets/images/perfil.jpg'; // Foto de perfil predeterminada
+  nombreUsuario: string = ''; // Variable para el nombre de usuario
+  apellidosUsuario: string = '';
 
   constructor(
     public usuarioService: UsuarioService,
@@ -24,17 +26,16 @@ export class EncabezadoComponent implements OnInit{
   ngOnInit(): void {
     const user = this.tokenService.getUser();
     if (user && user.idUsuario) {
-      const idUsuario = user.idUsuario;
-      this.usuarioService.consultarPerfil(idUsuario).subscribe(
-        (data) => {
-          this.perfil = data;
+      this.usuarioService.consultarPerfil(user.idUsuario).subscribe(
+        (data: any) => {
+          this.imagenPerfilUrl = data.fotoPerfilUrl || this.imagenPerfilUrl;
+          this.nombreUsuario = data.usuario.nombreUsuario;
+          this.apellidosUsuario= data.usuario.apellidosUsuario;
         },
         (error) => {
-          console.error('Error al obtener los datos del administrador:', error);
+          console.error('Error al obtener el perfil del usuario:', error);
         }
       );
-    } else {
-      console.error('El usuario actual no es un administrador.');
     }
   }
     

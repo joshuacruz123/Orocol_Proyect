@@ -23,7 +23,7 @@ import { GestionarUsuariosComponent } from './pages/gestionar-usuarios/gestionar
 import { AsistenciasMinerosComponent } from './pages/minero/turnos/asistencias-mineros.component';
 import { VentasMinerosComponent } from './pages/ventas/ventas-mineros.component';
 
-export const routes: Routes = [
+export const routes: Routes = [ // joshuacruz@gmail.com JoshuaDeveloper2506
     {path: '', component: HomeComponent},
     {path: 'manual_usuario', title: 'Manual de usuario', component: ManualUsuarioComponent, canActivate: [LoginGuard]},
     {path: 'registro', title: 'Registro', component: RegistroComponent, canActivate: [LoginGuard]},

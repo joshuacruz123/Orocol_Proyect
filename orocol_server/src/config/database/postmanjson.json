@@ -88,13 +88,16 @@
   ],
   "ejemploperfil": [
     {
-      "idUsuario": 2,
-      "nombreUsuario": "Alezander Antonio",
-      "apellidosUsuario": "Velazco",
-      "perfil": {
-        "idPerfil": 3,
-        "fotoPerfil": "https://compressor.io/login"
-      }
+      "usuario": {
+        "idUsuario": 1,
+        "nombreUsuario": "Andres Manuel",
+        "apellidosUsuario": "Hernandez Castillo",
+        "perfil": {
+          "idPerfil": 11,
+          "fotoPerfil": "/uploads/1_1.jpg"
+        }
+      },
+      "fotoPerfilUrl": "http://localhost:3000/uploads/1_1.jpg"
     }
   ],
   "login": [

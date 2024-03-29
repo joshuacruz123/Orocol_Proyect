@@ -12,17 +12,23 @@ import { VentaModule } from './modules/venta/venta.module';
 import { ProductoModule } from './modules/producto/producto.module';
 import { CompraModule } from './modules/compra/compra.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import * as fs from 'fs';
 
 const UPLOADS_FOLDER = './uploads';
 
 // Verificar si la carpeta de subidas existe, si no existe, crearla
 if (!fs.existsSync(UPLOADS_FOLDER)) {
-    fs.mkdirSync(UPLOADS_FOLDER);
+  fs.mkdirSync(UPLOADS_FOLDER);
 }
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'), // Ruta a la carpeta de archivos estáticos
+      serveRoot: '/uploads', // Ruta base para servir los archivos estáticos
+    }),
     MulterModule.register({
       dest: './uploads', // Carpeta donde se guardarán los archivos subidos 
     }),
@@ -50,4 +56,4 @@ if (!fs.existsSync(UPLOADS_FOLDER)) {
   //Importa todos los módulos 
   controllers: [AppController],
 })
-export class AppModule {}
+export class AppModule { }

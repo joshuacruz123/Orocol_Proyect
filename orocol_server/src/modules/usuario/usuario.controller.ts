@@ -48,10 +48,10 @@ export class UsuarioController {
     async recuperarPassword(@Param('correoUsuario') correoUsuario: string, @Body() dto: PasswordDto) {
         return await this.usuarioService.recuperarPassword(correoUsuario, dto);
     }
-    /*
+    
     @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
-    @UseGuards(JwtAuthGuard, RolesGuard) */
+    @UseGuards(JwtAuthGuard, RolesGuard) 
     @Post(':idUsuario/perfil')
     @ApiParam({ name: 'idUsuario', description: 'ID del usuario' }) // Documentar el parámetro de ruta
     @ApiConsumes('multipart/form-data') // Especificar el tipo de contenido consumido (para la carga de archivos)
@@ -67,24 +67,15 @@ export class UsuarioController {
     ) {
         return this.usuarioService.subirFotoPerfil(idUsuario, fotoPerfil, dto);
     }
-    /*
+     
     @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
-    @UseGuards(JwtAuthGuard, RolesGuard) */
+    @UseGuards(JwtAuthGuard, RolesGuard) 
     @Get(':idUsuario/perfil')
     async consultarPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number) {
-        try {
-            const perfil = await this.usuarioService.consultarPerfil(idUsuario);
-            return perfil;
-        } catch (error) {
-            if (error instanceof NotFoundException) {
-                throw error;
-            } else {
-                throw new InternalServerErrorException('Error al consultar el perfil del usuario');
-            }
-        }
+        return await this.usuarioService.consultarPerfil(idUsuario);
     }
-
+    /*
     @ApiBearerAuth()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard)
@@ -92,5 +83,5 @@ export class UsuarioController {
     @Put('perfil/:idUsuario')
     async editarFotoPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PerfilDto) {
         return await this.usuarioService.editarFotoPerfil(idUsuario, dto);
-    }
+    } */
 }

@@ -108,19 +108,6 @@ mat-icon {
 }
 /* fin */
 
-.informacion-usuarios img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 1px solid #ee7b00;
-  cursor: pointer;
-}
-
-.informacion-usuarios img:hover {
-  border: 2px solid #0e0e8e;
-  transition: 0.1s;
-}
-
 .informacion-usuarios {
   padding: 20px;
   border: 2px solid #f1f839;

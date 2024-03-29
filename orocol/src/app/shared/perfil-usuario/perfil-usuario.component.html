@@ -1,0 +1,12 @@
+<div class="caja">
+    <img class="foto-perfil" [src]="imagenPerfilUrl" alt="Tu perfil" />
+    <br>
+    <input class="input-file" type="file" (change)="onFileSelect($event)" />
+    <br>
+    @if(mostrarCambiarFoto) {
+    <button class="btn btn-warning text-light" (click)="subirFoto()"><mat-icon>upload_file</mat-icon> Cambiar
+        Foto</button>
+    } @else {
+    <button class="btn btn-primary" (click)="subirFoto()"><mat-icon>image</mat-icon> Subir Foto</button>
+    }
+</div>

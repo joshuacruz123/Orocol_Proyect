@@ -8,20 +8,19 @@ import { UsuarioService } from '../../core/services/usuario.service';
 import { NavAdminComponent } from '../../shared/navbar-usuarios/nav-admin.component';
 import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
 import { ToastrService } from 'ngx-toastr';
+import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuario.component';
 
 @Component({
   selector: 'app-administrador',
   standalone: true,
-  imports: [CommonModule, EncabezadoComponent, PieComponent, NavAdminComponent, MatIconModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, EncabezadoComponent, PieComponent, NavAdminComponent, PerfilUsuarioComponent, MatIconModule, RouterLink, RouterOutlet],
   templateUrl: './administrador.component.html',
   styleUrl: './administrador.component.css'
 })
 export class AdministradorComponent implements OnInit{
 
   administrador: any;
-  perfil: any;
-  fotoPerfil: File | null = null;
-
+  
   constructor(
     public usuarioService: UsuarioService,
     private tokenService: TokenService,
@@ -43,28 +42,6 @@ export class AdministradorComponent implements OnInit{
       );
     } else {
       console.error('El usuario actual no es un administrador.');
-    }
-  }
-
-  onFileSelect(event: any) {
-    this.fotoPerfil = event.target.files[0];
-  }
-
-  subirFoto() {
-    if (this.fotoPerfil) {
-      const user = this.tokenService.getUser();
-      if (user && user.idUsuario) {
-        const idUsuario = user.idUsuario;
-        this.usuarioService.subirFotoPerfil(idUsuario, this.fotoPerfil).subscribe(
-          (data) => {
-            this.toastr.success('Foto subida correctamente');
-          },
-          (error) => {
-            this.toastr.error('Error al subir la foto de perfil');
-            console.error('Error al subir la foto de perfil:', error);
-          }
-        );
-      }
     }
   }
 }

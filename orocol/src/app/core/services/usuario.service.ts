@@ -26,8 +26,8 @@ export class UsuarioService {
     return this.http.post(`${this.usuarioURL}refresh`, token);
   }
 
-  consultarPerfil(idUsuario: number) {
-    return this.http.get<any>(`${this.usuarioURL}${idUsuario}/perfil`);
+  consultarPerfil (idUsuario:number): Observable<any> {
+    return this.http.get(`${this.usuarioURL}${idUsuario}/perfil`)
   }
 
   subirFotoPerfil(idUsuario:number, fotoPerfil: File) {

@@ -11,10 +11,7 @@
                         <br>
                         <article class="informacion-usuarios">
                             <br>
-                            <img class="imagen" [src]="perfil?.fotoPerfil || '/assets/images/perfil_usuario.jpg'" alt="Tu perfil de usuario" />
-                            <br>
-                            <input type="file" (change)="onFileSelect($event)" />
-                            <button (click)="subirFoto()">Subir Foto</button>
+                            <app-perfil-usuario></app-perfil-usuario>
                             <br>
                             <h2>Administrador {{ administrador.usuario.nombreUsuario }} {{ administrador.usuario.apellidosUsuario }}</h2>
                             <ul>

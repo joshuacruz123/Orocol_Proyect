@@ -8,11 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { TokenService } from '../../core/services/token.service';
 import { UsuarioService } from '../../core/services/usuario.service';
+import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuario.component';
 
 @Component({
   selector: 'app-minero',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavMineroComponent, PieComponent, MatIconModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavMineroComponent, PerfilUsuarioComponent, PieComponent, MatIconModule],
   templateUrl: './minero.component.html',
   styleUrl: './minero.component.css'
 })
@@ -42,10 +43,4 @@ export class MineroComponent implements OnInit{
       console.error('El usuario actual no es un minero.');
     }
   }
-
-  cerrar(): void {
-    this.tokenService.logOut();
-    this.router.navigate(['/iniciar_sesion'])
-  }
-
 }

@@ -163,12 +163,21 @@ export class UsuarioService {
         if (!usuario || usuario.estadoUsuario === EstadoUsuario.INACTIVO) {
             throw new NotFoundException('Usuario no disponible');
         } // Verificar si el usuario ya tiene un perfil
-        if (usuario.perfil) {
-            throw new BadRequestException('El usuario ya tiene un perfil');
-        } // Verificar si se cargó correctamente un archivo
         if (!fotoPerfil || !fotoPerfil.originalname) {
             throw new BadRequestException('No se proporcionó una imagen válida');
-        } // Guardar la foto de perfil
+        }
+        if (usuario.perfil) { // Eliminar la foto de perfil anterior
+            try {
+                fs.unlinkSync(`.${usuario.perfil.fotoPerfil}`);
+                const fotoPerfilPath = `/uploads/${idUsuario}_${fotoPerfil.originalname}`;
+                fs.writeFileSync(`.${fotoPerfilPath}`, fotoPerfil.buffer);
+            } catch (error) { 
+                console.error(`Error al editar la foto de perfil: ${error.message}`);
+            }
+            usuario.perfil.fotoPerfil = `/uploads/${idUsuario}_${fotoPerfil.originalname}`;
+            await this.perfilRepository.save(usuario.perfil);
+            return new MessageDto('Foto de perfil actualizada');
+        } 
         const fotoPerfilPath = `/uploads/${idUsuario}_${fotoPerfil.originalname}`;
         try {
             fs.writeFileSync(`.${fotoPerfilPath}`, fotoPerfil.buffer); // Guardar la imagen en el servidor
@@ -185,40 +194,19 @@ export class UsuarioService {
             throw new InternalServerErrorException(`Error al crear el perfil: ${error.message || error}`);
         }
     }
-    // Método para subir foto de perfil de usuario
+    // Método para subir o editar foto de perfil de usuario
 
-    async consultarPerfil(idUsuario: number): Promise<PerfilCompleto> {
-        const perfil = await this.usuarioRepository.findOne({
+    async consultarPerfil(idUsuario: number): Promise<{ usuario: UsuarioEntity; fotoPerfilUrl: string }> {
+        const usuario = await this.usuarioRepository.findOne({
             where: { idUsuario },
             select: ['idUsuario', 'nombreUsuario', 'apellidosUsuario'],
             relations: ['perfil'],
         });
-        if (!perfil) {
-            throw new NotFoundException('El usuario no tiene perfil');
+        let fotoPerfilUrl = null;
+        if (usuario.perfil && usuario.perfil.fotoPerfil){
+            fotoPerfilUrl = `${process.env.PERFIL_URL}${usuario.perfil.fotoPerfil}`;
         }
-        const fotoPerfilUrl = perfil.perfil ? `${perfil.perfil.fotoPerfil}` : null;
-        return {
-            ...perfil,
-            fotoPerfilUrl,
-        };
-    }
+        return {usuario, fotoPerfilUrl};
+    }    
     // Método para consultar el perfil del usuario
-
-    async editarFotoPerfil(idUsuario: number, dto: PerfilDto): Promise<any> {
-        const perfil = await this.consultarPerfil(idUsuario);
-        if (!perfil) {
-            throw new NotFoundException(new MessageDto('No existe el usuario'));
-        }
-        if (perfil !== perfil) {
-            throw new BadRequestException(new MessageDto('El perfil ya existe'));
-        }
-        perfil.perfil.fotoPerfil = dto.fotoPerfil;
-        try {
-            await this.usuarioRepository.save(perfil);
-            return new MessageDto('Tu foto de perfil fue actualizada exitosamente');
-        } catch (error) {
-            throw new InternalServerErrorException(new MessageDto('Error al cambiar la foto'));
-        }
-    }
-    // Método para editar la foto de perfil del usuario
 }
