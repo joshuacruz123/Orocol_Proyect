@@ -12,12 +12,13 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './perfil-usuario.component.html',
   styleUrl: './perfil-usuario.component.css'
 })
-export class PerfilUsuarioComponent implements OnInit{
+export class PerfilUsuarioComponent implements OnInit {
 
   perfil: any;
   fotoPerfil: File | null = null;
-  imagenPerfilUrl: string = '/assets/images/perfil.jpg'; 
+  imagenPerfilUrl: string = '/assets/images/perfil.jpg';
   mostrarCambiarFoto: boolean = false;
+  imagenPreviaUrl: string | ArrayBuffer | null = null; 
 
   constructor(
     public usuarioService: UsuarioService,
@@ -43,6 +44,14 @@ export class PerfilUsuarioComponent implements OnInit{
 
   onFileSelect(event: any) {
     this.fotoPerfil = event.target.files[0];
+    if (this.fotoPerfil) {
+      // Crear URL de objeto para previsualizar imagen
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagenPreviaUrl = reader.result;
+      };
+      reader.readAsDataURL(this.fotoPerfil);
+    }
   }
 
   subirFoto() {
@@ -52,8 +61,8 @@ export class PerfilUsuarioComponent implements OnInit{
         const idUsuario = user.idUsuario;
         this.usuarioService.subirFotoPerfil(idUsuario, this.fotoPerfil).subscribe(
           (data) => {
-            this.toastr.success('Por favor reinicia la página para ver la foto de perfil', 'Foto subida correctamente', 
-            { timeOut: 6000});
+            this.toastr.success('Por favor reinicia la página para ver la foto de perfil', 'Foto subida correctamente',
+              { timeOut: 6000 });
             this.mostrarCambiarFoto = true;
           },
           (error) => {

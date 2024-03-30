@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TokenService } from '../../core/services/token.service';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuario.component';
+import { MineroInterface } from '../../core/interfaces/minero.interface';
 
 @Component({
   selector: 'app-minero',
@@ -19,7 +20,7 @@ import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuar
 })
 export class MineroComponent implements OnInit{
 
-  minero: any;
+  minero!: MineroInterface;
 
   constructor(
     public usuarioService: UsuarioService,
@@ -32,7 +33,7 @@ export class MineroComponent implements OnInit{
     if (user && user.IdMinero) {
       const IdMinero = user.IdMinero;
       this.usuarioService.consultarMinero(IdMinero).subscribe(
-        (data) => {
+        (data: MineroInterface) => {
           this.minero = data;
         },
         (error) => {

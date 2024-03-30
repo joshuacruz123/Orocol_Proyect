@@ -33,7 +33,7 @@ export class IniciarSesionComponent {
   iniciarSesion() {
     this.usuarioService.login(this.correoUsuario, this.passwordUsuario).subscribe(
       (response) => {
-        console.log('JWT:', response.token);
+        //console.log('JWT:', response.token);
         if (!response.token) {
           this.toastr.error(response.error.message, 'Error', {
             timeOut: 3000

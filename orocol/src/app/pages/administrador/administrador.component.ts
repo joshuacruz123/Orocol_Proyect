@@ -9,6 +9,7 @@ import { NavAdminComponent } from '../../shared/navbar-usuarios/nav-admin.compon
 import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
 import { ToastrService } from 'ngx-toastr';
 import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuario.component';
+import { AdministradorInterface } from '../../core/interfaces/administrador.interface';
 
 @Component({
   selector: 'app-administrador',
@@ -19,7 +20,7 @@ import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuar
 })
 export class AdministradorComponent implements OnInit{
 
-  administrador: any;
+  administrador!: AdministradorInterface;
   
   constructor(
     public usuarioService: UsuarioService,
@@ -33,7 +34,7 @@ export class AdministradorComponent implements OnInit{
     if (user && user.idAdmin) {
       const idAdmin = user.idAdmin;
       this.usuarioService.consultarAdministrador(idAdmin).subscribe(
-        (data) => {
+        (data: AdministradorInterface) => { 
           this.administrador = data;
         },
         (error) => {

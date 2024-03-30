@@ -6,7 +6,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 2px solid #07075e;
+    border: 2px solid #030303;
     object-fit: cover;
 }
 
@@ -23,6 +23,7 @@ button mat-icon {
 .input-file {
     background-color: transparent;
     position: relative;
+    width: 150px;
     height: 100px;
     border: solid 1px #babbaf;
     cursor: pointer;

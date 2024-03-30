@@ -8,6 +8,11 @@ nav li{
 
 }
 
+a {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
 /*Estilos formulario de registro*/
 .contenendorstyle{
     width: 60%;
@@ -84,8 +89,26 @@ h2{
     align-items: center;
 }
 
-table {
+table, .div-boton {
     width: 1000px;
+}
+
+.busqueda {
+    margin-top: 20px;
+    margin-left: 350px;
+    height: 45px;
+    width: 300px;
+}
+
+th, td {
+  padding-left: 20px;
+}
+
+th {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 1200px) {
 }
 
 .my-button {

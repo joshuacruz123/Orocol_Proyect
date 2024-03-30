@@ -31,7 +31,7 @@ export class ProductoService {
 
   registrarProducto(producto: ProductosInterface): Observable<any> {
     return this.http.post(this.productosURL, JSON.stringify(producto), this.httpOptions)
-  
+
     .pipe(
       catchError(this.errorHandler)
     )
