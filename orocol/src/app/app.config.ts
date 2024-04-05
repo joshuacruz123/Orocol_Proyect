@@ -6,9 +6,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { provideToastr } from "ngx-toastr";
 import { tokenInterceptor } from "./core/interceptor/token.interceptor";
+import { errorTokenInterceptor } from "./core/interceptor/error-token.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), 
-    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, errorTokenInterceptor])), //, errorTokenInterceptor
     provideAnimations(), provideToastr()]
 };

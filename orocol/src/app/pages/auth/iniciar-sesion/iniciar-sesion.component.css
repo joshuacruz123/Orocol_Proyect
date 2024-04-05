@@ -37,7 +37,7 @@ h1 {
   font-size: 30px;
 }
 
-input {
+.inputt {
   width: 100%;
   padding: 5px;
   box-sizing: border-box;
@@ -51,11 +51,11 @@ input {
   color: white;
 }
 
-input:focus {
+.inputt:focus {
   border-bottom: 2px solid #aea023
 }
 
-label {
+.labbel {
   content: attr(type);
   display: block;
   margin: 28px 0 0;
@@ -72,7 +72,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 142%;
+  height: 150%;
 }
 
 .btn-outline-dark {

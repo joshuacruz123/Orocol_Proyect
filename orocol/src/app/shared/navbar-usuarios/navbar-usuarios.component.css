@@ -1,62 +1,64 @@
   /*BARRA LATERAL*/
 
- a {
-     color: #fff;
-     text-decoration: none;
- }
- 
- /*ESTILOS MENU*/
- 
- .menu a {
-     display: block;
-     padding: 20px;
-     font-family: Roboto, sans-serif;
-     font-weight: 500;
-     border-bottom: 1px solid rgba(255, 255, 255, .1);
- }
- 
- .menu a:hover {
-     background-color:  #a49123;
-     text-decoration: none;
- }
- 
- .active {
-     background:  #a49123;;
- }
- 
- .menu a i {
-     margin-right: 10px;
- }
- 
- /*mediaquerys*/
- 
- @media screen and (max-width:1300px) {
-    .menu a span {
-        display: none;
-    }
-    .menu a i {
-        margin: 0;
-    }
-    .barra {
-        min-width: auto;
-    }
-}
+  a {
+      color: #fff;
+      text-decoration: none;
+  }
 
-@media screen and (max-width:575px) {
-    .menu a {
-        display: inline-block;
-        border-bottom: none;
-    }
-}
+  /*ESTILOS MENU*/
+
+  .menu a {
+      display: block;
+      padding: 20px;
+      font-family: Roboto, sans-serif;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+  }
+
+  .menu a:hover {
+      background-color: #a49123;
+      text-decoration: none;
+  }
+
+  .active {
+      background: #a49123;
+  }
+
+  .menu a i {
+      margin-right: 0;
+  }
+
+  /*mediaquerys*/
+
+  @media screen and (max-width:700px) {
+      .menu a span {
+          display: none;
+      }
+
+      .menu a i {
+          margin: 0;
+      }
+
+      .barra {
+          min-width: auto;
+      }
+  }
+
+  @media screen and (max-width:575px) {
+      .menu a {
+          display: inline-block;
+          border-bottom: none;
+      }
+  }
 
 
 
-@media screen and (max-width:575px) {
-    .menu a {
-        display: inline-block;
-        border-bottom: none;
-    }
-    .dropdown-menu {
-        margin: 20px -78 0px;
-    }
-}
+  @media screen and (max-width:575px) {
+      .menu a {
+          display: inline-block;
+          border-bottom: none;
+      }
+
+      .dropdown-menu {
+          margin: 20px -78 0px;
+      }
+  }

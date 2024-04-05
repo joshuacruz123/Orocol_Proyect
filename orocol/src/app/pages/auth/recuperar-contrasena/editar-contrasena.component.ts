@@ -13,4 +13,12 @@ import { RegresarHomeComponent } from '../../../shared/regresar-home/regresar-ho
 })
 export class EditarContrasenaComponent {
 
+  verPassword(): void {
+    const x = document.getElementById("passwordUsuario" || "editarPasswordUsuario") as HTMLInputElement;
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
 }

@@ -30,15 +30,26 @@ export class VentaController {
         return await this.ventaService.consultarVenta(idGestionVenta);
     }
 
+    @RolDecorator(RolNombre.MINERO, RolNombre.ADMINISTRADOR)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Post(':IdMinero/:tipoOro')
+    async registrarVenta(
+        @Param('IdMinero') IdMinero: number,
+        @Param('tipoOro') tipoOro: string,
+        @Body() entradaDto: EntradaDto,
+    ): Promise<any> {
+        return this.ventaService.registrarVenta(IdMinero, tipoOro, entradaDto);
+    }
+
     @RolDecorator(RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Post(':numero_documento/:tipoOro')
-    async registrarVenta(
+    async registrarVentaAdmin(
         @Param('numero_documento') numeroDocumento: number,
         @Param('tipoOro') tipoOro: string,
         @Body() entradaDto: EntradaDto,
     ): Promise<any> {
-        return this.ventaService.registrarVenta(numeroDocumento, tipoOro, entradaDto);
+        return this.ventaService.registrarVentaAdmin(numeroDocumento, tipoOro, entradaDto);
     }
     
     @RolDecorator(RolNombre.ADMINISTRADOR)

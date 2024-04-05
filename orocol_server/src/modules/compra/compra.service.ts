@@ -64,10 +64,8 @@ export class CompraService {
         if (!salidaVentas) {
             throw new NotFoundException(new MessageDto('No se encontró el minero o el producto'));
         }
-        const compra: ClienteEntity = await this.clienteRepository.findOne({
-            where: {
-                salidaVentas: { IdSalidaVenta: salidaVentas.IdSalidaVenta }
-            },
+        const compra = await this.clienteRepository.findOne({
+            where: {IdCliente},
             relations: ['salidaVentas.entrada.producto']    
         });
         if (!compra) {

@@ -41,7 +41,35 @@ export class VentaService {
         private readonly usuarioService: UsuarioService, 
     ) { }
     
-    async registrarVenta(numero_documento: number, tipoOro: string, dto: EntradaDto): Promise<any> {
+    async registrarVenta(IdMinero: number, tipoOro: string, dto: EntradaDto): Promise<any> {
+        try {
+            const minero = await this.mineroRepository.findOne({ where: { IdMinero } });
+            const producto = await this.productoRepository.findOne({ where: { TipoOro: tipoOro } });
+            if (!minero) {
+                throw new NotFoundException('Minero no encontrado');
+            }
+            if (!producto || producto.estadoProducto === EstadoProducto.INACTIVO) {
+                throw new NotFoundException('Producto no encontrado o no disponible');
+            }
+            const nuevaVenta = this.entradaVentaRepository.create({
+                ...dto,
+                minero,
+                producto,
+            });
+            nuevaVenta.minero = minero;
+            nuevaVenta.producto = producto;
+            await this.entradaVentaRepository.save(nuevaVenta);
+            return new MessageDto(`Venta de ${producto.TipoOro} registrada.`);
+        } catch (error) {
+            if (error instanceof HttpException) {
+                throw error;
+            }
+            throw new InternalServerErrorException(new MessageDto(`Error al registrar la venta`));
+        }
+    }
+    // Método para registrar las ventas de entrada
+    
+    async registrarVentaAdmin(numero_documento: number, tipoOro: string, dto: EntradaDto): Promise<any> {
         try {
             const minero = await this.mineroRepository.findOne({ where: { numero_documento } });
             const producto = await this.productoRepository.findOne({ where: { TipoOro: tipoOro } });
@@ -67,7 +95,7 @@ export class VentaService {
             throw new InternalServerErrorException(new MessageDto(`Error al registrar la venta`));
         }
     }
-    // Método para registrar las ventas de entrada
+    // Método para registrar las ventas de entrada por administrador
 
     async consultarVentas(): Promise<EntradaVentaEntity[]> {
         const ventas = await this.entradaVentaRepository.find({
@@ -88,11 +116,8 @@ export class VentaService {
         if (!minero || !producto) {
             throw new NotFoundException(new MessageDto('No se encontró el minero o el producto'));
         }
-        const entradaVenta: EntradaVentaEntity = await this.entradaVentaRepository.findOne({
-            where: {
-                minero: { IdMinero: minero.IdMinero },
-                producto: { IdProducto: producto.IdProducto }
-            },
+        const entradaVenta = await this.entradaVentaRepository.findOne({
+            where: { idGestionVenta },
             relations: ['minero.usuario', 'producto']    
         });
         if (!entradaVenta) {

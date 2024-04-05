@@ -56,4 +56,13 @@ export class FormularioMineroComponent implements OnInit {
         );
     }
   }
+
+  verPassword(): void {
+    const x = document.getElementById("passwordUsuario") as HTMLInputElement;
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
 }

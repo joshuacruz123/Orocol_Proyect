@@ -28,7 +28,7 @@ export class ProductosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.consultarProductos()
+    this.consultarProductos();
   }
 
   consultarProductos() {
@@ -44,9 +44,10 @@ export class ProductosComponent implements OnInit {
   } // Función para ver los productos
 
   buscarProducto(event: any) {
-    const busqueda = event?.target?.value || '';
+    const busqueda = event?.target?.value.trim().toLowerCase() || '';
     this.productListFiltro = this.productList.filter(producto =>
-      producto.TipoOro.toLowerCase().includes(busqueda.toLowerCase())
+      producto.TipoOro.toLowerCase().includes(busqueda) ||
+      producto.estadoProducto.toLowerCase().includes(busqueda)
     );
   }
 

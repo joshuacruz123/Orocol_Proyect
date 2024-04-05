@@ -12,7 +12,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text"><mat-icon>password</mat-icon></span><!--bootstrap y fontawesome-->				
 				</div>
-                <input type="password" class="form-control inputt" placeholder="Contraseña" id="correo" name="correo">
+                <input type="password" id="passwordUsuario" class="form-control inputt" placeholder="Contraseña" id="correo" name="correo">
             </div>
         </div>
         <div class="form-group">
@@ -21,9 +21,15 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text"><mat-icon>lock</mat-icon></span><!--bootstrap y fontawesome-->				
 				</div>
-                <input type="password" class="form-control inputt" placeholder="Confirmar contraseña" id="correo"
+                <input type="password" id="editarPasswordUsuario" class="form-control inputt" placeholder="Confirmar contraseña" id="correo"
                     name="correo">
             </div>
+        </div>
+        <div class="form-group">
+            <input class="form-check-input" type="checkbox" (click)="verPassword()">
+            <label class="form-check-label"> 
+                Mostrar contraseña
+            </label>
         </div>
         <button type="submit" class="btn btn-warning btn-lg">Crear nueva
             contraseña <mat-icon>edit</mat-icon></button>

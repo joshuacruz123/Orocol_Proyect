@@ -22,7 +22,7 @@ import { PerfilEntity } from './perfil.entity';
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get(JWT_SECRET),
         signOptions: {
-          expiresIn: '2h' 
+          expiresIn: '2h' // 2h 5m
         }        
       }),
       inject: [ConfigService],

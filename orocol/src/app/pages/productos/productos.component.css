@@ -108,9 +108,6 @@ th {
     font-size: 18px;
 }
 
-@media only screen and (max-width: 1200px) {
-}
-
 .my-button {
     padding: 10px ;
     background-color: #252121;

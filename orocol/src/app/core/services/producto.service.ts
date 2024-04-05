@@ -25,10 +25,6 @@ export class ProductoService {
     return this.http.get<ProductosInterface[]>(this.productosURL);
   }
 
-  public consultarProducto(IdProducto: number): Observable<Productos> {
-    return this.http.get<Productos>(`${this.productosURL}${IdProducto}`);
-  }
-
   registrarProducto(producto: ProductosInterface): Observable<any> {
     return this.http.post(this.productosURL, JSON.stringify(producto), this.httpOptions)
 

@@ -2,11 +2,17 @@
     <app-regresar-home></app-regresar-home>
     <form class="form login" (ngSubmit)="iniciarSesion()">
         <h1>Iniciar Sesión</h1>
-        <label>Correo</label><br>
-        <input type="email" name="correoUsuario" [(ngModel)]="correoUsuario" required placeholder="Correo electrónico">
+        <label class="labbel">Correo</label><br>
+        <input class="inputt" type="email" name="correoUsuario" [(ngModel)]="correoUsuario" required placeholder="Correo electrónico">
         
-        <label>Contraseña</label><br>
-        <input type="password" name="passwordUsuario" [(ngModel)]="passwordUsuario" required placeholder="Digite su contraseña">
+        <label class="labbel">Contraseña</label><br>
+        <input class="inputt" type="password" id="passwordUsuario" name="passwordUsuario" [(ngModel)]="passwordUsuario" required placeholder="Digite su contraseña">
+        <div class="form-group">
+            <input class="form-check-input" type="checkbox" (click)="verPassword()">
+            <label class="form-check-label"> 
+                Mostrar contraseña
+            </label>
+        </div>
         <br/>
         <button class="btn btn-outline-dark btn-lg" type="submit">Iniciar sesión <mat-icon>login</mat-icon></button>
         <br/>

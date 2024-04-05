@@ -1,0 +1,27 @@
+table, .div-boton {
+    width: 1300px;
+}
+
+.busqueda {
+    margin-top: 20px;
+    margin-left: 250px;
+    height: 45px;
+    width: 300px;
+}
+
+th, td {
+  padding-left: 10px;
+}
+
+th {
+    font-size: 18px;
+}
+
+td button {
+    margin-right: 6px;
+}
+
+a {
+    margin-top: 5px;
+    margin-left: 10px;
+}
