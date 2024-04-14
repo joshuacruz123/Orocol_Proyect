@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Ventas } from '../models/ventas';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, map, of, switchMap, throwError } from 'rxjs';
 import { VentasInterface } from '../interfaces/venta.interface';
 import { ReporteVentasInterface } from '../interfaces/reporte-venta.interface';
+import jsPDF from 'jspdf';
 
 @Injectable({
   providedIn: 'root'
@@ -31,21 +30,21 @@ export class VentasService {
     return this.http.get<VentasInterface>(`${this.ventaURL}${idGestionVenta}`)
   }// :idGestionVenta
 
-  registrarVenta(venta: VentasInterface, IdMinero: number, tipoOro: string): Observable<void> {
-    return this.http.post<void>(`${this.ventaURL}${IdMinero}/${tipoOro}`, venta);
+  registrarVenta(IdMinero: number, TipoOro: string, venta: VentasInterface): Observable<any> {
+    return this.http.post<void>(`${this.ventaURL}${IdMinero}/${TipoOro}`, venta);
   }
 
-  registrarVentaAdmin(venta: VentasInterface, numero_documento: number, tipoOro: string): Observable<void> {
-    return this.http.post<void>(`${this.ventaURL}${numero_documento}/${tipoOro}`, venta);
-  }
+  registrarVentaAdmin(numero_documento: number, TipoOro: string, venta: any): Observable<any> {
+    return this.http.post<void>(`${this.ventaURL}${numero_documento}/admin/${TipoOro}`, venta);
+  } // 1012587523 Oro de 24 quilates 
 
-  editarVenta(id: number, venta: VentasInterface): Observable<void> {
-    return this.http.put<void>(`${this.ventaURL}entrada_venta/${id}`, venta);
+  editarVenta(idGestionVenta: number, venta: VentasInterface): Observable<any> {
+    return this.http.put<void>(`${this.ventaURL}${idGestionVenta}`, venta);
   }// entrada_venta/:idGestionVenta
 
-  inactivarVenta(id: number, estadoVenta: string): Observable<any> {
+  inactivarVenta(idGestionVenta: number, estadoVenta: string): Observable<any> {
     const body = { estadoVenta: estadoVenta };
-    return this.http.put(`${this.ventaURL}inactivar/${id}`, body, this.httpOptions)
+    return this.http.put(`${this.ventaURL}inactivar/${idGestionVenta}`, body, this.httpOptions)
   } // inactivar/:idGestionVenta
 
   activarVenta(id: number, estadoVenta: string): Observable<any> {
@@ -54,6 +53,13 @@ export class VentasService {
   }// activar/:idGestionVenta
 
   generarReporteVenta(): Observable<ReporteVentasInterface[]> {
-    return this.http.get<ReporteVentasInterface[]>(this.reportesURL)
+    return this.http.get<ReporteVentasInterface[]>(this.reportesURL).pipe(
+      map(reportes => {
+        reportes.forEach(reporte => {
+          reporte.pdf = new jsPDF();
+        });
+        return reportes;
+      })
+    );
   }
 }

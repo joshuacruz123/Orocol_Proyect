@@ -14,7 +14,7 @@ export class MineroEntity {
   @Column({type: 'varchar', length: 30, nullable: false})
   tipo_documento: TipoDocumento;
 
-  @Column({ type: 'bigint', unique: true })
+  @Column({ type: 'int', unique: true })
   numero_documento: number;
 
   @Column({type: 'varchar', length: 15, nullable: false})

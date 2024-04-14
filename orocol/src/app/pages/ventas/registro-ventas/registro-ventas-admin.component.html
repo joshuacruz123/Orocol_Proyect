@@ -1,0 +1,25 @@
+<div class="col-md-5">
+    <div class="card">
+        <div class="card-header">
+            Agregar venta
+        </div>
+        <form [formGroup]="ventaForm" (ngSubmit)="crearVenta()">
+            <label for="numero_documento">Número de Documento:</label>
+            <input type="number" formControlName="numero_documento" required>
+            
+            <label for="TipoOro">Tipo de Oro:</label>
+            <input type="text" formControlName="TipoOro" required>
+            
+            <label for="fechaExtraccionOro">Fecha Extracción Oro:</label>
+            <input type="date" formControlName="fechaExtraccionOro" required>
+            
+            <label for="precioOro">Precio Oro:</label>
+            <input type="number" formControlName="precioOro" required>
+            
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" formControlName="cantidad" required>
+            <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+            <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar Venta</button>
+          </form>          
+    </div>
+</div>

@@ -8,6 +8,6 @@ export const environment = {
     novedadURL: 'http://localhost:3000/novedad/',
     ventaURL: 'http://localhost:3000/venta/',
     salidaURL: 'http://localhost:3000/salida/',
-    reportesURL: 'http://localhost:3000/reportes/',
+    reportesURL: 'http://localhost:3000/reportes',
     compraURL: 'http://localhost:3000/compra/'
 };

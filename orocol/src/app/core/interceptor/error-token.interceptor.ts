@@ -22,7 +22,7 @@ export const errorTokenInterceptor: HttpInterceptorFn = (req, next) => {
                 Authorization: `Bearer ${data.token}`
               }
             });
-            console.log('Refrescando token ...');
+            console.log('Refrescando ...');
             return next(authReq);
           }),
           catchError(error => {

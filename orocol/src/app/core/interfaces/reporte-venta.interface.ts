@@ -1,6 +1,8 @@
+import jsPDF from "jspdf";
+
 export interface ReporteVentasInterface {
     // idGestionVenta: number;
-    fechaExtraccionOro: Date;
+    fechaExtraccionOro: string;
     precioOro: number;
     cantidad: number;
     estadoVenta: string;
@@ -19,9 +21,11 @@ export interface ReporteVentasInterface {
     producto: {
         //IdProducto: number;
         TipoOro: string;
-    };
+    }; /*
     salida: {
         //IdSalidaVenta: 1;
         PesogrOro: number;
-    };
+    }; */
+    
+  pdf: jsPDF;
 }

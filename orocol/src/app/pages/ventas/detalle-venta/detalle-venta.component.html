@@ -1,1 +1,6 @@
-<p>detalle-venta works!</p>
+<li><strong>Producto:</strong> {{ venta.producto.TipoOro }}</li>
+<li><strong>Fecha de extracción:</strong> {{ venta.fechaExtraccionOro }}</li>
+<li><strong>Cantidad:</strong> {{ venta.cantidad }}</li>
+<li><strong>Precio:</strong> {{ venta.precioOro }}</li>
+<li><strong>Estado de la venta:</strong> {{ venta.estadoVenta }}</li>
+<button type="button" (click)="cancelar()" mat-button>Cerrar</button>

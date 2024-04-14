@@ -15,9 +15,9 @@
       "cargoAdmin": "Supervisor"
     },
     {
-      "nombreUsuario": "Felipe monte",
+      "nombreUsuario": "Felipe Montes",
       "apellidosUsuario": "Brievich Gomez",
-      "correoUsuario": "FelipeMZ@gmail.com",
+      "correoUsuario": "felipeMZ@gmail.com",
       "passwordUsuario": "235687XXX",
       "cargoAdmin": "Supervisor"
     },
@@ -125,7 +125,7 @@
       "rol": "Minero"
     },
     {
-      "correoUsuario": "FelipeMZ@gmail.com",
+      "correoUsuario": "felipeMZ@gmail.com",
       "passwordUsuario": "235687XXX",
       "rol": "Administrador"
     },
@@ -195,6 +195,13 @@
   ],
   "entradaventas": [
     {
+      "producto":" Oro de  quilates ",
+      "fechaExtraccionOro": "2023-10-06",
+      "precioOro": 7000000,
+      "cantidad": 400,
+      "cambios": "ALTER TABLE `mineros` CHANGE `numero_documento` `numero_documento` INT(20) NOT NULL;"
+    }
+    ,{
       "url": "http://localhost:3000/venta/1012587523/Oro de 24 quilates",
       "fechaExtraccionOro": "2023-10-05",
       "precioOro": 7000000,

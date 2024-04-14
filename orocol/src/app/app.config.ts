@@ -10,6 +10,6 @@ import { errorTokenInterceptor } from "./core/interceptor/error-token.intercepto
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), 
-    provideHttpClient(withInterceptors([tokenInterceptor, errorTokenInterceptor])), //, errorTokenInterceptor
+    provideHttpClient(withInterceptors([tokenInterceptor, errorTokenInterceptor])),
     provideAnimations(), provideToastr()]
 };

@@ -16,7 +16,7 @@
                                     <a type="button" class="btn btn-primary btn-lg"
                                     (click)="agregarVenta()"><mat-icon>add</mat-icon> Registrar Venta</a>
                                     <a type="button" class="btn btn-secondary btn-lg"
-                                        routerLink="/nuevo_Venta"><mat-icon>add</mat-icon> Generar reporte</a>
+                                        (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar reporte</a>
                                     <input type="text" class="busqueda" placeholder="Buscar venta..."
                                         (input)="buscarVenta($event)">
                                 </div>
@@ -32,7 +32,7 @@
                                         </tr>
                                     </thead>
                                     @if (!sinLista) {
-                                    <tbody>
+                                    <tbody class="table-secondary">
                                         @for (item of ventaListFiltro; track $index) {
                                         <tr>
                                             <td scope="row">{{item.producto.TipoOro}}</td>
@@ -42,17 +42,22 @@
                                             <td> {{item.estadoVenta}} </td>
                                             <td>
                                                 <button class="btn btn-info text-white" type="button"
-                                                    (click)="detalleVenta(item.idGestionVenta)"> Ver detalle</button>
-                                                <button class="btn btn-success" type="button"
-                                                    (click)="detalleVenta(item.idGestionVenta)"> Registrar compra</button>
+                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>search</mat-icon> Ver detalle</button>
+                                                @if (item.estadoVenta === 'Activo') {
+                                                    <button class="btn btn-success" type="button"
+                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
+                                                } @else {
+                                                    <button class="btn btn-success" type="button" disabled
+                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
+                                                }
                                                 <button class="btn btn-warning text-white" type="button"
-                                                    (click)="editarVenta(item.idGestionVenta)"> Editar venta</button>
-                                                @if (item.estadoVenta === 'No disponible') {
+                                                    (click)="editarVenta(item.idGestionVenta)"><mat-icon>edit</mat-icon> Editar venta</button>
+                                                @if (item.estadoVenta === 'Inactivo') {
                                                 <button class="btn btn-success" type="button"
-                                                    (click)="activarVenta(item.idGestionVenta)"> Activar </button>
+                                                    (click)="activarVenta(item.idGestionVenta)"><mat-icon>toggle_on</mat-icon> Activar </button>
                                                 } @else {
                                                 <button class="btn btn-danger" type="button"
-                                                    (click)="inactivarVenta(item.idGestionVenta)">Inactivar</button>
+                                                    (click)="inactivarVenta(item.idGestionVenta)"><mat-icon>toggle_off</mat-icon> Inactivar</button>
                                                 }
                                             </td>
                                         </tr>

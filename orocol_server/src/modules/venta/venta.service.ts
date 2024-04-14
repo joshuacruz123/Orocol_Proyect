@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager, Equal, Repository } from 'typeorm';
 import { MessageDto } from 'src/dto/common/message.dto';
 import { EntradaVentaEntity } from './entradaventas.entity';
 import { SalidaVentaEntity } from './salidaventas.entity';
@@ -20,15 +20,15 @@ import { EstadoVenta } from './venta.enum';
 
 @Injectable()
 export class VentaService {
-     
-    constructor( 
+
+    constructor(
         @InjectRepository(EntradaVentaEntity)
         private readonly entradaVentaRepository: Repository<EntradaVentaEntity>,
         @InjectRepository(SalidaVentaEntity)
         private readonly salidaVentaRepository: Repository<SalidaVentaEntity>,
         @InjectRepository(ProductoEntity) private readonly productoRepository: Repository<ProductoEntity>,
         private readonly productoService: ProductoService,
-        @InjectRepository(MineroEntity) 
+        @InjectRepository(MineroEntity)
         private readonly mineroRepository: Repository<MineroEntity>,
         private readonly mineroService: MineroService,
         @InjectRepository(AdministradorEntity)
@@ -38,15 +38,15 @@ export class VentaService {
         private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
         private readonly usuarioRepository: Repository<UsuarioEntity>,
-        private readonly usuarioService: UsuarioService, 
+        private readonly usuarioService: UsuarioService,
     ) { }
-    
-    async registrarVenta(IdMinero: number, tipoOro: string, dto: EntradaDto): Promise<any> {
+
+    async registrarVenta(IdMinero: number, TipoOro: string, dto: EntradaDto): Promise<any> {
         try {
             const minero = await this.mineroRepository.findOne({ where: { IdMinero } });
-            const producto = await this.productoRepository.findOne({ where: { TipoOro: tipoOro } });
+            const producto = await this.productoRepository.findOne({ where: { TipoOro: TipoOro } });
             if (!minero) {
-                throw new NotFoundException('Minero no encontrado');
+                throw new NotFoundException('Usuario no encontrado');
             }
             if (!producto || producto.estadoProducto === EstadoProducto.INACTIVO) {
                 throw new NotFoundException('Producto no encontrado o no disponible');
@@ -68,13 +68,13 @@ export class VentaService {
         }
     }
     // Método para registrar las ventas de entrada
-    
-    async registrarVentaAdmin(numero_documento: number, tipoOro: string, dto: EntradaDto): Promise<any> {
+
+    async registrarVentaAdmin(numero_documento: number, TipoOro: string, dto: EntradaDto): Promise<any> {
         try {
             const minero = await this.mineroRepository.findOne({ where: { numero_documento } });
-            const producto = await this.productoRepository.findOne({ where: { TipoOro: tipoOro } });
+            const producto = await this.productoRepository.findOne({ where: { TipoOro: TipoOro } });
             if (!minero) {
-                throw new NotFoundException('Minero no encontrado');
+                throw new NotFoundException('No existe el usuario');
             }
             if (!producto || producto.estadoProducto === EstadoProducto.INACTIVO) {
                 throw new NotFoundException('Producto no encontrado o no disponible');
@@ -118,34 +118,31 @@ export class VentaService {
         }
         const entradaVenta = await this.entradaVentaRepository.findOne({
             where: { idGestionVenta },
-            relations: ['minero.usuario', 'producto']    
+            relations: ['minero.usuario', 'producto']
         });
         if (!entradaVenta) {
-            throw new NotFoundException(new MessageDto('No existe ese registro')); 
+            throw new NotFoundException(new MessageDto('No existe ese registro'));
         }
         return entradaVenta;
     }
     // Método para consultar la venta de entrada
 
-    async editarVenta(idGestionVenta: number, dto: EntradaDto): Promise<any> {
-        const venta = await this.consultarVenta(idGestionVenta);
+    async editarVenta(idGestionVenta: number, entradaDto: EntradaDto): Promise<EntradaVentaEntity> {
+        // Buscar la venta por su ID
+        const venta = await this.entradaVentaRepository.findOne({ where: {idGestionVenta}});
         if (!venta) {
-            throw new NotFoundException(new MessageDto('No existe la venta'));
-        }
-        if (venta !== venta) {
-            throw new BadRequestException(new MessageDto('La venta ya existe'));
-        }
-        venta.fechaExtraccionOro = dto.fechaExtraccionOro || venta.fechaExtraccionOro;
-        venta.precioOro = dto.precioOro || venta.precioOro;
-        venta.cantidad = dto.cantidad || venta.cantidad;
-        try {
-            await this.entradaVentaRepository.save(venta);
-            return new MessageDto('Datos de la venta editados exitosamente');
-        } catch (error) {
-            throw new InternalServerErrorException(new MessageDto('Error al editar la venta'));
-        }
+            throw new NotFoundException('Venta no encontrada');
+        } // Actualizar los campos de la venta con los datos del DTO
+        venta.fechaExtraccionOro = entradaDto.fechaExtraccionOro;
+        venta.precioOro = entradaDto.precioOro;
+        venta.cantidad = entradaDto.cantidad;
+
+        // Guardar los cambios en la base de datos
+        await this.entradaVentaRepository.save(venta);
+
+        return venta;
     }
-    // Método para editar la salida de la venta
+    // Método para editar la venta
 
     async desactivarVenta(idGestionVenta: number, dto: EstadoVentaDto): Promise<any> {
         const venta = await this.consultarVenta(idGestionVenta);
@@ -197,15 +194,15 @@ export class VentaService {
             where: {
                 entrada: { idGestionVenta: entrada.idGestionVenta }
             },
-            relations: ['entrada']    
+            relations: ['entrada']
         });
         if (!salidaVenta) {
-            throw new NotFoundException(new MessageDto('No existe ese registro')); 
+            throw new NotFoundException(new MessageDto('No existe ese registro'));
         }
         return salidaVenta;
     }
     // Método para consultar la salida de la venta
-    
+
 
     async generarReporteVenta(): Promise<EntradaVentaEntity[]> {
         const reporte = await this.entradaVentaRepository.find({

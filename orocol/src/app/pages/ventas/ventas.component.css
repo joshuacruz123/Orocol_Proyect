@@ -1,12 +1,16 @@
+body {
+    background-color: rgb(252, 248, 181);
+}
+
 table, .div-boton {
-    width: 1300px;
+    width: 1400px;
 }
 
 .busqueda {
     margin-top: 20px;
-    margin-left: 250px;
+    margin-left: 370px;
     height: 45px;
-    width: 300px;
+    width: 400px;
 }
 
 th, td {
