@@ -3,13 +3,13 @@
 <form [formGroup]="ventaForm" (ngSubmit)="editarVenta()">
 
     <label for="fechaExtraccionOro">Fecha extracción de oro:</label>
-    <input type="date" formControlName="fechaExtraccionOro" required>
+    <input type="date" formControlName="fechaExtraccionOro">
 
     <label for="precioOro">Precio Oro:</label>
-    <input type="number" formControlName="precioOro" required>
+    <input type="number" formControlName="precioOro">
 
     <label for="cantidad">Cantidad:</label>
-    <input type="number" formControlName="cantidad" required>
+    <input type="number" formControlName="cantidad">
     <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!ventaForm.valid">Editar</button>
 </form>
 }

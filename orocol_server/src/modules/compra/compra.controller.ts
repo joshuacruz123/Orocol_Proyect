@@ -31,7 +31,7 @@ export class CompraController {
 
     @RolDecorator(RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Post(':idGestionVenta')
+    @Post(':idGestionVenta/:idAdmin')
     async registrarCompra(@Param('idGestionVenta') idGestionVenta: number, @Param('idAdmin') idAdmin: number,
         @Body() dto: CompraDto,
     ): Promise<any> {
@@ -42,11 +42,11 @@ export class CompraController {
     @UseGuards(JwtAuthGuard, RolesGuard) 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':IdCliente')
-    async editarNovedad(@Param('IdCliente', ParseIntPipe) IdCliente: number, @Body() dto: CompraDto) {
+    async editarCompra(@Param('IdCliente', ParseIntPipe) IdCliente: number, @Body() dto: CompraDto) {
         return await this.compraService.editarCompra(IdCliente, dto);
     }  
 
-     @RolDecorator(RolNombre.ADMINISTRADOR)
+    @RolDecorator(RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard) 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put('compra/:IdCliente')

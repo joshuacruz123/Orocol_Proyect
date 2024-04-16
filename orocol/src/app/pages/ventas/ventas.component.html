@@ -10,7 +10,6 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div id="tablaVents">
-
                             <div class="table-responsive">
                                 <div class="bg-dark div-boton">
                                     <a type="button" class="btn btn-primary btn-lg"
@@ -45,10 +44,9 @@
                                                     (click)="detalleVenta(item.idGestionVenta)"><mat-icon>search</mat-icon> Ver detalle</button>
                                                 @if (item.estadoVenta === 'Activo') {
                                                     <button class="btn btn-success" type="button"
-                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
+                                                    (click)="agregarCompra(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
                                                 } @else {
-                                                    <button class="btn btn-success" type="button" disabled
-                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
+                                                    <button class="btn btn-success" type="button" disabled><mat-icon>add</mat-icon> Registrar compra</button>
                                                 }
                                                 <button class="btn btn-warning text-white" type="button"
                                                     (click)="editarVenta(item.idGestionVenta)"><mat-icon>edit</mat-icon> Editar venta</button>

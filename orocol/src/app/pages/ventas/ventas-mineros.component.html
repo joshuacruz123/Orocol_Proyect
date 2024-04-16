@@ -1,86 +1,65 @@
 <body>
     <app-encabezado></app-encabezado>
-        <div class="row">
-            <div class="barra-lateral col-6 col-sm-auto">
-                <app-nav-minero></app-nav-minero>
-            </div>
-            <main class="main col">
-                <nav class="search-container">
-                    <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
-                    <button class="search-button" id="search-button">Buscar</button>
-                </nav>
-                <script>
-                    function buscar() {
-                        var input = document.getElementById('search-input').value;
-                        alert('Has buscado: ' + input);
-                    }
-                    document.getElementById('search-button').addEventListener('click', buscar);
-                </script>
-                <br>
-                <div class="contenendorstyle" class="container">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    Agregar venta
+    <div class="row">
+        <div class="barra-lateral col-6 col-sm-auto">
+            <app-nav-minero></app-nav-minero>
+        </div>
+        <main class="main col">
+            <br>
+            <div class="contenendorstyle" class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div id="tablaVents">
+                            <div class="table-responsive">
+                                <div class="bg-dark div-boton">
+                                    <a type="button" class="btn btn-primary btn-lg"
+                                    (click)="agregarVenta()"><mat-icon>add</mat-icon> Registrar Venta</a>
+                                    <input type="text" class="busqueda" placeholder="Buscar venta..."
+                                        (input)="buscarVenta($event)">
                                 </div>
-                                <div class="card" class="card-body">
-                                    <form method="post" action="" class="form">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha Exportacion de Oro</label>
-                                            <input type="date" class="form-control" name="" id="" aria-describedby="helpId"
-                                                placeholder="Seleccione la fecha de la extarccion de oro">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Precio del Oro</label>
-                                            <input type="number" class="form-control" name="" id=""
-                                                aria-describedby="helpId" placeholder="Digite el precio del Oro">
-                                        </div>
-                                        <input name="" id="" class="btn btn-primary"
-                                            style="background-color: white; color:black;" type="submit" value="Agregar +">
-                                    </form>
-                                </div>
-                                <div class="card-footer text-muted">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div>
-                                <table class="tabla" class="table table-primary">
+                                <table class="table table-hover table-dark table-sm">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Fecha Exportacion de Oro</th>
-                                            <th scope="col">Precio del Oro</th>
-                                            <th scope="col">Accion</th>
+                                            <th scope="col">Venta</th>
+                                            <th scope="col">Fecha extracción de oro</th>
+                                            <th scope="col">Precio del oro</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Estado de la venta</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="">
-                                            <td scope="row">Item</td>
-                                            <td>Item</td>
-                                            <td>Item</td>
+                                    @if (!sinLista) {
+                                    <tbody class="table-secondary">
+                                        @for (item of ventaListFiltro; track $index) {
+                                        <tr>
+                                            <td scope="row">{{item.producto.TipoOro}}</td>
+                                            <td> {{item.fechaExtraccionOro}}</td>
+                                            <td> {{item.precioOro}} </td>
+                                            <td> {{item.cantidad}} </td>
+                                            <td> {{item.estadoVenta}} </td>
                                             <td>
-                                                <div class="btn-group-vertical" role="group"
-                                                    aria-label="Vertical button group">
-                                                    <form class="form-inline" method="get" action="">
-                                                        <button class="btn btn-warning" type="submit"><a
-                                                                href="Editar_venta_min"
-                                                                style="text-decoration: none; color: white;">Editar</a></button>
-                                                    </form>
-    
-                                                </div>
+                                                <button class="btn btn-info text-white" type="button"
+                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>search</mat-icon> Ver detalle</button>
                                             </td>
                                         </tr>
+                                        }
                                     </tbody>
+                                    }
+                                    @if (sinLista) {
+                                    <tbody>
+                                        <div class="p-3 mb-2 bg-dark text-white text-center">
+                                            <h2>No hay ventas en la lista</h2>
+                                        </div>
+                                    </tbody>
+                                    }
                                 </table>
                             </div>
-    
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
+    </div>
     <app-pie></app-pie>
-</body> 
+</body>
 <router-outlet />

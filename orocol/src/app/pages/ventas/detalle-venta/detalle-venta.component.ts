@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VentasInterface } from '../../../core/interfaces/venta.interface';
 import { VentasService } from '../../../core/services/ventas.service';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -19,7 +18,6 @@ export class DetalleVentaComponent implements OnInit{
   
   constructor(
     public ventaService: VentasService,
-    private toastr: ToastrService,
     public dialogRef: MatDialogRef<DetalleVentaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { idGestionVenta: number }
   ) {
@@ -40,7 +38,7 @@ export class DetalleVentaComponent implements OnInit{
     } else {
       console.error('No existe.');
     }
-  }
+  } 
   
   cancelar() {
     this.dialogRef.close(false);

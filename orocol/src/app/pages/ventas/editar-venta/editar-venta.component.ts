@@ -39,7 +39,6 @@ export class EditarVentaComponent implements OnInit {
   ngOnInit(): void {
     this.ventaService.consultarVenta(this.idGestionVenta).subscribe((data: VentasInterface)=>{
       this.ventas = data;
-
       // Inicialización del formulario dentro del bloque subscribe
       this.ventaForm = new FormGroup({
         fechaExtraccionOro: new FormControl(this.ventas.fechaExtraccionOro, [Validators.required]),

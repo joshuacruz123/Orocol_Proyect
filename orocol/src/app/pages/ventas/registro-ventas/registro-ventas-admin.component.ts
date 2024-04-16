@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { VentasService } from '../../../core/services/ventas.service';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
@@ -20,7 +19,6 @@ export class RegistroVentasAdminComponent {
   constructor(
     private ventaService: VentasService,
     private toastr: ToastrService,
-    private router: Router,
     public dialogRef: MatDialogRef<RegistroVentasAdminComponent>,
     private fb: FormBuilder
   ) {
@@ -46,7 +44,7 @@ export class RegistroVentasAdminComponent {
     this.ventaService.registrarVentaAdmin(numero_documento, TipoOro, this.ventaForm.value).subscribe(
       response => {
         this.toastr.success(response.message, 'OK', {
-          timeOut: 3000
+          timeOut: 3000 
         });
       },
       error => {

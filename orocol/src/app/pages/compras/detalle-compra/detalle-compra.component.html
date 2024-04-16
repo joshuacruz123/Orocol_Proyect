@@ -1,0 +1,9 @@
+<li><strong>Producto:</strong> {{ compra.salidaVentas.entrada?.producto?.TipoOro }}</li>
+<li><strong>Nombre del comprador:</strong> {{ compra.NombreCompleto }}</li>
+<li><strong>Empresa:</strong> {{ compra.Empresa }}</li>
+<li><strong>País:</strong> {{ compra.Pais }}</li>
+<li><strong>Ciudad/Municipio:</strong> {{ compra.CiudadMunicipio }}</li>
+<li><strong>Fecha de exportacion:</strong> {{ compra.FechaExportacion }}</li>
+<li><strong>Peso del oro:</strong> {{ compra.salidaVentas.PesogrOro }}</li>
+<li><strong>Estado de la compra:</strong> {{ compra.estadoCompra }}</li>
+<button type="button" (click)="cancelar()" mat-button>Cerrar</button>

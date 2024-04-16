@@ -5,104 +5,63 @@
             <app-nav-admin></app-nav-admin>
         </div>
         <main class="main col">
-            <nav class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
-                <button class="search-button" id="search-button">Buscar</button>
-            </nav>
-            <script>
-                function buscar() {
-                    var input = document.getElementById('search-input').value;
-                    alert('Has buscado: ' + input);
-                }
-                document.getElementById('search-button').addEventListener('click', buscar);
-            </script>
             <br>
-            <div class="contenendorstyle container">
+            <div class="contenendorstyle" class="container">
                 <div class="row">
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-header">
-                                Agregar Cliente
+                    <div class="col-md-10">
+                        <div id="tablaVents">
+                            <div class="table-responsive">
+                                <div class="bg-dark div-boton">
+                                    <a type="button" class="btn btn-secondary btn-lg"
+                                        (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar
+                                        reporte de compras</a>
+                                </div>
+                                <table class="table table-hover table-dark table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Nombre del comprador</th>
+                                            <th scope="col">Empresa</th>
+                                            <th scope="col">País</th>
+                                            <th scope="col">Estado compra</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    @if (!sinLista) {
+                                    <tbody class="table-secondary">
+                                        @for (item of compraList; track $index) {
+                                        <tr>
+                                            <td scope="row">{{item.salidaVentas.entrada?.producto?.TipoOro}}</td>
+                                            <td> {{item.NombreCompleto}}</td>
+                                            <td> {{item.Empresa}} </td>
+                                            <td> {{item.Pais}} </td>
+                                            <td> {{item.estadoCompra}} </td>
+                                            <td>
+                                                <button class="btn btn-info text-white" type="button"
+                                                    (click)="detalleCompra(item.IdCliente)"><mat-icon>search</mat-icon>
+                                                    Ver detalle</button>
+                                                <button class="btn btn-warning text-white" type="button"
+                                                    (click)="editarCompra(item.IdCliente)"><mat-icon>edit</mat-icon>
+                                                    Editar compra</button>
+                                                @if (item.estadoCompra === 'En proceso') {
+                                                <button class="btn btn-danger" type="button"
+                                                    (click)="inactivarCompra(item.IdCliente)"><mat-icon>toggle_off</mat-icon>
+                                                    Terminar compra</button>
+                                                }
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                    }
+                                    @if (sinLista) {
+                                    <tbody>
+                                        <div class="p-3 mb-2 bg-dark text-white text-center">
+                                            <h2>No hay compras en la lista</h2>
+                                        </div>
+                                    </tbody>
+                                    }
+                                </table>
                             </div>
-                            <div class="card-body">
-                                <form method="post" action="" class="form">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Nombre Completo</label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite el nombre completo del cliente">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Empresa</label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite la empresa del cliente">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Pais</label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite el pais del cliente">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Ciudad/Municipio</label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite la ciudad o el municipio">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Fecha de Exportacion</label>
-                                        <input type="date" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Seleccion la fecha de la exportacion">
-                                    </div>
-                                    <input name="" id="" class="btn btn-primary"
-                                        style="background-color: white; color:black;" type="submit" value="Agregar +">
-                                </form>
-                            </div>
-                            <div class="card-footer text-muted">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div>
-                            <table class="tabla table table-primary">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">NombreCompleto</th>
-                                        <th scope="col">Empresa</th>
-                                        <th scope="col">Pais</th>
-                                        <th scope="col">Ciudad</th>
-                                        <th scope="col">Exportacion</th>
-                                        <th scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td scope="row">Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>
-                                            <div class="btn-group-vertical" role="group"
-                                                aria-label="Vertical button group">
-                                                <form class="form-inline" method="get" action="">
-                                                    <button class="btn btn-warning" type="submit">
-                                                        <a href="EditarCl.html"
-                                                            style="text-decoration: none; color: white;">Editar</a>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group-vertical" role="group"
-                                                aria-label="Vertical button group">
-                                                <form class="form-inline" method="post" action="">
-                                                    <button class="btn btn-danger" type="submit">Inactivar</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

@@ -3,23 +3,20 @@
         <div class="card-header">
             Agregar venta
         </div>
-        <div class="card" class="card-body">
-            <form method="post" action="" class="form">
-                <div class="mb-3">
-                    <label for="" class="form-label">Fecha Exportacion de Oro</label>
-                    <input type="date" class="form-control" name="" id="" aria-describedby="helpId"
-                        placeholder="Seleccione la fecha de la extarccion de oro">
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Precio del Oro</label>
-                    <input type="number" class="form-control" name="" id=""
-                        aria-describedby="helpId" placeholder="Digite el precio del Oro">
-                </div>
-                <input name="" id="" class="btn btn-primary"
-                    style="background-color: white; color:black;" type="submit" value="Agregar +">
-            </form>
-        </div>
-        <div class="card-footer text-muted">
-        </div>
+        <form [formGroup]="ventaForm" (ngSubmit)="crearVenta()">
+            <label for="TipoOro">Tipo de Oro:</label>
+            <input type="text" formControlName="TipoOro" required>
+            
+            <label for="fechaExtraccionOro">Fecha Extracción Oro:</label> 
+            <input type="date" formControlName="fechaExtraccionOro" required>
+            
+            <label for="precioOro">Precio Oro:</label>
+            <input type="number" formControlName="precioOro" required>
+            
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" formControlName="cantidad" required>
+            <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+            <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar Venta</button>
+          </form>          
     </div>
 </div>

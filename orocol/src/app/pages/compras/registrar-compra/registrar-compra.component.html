@@ -1,1 +1,29 @@
-<p>registrar-compra works!</p>
+<div class="col-md-5">
+    <div class="card">
+        <div class="card-header">
+            Agregar venta
+        </div>
+        <form [formGroup]="compraForm" (ngSubmit)="crearCompra()">
+            <label for="NombreCompleto">Nombre completo del cliente:</label>
+            <input type="text" formControlName="NombreCompleto" required>
+            
+            <label for="Empresa">Nombre de la empresa:</label>
+            <input type="text" formControlName="Empresa" required>
+            
+            <label for="Pais">País:</label>
+            <input type="text" formControlName="Pais" required>
+            
+            <label for="CiudadMunicipio">Ciudad/Municipio:</label>
+            <input type="text" formControlName="CiudadMunicipio" required>
+            
+            <label for="FechaExportacion">Fecha exportación de oro:</label> 
+            <input type="date" formControlName="FechaExportacion" required>
+            
+            <label for="PesogrOro">Peso del oro (Gramos):</label>
+            <input type="number" formControlName="PesogrOro" required>
+
+            <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+            <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar compra</button>
+          </form>          
+    </div>
+</div>

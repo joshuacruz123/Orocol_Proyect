@@ -15,6 +15,7 @@ import { RegistroVentasAdminComponent } from './registro-ventas/registro-ventas-
 import { jsPDF } from 'jspdf';
 import autoTable, { CellInput } from 'jspdf-autotable';
 import { ReporteVentasInterface } from '../../core/interfaces/reporte-venta.interface';
+import { RegistrarCompraComponent } from '../compras/registrar-compra/registrar-compra.component';
 
 @Component({
   selector: 'app-ventas',
@@ -29,7 +30,6 @@ export class VentasComponent {
   ventaList: VentasInterface[] = [];
   sinLista = undefined;
   ventaListFiltro: VentasInterface[] = [];
-  // producto: ProductosInterface[] = [];
 
   constructor(
     private ventaService: VentasService,
@@ -114,6 +114,20 @@ export class VentasComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
+        this.consultarVentas();
+      }
+    });
+  }
+
+  agregarCompra(idGestionVenta?: number) {
+    const dialogRef = this.dialog.open(RegistrarCompraComponent, {
+      width: '550px',
+      disableClose: true,
+      data: { idGestionVenta: idGestionVenta }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.consultarVentas();
       }
@@ -149,7 +163,6 @@ export class VentasComponent {
   }
 
   /* Código para generar reportes*/
-
   convertirDatos(data: ReporteVentasInterface[]): CellInput[][] {
     return data.map(reporte => [
       `${reporte.minero.usuario.nombreUsuario} ${reporte.minero.usuario.apellidosUsuario}`,

@@ -1,4 +1,4 @@
-import { SalidaVentasInterface } from '../../core/interfaces/salida-venta.interface';
+import { VentasInterface } from '../../core/interfaces/venta.interface';
 
 export interface ComprasInterface {
     IdCliente: number;
@@ -8,5 +8,9 @@ export interface ComprasInterface {
     CiudadMunicipio: string;
     FechaExportacion: Date;
     estadoCompra: string;
-    salidaVentas: SalidaVentasInterface;
+    salidaVentas: { 
+        IdSalidaVenta: number;
+        PesogrOro: number;
+        entrada?: VentasInterface;
+    };
 }
