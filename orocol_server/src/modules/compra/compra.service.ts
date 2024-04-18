@@ -95,7 +95,7 @@ export class CompraService {
         nuevaCompra.Empresa = dto.Empresa;
         nuevaCompra.Pais = dto.Pais;
         nuevaCompra.CiudadMunicipio = dto.CiudadMunicipio;
-        nuevaCompra.FechaExportacion = dto.FechaExportacion;
+        nuevaCompra.FechaExportacion = new Date (dto.FechaExportacion);
         nuevaCompra.salidaVentas = nuevaSalida;
         try {
             await this.salidaVentaRepository.save(nuevaSalida);
@@ -104,7 +104,7 @@ export class CompraService {
         } catch (error) {
             throw new InternalServerErrorException(new MessageDto(`Error al registrar compra: ${error.message || error}`))
         }
-    } 
+    }
     // Método para registrar las salidas de las ventas
     
     async editarCompra(IdCliente: number, dto: CompraDto): Promise<any> {
@@ -119,7 +119,7 @@ export class CompraService {
         dto.Empresa ? compra.Empresa = dto.Empresa : compra.Empresa;
         dto.Pais ? compra.Pais = dto.Pais : compra.Pais;
         dto.CiudadMunicipio ? compra.CiudadMunicipio = dto.CiudadMunicipio : compra.CiudadMunicipio;
-        dto.FechaExportacion ? compra.FechaExportacion = dto.FechaExportacion : compra.FechaExportacion;
+        dto.FechaExportacion ? compra.FechaExportacion = new Date(dto.FechaExportacion) : compra.FechaExportacion;
         dto.PesogrOro ? compra.salidaVentas.PesogrOro = dto.PesogrOro : compra.salidaVentas.PesogrOro;
         try {
             // Guardar el compra en la base de datos

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, MaxLength, Min } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, MaxLength, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 
 export class CompraDto {
@@ -19,14 +19,12 @@ export class CompraDto {
     @MaxLength(80, {message: 'nombre: longitud máxima de 60'})
     CiudadMunicipio: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    @IsNotBlank({message: 'El La fecha no puede estar vacía'})
-    FechaExportacion: Date;
+    @IsNotEmpty({ message: 'El La fecha no puede estar vacía' })
+    @IsDateString({ message: 'FechaExportacion debe ser una fecha válida' })
+    FechaExportacion: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    @IsNotBlank({message: 'El peso del oro no puede estar vacío'})
-    @Min(1, {message: 'el peso debe de ser al menos de 1 gramo'})
+    @IsNumber({}, { message: 'El peso del oro debe ser un número' })
+    @IsNotEmpty({ message: 'El peso del oro no puede estar vacío' })
+    @Min(1, { message: 'el peso debe de ser al menos de 1 gramo' })
     PesogrOro: number;
 }  

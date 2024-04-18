@@ -127,13 +127,12 @@ export class VentaService {
     }
     // Método para consultar la venta de entrada
 
-    async editarVenta(idGestionVenta: number, entradaDto: EntradaDto): Promise<EntradaVentaEntity> {
-        // Buscar la venta por su ID
+    async editarVent(idGestionVenta: number, entradaDto: EntradaDto): Promise<EntradaVentaEntity> {
         const venta = await this.entradaVentaRepository.findOne({ where: {idGestionVenta}});
         if (!venta) {
             throw new NotFoundException('Venta no encontrada');
         } // Actualizar los campos de la venta con los datos del DTO
-        venta.fechaExtraccionOro = entradaDto.fechaExtraccionOro;
+        venta.fechaExtraccionOro = new Date (entradaDto.fechaExtraccionOro);
         venta.precioOro = entradaDto.precioOro;
         venta.cantidad = entradaDto.cantidad;
 
@@ -141,6 +140,24 @@ export class VentaService {
         await this.entradaVentaRepository.save(venta);
 
         return venta;
+    }
+    async editarVenta(idGestionVenta: number, entradaDto: EntradaDto): Promise<any> {
+        const venta = await this.consultarVenta(idGestionVenta);
+        if (!venta) {
+            throw new NotFoundException(new MessageDto('No existe la venta'));
+        }
+        if (idGestionVenta !== idGestionVenta) {
+            throw new BadRequestException(new MessageDto('Esa venta ya existe'));
+        }
+        entradaDto.fechaExtraccionOro ? venta.fechaExtraccionOro = new Date(entradaDto.fechaExtraccionOro) : venta.fechaExtraccionOro;
+        entradaDto.precioOro ? venta.precioOro = entradaDto.precioOro : venta.precioOro;
+        entradaDto.cantidad ? venta.cantidad = entradaDto.cantidad : venta.cantidad;
+        try {
+            await this.entradaVentaRepository.save(venta);
+            return new MessageDto(`Los datos de la venta de ${venta.producto.TipoOro} editados`);
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al editar la información'));
+        } 
     }
     // Método para editar la venta
 

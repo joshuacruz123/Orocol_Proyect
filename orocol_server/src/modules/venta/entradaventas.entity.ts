@@ -12,10 +12,10 @@ export class EntradaVentaEntity {
   @Column({ type: 'date' })
   fechaExtraccionOro: Date;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'float', nullable: false })
   precioOro: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'float', nullable: false })
   cantidad: number;
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})
@@ -27,7 +27,7 @@ export class EntradaVentaEntity {
   
   @ManyToOne(() => ProductoEntity, (producto) => producto.entradaVentas)
   @JoinColumn({ name: 'IdProducto' })
-  producto: ProductoEntity;
+  producto: ProductoEntity; 
 
   @OneToOne(() => SalidaVentaEntity, (salida) => salida.entrada)
   salida: SalidaVentaEntity;
