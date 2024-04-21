@@ -10,8 +10,6 @@ import { EditarMineroComponent } from './pages/minero/editar-minero/editar-miner
 import { ProductosComponent } from './pages/productos/productos.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { ComprasComponent } from './pages/compras/compras.component';
-import { ReporteComprasComponent } from './pages/compras/reporte-compras/reporte-compras.component';
-import { RepoteVentasComponent } from './pages/ventas/repote-ventas/repote-ventas.component';
 import { NovedadesComponent } from './pages/minero/novedades/novedades.component';
 import { TurnosComponent } from './pages/minero/turnos/turnos.component';
 import { IndicadoresFinancierosComponent } from './pages/indicadores-financieros/indicadores-financieros.component';
@@ -40,8 +38,6 @@ export const routes: Routes = [ // joshuacruz@gmail.com JoshuaDeveloper2506
     {path: 'ventas', title: 'Ventas', component: VentasComponent},
     {path: 'ventas_minero', title: 'Ventas', component: VentasMinerosComponent},
     {path: 'compras', title: 'Compras', component: ComprasComponent},
-    {path: 'repote_ventas', title: 'Reportes de ventas', component: RepoteVentasComponent},
-    {path: 'reporte_compras', title: 'Reportes de compras', component: ReporteComprasComponent},
     {path: 'ver_asistencias', title: 'Asistencia de mineros', component: TurnosComponent},
     {path: 'asistencias', title: 'Registrar asistencia', component: AsistenciasMinerosComponent},
     {path: 'novedades', title: 'Novedades', component: NovedadesComponent},

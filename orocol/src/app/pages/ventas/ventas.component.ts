@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../../shared/footer/pie.component';
 import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
@@ -57,9 +57,9 @@ export class VentasComponent {
     const busqueda = event?.target?.value.trim().toLowerCase() || '';
     this.ventaListFiltro = this.ventaList.filter(venta =>
       venta.estadoVenta.toLowerCase().includes(busqueda) ||
-      (venta.fechaExtraccionOro instanceof Date && venta.fechaExtraccionOro.toLocaleString().toLowerCase().includes(busqueda)) || //Error: Property 'toLowerCase' does not exist on type 'Date'.ts(2339)
-      venta.cantidad.toString().toLowerCase().includes(busqueda) || //Error: Property 'toLowerCase' does not exist on type 'number'.ts(2339)
-      venta.precioOro.toString().toLowerCase().includes(busqueda) //Error: Property 'toLowerCase' does not exist on type 'number'.ts(2339)
+      (venta.fechaExtraccionOro instanceof Date && venta.fechaExtraccionOro.toLocaleString().toLowerCase().includes(busqueda)) ||
+      venta.cantidad.toString().toLowerCase().includes(busqueda) || 
+      venta.precioOro.toString().toLowerCase().includes(busqueda) 
     );
   }
 

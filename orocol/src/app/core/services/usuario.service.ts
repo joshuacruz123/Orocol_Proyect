@@ -51,4 +51,9 @@ export class UsuarioService {
   consultarMinero(IdMinero:number): Observable<any> {
     return this.http.get(this.mineroURL + IdMinero)
   }
+
+  inactivarCuenta(id: number, estadoUsuario: string): Observable<any> {
+    const body = { estadoUsuario: estadoUsuario };
+    return this.http.put(`${this.usuarioURL}${id}`, body)
+  }
 }

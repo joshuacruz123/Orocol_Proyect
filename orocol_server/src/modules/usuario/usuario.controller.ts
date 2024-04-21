@@ -75,13 +75,4 @@ export class UsuarioController {
     async consultarPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number) {
         return await this.usuarioService.consultarPerfil(idUsuario);
     }
-    /*
-    @ApiBearerAuth()
-    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @UsePipes(new ValidationPipe({ whitelist: true }))
-    @Put('perfil/:idUsuario')
-    async editarFotoPerfil(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PerfilDto) {
-        return await this.usuarioService.editarFotoPerfil(idUsuario, dto);
-    } */
 }
