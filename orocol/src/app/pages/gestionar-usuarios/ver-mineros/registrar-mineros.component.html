@@ -1,0 +1,142 @@
+<mat-dialog-content class="mat-typography">
+<form [formGroup]="mineroForm" (ngSubmit)="registrarMineros()">
+    <div class="form-group">
+        <label class="obligatorio">*Obligatorio</label>
+        <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>person</mat-icon></font>
+                </span>
+            </div>
+            <input type="text" id="nombreUsuario" formControlName="nombreUsuario" class="inputt" placeholder="Nombre">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="apellidosUsuario">Apellido(s)</label>
+        <div class="input-group">
+
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>person</mat-icon></font>
+                </span>
+            </div>
+            <input type="text" id="apellidosUsuario" formControlName="apellidosUsuario" class="inputt nobligatorio"
+                placeholder="Apellido">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="correoUsuario">Correo Electrónico: <font color="red">*</font></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>mail</mat-icon></font>
+                </span>
+            </div>
+            <input type="email" id="correoUsuario" formControlName="correoUsuario" class="inputt"
+                placeholder="Correo electronico.">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="passwordUsuario">Contraseña <font color="red">*</font></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>key</mat-icon></font>
+                </span>
+            </div>
+            <input type="password" id="passwordUsuario" formControlName="passwordUsuario" class="inputt"
+                placeholder="Crear contraseña">
+        </div>
+    </div>
+    <div class="form-group">
+        <input class="form-check-input" type="checkbox" (click)="verPassword()">
+        <label class="form-check-label"> 
+            Mostrar contraseña
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label for="tipo_documento">Tipo de documento <font color="red">*</font></label>
+        <div class="input-group">
+            <span class="input-group-text bg-dark text-white">
+                <font color="white"><mat-icon>badge</mat-icon></font>
+            </span>
+            <select id="tipo_documento" formControlName="tipo_documento">
+                <option value="Cedula de ciudadania">Cedula de ciudadania</option>
+                <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pwd">Número de documento: <font color="red">*</font></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>assignment_ind</mat-icon></font>
+                </span>
+            </div>
+            <input type="number" id="numero_documento" formControlName="numero_documento" class="inputt"
+            placeholder="Número de documento">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pwd">Número de teléfono: <font color="red">*</font></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>phone_iphone</mat-icon></font>
+                </span>
+            </div>
+            <input type="number" id="telefono" formControlName="telefono" class="inputt" placeholder="Número telefónico">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pwd">Fecha de nacimiento: <font color="red">*</font></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>calendar_month</mat-icon></font>
+                </span>
+            </div>
+            <input type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento" class="inputt">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="usuario">Dirección de vivienda</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-white">
+                    <font color="white"><mat-icon>home_pin</mat-icon></font>
+                </span>
+            </div>
+            <input type="text" id="direccion_vivienda" formControlName="direccion_vivienda" class="inputt" placeholder="Direccion vivienda">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>¿Acepta que el administrador del sistema pueda editar su documento de identidad?</label>
+        <div class="form-check">
+            <label><input type="radio" formControlName="cambio_documento" value="Acepto"> Acepto</label>
+        </div>
+        <div class="form-check">
+            <label><input type="radio" formControlName="cambio_documento" value="No acepto"> No acepto</label>
+        </div>
+    </div>
+    <br>
+    <div class="botones">
+        <button type="submit" class="btn btn-primary" [disabled]="!mineroForm.valid">Registrar usuario</button>
+        <button class="btn btn-light active text-danger" type="reset">Borrar formulario</button>
+    </div>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+<button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

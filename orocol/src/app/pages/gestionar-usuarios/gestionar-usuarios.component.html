@@ -5,97 +5,24 @@
             <app-nav-admin></app-nav-admin>
         </div>
         <main class="main col">
-            <nav class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
-                <button class="search-button" id="search-button">Buscar</button>
-            </nav>
-            <script>
-                function buscar() {
-                    var input = document.getElementById('search-input').value;
-                    alert('Has buscado: ' + input);
-                }
-                document.getElementById('search-button').addEventListener('click', buscar);
-            </script>
-            <br>
-            <div class="contenendorstyle" class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-header">Agregar Usuario</div>
-                            <div class="card" class="card-body">
-                                <form method="post" action="" class="form">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Nombre de usuario</label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite el Nombre completo">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Apellido de Usuario</label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite el Apellido completo">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Correo electronico</label>
-                                        <input type="email" class="form-control" name="" id="" aria-describedby="helpId"
-                                            required placeholder="Digite la direccion del correo electronico">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">password</label>
-                                        <input type="password" class="form-control" name="" id=""
-                                            aria-describedby="helpId" required placeholder="Digite la clave">
-                                    </div>
-                                    <input name="" id="" class="btn btn-primary"
-                                        style="background-color: white; color:black;" type="submit" value="Agregar +">
-                                </form>
-                            </div>
-                            <div class="card-footer text-muted"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div>
-                            <table class="tabla" class="table table-primary">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nombre de usuario</th>
-                                        <th scope="col">Apellido de Usuario</th>
-                                        <th scope="col">Correo electronico</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="">
-                                        <td scope="row">Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                        <td>
-                                            <div class="btn-group-vertical" role="group"
-                                                aria-label="Vertical button group">
-                                                <form class="form-inline" method="get" action="">
-                                                    <button class="btn btn-warning" type="submit"><a
-                                                            href="Editar_usuario"
-                                                            style="text-decoration: none; color: white;">Editar</a></button>
-                                                </form>
-                                            </div>
-                                            <div class="btn-group-vertical" role="group"
-                                                aria-label="Vertical button group">
-                                                <form class="form-inline" method="post" action="">
-                                                    <button class="btn btn-danger" type="submit">Inactivar</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="radios">
+                <label>
+                    <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario"> Como
+                    administrador
+                </label>
+                <label>
+                    <input type="radio" name="tipoUsuario" value="Minero" [(ngModel)]="tipoUsuario">
+                    Como empleado (Minero)
+                </label>
             </div>
+            <div>
+            @if (tipoUsuario === 'Administrador') {
+            <app-ver-administradores></app-ver-administradores>
+            } </div>
+            <div>
+            @if (tipoUsuario === 'Minero') {
+            <app-ver-mineros></app-ver-mineros>
+            }</div>
         </main>
     </div>
     <app-pie></app-pie>

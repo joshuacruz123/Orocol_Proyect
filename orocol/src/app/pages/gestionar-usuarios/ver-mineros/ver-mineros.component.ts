@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PieComponent } from '../../../shared/footer/pie.component';
 import { EncabezadoComponent } from '../../../shared/encabezado/encabezado.component';
-import { NavMineroComponent } from '../../../shared/navbar-usuarios/nav-minero.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,11 +11,13 @@ import { GestionUsuariosService } from '../../../core/services/gestion-usuarios.
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { EditarUsuariosMinerosComponent } from '../editar-usuarios-mineros/editar-usuarios-mineros.component';
 import { DetalleMineroComponent } from './detalle-minero.component';
+import { NavAdminComponent } from '../../../shared/navbar-usuarios/nav-admin.component';
+import { RegistrarMinerosComponent } from './registrar-mineros.component';
 
 @Component({
   selector: 'app-ver-mineros',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavMineroComponent, PieComponent, MatIconModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavAdminComponent, PieComponent, MatIconModule],
   templateUrl: './ver-mineros.component.html',
   styleUrl: './ver-mineros.component.css'
 })
@@ -25,6 +26,7 @@ export class VerMinerosComponent {
   mineros: MineroInterface[] = [];
   sinLista = undefined;
   minerosFiltro: MineroInterface[] = [];
+  imagenPerfilUrl: string = '/assets/images/perfil.jpg';
 
   constructor(
     private gestionUsuarios: GestionUsuariosService,
@@ -40,6 +42,7 @@ export class VerMinerosComponent {
   consultarMineros() {
     this.gestionUsuarios.consultarMineros().subscribe({
       next: (result) => {
+        
         this.mineros = result;
         this.minerosFiltro = [...this.mineros];
       },
@@ -48,6 +51,10 @@ export class VerMinerosComponent {
       }
     });
   } // Función para ver las Mineros
+
+  obtenerFotoPerfil(fotoPerfil: string | undefined): string {
+    return fotoPerfil || this.imagenPerfilUrl;
+  }
 
   buscarMineros(event: any) {
     const busqueda = event?.target?.value.trim().toLowerCase() || '';
@@ -58,13 +65,25 @@ export class VerMinerosComponent {
     );
   }
 
-  inactivarMinero(IdMinero: number) {
-    const estado = 'Activo';
+  agregarMineos() {
+    const dialogRef = this.dialog.open(RegistrarMinerosComponent, {
+      width: '550px',
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
+        this.consultarMineros();
+      }
+    });
+  }
+
+  inactivarMinero(id: number) {
+    const estado = 'activo';
     let desactivarMinero;
     do {
-      desactivarMinero = confirm("¿Deseas inactivar este Minero?, si lo hace este Minero no se va a vender.");
+      desactivarMinero = confirm("¿Deseas inactivar este usuario?, si lo hace el usuario NO podrá iniciar sesión.");
       if (desactivarMinero) {
-        this.usuarioService.inactivarCuenta(IdMinero, estado).subscribe({
+        this.usuarioService.inactivarCuenta(id, estado).subscribe({
           next: () => {
             this.toastr.success('Minero inactivada correctamente');
             this.consultarMineros(); // Actualizar la lista de Mineros después de inactivar un Minero
@@ -81,10 +100,10 @@ export class VerMinerosComponent {
   } // Función para inactivar Minero
 
   activarMinero(id: number) {
-    const nuevoEstado = 'Activo';
+    const nuevoEstado = 'activo';
     let activarMinero;
     do {
-      activarMinero = confirm("¿Deseas activar este Minero?, si lo hace este Minero va a estar disponible a la Minero.");
+      activarMinero = confirm("¿Deseas reactivar este usuario?, si lo hace el usuario va a poder iniciar sesión.");
       if (activarMinero) {
         this.gestionUsuarios.activarUsuario(id, nuevoEstado).subscribe({
           next: () => {

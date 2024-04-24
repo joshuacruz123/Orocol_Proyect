@@ -26,11 +26,16 @@ export class MineroService {
     ) { }
 
     async consultarMineros(): Promise<MineroEntity[]> {
-        const lista = await this.mineroRepository.find({ relations: ['usuario.perfil'] });
+        const lista = await this.mineroRepository.find({ relations: ['usuario', 'usuario.perfil'] });
         if (!lista.length) {
             throw new NotFoundException(new MessageDto('No hay usuarios mineros'));
         }
-        return lista; 
+        return lista.map(minero => {
+            if (minero.usuario.perfil) {
+                minero.usuario.perfil.fotoPerfil = `${process.env.PERFIL_URL}${minero.usuario.perfil.fotoPerfil}`;
+            }
+            return minero;
+        });
     } 
     // Método para consultar usuarios mineros
 
@@ -38,20 +43,20 @@ export class MineroService {
         const minero = await this.mineroRepository.findOne({
             where: { IdMinero: IdMinero },
             relations: ['usuario.roles', 'usuario.perfil'],
-        }); 
+        });
         if (!minero) {
             throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
         }
         return minero;
-    } 
+    }
     // Método para consultar un usuarios minero
 
     async registrarUsuarioMinero(dto: mineroDto): Promise<MessageDto> {
-        const rolAdmin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.MINERO} });
-        if(!rolAdmin) throw new BadRequestException(new MessageDto('El rol de administrador no existe.'));
-        const {correoUsuario} = dto;
-        const exists = await this.usuarioRepository.findOne({ where: {correoUsuario: correoUsuario} });
-        if(exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
+        const rolAdmin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.MINERO } });
+        if (!rolAdmin) throw new BadRequestException(new MessageDto('El rol de administrador no existe.'));
+        const { correoUsuario } = dto;
+        const exists = await this.usuarioRepository.findOne({ where: { correoUsuario: correoUsuario } });
+        if (exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
         const nuevoUsuario = new UsuarioEntity();
         nuevoUsuario.nombreUsuario = dto.nombreUsuario;
         nuevoUsuario.apellidosUsuario = dto.apellidosUsuario;
@@ -60,12 +65,12 @@ export class MineroService {
         nuevoUsuario.roles = rolAdmin;
         const nuevoMinero = new MineroEntity();
         nuevoMinero.tipo_documento = dto.tipo_documento,
-        nuevoMinero.numero_documento = dto.numero_documento,
-        nuevoMinero.cambio_documento = dto.cambio_documento,
-        nuevoMinero.telefono = dto.telefono,
-        nuevoMinero.fecha_nacimiento = dto.fecha_nacimiento,
-        nuevoMinero.direccion_vivienda = dto.direccion_vivienda,
-        nuevoMinero.usuario = nuevoUsuario;
+            nuevoMinero.numero_documento = dto.numero_documento,
+            nuevoMinero.cambio_documento = dto.cambio_documento,
+            nuevoMinero.telefono = dto.telefono,
+            nuevoMinero.fecha_nacimiento = dto.fecha_nacimiento,
+            nuevoMinero.direccion_vivienda = dto.direccion_vivienda,
+            nuevoMinero.usuario = nuevoUsuario;
         try {
             await this.usuarioRepository.save(nuevoUsuario);
             await this.mineroRepository.save(nuevoMinero);
@@ -75,7 +80,7 @@ export class MineroService {
         }
     }
     // Método para registrar usuario administrador
-  
+
     async editarMinero(IdMinero: number, dto: mineroDto): Promise<any> {
         const minero = await this.consultarMinero(IdMinero);
         if (!minero) {
@@ -108,7 +113,7 @@ export class MineroService {
         const minero: MineroEntity = await this.consultarMinero(IdMinero);
         if (!minero) {
             throw new InternalServerErrorException(
-              new MessageDto('Ese usuario no existe'),
+                new MessageDto('Ese usuario no existe'),
             );
         }
         const turno: TurnoMineroEntity = new TurnoMineroEntity();
@@ -138,7 +143,7 @@ export class MineroService {
         return turnos;
     }
     // Método para consultar las turnos
-    
+
     async consultarTurno(idTurno: number): Promise<TurnoMineroEntity> {
         const minero: MineroEntity = await this.consultarMinero(idTurno);
         if (!minero) {
@@ -148,10 +153,10 @@ export class MineroService {
             where: {
                 minero: { IdMinero: minero.IdMinero }
             },
-            relations: ['minero.usuario']    
+            relations: ['minero.usuario']
         });
         if (!turno) {
-            throw new NotFoundException(new MessageDto('No existe ese registro')); 
+            throw new NotFoundException(new MessageDto('No existe ese registro'));
         }
         return turno;
     }

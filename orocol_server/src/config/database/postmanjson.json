@@ -84,6 +84,30 @@
       "telefono": 3186279600,
       "fecha_nacimiento": "2006-01-25",
       "direccion_vivienda": "Transversal 1b este #81d 84 sur"
+    },
+    {
+      "nombreUsuario": "Juan Santiago",
+      "apellidosUsuario": "García Pérez",
+      "correoUsuario": "juan.garcia@gmail.com",
+      "passwordUsuario": "contrasenna123",
+      "tipo_documento": "Cedula de Extranjeria",
+      "numero_documento": 1234567855,
+      "cambio_documento": "Acepto",
+      "telefono": 8388607,
+      "fecha_nacimiento": "1994-04-25",
+      "direccion_vivienda": "Calle Principal 123"
+    },
+    {
+      "nombreUsuario": "María José",
+      "apellidosUsuario": "López Martínez",
+      "correoUsuario": "marialopez@gmail.com",
+      "passwordUsuario": "seguraenorocol456",
+      "tipo_documento": "Cedula de ciudadania",
+      "numero_documento": 1398765432,
+      "cambio_documento": "Acepto",
+      "telefono": 123456789,
+      "fecha_nacimiento": "1987-10-14",
+      "direccion_vivienda": "Avenida Central 456"
     }
   ],
   "ejemploperfil": [
@@ -145,9 +169,14 @@
       "rol": "Minero"
     },
     {
-      "correoUsuario": "amcruzf04@gmail.com",
-      "passwordUsuario": "ajskahdjsjs",
-      "rol": "Administrador"
+      "correoUsuario": "juan.garcia@gmail.com",
+      "passwordUsuario": "contrasenna123",
+      "rol": "Minero"
+    },
+    {
+      "correoUsuario": "marialopez@gmail.com",
+      "passwordUsuario": "seguraenorocol456",
+      "rol": "Minero"
     }
   ],
   "turnominero": [

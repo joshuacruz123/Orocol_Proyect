@@ -1,0 +1,37 @@
+.fotosperfiles {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #030303;
+    object-fit: cover;
+    margin-left: 5px;
+    margin-top: 5x;
+}
+
+table, .div-boton {
+    width: 2000px;
+}
+
+.busqueda {
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 45px;
+    width: 400px;
+}
+
+th, td {
+  padding-left: 10px;
+}
+
+th {
+    font-size: 18px;
+}
+
+td button {
+    margin-right: 6px;
+}
+
+a {
+    margin-top: 5px;
+    margin-left: 10px;
+}

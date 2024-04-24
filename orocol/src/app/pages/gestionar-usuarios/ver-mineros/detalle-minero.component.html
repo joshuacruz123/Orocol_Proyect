@@ -1,1 +1,11 @@
-<p>detalle-minero works!</p>
+<img class="foto-perfil" [src]="imagenPerfilUrl" alt="Tu perfil" />
+<strong>Nombre del usuario: {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</strong>
+<strong>Correo: {{ minero.usuario.correoUsuario }}</strong>
+<strong>Tipo de documento: {{ minero.tipo_documento }}</strong>
+<strong>Número de documento: {{ minero.numero_documento }}</strong>
+<strong>Número de teléfono: {{ minero.telefono }}</strong>
+<strong>Fecha de nacimiento: {{ minero.fecha_nacimiento }}</strong>
+<strong>Direccion de vivienda: {{ minero.direccion_vivienda }}</strong>
+<strong>Cambio_documento: {{ minero.cambio_documento }}</strong>
+<strong>Estado del usuario: {{ minero.usuario.estadoUsuario }}</strong>
+<button type="button" (click)="cancelar()" mat-button>Cerrar</button>

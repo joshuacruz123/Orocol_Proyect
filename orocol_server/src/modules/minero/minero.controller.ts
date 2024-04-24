@@ -6,6 +6,7 @@ import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { MineroEntity } from './minero.entity';
 
 @ApiTags('Usuarios mineros')
 @Controller('minero')
@@ -17,7 +18,7 @@ export class MineroController {
     @Get()
     @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async consultarMineros() {
+    async consultarMineros(): Promise<MineroEntity[]> {
         return await this.mineroService.consultarMineros();
     } 
 

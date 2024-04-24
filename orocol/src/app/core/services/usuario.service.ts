@@ -44,7 +44,7 @@ export class UsuarioService {
     return this.http.get(this.adminURL + idAdmin)
   }
 
-  registrarMinero(usuarioData: any) {
+  registrarMinero(usuarioData: any): Observable<any> {
     return this.http.post(this.mineroURL, usuarioData);
   }
 

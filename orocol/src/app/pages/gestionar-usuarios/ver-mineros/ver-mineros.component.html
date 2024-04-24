@@ -1,1 +1,75 @@
-<p>ver-mineros works!</p>
+<br>
+<div class="contenendorstyle" class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div id="tablaVents">
+                <div class="table-responsive">
+                    <div class="bg-dark div-boton">
+                        <a type="button" class="btn btn-info text-white btn-lg"
+                            (click)="agregarMineos()">Registrar usuario minero <mat-icon>person_add</mat-icon></a>
+                        <input type="text" class="busqueda" placeholder="Buscar por nombre o número de documento"
+                            (input)="buscarMineros($event)">
+                    </div>
+                    <table class="table table-hover table-dark table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Correo electrónico</th>
+                                <th scope="col">Número de teléfono</th>
+                                <th scope="col">Tipo de documento</th>
+                                <th scope="col">Número de documento</th>
+                                <th scope="col">Estado del usuario</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        @if (!sinLista) {
+                        <tbody class="table-secondary">
+                            @for (item of minerosFiltro; track $index) {
+                            <tr>
+                                <td scope="row">
+                                    <img class="fotosperfiles" [src]="obtenerFotoPerfil(item.usuario.perfil?.fotoPerfil)"
+                                        alt="Tu perfil" />
+                                </td>
+                                <td> {{item.usuario.nombreUsuario}} {{item.usuario.apellidosUsuario}}</td>
+                                <td> {{item.usuario.correoUsuario}} </td>
+                                <td> {{item.telefono}} </td>
+                                <td> {{item.tipo_documento}} </td>
+                                <td> {{item.numero_documento}} </td>
+                                <td> {{item.usuario.estadoUsuario}} </td>
+                                <td>
+                                    <button class="btn btn-primary" type="button"
+                                        (click)="detalleMinero(item.IdMinero)"><mat-icon>person_search</mat-icon> Ver
+                                        detalle</button>
+                                    <button class="btn btn-info text-white" type="button">
+                                        <mat-icon>checklist</mat-icon> Ver asistencias</button>
+                                    <button class="btn btn-warning text-white" type="button"
+                                        (click)="editarMinero(item.IdMinero)"><mat-icon>manage_accounts</mat-icon> Editar usuario</button>
+                                    @if (item.usuario.estadoUsuario === 'inactivo') {
+                                    <button class="btn btn-success" type="button"
+                                        (click)="item.usuario.idUsuario !== undefined && activarMinero(item.usuario.idUsuario)">
+                                        Activar usuario <mat-icon>person</mat-icon></button>
+                                    } @else {
+                                    <button class="btn btn-danger" type="button"
+                                        (click)="item.usuario.idUsuario !== undefined && inactivarMinero(item.usuario.idUsuario)">
+                                        Inactivar usuario <mat-icon>person_off</mat-icon></button>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                        @if (sinLista) {
+                        <tbody>
+                            <div class="p-3 mb-2 bg-dark text-white text-center">
+                                <h2>No hay Ventas en la lista</h2>
+                            </div>
+                        </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet />

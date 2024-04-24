@@ -207,6 +207,6 @@ export class UsuarioService {
             fotoPerfilUrl = `${process.env.PERFIL_URL}${usuario.perfil.fotoPerfil}`;
         }
         return {usuario, fotoPerfilUrl};
-    }    
+    }   
     // Método para consultar el perfil del usuario
 }

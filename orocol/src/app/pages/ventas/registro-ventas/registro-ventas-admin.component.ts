@@ -35,14 +35,12 @@ export class RegistroVentasAdminComponent {
     this.dialogRef.close(false);
   }
 
-  ngOnInit(): void {
-  }
-
   crearVenta() {
     const { numero_documento, TipoOro } = this.ventaForm.value;
     console.log(this.ventaForm.value);
     this.ventaService.registrarVentaAdmin(numero_documento, TipoOro, this.ventaForm.value).subscribe(
       response => {
+        this.dialogRef.close(true);
         this.toastr.success(response.message, 'OK', {
           timeOut: 3000 
         });

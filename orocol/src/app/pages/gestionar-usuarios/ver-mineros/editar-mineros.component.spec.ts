@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RepoteVentasComponent } from './repote-ventas.component';
+import { EditarMinerosComponent } from './editar-mineros.component';
 
-describe('RepoteVentasComponent', () => {
-  let component: RepoteVentasComponent;
-  let fixture: ComponentFixture<RepoteVentasComponent>;
+describe('EditarMinerosComponent', () => {
+  let component: EditarMinerosComponent;
+  let fixture: ComponentFixture<EditarMinerosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RepoteVentasComponent]
+      imports: [EditarMinerosComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(RepoteVentasComponent);
+    fixture = TestBed.createComponent(EditarMinerosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
