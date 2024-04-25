@@ -1,11 +1,16 @@
-<img class="foto-perfil" [src]="imagenPerfilUrl" alt="Tu perfil" />
-<strong>Nombre del usuario: {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</strong>
-<strong>Correo: {{ minero.usuario.correoUsuario }}</strong>
-<strong>Tipo de documento: {{ minero.tipo_documento }}</strong>
-<strong>Número de documento: {{ minero.numero_documento }}</strong>
-<strong>Número de teléfono: {{ minero.telefono }}</strong>
-<strong>Fecha de nacimiento: {{ minero.fecha_nacimiento }}</strong>
-<strong>Direccion de vivienda: {{ minero.direccion_vivienda }}</strong>
-<strong>Cambio_documento: {{ minero.cambio_documento }}</strong>
-<strong>Estado del usuario: {{ minero.usuario.estadoUsuario }}</strong>
-<button type="button" (click)="cancelar()" mat-button>Cerrar</button>
+<mat-dialog-content>
+    <img class="foto-perfil" [src]="imagenPerfilUrl" alt="Tu perfil" />
+    <br/>
+    <strong>Nombre del usuario:</strong> <p> {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</p>
+    <strong>Correo:</strong> <p> {{ minero.usuario.correoUsuario }}</p>
+    <strong>Tipo de documento:</strong> <p> {{ minero.tipo_documento }}</p>
+    <strong>Número de documento:</strong> <p> {{ minero.numero_documento }}</p>
+    <strong>Número de teléfono:</strong> <p> {{ minero.telefono }}</p>
+    <strong>Fecha de nacimiento:</strong> <p> {{ minero.fecha_nacimiento }}</p>
+    <strong>Direccion de vivienda:</strong> <p> {{ minero.direccion_vivienda }}</p>
+    <strong>Cambio_documento:</strong> <p> {{ minero.cambio_documento }}</p>
+    <strong>Estado del usuario:</strong> <p> {{ minero.usuario.estadoUsuario }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" (click)="cancelar()" mat-button>Cerrar</button>
+</mat-dialog-actions>

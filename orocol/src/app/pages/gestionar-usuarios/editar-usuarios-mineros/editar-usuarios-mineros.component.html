@@ -1,1 +1,39 @@
-<p>editar-usuarios-mineros works!</p>
+<mat-dialog-content>
+<h1>Editar compra</h1>
+@if (mineroForm) {
+<form [formGroup]="mineroForm" (ngSubmit)="editarMineros()">
+
+    <label for="nombreUsuario">Nombre(s): <font color="red">*</font></label>
+    <input type="text" formControlName="nombreUsuario" id="nombreUsuario">
+
+    <label for="apellidosUsuario">Apellido(s):</label>
+    <input type="text" formControlName="apellidosUsuario" id="apellidosUsuario">
+
+    <label for="correoUsuario">Correo electrónico: <font color="red">*</font></label>
+    <input type="text" formControlName="correoUsuario" id="correoUsuario">
+
+    <label for="tipo_documento">Tipo de documento: <font color="red">*</font></label>
+    <select id="tipo_documento" formControlName="tipo_documento">
+        <option value="Cedula de ciudadania">Cedula de ciudadania</option>
+        <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+    </select>
+
+    <label for="pwd">Número de documento: <font color="red">*</font></label>
+    <input type="number" formControlName="numero_documento">
+
+    <label for="pwd">Número de teléfono: <font color="red">*</font></label>
+    <input type="number" id="telefono" formControlName="telefono">
+    
+    <label for="pwd">Fecha de nacimiento: <font color="red">*</font></label>
+    <input type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento">
+ 
+    <label for="usuario">Dirección de vivienda: <font color="red">*</font></label>
+    <input type="text" id="direccion_vivienda" formControlName="direccion_vivienda">
+ 
+    <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!mineroForm.valid">Editar usuario</button>
+</form>
+}
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

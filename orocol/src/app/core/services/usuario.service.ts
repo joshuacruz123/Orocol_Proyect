@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MineroInterface } from '../interfaces/minero.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,10 @@ export class UsuarioService {
 
   consultarMinero(IdMinero:number): Observable<any> {
     return this.http.get(this.mineroURL + IdMinero)
+  }
+
+  editarMinero(id: number, minero: MineroInterface): Observable<any> {
+    return this.http.put<void>(`${this.mineroURL}${id}`, minero);
   }
 
   inactivarCuenta(id: number, estadoUsuario: string): Observable<any> {

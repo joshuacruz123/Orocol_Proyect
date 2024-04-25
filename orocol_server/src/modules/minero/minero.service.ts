@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MineroEntity } from './minero.entity';
 import { MessageDto } from 'src/dto/common/message.dto';
-import { mineroDto } from 'src/dto/minero.dto';
+import { EditarMineroDto, mineroDto } from 'src/dto/minero.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { RolEntity } from '../rol/rol.entity';
@@ -40,6 +40,37 @@ export class MineroService {
     // Método para consultar usuarios mineros
 
     async consultarMinero(IdMinero: number): Promise<MineroEntity> {
+        const minero = await this.mineroRepository
+            .createQueryBuilder('minero')
+            .leftJoinAndSelect('minero.usuario', 'usuario')
+            .leftJoinAndSelect('usuario.roles', 'roles')
+            .where('minero.IdMinero = :IdMinero', { IdMinero })
+            .select([
+                'minero',
+                'usuario.idUsuario',
+                'usuario.nombreUsuario',
+                'usuario.apellidosUsuario',
+                'usuario.correoUsuario',
+                'usuario.estadoUsuario'
+            ])
+            .getOne();
+        if (!minero) {
+            throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
+        }
+        return minero;
+    }/*
+    async consultarMinero(IdMinero: number): Promise<MineroEntity> {
+        const minero = await this.mineroRepository.findOne({
+            where: { IdMinero: IdMinero },
+            relations: ['usuario.roles']
+        });
+        if (!minero) {
+            throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
+        }
+        return minero;
+    }
+    ---
+    async consultarMinero(IdMinero: number): Promise<MineroEntity> {
         const minero = await this.mineroRepository.findOne({
             where: { IdMinero: IdMinero },
             relations: ['usuario.roles', 'usuario.perfil'],
@@ -47,8 +78,10 @@ export class MineroService {
         if (!minero) {
             throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
         }
+        minero.usuario.passwordUsuarioOriginal = minero.usuario.passwordUsuario;
+        delete minero.usuario.passwordUsuario;
         return minero;
-    }
+    }*/
     // Método para consultar un usuarios minero
 
     async registrarUsuarioMinero(dto: mineroDto): Promise<MessageDto> {
@@ -81,7 +114,7 @@ export class MineroService {
     }
     // Método para registrar usuario administrador
 
-    async editarMinero(IdMinero: number, dto: mineroDto): Promise<any> {
+    async editarMinero(IdMinero: number, dto: EditarMineroDto): Promise<any> {
         const minero = await this.consultarMinero(IdMinero);
         if (!minero) {
             throw new NotFoundException(new MessageDto('No existe el usuario'));
@@ -89,16 +122,15 @@ export class MineroService {
         if (IdMinero !== IdMinero) {
             throw new BadRequestException(new MessageDto('El usuario ya existe'));
         }
-        dto.nombreUsuario ? minero.usuario.nombreUsuario = dto.nombreUsuario : minero.usuario.nombreUsuario;
-        dto.apellidosUsuario ? minero.usuario.apellidosUsuario = dto.apellidosUsuario : minero.usuario.apellidosUsuario;
-        dto.correoUsuario ? minero.usuario.correoUsuario = dto.correoUsuario : minero.usuario.correoUsuario;
-        dto.passwordUsuario ? minero.usuario.passwordUsuario = dto.passwordUsuario : minero.usuario.passwordUsuario;
-        dto.tipo_documento ? minero.tipo_documento = dto.tipo_documento : minero.tipo_documento;
-        dto.numero_documento ? minero.numero_documento = dto.numero_documento : minero.numero_documento;
-        dto.cambio_documento ? minero.cambio_documento = dto.cambio_documento : minero.cambio_documento;
-        dto.telefono ? minero.telefono = dto.telefono : minero.telefono;
-        dto.fecha_nacimiento ? minero.fecha_nacimiento = dto.fecha_nacimiento : minero.fecha_nacimiento;
-        dto.direccion_vivienda ? minero.direccion_vivienda = dto.direccion_vivienda : minero.direccion_vivienda;
+        minero.usuario.nombreUsuario = dto.nombreUsuario ?? minero.usuario.nombreUsuario;
+        minero.usuario.apellidosUsuario = dto.apellidosUsuario ?? minero.usuario.apellidosUsuario;
+        minero.usuario.correoUsuario = dto.correoUsuario ?? minero.usuario.correoUsuario;
+        minero.tipo_documento = dto.tipo_documento ?? minero.tipo_documento;
+        minero.numero_documento = dto.numero_documento ?? minero.numero_documento;
+        minero.cambio_documento = dto.cambio_documento ?? minero.cambio_documento;
+        minero.telefono = dto.telefono ?? minero.telefono;
+        minero.fecha_nacimiento = dto.fecha_nacimiento ?? minero.fecha_nacimiento;
+        minero.direccion_vivienda = dto.direccion_vivienda ?? minero.direccion_vivienda;
         try {
             // Guardar el minero en la base de datos
             await this.mineroRepository.save(minero);

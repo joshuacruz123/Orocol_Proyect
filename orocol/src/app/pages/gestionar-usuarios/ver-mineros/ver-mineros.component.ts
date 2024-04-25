@@ -133,11 +133,28 @@ export class VerMinerosComponent {
         this.consultarMineros();
       }
     });
-  }
+  } /*
+"cargoAdmin": "string",
+"nombreUsuario": "string",
+"apellidosUsuario": "string",
+"correoUsuario": "string",
+"passwordUsuario": "string"
+
+"tipo_documento": "Cedula de ciudadania",
+"numero_documento": 10,
+"telefono": 10,
+"fecha_nacimiento": "2024-04-24T17:34:01.872Z",
+"direccion_vivienda": "string",
+"cambio_documento": "No acepto",
+"nombreUsuario": "string",
+"apellidosUsuario": "string",
+"correoUsuario": "string",
+"passwordUsuario": "string"
+*/
 
   detalleMinero(IdMinero?: number) {
     const dialogRef = this.dialog.open(DetalleMineroComponent, {
-      width: '550px',
+      width: '500px',
       disableClose: true,
       data: { IdMinero: IdMinero }
     });

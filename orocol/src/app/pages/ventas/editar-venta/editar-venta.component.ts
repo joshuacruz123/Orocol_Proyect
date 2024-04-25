@@ -26,7 +26,7 @@ export class EditarVentaComponent implements OnInit {
     producto: { IdProducto: 0, TipoOro: '', estadoProducto: '' }
   }; 
   ventaForm!: FormGroup;
-
+  
   constructor(
     public ventaService: VentasService,
     private toastr: ToastrService,

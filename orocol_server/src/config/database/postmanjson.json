@@ -64,7 +64,7 @@
     {
       "nombreUsuario": "Brenton Para",
       "apellidosUsuario": "Casillas Aguilar",
-      "correoUsuario": "BrentP@gmail.com",
+      "correoUsuario": "brentP@gmail.com",
       "passwordUsuario": "46432132q",
       "tipo_documento": "Cedula de ciudadania",
       "numero_documento": 1312587790,
@@ -154,7 +154,7 @@
       "rol": "Administrador"
     },
     {
-      "correoUsuario": "BrentP@gmail.com",
+      "correoUsuario": "brentP@gmail.com",
       "passwordUsuario": "46432132q",
       "rol": "Minero"
     },

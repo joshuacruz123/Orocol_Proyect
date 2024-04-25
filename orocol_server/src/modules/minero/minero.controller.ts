@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { MineroService } from './minero.service';
-import { mineroDto } from '../../dto/minero.dto';
+import { EditarMineroDto, mineroDto } from '../../dto/minero.dto';
 import { RolNombre } from '../rol/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -41,7 +41,7 @@ export class MineroController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':IdMinero')
-    async editarMinero(@Param('IdMinero', ParseIntPipe) IdMinero: number, @Body() dto: mineroDto) {
+    async editarMinero(@Param('IdMinero', ParseIntPipe) IdMinero: number, @Body() dto: EditarMineroDto) {
         return await this.mineroService.editarMinero(IdMinero, dto);
     }
 }

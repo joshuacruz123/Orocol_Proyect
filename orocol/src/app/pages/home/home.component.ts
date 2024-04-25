@@ -19,8 +19,9 @@ export class HomeComponent {
   constructor(private toastr: ToastrService, public dialog: MatDialog) { }
 
   openDialog() {
-    const dialogRef = this.dialog.open(InfoOrocolComponent);
-
+    const dialogRef = this.dialog.open(InfoOrocolComponent, {
+      width: '700px',
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

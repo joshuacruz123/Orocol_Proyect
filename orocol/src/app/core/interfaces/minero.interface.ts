@@ -5,7 +5,7 @@ export interface MineroInterface extends UsuarioInterface {
     tipo_documento: string;
     numero_documento: number;
     telefono: number;
-    fecha_nacimiento: number;
+    fecha_nacimiento: Date;
     direccion_vivienda: string;
     cambio_documento: string;
 }

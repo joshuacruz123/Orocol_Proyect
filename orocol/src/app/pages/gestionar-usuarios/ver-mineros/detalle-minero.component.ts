@@ -15,10 +15,7 @@ export class DetalleMineroComponent implements OnInit{
 
   IdMinero!: number;
   minero!: MineroInterface;
-  perfil: any;
-  fotoPerfil: File | null = null;
   imagenPerfilUrl: string = '/assets/images/perfil.jpg';
-  mostrarFoto: boolean = false;
   
   constructor(
     public usuarioService: UsuarioService,
@@ -34,7 +31,7 @@ export class DetalleMineroComponent implements OnInit{
       this.usuarioService.consultarMinero(id).subscribe(
         (data: MineroInterface) => { 
           this.minero = data;
-          this.consultarPerfilUsuario();
+          this.consultarPerfil(data.usuario.idUsuario);
         },
         (error) => {
           console.error('Error al obtener los datos:', error);
@@ -44,23 +41,17 @@ export class DetalleMineroComponent implements OnInit{
       console.error('Error al obtener los detos del minero:');
     }
   } 
-  
-  consultarPerfilUsuario() {
-    if (this.minero && this.minero.usuario && this.minero.usuario.idUsuario) {
-      this.usuarioService.consultarPerfil(this.minero.usuario.idUsuario).subscribe(
-        (data: any) => {
-          this.imagenPerfilUrl = data.fotoPerfil || this.imagenPerfilUrl;
-          this.mostrarFoto = !!data.fotoPerfilUrl;
-        },
-        (error) => {
-          console.error('Error al obtener el perfil del usuario:', error);
-        }
-      );
-    } else {
-      console.error('No se puede consultar el perfil del usuario: ID de usuario no disponible.');
-    }
+
+  consultarPerfil(idUsuario: number) {
+    this.usuarioService.consultarPerfil(idUsuario).subscribe(
+      (data: any) => {
+        this.imagenPerfilUrl = data.fotoPerfilUrl || this.imagenPerfilUrl;
+      },
+      (error) => {
+        console.error('Error al obtener el perfil del usuario:', error);
+      }
+    );
   }
-  
   
   cancelar() {
     this.dialogRef.close(false);

@@ -27,6 +27,11 @@ import { PerfilEntity } from "./perfil.entity";
     @Column({type: 'varchar', length: 55, nullable: false, default: EstadoUsuario.ACTIVO})
     estadoUsuario: EstadoUsuario;
 
+    // passwordUsuarioOriginal: string;
+    /*
+    @Column({ type: 'varchar', length: 60, nullable: true, select: false })
+    passwordUsuarioPlain: string; */
+
     @ManyToOne(() => RolEntity, (roles) => roles.usuario)
     @JoinColumn({ name: 'idRol' })
     roles: RolEntity;
