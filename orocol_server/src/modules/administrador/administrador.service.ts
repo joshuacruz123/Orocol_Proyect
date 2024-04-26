@@ -50,14 +50,17 @@ export class AdministradorService {
     // Método para registrar usuario administrador
       
     async consultarAdministradores(): Promise<AdministradorEntity[]> {
-        const lista = await this.administradorRepository.find({
-            relations: ['usuario.perfil'],
-          });
+        const lista = await this.administradorRepository.find({ relations: ['usuario', 'usuario.perfil'] });
         if (!lista.length) {
             throw new NotFoundException(new MessageDto('No hay usuarios administradores'));
         }
-        return lista;
-    }
+        return lista.map(administrador => {
+            if (administrador.usuario.perfil) {
+                administrador.usuario.perfil.fotoPerfil = `${process.env.PERFIL_URL}${administrador.usuario.perfil.fotoPerfil}`;
+            }
+            return administrador;
+        });
+    } 
     // Método para consultar usuarios administradores
 
     async consultarAdministrador(idAdmin: number): Promise<AdministradorEntity> {

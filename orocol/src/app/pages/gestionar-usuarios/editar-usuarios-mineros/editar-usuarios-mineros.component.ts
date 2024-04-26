@@ -16,7 +16,7 @@ import { UsuarioService } from '../../../core/services/usuario.service';
 export class EditarUsuariosMinerosComponent implements OnInit {
 
   IdMinero!: number;
-  mineros: MineroInterface = { 
+  mineros: MineroInterface = {
     IdMinero: 0,
     tipo_documento: '',
     numero_documento: 0,
@@ -25,9 +25,10 @@ export class EditarUsuariosMinerosComponent implements OnInit {
     direccion_vivienda: '',
     cambio_documento: '',
     usuario: { idUsuario: 0, nombreUsuario: '', apellidosUsuario: '', correoUsuario: '', passwordUsuario: '' }
-  }; 
+  };
   mineroForm!: FormGroup;
-  
+  cambioDocumentoControl: FormControl = new FormControl(false);
+
   constructor(
     public usuarioService: UsuarioService,
     private toastr: ToastrService,
@@ -38,7 +39,7 @@ export class EditarUsuariosMinerosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuarioService.consultarMinero(this.IdMinero).subscribe((data: MineroInterface)=>{
+    this.usuarioService.consultarMinero(this.IdMinero).subscribe((data: MineroInterface) => {
       this.mineros = data;
       this.mineroForm = new FormGroup({
         nombreUsuario: new FormControl(this.mineros.usuario.nombreUsuario, Validators.required),
@@ -49,11 +50,12 @@ export class EditarUsuariosMinerosComponent implements OnInit {
         telefono: new FormControl(this.mineros.telefono, Validators.required),
         fecha_nacimiento: new FormControl(this.mineros.fecha_nacimiento, [Validators.required]),
         direccion_vivienda: new FormControl(this.mineros.direccion_vivienda, Validators.required),
+        cambio_documento: new FormControl(this.mineros.cambio_documento, Validators.required),
       });
-    }); 
+    });
   }
 
-  get f(){
+  get f() {
     return this.mineroForm.controls;
   }
 
@@ -61,14 +63,14 @@ export class EditarUsuariosMinerosComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  editarMineros(){
+  editarMineros() {
     console.log(this.mineroForm.value);
     this.usuarioService.editarMinero(this.IdMinero, this.mineroForm.value).subscribe(
       response => {
         this.toastr.success(response.message, 'OK', {
           timeOut: 3000
         });
-        this.dialogRef.close(true); 
+        this.dialogRef.close(true);
       },
       error => {
         console.error('Error al editar la venta', error);

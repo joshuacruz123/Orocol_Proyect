@@ -1,1 +1,18 @@
-<p>ver-administradores works!</p>
+<h1>Administradores del sistema</h1>
+<div class="pokemon-list">
+    @for (item of administrador; track item.usuario.nombreUsuario) {
+        <div class="datos-admin">
+            <br>
+            <img class="fotosperfiles" [src]="obtenerFotoPerfil(item.usuario.perfil?.fotoPerfil)" alt="Tu perfil" />
+            <br>
+            <strong>Nombre</strong>
+            <p> {{item.usuario.nombreUsuario}} {{item.usuario.apellidosUsuario}}</p>
+            <strong>Correo:</strong>
+            <p> {{item.usuario.correoUsuario}} </p>
+            <strong>Cargo del administrador:</strong>
+            <p>{{ item.cargoAdmin }}</p>
+            <strong>Estado:</strong>
+            <p>{{ item.usuario.estadoUsuario }}</p>
+          </div>
+    }
+</div>

@@ -11,15 +11,17 @@
 
     <label for="correoUsuario">Correo electrónico: <font color="red">*</font></label>
     <input type="text" formControlName="correoUsuario" id="correoUsuario">
+    
+    @if (mineros.cambio_documento === 'Acepto') {
+        <label for="tipo_documento">Tipo de documento: <font color="red">*</font></label>
+        <select id="tipo_documento" formControlName="tipo_documento">
+            <option value="Cedula de ciudadania">Cedula de ciudadania</option>
+            <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+        </select>
 
-    <label for="tipo_documento">Tipo de documento: <font color="red">*</font></label>
-    <select id="tipo_documento" formControlName="tipo_documento">
-        <option value="Cedula de ciudadania">Cedula de ciudadania</option>
-        <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
-    </select>
-
-    <label for="pwd">Número de documento: <font color="red">*</font></label>
-    <input type="number" formControlName="numero_documento">
+        <label for="pwd">Número de documento: <font color="red">*</font></label>
+        <input type="number" formControlName="numero_documento">
+    }
 
     <label for="pwd">Número de teléfono: <font color="red">*</font></label>
     <input type="number" id="telefono" formControlName="telefono">
