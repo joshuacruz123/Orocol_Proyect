@@ -10,11 +10,12 @@ import { EncabezadoComponent } from '../../shared/encabezado/encabezado.componen
 import { ToastrService } from 'ngx-toastr';
 import { PerfilUsuarioComponent } from '../../shared/perfil-usuario/perfil-usuario.component';
 import { AdministradorInterface } from '../../core/interfaces/administrador.interface';
+import { EditarPasswordComponent } from '../../shared/editar-password/editar-password.component';
 
 @Component({
   selector: 'app-administrador',
   standalone: true,
-  imports: [CommonModule, EncabezadoComponent, PieComponent, NavAdminComponent, PerfilUsuarioComponent, MatIconModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, EncabezadoComponent, PieComponent, NavAdminComponent, PerfilUsuarioComponent, EditarPasswordComponent, MatIconModule, RouterLink, RouterOutlet],
   templateUrl: './administrador.component.html',
   styleUrl: './administrador.component.css'
 })

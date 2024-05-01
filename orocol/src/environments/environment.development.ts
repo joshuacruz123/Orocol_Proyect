@@ -1,6 +1,7 @@
 export const environment = {
     production: false,
-    usuarioURL: 'http://localhost:3000/usuario/', 
+    paswordURL: 'http://localhost:3000/password/', 
+    usuarioURL: 'http://localhost:3000/usuario/',
     adminURL: 'http://localhost:3000/administrador/',
     mineroURL: 'http://localhost:3000/minero/',
     productosURL: 'http://localhost:3000/producto/',

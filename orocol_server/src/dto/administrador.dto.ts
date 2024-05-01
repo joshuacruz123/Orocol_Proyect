@@ -1,5 +1,5 @@
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
-import { UsuarioDto } from "./usuario.dto";
+import { UsuarioDto, EditarUsuarioDto } from "./usuario.dto";
 import { MaxLength } from "class-validator";
 
 export class AdministradorDto extends UsuarioDto{
@@ -7,3 +7,9 @@ export class AdministradorDto extends UsuarioDto{
     @MaxLength(60, {message: 'cargo: longitud máxima de 60'})
     cargoAdmin: string;
 } 
+
+export class EditarAdministradorDto extends EditarUsuarioDto {
+    @IsNotBlank({ message: 'el cargo no puede estar vacío' })
+    @MaxLength(60, {message: 'cargo: longitud máxima de 60'})
+    cargoAdmin: string;
+}

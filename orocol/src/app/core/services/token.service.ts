@@ -57,7 +57,7 @@ export class TokenService {
     localStorage.clear();
   }
   
-  isAdmin(): boolean {
+  validarPermisosUsuarios(): boolean {
     if (!this.isLogged()) {
       return false; 
     }
@@ -72,7 +72,7 @@ export class TokenService {
     return true;
   } 
 
-  isRoles() {
+  validarRoles() {
     const token = this.getToken();
     const payload = token.split('.')[1];
     const values = atob(payload);

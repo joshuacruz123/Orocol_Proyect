@@ -8,14 +8,14 @@ import { InactivarUsuarioDto } from 'src/dto/enum.dto';
 import { EstadoUsuario } from './usuario.enum';
 import { JwtService } from '@nestjs/jwt';
 import { LoginUsuarioDto } from 'src/dto/login.dto';
-import { compare } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
 import { PayloadInterface } from 'src/auth/payload.interface';
 import { TokenDto } from 'src/dto/token.dto';
 import { PerfilEntity } from './perfil.entity';
 import { PerfilDto } from 'src/dto/perfil.dto';
 import { Repository } from 'typeorm';
 import { UsuarioDto } from 'src/dto/usuario.dto';
-import { PasswordDto } from 'src/dto/editar-password.dto';
+import { PasswordDto, RecuperarPassDto } from 'src/dto/editar-password.dto';
 import { MulterOptionsFactory, MulterModuleOptions } from '@nestjs/platform-express';
 import * as fs from 'fs';
 import { PerfilCompleto } from './perfil.interface';
@@ -128,21 +128,24 @@ export class UsuarioService {
     }
     // Método para refrescar token caducado del usuario
 
-    async consultarCorreosUsuarios(): Promise<string[]> {
-        const usuarios = await this.usuarioRepository.find({ select: ['correoUsuario'] });
-        if (!usuarios.length) {
-            throw new NotFoundException('No se encontraron usuarios registrados.');
+    async consultarCorreosUsuario(correoUsuario: string): Promise<UsuarioEntity> {
+        const usuario = await this.usuarioRepository.findOne({ 
+            where: { correoUsuario: correoUsuario },
+            select: ['correoUsuario']
+        });
+        if (!usuario) {
+            throw new NotFoundException(new MessageDto('No existe ese correo en el sistema'));
         }
-        return usuarios.map(usuario => usuario.correoUsuario);
+        return usuario;
     }
     // Método para consultar los correod de los usuarios
 
-    async recuperarPassword(correoUsuario: string, dto: PasswordDto): Promise<any> {
+    async recuperarPassword(correoUsuario: string, dto: RecuperarPassDto): Promise<any> {
         const usuario = await this.usuarioRepository.findOne({ where: { correoUsuario } });
         if (!usuario) {
-            throw new NotFoundException(new MessageDto('No se encontró el usuario'));
+            throw new NotFoundException(new MessageDto('No se encontró el correo electrónico'));
         }
-        usuario.passwordUsuario = dto.passwordUsuario;
+        usuario.passwordUsuario = dto.passwordNuevo;
         try {
             await this.usuarioRepository.save(usuario);
             return new MessageDto('La contraseña ha sido actualizada exitosamente');
@@ -150,7 +153,28 @@ export class UsuarioService {
             throw new InternalServerErrorException(new MessageDto('Error al cambiar la contraseña'));
         }
     }
-    // Método para recuperar la contraseña del usuario del usuario
+    // Método para recuperar la contraseña del usuario
+
+    async editarPassword(idUsuario: number, dto: PasswordDto): Promise<any> {
+        const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: idUsuario } });
+        if (!usuario) {
+            throw new NotFoundException(new MessageDto('No se encontró el usuario'));
+        } /*
+        console.log('Correo:', usuario.correoUsuario);
+        console.log('Anterior: ', dto.passwordAnterior, ', Nuevo: ', dto.passwordNuevo); */
+        const passwordValido = await compare(dto.passwordAnterior, usuario.passwordUsuario);
+        if (!passwordValido) {
+            throw new UnauthorizedException(new MessageDto('La contraseña anterior no es correcta'));
+        }
+        usuario.passwordUsuario = dto.passwordNuevo;
+        try {
+            await this.usuarioRepository.save(usuario);
+            return new MessageDto('La contraseña ha sido actualizada exitosamente');
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al cambiar la contraseña'));
+        }
+    }
+    // Método para editar la contraseña del usuario
 
     /*
     Gestionar perfil propio de usuario

@@ -1,25 +1,24 @@
 <body>
     <app-regresar-home></app-regresar-home>
     <br>
-    <form class="p-5 bg-light">
+    <form class="p-5 bg-light" [formGroup]="correoForm" (ngSubmit)="consultarCorreo()">
         <div class="card-header text-center">
             Recuperar contraseña
         </div>
         <br />
         <div class="form-group">
-            <label for="usuario">Confirmar correo electrónico:</label>
+            <label for="correoUsuario">Confirmar correo electrónico:</label>
             <div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text"><mat-icon>alternate_email</mat-icon></span><!--bootstrap y fontawesome-->				
 				</div>
-				<input type="email" class="form-control inputt" placeholder="correo electrónico" id="correo"
+				<input type="email" formControlName="correoUsuario" class="form-control inputt" placeholder="correo electrónico" id="correo"
                     name="correo">
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-lg"><mat-icon>search</mat-icon> Confirmar</button>
         <br />
         <br />
-        <div id="advertencia"></div>
         <br />
     </form>
     <br>

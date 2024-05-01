@@ -58,31 +58,8 @@ export class MineroService {
             throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
         }
         return minero;
-    }/*
-    async consultarMinero(IdMinero: number): Promise<MineroEntity> {
-        const minero = await this.mineroRepository.findOne({
-            where: { IdMinero: IdMinero },
-            relations: ['usuario.roles']
-        });
-        if (!minero) {
-            throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
-        }
-        return minero;
     }
-    ---
-    async consultarMinero(IdMinero: number): Promise<MineroEntity> {
-        const minero = await this.mineroRepository.findOne({
-            where: { IdMinero: IdMinero },
-            relations: ['usuario.roles', 'usuario.perfil'],
-        });
-        if (!minero) {
-            throw new NotFoundException(`Usuario minero con ID ${IdMinero} no encontrado`);
-        }
-        minero.usuario.passwordUsuarioOriginal = minero.usuario.passwordUsuario;
-        delete minero.usuario.passwordUsuario;
-        return minero;
-    }*/
-    // Método para consultar un usuarios minero
+    // Método para consultar un usuario minero
 
     async registrarUsuarioMinero(dto: mineroDto): Promise<MessageDto> {
         const rolAdmin = await this.rolRepository.findOne({ where: { tipoRol: RolNombre.MINERO } });

@@ -12,3 +12,8 @@ export interface UsuarioInterface {
         }
     }
 }
+
+export interface PasswordInterface {
+    passwordAnterior: string;
+    passwordNuevo: string;
+}

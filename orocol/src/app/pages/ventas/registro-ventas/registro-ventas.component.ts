@@ -49,7 +49,7 @@ export class RegistroVentasComponent {
       this.ventaService.registrarVenta(IdMinero, TipoOro, this.ventaForm.value).subscribe(
         response => {
           this.toastr.success(response.message, 'OK', {
-            timeOut: 3000
+            timeOut: 6000
           });
         },
         error => {

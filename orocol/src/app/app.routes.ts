@@ -13,35 +13,33 @@ import { ComprasComponent } from './pages/compras/compras.component';
 import { NovedadesComponent } from './pages/minero/novedades/novedades.component';
 import { TurnosComponent } from './pages/minero/turnos/turnos.component';
 import { IndicadoresFinancierosComponent } from './pages/indicadores-financieros/indicadores-financieros.component';
-import { CrearProductoComponent } from './pages/productos/crear-producto/crear-producto.component';
-import { LoginGuard } from './core/guards/login.guard';
 import { RecuperarContrasenaComponent } from './pages/auth/recuperar-contrasena/recuperar-contrasena.component';
 import { EditarContrasenaComponent } from './pages/auth/recuperar-contrasena/editar-contrasena.component';
 import { GestionarUsuariosComponent } from './pages/gestionar-usuarios/gestionar-usuarios.component';
 import { AsistenciasMinerosComponent } from './pages/minero/turnos/asistencias-mineros.component';
-import { VentasMinerosComponent } from './pages/ventas/ventas-mineros.component';
+import { adminGuard } from './core/guard/admin.guard';
+import { mineroGuard } from './core/guard/minero.guard';
+import { authGuard } from './core/guard/auth.guard';
 
-export const routes: Routes = [ // joshuacruz@gmail.com JoshuaDeveloper2506
+export const routes: Routes = [ // joshuacruz@gmail.com JoshuaDesarrollador2006 | hernandez@gmail.com hernandezOrocol1
     {path: '', component: HomeComponent},
-    {path: 'manual_usuario', title: 'Manual de usuario', component: ManualUsuarioComponent, canActivate: [LoginGuard]},
-    {path: 'registro', title: 'Registro', component: RegistroComponent, canActivate: [LoginGuard]},
+    {path: 'manual_usuario', title: 'Manual de usuario', component: ManualUsuarioComponent},
+    {path: 'registro', title: 'Registro', component: RegistroComponent},
     {path: 'recuperar_contrasena', title: 'Recuperar contraseña', component: RecuperarContrasenaComponent},
     {path: 'editar_contrasena', title: 'Editar contraseña', component: EditarContrasenaComponent},
-    {path: 'iniciar_sesion', title: 'Iniciar sesión', component: IniciarSesionComponent, canActivate: [LoginGuard]},
-    {path: 'administrador', title: 'Administrador', component: AdministradorComponent},
-    {path: 'minero', title: 'Minero', component: MineroComponent},
-    {path: 'editar_administrador', title: 'Editar usuario', component: EditarAdministradorComponent},
-    {path: 'editar_minero', title: 'Editar usuario', component: EditarMineroComponent},
-    {path: 'gestionar_usuarios', title: 'Gestionar usuarios', component: GestionarUsuariosComponent},
-    {path: 'productos', title: 'Productos', component: ProductosComponent},
-    {path: 'nuevo_producto', title: 'Nuevo producto', component: CrearProductoComponent}, //temporal
-    {path: 'ventas', title: 'Ventas', component: VentasComponent},
-    {path: 'ventas_minero', title: 'Ventas', component: VentasMinerosComponent},
-    {path: 'compras', title: 'Compras', component: ComprasComponent},
-    {path: 'ver_asistencias', title: 'Asistencia de mineros', component: TurnosComponent},
-    {path: 'asistencias', title: 'Registrar asistencia', component: AsistenciasMinerosComponent},
-    {path: 'novedades', title: 'Novedades', component: NovedadesComponent},
-    {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent},
+    {path: 'iniciar_sesion', title: 'Iniciar sesión', component: IniciarSesionComponent},
+    {path: 'administrador', title: 'Administrador', component: AdministradorComponent, canActivate: [adminGuard]},
+    {path: 'editar_administrador/:idAdmin', title: 'Editar usuario', component: EditarAdministradorComponent, canActivate: [adminGuard]},
+    {path: 'minero', title: 'Minero', component: MineroComponent, canActivate: [mineroGuard]},
+    {path: 'editar_minero/:IdMinero', title: 'Editar usuario', component: EditarMineroComponent, canActivate: [mineroGuard]},
+    {path: 'gestionar_usuarios', title: 'Gestionar usuarios', component: GestionarUsuariosComponent, canActivate: [adminGuard]},
+    {path: 'productos', title: 'Productos', component: ProductosComponent, canActivate: [authGuard]},
+    {path: 'ventas', title: 'Ventas', component: VentasComponent, canActivate: [authGuard]},
+    {path: 'compras', title: 'Compras', component: ComprasComponent, canActivate: [adminGuard]},
+    {path: 'ver_asistencias', title: 'Asistencia de mineros', component: TurnosComponent, canActivate: [authGuard]},
+    {path: 'asistencias', title: 'Registrar asistencia', component: AsistenciasMinerosComponent, canActivate: [mineroGuard]},
+    {path: 'novedades', title: 'Novedades', component: NovedadesComponent, canActivate: [authGuard]},
+    {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent, canActivate: [adminGuard]},
     //{path: '', title: '', component: },
     { path: '', redirectTo: '', pathMatch: 'full' },
     { path: '**', redirectTo: '/iniciar_sesion' } 

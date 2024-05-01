@@ -20,6 +20,14 @@
                               <li><strong>Estado:</strong> {{ administrador.usuario.estadoUsuario }}</li>
                             </ul> 
                             <br>
+                            <hr>
+                            <br>
+                            <a class="btn btn-lg btn-warning text-white" [routerLink]="['/editar_administrador/', administrador.idAdmin]">Actualizar datos personales</a>
+                            <br> 
+                            <hr>
+                            <br>
+                            <app-editar-password></app-editar-password>
+                            <br>
                         </article>
                         <br>
                         <br>

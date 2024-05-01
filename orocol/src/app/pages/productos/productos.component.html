@@ -2,7 +2,11 @@
     <app-encabezado></app-encabezado>
     <div class="row">
         <div class="barra-lateral col-6 col-sm-auto">
+        @if (usuarioAdmin) {
             <app-nav-admin></app-nav-admin>
+        } @else {
+            <app-nav-minero></app-nav-minero>
+        }
         </div>
         <main class="main col">
             <br>
@@ -13,8 +17,10 @@
                             
                             <div class="table-responsive-xl">
                                 <div class="bg-dark div-boton">
+                                    @if (usuarioAdmin) {
                                     <a type="button" class="btn btn-primary btn-lg"
                                         routerLink="/nuevo_producto"><mat-icon>add</mat-icon> Registrar producto</a>
+                                    }
                                     <input type="text" class="busqueda" placeholder="Buscar tipo de oro..." (input)="buscarProducto($event)">
                                 </div>
                                 <table class="table table-hover table-dark table-sm">
@@ -32,6 +38,7 @@
                                             <td scope="row"> {{item.TipoOro}}</td>
                                             <td> {{item.estadoProducto}} </td> 
                                             <td>
+                                            @if (usuarioAdmin) {
                                                 @if (item.estadoProducto === 'No disponible') {
                                                 <button class="btn btn-success" type="button"
                                                     (click)="activarProducto(item.IdProducto)"> Activar </button>
@@ -39,6 +46,7 @@
                                                 <button class="btn btn-danger" type="button"
                                                     (click)="inactivarProducto(item.IdProducto)">Inactivar</button>
                                                 }
+                                            }
                                             </td>
                                         </tr>
                                         }

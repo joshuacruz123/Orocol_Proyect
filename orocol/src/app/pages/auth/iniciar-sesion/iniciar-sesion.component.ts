@@ -40,7 +40,7 @@ export class IniciarSesionComponent {
           });
         } else {
           this.tokenService.setToken(response.token);
-          const rolUsuario = this.tokenService.isRoles();
+          const rolUsuario = this.tokenService.validarRoles();
           const rol = this.roles = rolUsuario.roles;
           if (rol.indexOf('Minero') >= 0) {
             this.router.navigate(['/minero']);

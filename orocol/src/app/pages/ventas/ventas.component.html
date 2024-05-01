@@ -2,7 +2,11 @@
     <app-encabezado></app-encabezado>
     <div class="row">
         <div class="barra-lateral col-6 col-sm-auto">
-            <app-nav-admin></app-nav-admin>
+            @if (usuarioAdmin) {
+                <app-nav-admin></app-nav-admin>
+            } @else {
+                <app-nav-minero></app-nav-minero>
+            }
         </div>
         <main class="main col">
             <br>
@@ -12,10 +16,15 @@
                         <div id="tablaVents">
                             <div class="table-responsive">
                                 <div class="bg-dark div-boton">
+                                @if (usuarioAdmin) {
                                     <a type="button" class="btn btn-primary btn-lg"
-                                    (click)="agregarVenta()"><mat-icon>add</mat-icon> Registrar Venta</a>
+                                    (click)="agregarVentaAdmin()"><mat-icon>add</mat-icon> Registrar Venta</a>
                                     <a type="button" class="btn btn-secondary btn-lg"
                                         (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar reporte</a>
+                                } @else {
+                                    <a type="button" class="btn btn-primary btn-lg"
+                                    (click)="agregarVenta()"><mat-icon>add</mat-icon> Registrar Venta</a>
+                                }
                                     <input type="text" class="busqueda" placeholder="Buscar venta..."
                                         (input)="buscarVenta($event)">
                                 </div>
@@ -42,20 +51,22 @@
                                             <td>
                                                 <button class="btn btn-info text-white" type="button"
                                                     (click)="detalleVenta(item.idGestionVenta)"><mat-icon>search</mat-icon> Ver detalle</button>
-                                                @if (item.estadoVenta === 'Activo') {
+                                                @if (usuarioAdmin) {
+                                                    @if (item.estadoVenta === 'Activo') {
+                                                        <button class="btn btn-success" type="button"
+                                                        (click)="agregarCompra(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
+                                                    } @else {
+                                                        <button class="btn btn-success" type="button" disabled><mat-icon>add</mat-icon> Registrar compra</button>
+                                                    }
+                                                    <button class="btn btn-warning text-white" type="button"
+                                                        (click)="editarVenta(item.idGestionVenta)"><mat-icon>edit</mat-icon> Editar venta</button>
+                                                    @if (item.estadoVenta === 'Inactivo') {
                                                     <button class="btn btn-success" type="button"
-                                                    (click)="agregarCompra(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
-                                                } @else {
-                                                    <button class="btn btn-success" type="button" disabled><mat-icon>add</mat-icon> Registrar compra</button>
-                                                }
-                                                <button class="btn btn-warning text-white" type="button"
-                                                    (click)="editarVenta(item.idGestionVenta)"><mat-icon>edit</mat-icon> Editar venta</button>
-                                                @if (item.estadoVenta === 'Inactivo') {
-                                                <button class="btn btn-success" type="button"
-                                                    (click)="activarVenta(item.idGestionVenta)"><mat-icon>toggle_on</mat-icon> Activar </button>
-                                                } @else {
-                                                <button class="btn btn-danger" type="button"
-                                                    (click)="inactivarVenta(item.idGestionVenta)"><mat-icon>toggle_off</mat-icon> Inactivar</button>
+                                                        (click)="activarVenta(item.idGestionVenta)"><mat-icon>toggle_on</mat-icon> Activar </button>
+                                                    } @else {
+                                                    <button class="btn btn-danger" type="button"
+                                                        (click)="inactivarVenta(item.idGestionVenta)"><mat-icon>toggle_off</mat-icon> Inactivar</button>
+                                                    }
                                                 }
                                             </td>
                                         </tr>

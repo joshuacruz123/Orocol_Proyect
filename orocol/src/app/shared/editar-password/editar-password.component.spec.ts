@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditarMinerosComponent } from './editar-mineros.component';
+import { EditarPasswordComponent } from './editar-password.component';
 
-describe('EditarMinerosComponent', () => {
-  let component: EditarMinerosComponent;
-  let fixture: ComponentFixture<EditarMinerosComponent>;
+describe('EditarPasswordComponent', () => {
+  let component: EditarPasswordComponent;
+  let fixture: ComponentFixture<EditarPasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditarMinerosComponent]
+      imports: [EditarPasswordComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EditarMinerosComponent);
+    fixture = TestBed.createComponent(EditarPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

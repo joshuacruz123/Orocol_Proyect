@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JWT_SECRET } from 'src/config/constants';
 import { JwtStrategy } from 'src/auth/strategies/jwt.strategy';
 import { PerfilEntity } from './perfil.entity';
+import { PasswordController } from './password.controller';
 
 @Module({
   imports: [
@@ -29,7 +30,7 @@ import { PerfilEntity } from './perfil.entity';
     }),
     ],
     providers: [UsuarioService, ConfigService, JwtStrategy],
-    controllers: [UsuarioController],
+    controllers: [UsuarioController, PasswordController],
     exports: [PassportModule, JwtStrategy]
 })
 export class UsuarioModule { }

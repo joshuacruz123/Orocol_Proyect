@@ -8,11 +8,13 @@ import { ToastrService } from 'ngx-toastr';
 import { ProductoService } from '../../core/services/producto.service';
 import { ProductosInterface } from '../../core/interfaces/producto.interface';
 import { MatIconModule } from '@angular/material/icon';
+import { TokenService } from '../../core/services/token.service';
+import { NavMineroComponent } from '../../shared/navbar-usuarios/nav-minero.component';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavAdminComponent, PieComponent, MatIconModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavAdminComponent, NavMineroComponent, PieComponent, MatIconModule],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })
@@ -21,14 +23,17 @@ export class ProductosComponent implements OnInit {
   productList: ProductosInterface[] = [];
   sinLista = undefined;
   productListFiltro: ProductosInterface[] = [];
+  usuarioAdmin!: boolean;
 
   constructor(
     private productoService: ProductoService,
     private toastr: ToastrService,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
     this.consultarProductos();
+    this.usuarioAdmin = this.tokenService.validarPermisosUsuarios();
   }
 
   consultarProductos() {

@@ -39,14 +39,13 @@ export class UsuarioController {
         return this.usuarioService.refresh(dto);
     }
 
-    @Get()
-    async consultarCorreosUsuarios() {
-        return await this.usuarioService.consultarCorreosUsuarios();
-    }
-
-    @Put('recuperarPass/:correoUsuario')
-    async recuperarPassword(@Param('correoUsuario') correoUsuario: string, @Body() dto: PasswordDto) {
-        return await this.usuarioService.recuperarPassword(correoUsuario, dto);
+    @ApiBearerAuth()
+    @RolDecorator(RolNombre.ADMINISTRADOR, RolNombre.MINERO)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Put('password/:idUsuario')
+    async editarPassword(@Param('idUsuario', ParseIntPipe) idUsuario: number, @Body() dto: PasswordDto) {
+        return await this.usuarioService.editarPassword(idUsuario, dto);
     }
     
     @ApiBearerAuth()

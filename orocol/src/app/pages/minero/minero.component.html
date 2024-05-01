@@ -26,6 +26,18 @@
                             <li><strong>Cambio de documento:</strong> {{ minero.cambio_documento }}</li>
                         </ul>
                         <br>
+                        <hr>
+                        <br>
+                        <a class="btn btn-lg btn-warning text-white" [routerLink]="['/editar_minero/', minero.IdMinero]">Actualizar datos personales</a>
+                        <br> 
+                        <hr>
+                        <br>
+                        <app-editar-password></app-editar-password>
+                        <br>
+                        <hr>
+                        <br>
+                        <button class="btn btn-danger text-white" type="button"
+                            (click)="inactivarUsuarioPropio(minero.usuario.idUsuario)"><mat-icon>manage_accounts</mat-icon> Inactivar cuenta</button>
                     </article>
                     <br>
                     <br>

@@ -94,8 +94,8 @@ table, .div-boton {
 }
 
 .busqueda {
-    margin-top: 20px;
-    margin-left: 350px;
+    margin-top: 25px;
+    margin-left: 15px;
     height: 45px;
     width: 300px;
 }
@@ -109,7 +109,7 @@ th {
 }
 
 .my-button {
-    padding: 10px ;
+    padding: 10px;
     background-color: #252121;
     color: white;
     border: none;

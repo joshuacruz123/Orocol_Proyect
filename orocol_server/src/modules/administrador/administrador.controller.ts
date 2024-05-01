@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { AdministradorService } from './administrador.service';
-import { AdministradorDto } from '../../dto/administrador.dto';
+import { AdministradorDto, EditarAdministradorDto } from '../../dto/administrador.dto';
 import { InactivarUsuarioDto } from 'src/dto/enum.dto'; //
 import { RolNombre } from '../rol/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
@@ -41,7 +41,7 @@ export class AdministradorController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Put(':idAdmin')
-    async editarAdministrador(@Param('idAdmin', ParseIntPipe) idAdmin: number, @Body() dto: AdministradorDto) {
+    async editarAdministrador(@Param('idAdmin', ParseIntPipe) idAdmin: number, @Body() dto: EditarAdministradorDto) {
         return await this.administradorService.editarAdministrador(idAdmin, dto);
     }
     

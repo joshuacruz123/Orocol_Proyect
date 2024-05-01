@@ -1,5 +1,25 @@
-<p>editar-administrador works!</p>
+<body>
+    <app-encabezado></app-encabezado>
+    <h1>Editar datos propios</h1>
+    @if (adminForm) {
+    <form [formGroup]="adminForm" (ngSubmit)="editarAdmin()">
 
+        <label for="nombreUsuario">Nombre(s): <font color="red">*</font></label>
+        <input type="text" formControlName="nombreUsuario" id="nombreUsuario">
 
+        <label for="apellidosUsuario">Apellido(s):</label>
+        <input type="text" formControlName="apellidosUsuario" id="apellidosUsuario">
 
+        <label for="correoUsuario">Correo electrónico: <font color="red">*</font></label>
+        <input type="text" formControlName="correoUsuario" id="correoUsuario">
+
+        <label for="cargoAdmin">Cargo en la empresa: <font color="red">*</font></label>
+        <input type="text" id="cargoAdmin" formControlName="cargoAdmin">
+
+        <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!adminForm.valid">Editar</button>
+    </form>
+    }
+    <a class="btn btn-danger btn-lg" routerLink="/administrador">Cancelar</a>
+    <app-pie></app-pie>
+</body>
 <router-outlet />

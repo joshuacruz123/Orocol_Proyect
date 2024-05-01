@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AdministradorEntity } from './administrador.entity';
 import { MessageDto } from 'src/dto/common/message.dto';
-import { AdministradorDto } from 'src/dto/administrador.dto';
+import { AdministradorDto, EditarAdministradorDto } from 'src/dto/administrador.dto';
 import { UsuarioService } from '../usuario/usuario.service';
 import { RolNombre } from '../rol/rol.enum';
 import { UsuarioEntity } from '../usuario/usuario.entity';
@@ -75,7 +75,7 @@ export class AdministradorService {
     }
     // Método para consultar un usuario administrador
 
-    async editarAdministrador(idAdmin: number, dto: AdministradorDto): Promise<any> {
+    async editarAdministrador(idAdmin: number, dto: EditarAdministradorDto): Promise<any> {
         const administrador = await this.consultarAdministrador(idAdmin);
         if (!administrador) {
             throw new NotFoundException(new MessageDto('No existe el usuario'));
@@ -86,7 +86,6 @@ export class AdministradorService {
         dto.nombreUsuario ? administrador.usuario.nombreUsuario = dto.nombreUsuario : administrador.usuario.nombreUsuario;
         dto.apellidosUsuario ? administrador.usuario.apellidosUsuario = dto.apellidosUsuario : administrador.usuario.apellidosUsuario;
         dto.correoUsuario ? administrador.usuario.correoUsuario = dto.correoUsuario : administrador.usuario.correoUsuario;
-        dto.passwordUsuario ? administrador.usuario.passwordUsuario = dto.passwordUsuario : administrador.usuario.passwordUsuario;
         dto.cargoAdmin ? administrador.cargoAdmin = dto.cargoAdmin : administrador.cargoAdmin;
         try {
             // Guardar el administrador en la base de datos

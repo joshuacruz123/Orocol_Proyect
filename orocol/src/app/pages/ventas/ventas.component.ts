@@ -16,11 +16,14 @@ import { jsPDF } from 'jspdf';
 import autoTable, { CellInput } from 'jspdf-autotable';
 import { ReporteVentasInterface } from '../../core/interfaces/reporte-venta.interface';
 import { RegistrarCompraComponent } from '../compras/registrar-compra/registrar-compra.component';
+import { TokenService } from '../../core/services/token.service';
+import { NavMineroComponent } from '../../shared/navbar-usuarios/nav-minero.component';
+import { RegistroVentasComponent } from './registro-ventas/registro-ventas.component';
 
 @Component({
   selector: 'app-ventas',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavAdminComponent, PieComponent, MatIconModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, EncabezadoComponent, NavAdminComponent, NavMineroComponent, PieComponent, MatIconModule],
   templateUrl: './ventas.component.html',
   styleUrl: './ventas.component.css'
 })
@@ -30,15 +33,18 @@ export class VentasComponent {
   ventaList: VentasInterface[] = [];
   sinLista = undefined;
   ventaListFiltro: VentasInterface[] = [];
+  usuarioAdmin!: boolean;
 
   constructor(
     private ventaService: VentasService,
     private toastr: ToastrService,
     public dialog: MatDialog,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
     this.consultarVentas();
+    this.usuarioAdmin = this.tokenService.validarPermisosUsuarios();
   }
 
   consultarVentas() {
@@ -107,8 +113,21 @@ export class VentasComponent {
     } while (!activarventa);
   } // Función para activar venta
 
-  agregarVenta() {
+  agregarVentaAdmin() {
     const dialogRef = this.dialog.open(RegistroVentasAdminComponent, {
+      width: '550px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
+        this.consultarVentas();
+      }
+    });
+  }
+
+  agregarVenta() {
+    const dialogRef = this.dialog.open(RegistroVentasComponent, {
       width: '550px',
       disableClose: true,
     });
