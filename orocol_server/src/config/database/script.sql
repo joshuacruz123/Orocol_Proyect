@@ -1,3 +1,4 @@
+drop database orocol
 CREATE DATABASE IF NOT exists orocol character SET utf8 collate utf8_general_ci;
 use orocol;
 

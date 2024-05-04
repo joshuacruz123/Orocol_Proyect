@@ -13,10 +13,11 @@ import { UsuarioService } from '../usuario/usuario.service';
 import { JwtService } from '@nestjs/jwt';
 import { TurnoController } from './turno.controller';
 import { PerfilEntity } from '../usuario/perfil.entity';
+import { SolicitudEntity } from '../usuario/solicitud.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([MineroEntity, TurnoMineroEntity, RolEntity, UsuarioEntity, PerfilEntity]),
+    TypeOrmModule.forFeature([MineroEntity, TurnoMineroEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
     RolModule, UsuarioModule,
   ],
   providers: [MineroService, RolService, UsuarioService, JwtService],

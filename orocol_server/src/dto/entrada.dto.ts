@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, Max, Min } from "class-validator";
+import { IsDateString, IsDecimal, IsNotEmpty, IsNumber, Max, Min } from "class-validator";
 
 export class EntradaDto {
 
@@ -6,9 +6,9 @@ export class EntradaDto {
     @IsDateString({ message: 'La fecha debe ser una fecha válida' })
     fechaExtraccionOro: string;
 
-    @IsNumber({}, { message: 'El precio debe ser un número' })
+    @IsDecimal({}, {message: 'El procio debe ser un número decimal'})
     @IsNotEmpty({ message: 'El precio no puede estar vacío' })
-    @Min(2, { message: 'el peso debe de ser al menos de dos números' })
+    @Min(2, { message: 'el precio debe de ser mas de dos números' })
     precioOro: number;
 
     @IsNumber({}, { message: 'La cantidad de oro debe ser un número' })

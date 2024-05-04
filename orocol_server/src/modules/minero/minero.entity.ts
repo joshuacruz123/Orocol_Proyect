@@ -4,7 +4,6 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { CambioDocumento, TipoDocumento } from './minero.enum';
 import { EntradaVentaEntity } from '../venta/entradaventas.entity';
 import { TurnoMineroEntity } from './turno.entity';
-import { NovedadEntity } from '../novedad/novedad.entity';
 
 @Entity({ name: 'Mineros' })
 export class MineroEntity { 
@@ -38,7 +37,4 @@ export class MineroEntity {
 
   @OneToMany(() => TurnoMineroEntity, (turno) => turno.minero)
   turno: TurnoMineroEntity[];
-
-  @OneToMany(() => NovedadEntity, (novedad) => novedad.minero)
-  novedad: NovedadEntity[];
-}   
+}

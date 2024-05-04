@@ -1,26 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { MineroEntity } from '../minero/minero.entity';
-import { AdministradorEntity } from 'src/modules/administrador/administrador.entity';
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
+import { TurnoMineroEntity } from '../minero/turno.entity';
 
 @Entity({ name: 'novedades' })
 export class NovedadEntity {
   @PrimaryGeneratedColumn('increment')
   idNovedad: number;
 
-  @Column({ type: 'date', nullable: false })
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   fechaNovedad: Date;
 
   @Column({ type: 'text', nullable: false })
   descripcion: string;
 
-  @ManyToOne(() => MineroEntity, (minero) => minero.novedad, { cascade: true })
-  @JoinColumn({ name: 'IdMinero' })
-  minero: MineroEntity;
-
-  @ManyToOne(() => AdministradorEntity, (administrador) => administrador.novedad, { cascade: true })
-  @JoinColumn({ name: 'idAdmin' })
-  administrador: AdministradorEntity;
-} 
+  @OneToOne(() => TurnoMineroEntity)
+  @JoinColumn({ name: 'idTurno' })
+  turno: TurnoMineroEntity;
+}
 
 /* 
 create table Novedad

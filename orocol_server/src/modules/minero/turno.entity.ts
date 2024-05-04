@@ -1,7 +1,8 @@
 // turno.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { MineroEntity } from './minero.entity';
 import { Asistencia } from './turno.enum';
+import { NovedadEntity } from '../novedad/novedad.entity';
 
 @Entity({ name: 'turnoMinero' })
 export class TurnoMineroEntity {
@@ -20,7 +21,10 @@ export class TurnoMineroEntity {
   @ManyToOne(() => MineroEntity, (minero) => minero.turno)
   @JoinColumn({ name: 'IdMinero' })
   minero: MineroEntity; 
-}  
+
+  @OneToOne(() => NovedadEntity, (novedad) => novedad.turno)
+  novedad: NovedadEntity[];
+}
 
 /* 
 create table TurnoMinero

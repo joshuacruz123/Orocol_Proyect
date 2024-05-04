@@ -16,9 +16,10 @@ import { AdministradorModule } from '../administrador/administrador.module';
 import { AdministradorEntity } from '../administrador/administrador.entity';
 import { AdministradorService } from '../administrador/administrador.service';
 import { PerfilEntity } from '../usuario/perfil.entity';
+import { SolicitudEntity } from '../usuario/solicitud.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([NovedadEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity]),
+  imports: [TypeOrmModule.forFeature([NovedadEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
   MineroModule, AdministradorModule, UsuarioModule,
 ],
   providers: [NovedadService, MineroService, AdministradorService, UsuarioService, JwtService],

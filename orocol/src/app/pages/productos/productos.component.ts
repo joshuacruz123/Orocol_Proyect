@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { PieComponent } from '../../shared/footer/pie.component';
 import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
 import { NavAdminComponent } from '../../shared/navbar-usuarios/nav-admin.component';
@@ -10,6 +11,7 @@ import { ProductosInterface } from '../../core/interfaces/producto.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { TokenService } from '../../core/services/token.service';
 import { NavMineroComponent } from '../../shared/navbar-usuarios/nav-minero.component';
+import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 
 @Component({
   selector: 'app-productos',
@@ -23,11 +25,12 @@ export class ProductosComponent implements OnInit {
   productList: ProductosInterface[] = [];
   sinLista = undefined;
   productListFiltro: ProductosInterface[] = [];
-  usuarioAdmin!: boolean;
+  usuarioAdmin!: boolean; 
 
   constructor(
     private productoService: ProductoService,
     private toastr: ToastrService,
+    public dialog: MatDialog,
     private tokenService: TokenService
   ) { }
 
@@ -36,6 +39,19 @@ export class ProductosComponent implements OnInit {
     this.usuarioAdmin = this.tokenService.validarPermisosUsuarios();
   }
 
+  agregarProducto() {
+    const dialogRef = this.dialog.open(CrearProductoComponent, {
+      width: '550px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
+        this.consultarProductos();
+      }
+    });
+  }
+  
   consultarProductos() {
     this.productoService.consultarProductos().subscribe({
       next: (result) => {

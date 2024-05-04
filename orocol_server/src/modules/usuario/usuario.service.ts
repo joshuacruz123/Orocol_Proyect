@@ -12,6 +12,7 @@ import { compare, hash } from 'bcryptjs';
 import { PayloadInterface } from 'src/auth/payload.interface';
 import { TokenDto } from 'src/dto/token.dto';
 import { PerfilEntity } from './perfil.entity';
+import { SolicitudEntity } from './solicitud.entity';
 import { PerfilDto } from 'src/dto/perfil.dto';
 import { Repository } from 'typeorm';
 import { UsuarioDto } from 'src/dto/usuario.dto';
@@ -19,6 +20,7 @@ import { PasswordDto, RecuperarPassDto } from 'src/dto/editar-password.dto';
 import { MulterOptionsFactory, MulterModuleOptions } from '@nestjs/platform-express';
 import * as fs from 'fs';
 import { PerfilCompleto } from './perfil.interface';
+import { SolicitudDto } from 'src/dto/solicitud.dto';
 // Importamos los archivos necesarios
 
 @Injectable()
@@ -32,6 +34,8 @@ export class UsuarioService {
         private readonly jwtService: JwtService,
         @InjectRepository(PerfilEntity)
         private readonly perfilRepository: Repository<PerfilEntity>,
+        @InjectRepository(SolicitudEntity)
+        private readonly solicitudRepository: Repository<SolicitudEntity>,
     ) { }
     // Instanciamos la clase con el constructor
 
@@ -233,4 +237,36 @@ export class UsuarioService {
         return {usuario, fotoPerfilUrl};
     }   
     // Método para consultar el perfil del usuario
+
+    /*
+    Gestionar solicitudes de ingreso al sistema
+    */
+    async crearSolicitudIngreso(correoUsuario: string, dto: SolicitudDto): Promise<MessageDto> {
+        const usuario = await this.usuarioRepository.findOne({ where: { correoUsuario } });
+        if (!usuario) {
+            throw new NotFoundException('No se encontró el correo en el sistema');
+        }
+        if (usuario.estadoUsuario === EstadoUsuario.ACTIVO) {
+            throw new BadRequestException(new MessageDto('El usuario se encuentra activo'));
+        }
+        const solicitud = new SolicitudEntity();
+        solicitud.descripcionSolicitud = dto.descripcionSolicitud;
+        solicitud.usuario = usuario;
+        try {
+            await this.solicitudRepository.save(solicitud);
+            return new MessageDto('Tu solicitud fue registrada exitosamente');
+        } catch (error) {
+            throw new InternalServerErrorException(new MessageDto('Error al crear la solicitud.'));
+        }
+    }
+    // Método para registrar los turnos
+
+    async consultarSolicitudes(): Promise<SolicitudEntity[]> {
+        const solicitudes = await this.solicitudRepository.find({ relations: ['usuario'] });
+        if (!solicitudes.length) {
+            throw new NotFoundException(new MessageDto('No hay solicitudes de ingreso'));
+        }
+        return solicitudes;
+    }
+    // Método para consultar solicitudes de ingreso de usuarios
 }

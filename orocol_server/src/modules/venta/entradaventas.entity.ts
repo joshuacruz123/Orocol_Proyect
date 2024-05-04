@@ -12,10 +12,10 @@ export class EntradaVentaEntity {
   @Column({ type: 'date' })
   fechaExtraccionOro: Date;
 
-  @Column({ type: 'float', nullable: false })
+  @Column({ type: 'numeric', precision: 10, scale: 2, nullable: false })
   precioOro: number;
 
-  @Column({ type: 'float', nullable: false })
+  @Column({ type: 'numeric', precision: 10, scale: 2, nullable: false })
   cantidad: number;
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})

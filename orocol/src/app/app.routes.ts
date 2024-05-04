@@ -10,18 +10,17 @@ import { EditarMineroComponent } from './pages/minero/editar-minero/editar-miner
 import { ProductosComponent } from './pages/productos/productos.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { ComprasComponent } from './pages/compras/compras.component';
-import { NovedadesComponent } from './pages/minero/novedades/novedades.component';
-import { TurnosComponent } from './pages/minero/turnos/turnos.component';
 import { IndicadoresFinancierosComponent } from './pages/indicadores-financieros/indicadores-financieros.component';
 import { RecuperarContrasenaComponent } from './pages/auth/recuperar-contrasena/recuperar-contrasena.component';
 import { EditarContrasenaComponent } from './pages/auth/recuperar-contrasena/editar-contrasena.component';
 import { GestionarUsuariosComponent } from './pages/gestionar-usuarios/gestionar-usuarios.component';
-import { AsistenciasMinerosComponent } from './pages/minero/turnos/asistencias-mineros.component';
+import { AsistenciaMineroComponent } from './pages/asistencias/asistencia-minero/asistencia-minero.component';
+import { AsistenciaAdminComponent } from './pages/asistencias/asistencia-admin/asistencia-admin.component';
 import { adminGuard } from './core/guard/admin.guard';
 import { mineroGuard } from './core/guard/minero.guard';
 import { authGuard } from './core/guard/auth.guard';
 
-export const routes: Routes = [ // joshuacruz@gmail.com JoshuaDesarrollador2006 | hernandez@gmail.com hernandezOrocol1
+export const routes: Routes = [ // brentP@gmail.com 19961312012 | hernandez@gmail.com hernandezOrocol1 | joshuacruz@gmail.com JoshuaDesarrollador2006
     {path: '', component: HomeComponent},
     {path: 'manual_usuario', title: 'Manual de usuario', component: ManualUsuarioComponent},
     {path: 'registro', title: 'Registro', component: RegistroComponent},
@@ -36,9 +35,8 @@ export const routes: Routes = [ // joshuacruz@gmail.com JoshuaDesarrollador2006 
     {path: 'productos', title: 'Productos', component: ProductosComponent, canActivate: [authGuard]},
     {path: 'ventas', title: 'Ventas', component: VentasComponent, canActivate: [authGuard]},
     {path: 'compras', title: 'Compras', component: ComprasComponent, canActivate: [adminGuard]},
-    {path: 'ver_asistencias', title: 'Asistencia de mineros', component: TurnosComponent, canActivate: [authGuard]},
-    {path: 'asistencias', title: 'Registrar asistencia', component: AsistenciasMinerosComponent, canActivate: [mineroGuard]},
-    {path: 'novedades', title: 'Novedades', component: NovedadesComponent, canActivate: [authGuard]},
+    {path: 'ver_asistencias', title: 'Asistencia de mineros', component: AsistenciaMineroComponent, canActivate: [adminGuard]},
+    {path: 'asistencias', title: 'Asistencias', component: AsistenciaAdminComponent, canActivate: [mineroGuard]},
     {path: 'indicadores_financieros', title: 'Indicadores financieros', component: IndicadoresFinancierosComponent, canActivate: [adminGuard]},
     //{path: '', title: '', component: },
     { path: '', redirectTo: '', pathMatch: 'full' },

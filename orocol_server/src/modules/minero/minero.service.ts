@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MineroEntity } from './minero.entity';
@@ -10,6 +10,7 @@ import { RolEntity } from '../rol/rol.entity';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { TurnoMineroEntity } from './turno.entity';
 import { TurnoDto } from 'src/dto/turno.dto';
+import { EstadoUsuario } from '../usuario/usuario.enum';
 
 @Injectable()
 export class MineroService {
@@ -36,7 +37,7 @@ export class MineroService {
             }
             return minero;
         });
-    } 
+    }
     // Método para consultar usuarios mineros
 
     async consultarMinero(IdMinero: number): Promise<MineroEntity> {
@@ -109,7 +110,6 @@ export class MineroService {
         minero.fecha_nacimiento = dto.fecha_nacimiento ?? minero.fecha_nacimiento;
         minero.direccion_vivienda = dto.direccion_vivienda ?? minero.direccion_vivienda;
         try {
-            // Guardar el minero en la base de datos
             await this.mineroRepository.save(minero);
             return new MessageDto(`Datos del usuario ${minero.usuario.nombreUsuario} editados exitosamente`);
         } catch (error) {
@@ -118,61 +118,56 @@ export class MineroService {
     }
     // Método para editar usuario minero 
 
-    async registrarTurnos(IdMinero: number, dto: TurnoDto): Promise<any> {
-        const minero: MineroEntity = await this.consultarMinero(IdMinero);
+    async registrarTurnoMinero(numeroDocumento: number, turnoDto: TurnoDto): Promise<MessageDto> {
+        const minero = await this.mineroRepository.findOne({ where: { numero_documento: numeroDocumento } });
         if (!minero) {
-            throw new InternalServerErrorException(
-                new MessageDto('Ese usuario no existe'),
-            );
+            throw new NotFoundException('Minero no encontrado');
         }
-        const turno: TurnoMineroEntity = new TurnoMineroEntity();
-        turno.FechaTurno = dto.FechaTurno;
-        turno.Asistencia = dto.Asistencia;
-        turno.AsignacionTareas = dto.AsignacionTareas;
-        turno.minero = minero;
-        try { // Guardar en la base de datos
-            await this.turnoRepository.save(turno);
-            await this.mineroRepository.save(minero);
-            return new MessageDto(`Turno de ${minero.usuario.nombreUsuario} registrado`);
+        const turnoMinero = new TurnoMineroEntity();
+        turnoMinero.FechaTurno = turnoDto.FechaTurno;
+        turnoMinero.Asistencia = turnoDto.Asistencia;
+        turnoMinero.AsignacionTareas = turnoDto.AsignacionTareas;
+        turnoMinero.minero = minero;
+        try {
+            await this.turnoRepository.save(turnoMinero);
+            return new MessageDto(`Asistencia registrada correctamente.`);
         } catch (error) {
-            throw new InternalServerErrorException(
-                new MessageDto(`Error al registrar el turno: ${error.message || error}`),
-            );
+            throw new InternalServerErrorException(new MessageDto('Error al registrar la asistencia'));
         }
     }
-    // Método para registrar las salidas de las turnos
+    // Método para registrar los turnos
 
     async consultarTurnos(): Promise<TurnoMineroEntity[]> {
-        const turnos = await this.turnoRepository.find({
-            relations: ['minero.usuario']
-        });
-        if (!turnos || turnos.length === 0) {
-            throw new NotFoundException(new MessageDto('No hay turnos registrados en el sistema'));
+        const turnos = await this.turnoRepository.find({ relations: ['minero', 'minero.usuario', 'novedad'] });
+        if (!turnos.length) {
+            throw new NotFoundException(new MessageDto('No hay turnos registrador'));
         }
-        return turnos;
-    }
+        return turnos.map(turno => {
+            if (turno.novedad) {
+                turno.novedad;
+            }
+            return turno;
+        });
+    } 
     // Método para consultar las turnos
 
-    async consultarTurno(idTurno: number): Promise<TurnoMineroEntity> {
-        const minero: MineroEntity = await this.consultarMinero(idTurno);
-        if (!minero) {
-            throw new NotFoundException(new MessageDto('No se encontró el minero al usuario'));
+    async consultarTurnosMinero(IdMinero: number): Promise<MineroEntity> {
+        const minero = await this.mineroRepository.findOne({
+            where: { IdMinero },
+            relations: ['turno', 'turno.novedad'],
+            select: ['IdMinero'],
+        }); 
+        const confirmar = await this.mineroRepository.findOne({ where: { IdMinero }, relations: ['turno'],
+        }); 
+        if (!confirmar) {
+            throw new NotFoundException('No tienes asistencias registradas');
         }
-        const turno: TurnoMineroEntity = await this.turnoRepository.findOne({
-            where: {
-                minero: { IdMinero: minero.IdMinero }
-            },
-            relations: ['minero.usuario']
-        });
-        if (!turno) {
-            throw new NotFoundException(new MessageDto('No existe ese registro'));
-        }
-        return turno;
+        return minero;
     }
-    // Método para consultar una turno
+    // Método para consultar los turnos de los usuarios
 
     async editarTurno(idTurno: number, dto: TurnoDto): Promise<any> {
-        const turno = await this.consultarTurno(idTurno);
+        const turno = await this.turnoRepository.findOne({ where: {idTurno}});
         if (!turno) {
             throw new NotFoundException(new MessageDto('No existe el turno'));
         }

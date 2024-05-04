@@ -1,6 +1,6 @@
 export enum TipoDocumento {
     CedulaCiudadania = 'Cedula de ciudadania',
-    CedulaExtranjeria = 'Cedula de Extranjeria',
+    CedulaExtranjeria = 'Cedula de extranjeria',
   }
   
 export enum CambioDocumento {

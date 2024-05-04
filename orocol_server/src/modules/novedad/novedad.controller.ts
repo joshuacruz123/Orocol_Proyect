@@ -14,27 +14,20 @@ export class NovedadController {
 
     constructor(private readonly novedadService: NovedadService) {}
 
-    @RolDecorator(RolNombre.MINERO, RolNombre.ADMINISTRADOR)
+    @RolDecorator(RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Get()
-    async consultarNovedades() {
-        return await this.novedadService.consultarNovedades();
-    } 
-
+    @Post(':idTurno')
+    async registrarNovedades(@Param('idTurno') idTurno: number,
+        @Body() dto: NovedadDto,
+    ): Promise<any> {
+        return this.novedadService.registrarNovedad(idTurno, dto);
+    }
+    
     @RolDecorator(RolNombre.MINERO, RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard) 
     @Get(':idNovedad')
     async consultarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number) {
         return await this.novedadService.consultarNovedad(idNovedad);
-    }
-
-    @RolDecorator(RolNombre.MINERO)
-    @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Post(':IdMinero/:idAdmin')
-    async registrarNovedades(@Param('IdMinero') IdMinero: number, @Param('idAdmin') idAdmin: number, 
-        @Body() dto: NovedadDto,
-    ): Promise<any> {
-        return this.novedadService.registrarNovedad(IdMinero, idAdmin, dto);
     }
     
     @RolDecorator(RolNombre.MINERO)
@@ -43,12 +36,5 @@ export class NovedadController {
     @Put(':idNovedad')
     async editarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number, @Body() dto: NovedadDto) {
         return await this.novedadService.editarNovedad(idNovedad, dto);
-    }  
-
-    @RolDecorator(RolNombre.MINERO)
-    @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Delete(':idNovedad')
-    async eliminarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number){
-        return await this.novedadService.eliminarNovedad(idNovedad)
     } 
 }

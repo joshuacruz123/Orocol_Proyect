@@ -10,7 +10,7 @@ export class SalidaVentaEntity {
   @PrimaryGeneratedColumn('increment')
   IdSalidaVenta: number;
 
-  @Column({ type: 'float' })
+  @Column({ type: 'numeric', precision: 10, scale: 2, nullable: false })
   PesogrOro: number;
 
   @OneToOne(() => EntradaVentaEntity, { cascade: true })

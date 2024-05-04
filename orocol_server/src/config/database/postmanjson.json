@@ -115,7 +115,7 @@
       "usuario": {
         "idUsuario": 1,
         "nombreUsuario": "Andres Manuel",
-        "apellidosUsuario": "Hernandez Castillo",
+        "apellidosUsuario": "Hernadez Castillo",
         "perfil": {
           "idPerfil": 11,
           "fotoPerfil": "/uploads/1_1.jpg"
@@ -182,7 +182,7 @@
   "turnominero": [
     {
       "url": "http://localhost:3000/turno/1",
-      "FechaTurno": "2023-01-12 13:00:00",
+      "FechaTurno": "2024-05-02 13:00:00",
       "Asistencia": "Nó asistió",
       "AsignacionTareas": "Recolección de oro"
     },
@@ -226,7 +226,7 @@
     {
       "producto":" Oro de  quilates ",
       "fechaExtraccionOro": "2023-10-06",
-      "precioOro": 7000000,
+      "precioOro": 75000.99,
       "cantidad": 400,
       "cambios": "ALTER TABLE `mineros` CHANGE `numero_documento` `numero_documento` INT(20) NOT NULL;"
     }

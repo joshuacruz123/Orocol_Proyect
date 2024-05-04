@@ -14,27 +14,27 @@ export class TurnoController {
 
     constructor(private readonly mineroService: MineroService) {}
 
-    @RolDecorator(RolNombre.MINERO, RolNombre.ADMINISTRADOR)
+    @RolDecorator(RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard) 
     @Get()
     async consultarTurnos() {
         return await this.mineroService.consultarTurnos();
     }
 
-    @RolDecorator(RolNombre.MINERO, RolNombre.ADMINISTRADOR)
+    @RolDecorator(RolNombre.MINERO)
     @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Get(':idTurno')
-    async consultarTurno(@Param('idTurno', ParseIntPipe) idTurno: number) {
-        return await this.mineroService.consultarTurno(idTurno);
+    @Get(':IdMinero')
+    async consultarTurnosMinero(@Param('IdMinero', ParseIntPipe) IdMinero: number) {
+        return await this.mineroService.consultarTurnosMinero(IdMinero);
     }
-
-    @RolDecorator(RolNombre.MINERO, RolNombre.ADMINISTRADOR)
+    
+    @RolDecorator(RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Post(':IdMinero')
-    async registrarTurnos(@Param('IdMinero') IdMinero: number,
-        @Body() dto: TurnoDto,
-    ): Promise<any> {
-        return this.mineroService.registrarTurnos(IdMinero, dto);
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    @Post(':numeroDocumento/registrar')
+    async registrarTurno(@Param('numeroDocumento', ParseIntPipe) numeroDocumento: number,
+        @Body() turnoDto: TurnoDto) {
+        return await this.mineroService.registrarTurnoMinero(numeroDocumento, turnoDto);
     }
     
     @RolDecorator(RolNombre.ADMINISTRADOR) 

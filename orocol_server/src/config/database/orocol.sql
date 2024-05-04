@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-02-2024 a las 05:34:36
+-- Tiempo de generación: 02-05-2024 a las 01:21:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -65,8 +65,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`IdCliente`, `NombreCompleto`, `Empresa`, `Pais`, `CiudadMunicipio`, `FechaExportacion`, `estadoCompra`, `IdSalidaVenta`) VALUES
-(1, 'Timothy Jhohanson MacBech', 'Gator Corporation', 'Perú', 'Lima', '2023-12-16', 'En proceso', 1),
-(2, 'Juan Manuel Hernandez Cabrera', 'GoldSocial', 'Colombia', 'Tolima', '2023-02-15', 'En proceso', 2);
+(1, 'Timothy Jhohanson MacBench', 'Gator Corporation', 'Perú', 'Lima', '2023-12-15', 'Terminada', 1),
+(2, 'Juan Manuel Hernandez Cabrera', 'GoldSocial', 'Colombia', 'Tolima', '2023-02-14', 'En proceso', 2);
 
 -- --------------------------------------------------------
 
@@ -77,8 +77,8 @@ INSERT INTO `clientes` (`IdCliente`, `NombreCompleto`, `Empresa`, `Pais`, `Ciuda
 CREATE TABLE `entradaventas` (
   `idGestionVenta` int(11) NOT NULL,
   `fechaExtraccionOro` date NOT NULL,
-  `precioOro` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `precioOro` float NOT NULL,
+  `cantidad` float NOT NULL,
   `estadoVenta` varchar(15) NOT NULL DEFAULT 'Activo',
   `IdMinero` int(11) DEFAULT NULL,
   `IdProducto` int(11) DEFAULT NULL
@@ -89,10 +89,15 @@ CREATE TABLE `entradaventas` (
 --
 
 INSERT INTO `entradaventas` (`idGestionVenta`, `fechaExtraccionOro`, `precioOro`, `cantidad`, `estadoVenta`, `IdMinero`, `IdProducto`) VALUES
-(1, '2023-10-05', 7000000, 400, 'Activo', 1, 2),
+(1, '2023-10-04', 7500000, 450, 'Activo', 1, 2),
 (2, '2023-10-05', 7000000, 400, 'Activo', 2, 1),
-(3, '2023-10-05', 8000000, 450, 'Activo', 3, 3),
-(4, '2023-10-05', 8000000, 450, 'Activo', 3, 3);
+(3, '2023-10-06', 7000000, 400, 'Inactivo', 3, 1),
+(4, '2023-10-07', 8000000, 450, 'Activo', 3, 3),
+(5, '2023-10-09', 9000000, 500, 'Activo', 4, 8),
+(6, '2023-10-10', 7000000, 400, 'Activo', 4, 11),
+(7, '2023-10-11', 7000000, 400, 'Activo', 2, 11),
+(8, '2023-10-10', 9000000, 500, 'Activo', 4, 8),
+(9, '2023-10-28', 8000000, 500, 'Activo', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -103,7 +108,7 @@ INSERT INTO `entradaventas` (`idGestionVenta`, `fechaExtraccionOro`, `precioOro`
 CREATE TABLE `mineros` (
   `IdMinero` int(11) NOT NULL,
   `tipo_documento` varchar(30) NOT NULL,
-  `numero_documento` bigint(20) NOT NULL,
+  `numero_documento` int(20) NOT NULL,
   `cambio_documento` varchar(15) NOT NULL,
   `telefono` mediumint(9) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
@@ -118,7 +123,10 @@ CREATE TABLE `mineros` (
 INSERT INTO `mineros` (`IdMinero`, `tipo_documento`, `numero_documento`, `cambio_documento`, `telefono`, `fecha_nacimiento`, `direccion_vivienda`, `idUsuario`) VALUES
 (1, 'Cedula de ciudadania', 1012587523, 'Acepto', 3212564, '1993-10-15', 'cra 102 #45-46', 2),
 (2, 'Cedula de ciudadania', 1332778599, 'No acepto', 3186279, '1987-12-08', 'Transversal 1b este # 81d 84 sur', 4),
-(3, 'Cedula de ciudadania', 1312587790, 'Acepto', 3182777, '1996-08-12', 'Av C.Cali #64 sur', 6);
+(3, 'Cedula de Extranjeria', 1312587790, 'Acepto', 3182777, '1996-08-12', 'Av C.Cali #64 sur', 6),
+(4, 'Cedula de ciudadania', 1032678564, 'No acepto', 3186279, '2006-01-25', 'Transversal 1b este #81d 84 sur', 8),
+(5, 'Cedula de Extranjeria', 1234567855, 'Acepto', 3188607, '1994-04-25', 'Calle Principal 123', 9),
+(6, 'Cedula de ciudadania', 1398765432, 'No acepto', 3183607, '1987-10-14', 'Avenida Central 456', 10);
 
 -- --------------------------------------------------------
 
@@ -134,13 +142,32 @@ CREATE TABLE `novedades` (
   `idAdmin` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `novedades`
+-- Estructura de tabla para la tabla `perfil`
 --
 
-INSERT INTO `novedades` (`idNovedad`, `fechaNovedad`, `descripcion`, `IdMinero`, `idAdmin`) VALUES
-(1, '2023-11-30', 'No pude cumplir con mi horario de trabajo por calamidad domestica.', 1, 1),
-(2, '2023-07-17', 'No cumple con el horario de trabajo', 2, 2);
+CREATE TABLE `perfil` (
+  `idPerfil` int(11) NOT NULL,
+  `fotoPerfil` varchar(255) NOT NULL,
+  `idUsuario` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `perfil`
+--
+
+INSERT INTO `perfil` (`idPerfil`, `fotoPerfil`, `idUsuario`) VALUES
+(12, '/uploads/2_6277e2b5.jpg', 2),
+(13, '/uploads/3_FWi76tMVUAE4rNN.jpg', 3),
+(14, '/uploads/1_sennior.jpg', 1),
+(15, '/uploads/4_minerodos.jpg', 4),
+(16, '/uploads/5_leonnesajdsnw.jpg', 5),
+(17, '/uploads/6_fondo_perfil.jpg', 6),
+(18, '/uploads/7_Alex Gamez.jpg', 7),
+(19, '/uploads/8_mifoto - copia.jpeg', 8),
+(20, '/uploads/10_4556seora.jpg', 10);
 
 -- --------------------------------------------------------
 
@@ -161,7 +188,11 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`IdProducto`, `TipoOro`, `estadoProducto`) VALUES
 (1, 'Oro de 24 quilates', 'Disponible'),
 (2, 'Oro de 22 quilates', 'Disponible'),
-(3, 'Oro de 18 quilates', 'Disponible');
+(3, 'Oro de 18 quilates', 'Disponible'),
+(8, 'Oro de 14 quilates', 'Disponible'),
+(9, 'Oro de 10 quilates', 'Disponible'),
+(10, 'Oro de 20 quilates', 'Disponible'),
+(11, 'Oro de 28 quilates', 'Disponible');
 
 -- --------------------------------------------------------
 
@@ -222,8 +253,7 @@ CREATE TABLE `turnominero` (
 --
 
 INSERT INTO `turnominero` (`idTurno`, `FechaTurno`, `Asistencia`, `AsignacionTareas`, `IdMinero`) VALUES
-(1, '2023-01-12 13:00:00', 'Nó asistió', 'Recolección de oro', 1),
-(2, '2023-01-12 07:00:00', 'Sí asistió', 'Carga de materiales', 2);
+(1, '2023-01-12 13:00:00', 'Nó asistió', 'Recolección de oro', 1);
 
 -- --------------------------------------------------------
 
@@ -246,13 +276,16 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `nombreUsuario`, `apellidosUsuario`, `correoUsuario`, `passwordUsuario`, `estadoUsuario`, `idRol`) VALUES
-(1, 'Andres Manuel', 'Hernandez Castillo', 'hernandez@gmail.com', '$2a$10$AFRot/NXzCPHgjw.unAK0OpYNhrvlMZVxLbIRWOuw/slZoR3MF6Du', 'activo', 1),
-(2, 'Alezander Antonio', 'Velazco', 'alexV@gmail.com', '$2a$10$ogs/omLmP.5fiOwY0xPhV.Umsx/TJo8miPCPceny0Sp3O0uX.Lm46', 'activo', 2),
-(3, 'Jesus Alvarez', 'Sierra Daza', 'jesusSierra@gmail.com', '$2a$10$qp5hW8LrB5KfsmRvxSwHC.W.wHvkxH1bbNig5OrgkKR.3rlwlJC0a', 'activo', 1),
-(4, 'Anderson', 'Perez Silva', 'Anders@gmail.com', '$2a$10$atYPHA6NFXnmrfbLi5k.3.iBfHMCymF6Xs2L0MBza5fWhIhbkwmpi', 'activo', 2),
-(5, 'Felipe montez', 'Brievich Gomez', 'FelipeMZ@gmail.com', '$2a$10$pw5cZQCgfORtJc/yk.VRTuaB0dgfow10sxuFJoHulfDfFivyeQQiS', 'activo', 1),
-(6, 'Brenton Parra', 'Casillas Aguilar', 'BrentP@gmail.com', '$2a$10$BgH346cLpQMaYStrKSzffepXleeTW5HlNTBn51wphCdCaSQSADILS', 'activo', 2),
-(7, 'Bernabe Alex', 'Gamez Prieto', 'alexisGe@gmail.com', '$2a$10$vUBrKTfLOLzOtX.hGKYkTek.U1fTjfLqLDat9Ecb07PPqh6VKXjnG', 'activo', 1);
+(1, 'Andres Manuel', 'Hernandez Cantillo', 'hernandez@gmail.com', '$2a$10$1Yak0tfIQOVh1JYyOw4Ip.OEfqgTU89StEB4qM3nC6ZwD75P.W7.m', 'activo', 1),
+(2, 'Alezander Antonio', 'Velazco', 'alexV@gmail.com', '$2a$10$/eI7tUIVItug.pueoIEY4.3nzc82I8QqWS/62rzjHu37RIVo0/8sa', 'activo', 2),
+(3, 'Jesus Alvarez', 'Sierra Daza', 'jesusSierra@gmail.com', '$2a$10$mXm6KLuo26wqW.AiFHS9seaJUZk7TGYD0MzZZgnOFOEnQIST8hZ3y', 'activo', 1),
+(4, 'Anderson Manuel', 'Perez Silva', 'Anders@gmail.com', '$2a$10$GHRSqaLvJBnkYCyiB9Y2CuhQ/KlLHPWbVy.rXYP6INHtO.BNs5lxi', 'activo', 2),
+(5, 'Felipe Montes', 'Brievich Gomez', 'felipeMZ@gmail.com', '$2a$10$qN9SHFO5nr99JtkkiH6oSuOtomOeAjKSo7vHOuRnvkJawxtxhJeJS', 'activo', 1),
+(6, 'Brenton Para', 'Casillas Aguilar', 'brentP@gmail.com', '$2a$10$9klsiKIRz61NtZuqaYrgyOlhIUrjhYTlJQyN17EKZUL0gmycpyqh2', 'activo', 2),
+(7, 'Bernabe Alex', 'Gamez Prieto', 'alexisGe@gmail.com', '$2a$10$tEGOpI.R2MRei0twimhiRO0FYRowrL0gGzikbT0DGuNIPRBCcOUIG', 'activo', 1),
+(8, 'Joshua Sebastian', 'Cruz Fierro', 'joshuacruz@gmail.com', '$2a$10$3d7ydTiupaEVXlU44f6HROFiK.bMRwn8CQYm7HVdEvrwMuAowNsi2', 'activo', 2),
+(9, 'Juan Santiago', 'García Perez', 'juan.garcia@gmail.com', '$2a$10$PwuyccOxLUqE/9ceTP9hXe4WNLKELuHTW85Irug7mHi1RnnHpaP.S', 'activo', 2),
+(10, 'María José', 'López Martínez', 'marialopez@gmail.com', '$2a$10$9zTxtGP.Ll9xGw9kIt9ZmeuJFDO6WfV6.7qGX0dW/FMQdyvwVv8C.', 'activo', 2);
 
 --
 -- Índices para tablas volcadas
@@ -295,6 +328,13 @@ ALTER TABLE `novedades`
   ADD PRIMARY KEY (`idNovedad`),
   ADD KEY `FK_6958f40b5c32e5c2475960ff65a` (`IdMinero`),
   ADD KEY `FK_b40c5ecba6b17e41c8626152939` (`idAdmin`);
+
+--
+-- Indices de la tabla `perfil`
+--
+ALTER TABLE `perfil`
+  ADD PRIMARY KEY (`idPerfil`),
+  ADD UNIQUE KEY `REL_b35ce50c61b2e3923fb284890a` (`idUsuario`);
 
 --
 -- Indices de la tabla `productos`
@@ -352,25 +392,31 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `entradaventas`
 --
 ALTER TABLE `entradaventas`
-  MODIFY `idGestionVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idGestionVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `mineros`
 --
 ALTER TABLE `mineros`
-  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdMinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `novedades`
 --
 ALTER TABLE `novedades`
-  MODIFY `idNovedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idNovedad` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `perfil`
+--
+ALTER TABLE `perfil`
+  MODIFY `idPerfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -388,13 +434,13 @@ ALTER TABLE `salidaventas`
 -- AUTO_INCREMENT de la tabla `turnominero`
 --
 ALTER TABLE `turnominero`
-  MODIFY `idTurno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idTurno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
@@ -431,6 +477,12 @@ ALTER TABLE `mineros`
 ALTER TABLE `novedades`
   ADD CONSTRAINT `FK_6958f40b5c32e5c2475960ff65a` FOREIGN KEY (`IdMinero`) REFERENCES `mineros` (`IdMinero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_b40c5ecba6b17e41c8626152939` FOREIGN KEY (`idAdmin`) REFERENCES `administradores` (`idAdmin`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `perfil`
+--
+ALTER TABLE `perfil`
+  ADD CONSTRAINT `FK_b35ce50c61b2e3923fb284890a8` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `salidaventas`

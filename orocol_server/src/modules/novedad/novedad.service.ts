@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MineroEntity } from '../minero/minero.entity';
@@ -12,6 +12,7 @@ import { MineroService } from '../minero/minero.service';
 import { TurnoMineroEntity } from '../minero/turno.entity';
 import { AdministradorEntity } from '../administrador/administrador.entity';
 import { AdministradorService } from '../administrador/administrador.service';
+import { Asistencia } from '../minero/turno.enum';
 
 @Injectable()
 export class NovedadService {
@@ -33,82 +34,49 @@ export class NovedadService {
         private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly usuarioService: UsuarioService,
     ) { }
-
-    async registrarNovedad(IdMinero: number, idAdmin: number, dto: NovedadDto): Promise<any> {
-        const minero: MineroEntity = await this.mineroService.consultarMinero(IdMinero);
-        const administrador: AdministradorEntity = await this.administradorService.consultarAdministrador(idAdmin);
-        if (!minero || !administrador) {
-            throw new InternalServerErrorException(
-              new MessageDto('Ese usuario no existe'),
-            );
+    
+    async registrarNovedad(idTurno: number, dto: NovedadDto): Promise<MessageDto> {
+        const turno: TurnoMineroEntity = await this.turnoRepository.findOne({ where: {idTurno}});
+        if (!turno) {
+            throw new NotFoundException('No existe la asistencia');
+        }
+        if (turno.Asistencia === Asistencia.Si) {
+            throw new BadRequestException(new MessageDto('El usuario sí asistió'));
         }
         const novedad: NovedadEntity = new NovedadEntity();
-        novedad.fechaNovedad = dto.fechaNovedad;
         novedad.descripcion = dto.descripcion;
-        novedad.minero = minero;
-        novedad.administrador = administrador;
-        try { // Guardar en la base de datos
+        novedad.turno = turno;
+        try {
+            await this.turnoRepository.save(turno);
             await this.novedadRepository.save(novedad);
-            await this.mineroRepository.save(minero);
-            await this.administradorRepository.save(administrador);
-            return new MessageDto(`novedad de ${minero.usuario.nombreUsuario} ${minero.usuario.apellidosUsuario} registrada`);
+            return new MessageDto(`Novedad registrada exitosamente.`)
         } catch (error) {
-            throw new InternalServerErrorException(
-                new MessageDto(`Error al registrar la novedad: ${error.message || error}`),
-            );
+            throw new InternalServerErrorException(new MessageDto('Error al registrar la novedad'))
         }
     }
-    // Método para registrar las salidas de las novedads
-
-    async consultarNovedades(): Promise<NovedadEntity[]> {
-        const novedads = await this.novedadRepository.find({
-            relations: ['minero.usuario']
-        });
-        if (!novedads || novedads.length === 0) {
-            throw new NotFoundException(new MessageDto('No hay novedads registrados en el sistema'));
-        }
-        return novedads;
-    }
-    // Método para consultar las novedads
+    // Método para registrar las novedades
     
     async consultarNovedad(idNovedad: number): Promise<NovedadEntity> {
-        const minero: MineroEntity = await this.mineroService.consultarMinero(idNovedad);
-        if (!minero) {
-            throw new NotFoundException(new MessageDto('No se encontró el minero al usuario'));
-        }
-        const novedad: NovedadEntity = await this.novedadRepository.findOne({
-            where: {
-                minero: { IdMinero: minero.IdMinero }
-            },
-            relations: ['minero.usuario']    
-        });
+        const novedad: NovedadEntity = await this.novedadRepository.findOne({ where: {idNovedad}});
         if (!novedad) {
-            throw new NotFoundException(new MessageDto('No existe ese registro')); 
+            throw new NotFoundException(new MessageDto('No se encontró la novedad'));
         }
         return novedad;
     }
     // Método para consultar una novedad
-
+    
     async editarNovedad(idNovedad: number, dto: NovedadDto): Promise<any> {
         const novedad = await this.consultarNovedad(idNovedad);
         if (!novedad) {
             throw new NotFoundException(new MessageDto('No existe la novedad'));
         }
-        novedad.fechaNovedad = dto.fechaNovedad;
         novedad.descripcion = dto.descripcion;
         try {
             await this.novedadRepository.save(novedad);
-            return new MessageDto('Datos de la novedad actualizados exitosamente');
+            return new MessageDto('Novedad actualizada exitosamente');
         } catch (error) {
             throw new InternalServerErrorException(new MessageDto('Error al editar la novedad'));
         }
     }
-    // Método para editar la novedad del usuario minero
-
-    async eliminarNovedad(idNovedad: number): Promise<any> {
-        const novedad = await this.consultarNovedad(idNovedad);
-        await this.novedadRepository.delete(idNovedad);
-        return new MessageDto(`Novedad de ${novedad.minero.usuario.nombreUsuario} eliminada`);
-    } 
-    // Método para eliminar la novedad del usuario minero
+    // Método para editar la novedad del usuario minero 
 }

@@ -1,10 +1,11 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { RolEntity } from '../rol/rol.entity';
 import { EstadoUsuario } from './usuario.enum';
 import { hash } from 'bcryptjs';
 import { MineroEntity } from "../minero/minero.entity";
 import { AdministradorEntity } from "../administrador/administrador.entity";
 import { PerfilEntity } from "./perfil.entity";
+import { SolicitudEntity } from "./solicitud.entity";
    
   @Entity({ name: 'Usuarios' })
   export class UsuarioEntity {
@@ -39,6 +40,9 @@ import { PerfilEntity } from "./perfil.entity";
     
     @OneToOne(() => PerfilEntity, (perfil) => perfil.usuario)
     perfil: PerfilEntity; 
+
+    @OneToMany(() => SolicitudEntity, (solicitud) => solicitud.usuario)
+    solicitud: SolicitudEntity[];
 
     @BeforeInsert()
     @BeforeUpdate()

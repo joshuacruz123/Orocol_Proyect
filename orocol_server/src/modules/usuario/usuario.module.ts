@@ -11,10 +11,12 @@ import { JWT_SECRET } from 'src/config/constants';
 import { JwtStrategy } from 'src/auth/strategies/jwt.strategy';
 import { PerfilEntity } from './perfil.entity';
 import { PasswordController } from './password.controller';
+import { SolicitudEntity } from './solicitud.entity';
+import { SolicitudesController } from './solicitudes.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UsuarioEntity, RolEntity, PerfilEntity]),
+    TypeOrmModule.forFeature([UsuarioEntity, RolEntity, PerfilEntity, SolicitudEntity]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),
@@ -30,7 +32,7 @@ import { PasswordController } from './password.controller';
     }),
     ],
     providers: [UsuarioService, ConfigService, JwtStrategy],
-    controllers: [UsuarioController, PasswordController],
+    controllers: [UsuarioController, PasswordController, SolicitudesController],
     exports: [PassportModule, JwtStrategy]
 })
 export class UsuarioModule { }

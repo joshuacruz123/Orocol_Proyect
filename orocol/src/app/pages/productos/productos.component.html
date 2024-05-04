@@ -19,7 +19,7 @@
                                 <div class="bg-dark div-boton">
                                     @if (usuarioAdmin) {
                                     <a type="button" class="btn btn-primary btn-lg"
-                                        routerLink="/nuevo_producto"><mat-icon>add</mat-icon> Registrar producto</a>
+                                    (click)="agregarProducto()"><mat-icon>add</mat-icon> Registrar producto</a>
                                     }
                                     <input type="text" class="busqueda" placeholder="Buscar tipo de oro..." (input)="buscarProducto($event)">
                                 </div>
