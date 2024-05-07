@@ -25,7 +25,6 @@ export class RegistroVentasComponent {
     private fb: FormBuilder
   ) {
     this.ventaForm = this.fb.group({
-      //numero_documento: [null, Validators.required],
       TipoOro: [null, Validators.required],
       fechaExtraccionOro: [null, Validators.required],
       precioOro: [null, Validators.required],

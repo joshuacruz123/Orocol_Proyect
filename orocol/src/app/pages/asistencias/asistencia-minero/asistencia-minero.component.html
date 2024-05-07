@@ -2,10 +2,27 @@
     <app-encabezado></app-encabezado>
         <div class="row">
             <div class="barra-lateral col-6 col-sm-auto">
-                <app-nav-admin></app-nav-admin>
+                <app-nav-minero></app-nav-minero>
             </div>
             <main class="main col">
-                <h1>Asistencias de mineros |:</h1>
+                <h1>Tus asistencias:</h1>
+                <br />
+                @for (turno of turnos; track $index) {
+                    <div class="turno">
+                        <p>Fecha del turno: {{ turno.FechaTurno }}</p>
+                        <p>Asistencia: {{ turno.Asistencia }}</p>
+                        <p>Asignación de Tareas: {{ turno.AsignacionTareas }}</p>
+                        <!-- <p>Novedad: {{ turno.novedad ? turno.novedad : 'Ninguna' }}</p> -->
+                        @if (turno.Asistencia === 'Nó asistió' && !turno.novedad) {
+                            <button class="btn btn-success" type="button"
+                            (click)="agregarNovedad(turno.idTurno)"><mat-icon>add</mat-icon> Registrar novedad</button>
+                        }
+                        @if (turno.novedad.idNovedad) {
+                            <button class="btn btn-info" type="button"
+                            (click)="verNovedad(turno.novedad.idNovedad)"><mat-icon>add</mat-icon> Ver novedad</button>
+                        }
+                    </div>
+                } 
             </main>
         </div>
     <app-pie></app-pie>

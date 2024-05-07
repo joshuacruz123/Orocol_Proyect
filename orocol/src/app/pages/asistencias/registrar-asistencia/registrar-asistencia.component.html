@@ -1,1 +1,26 @@
-<p>registrar-asistencia works!</p>
+<mat-dialog-content class="mat-typography">
+    <div class="card-header">
+        Agregar venta
+    </div>
+    <form [formGroup]="asisteciaForm" (ngSubmit)="crearAsistencia()">
+        <label for="numero_documento">Número de Documento:</label>
+        <input type="number" formControlName="numero_documento" required>
+        
+        <label for="FechaTurno">Fecha y hora del turno:</label> 
+        <input type="datetime-local" formControlName="FechaTurno" required>
+        
+        <label for="Asistencia">Asistencia:</label>
+        <select id="Asistencia" formControlName="Asistencia">
+            <option value="Sí asistió">Sí asistió</option>
+            <option value="Nó asistió">Nó asistió</option>
+        </select>
+            
+        <label for="AsignacionTareas">Asignación de tareas:</label>
+        <input type="text" formControlName="AsignacionTareas" required>
+
+        <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar asistencia</button>
+      </form>  
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

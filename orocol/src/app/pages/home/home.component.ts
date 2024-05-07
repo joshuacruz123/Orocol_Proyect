@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { InfoOrocolComponent } from '../../shared/info-orocol/info-orocol.component';
+import { CrearSolicitudComponent } from '../solicitud-entrada/crear-solicitud/crear-solicitud.component';
 
 @Component({
   selector: 'app-home',
@@ -60,5 +61,12 @@ export class HomeComponent {
     document.body.removeChild(link);
   } // Descargar PDF
 
-  
+  agregarSolicitud() {
+    const dialogRef = this.dialog.open(CrearSolicitudComponent, {
+      width: '550px',
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }

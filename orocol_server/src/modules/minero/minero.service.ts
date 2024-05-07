@@ -140,7 +140,7 @@ export class MineroService {
     async consultarTurnos(): Promise<TurnoMineroEntity[]> {
         const turnos = await this.turnoRepository.find({ relations: ['minero', 'minero.usuario', 'novedad'] });
         if (!turnos.length) {
-            throw new NotFoundException(new MessageDto('No hay turnos registrador'));
+            throw new NotFoundException(new MessageDto('No hay turnos registrados'));
         }
         return turnos.map(turno => {
             if (turno.novedad) {
@@ -165,6 +165,15 @@ export class MineroService {
         return minero;
     }
     // Método para consultar los turnos de los usuarios
+    
+    async consultarTurno(idTurno: number): Promise<TurnoMineroEntity> {
+        const turno: TurnoMineroEntity = await this.turnoRepository.findOne({ where: {idTurno}});
+        if (!turno) {
+            throw new NotFoundException(new MessageDto('No se encontró el turno'));
+        }
+        return turno;
+    }
+    // Método para consultar una novedad
 
     async editarTurno(idTurno: number, dto: TurnoDto): Promise<any> {
         const turno = await this.turnoRepository.findOne({ where: {idTurno}});

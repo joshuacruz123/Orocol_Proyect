@@ -1,16 +1,15 @@
-<mat-dialog-content class="mat-typography">
-    <div class="card-header">
-        Crear novedad
-    </div>
-    <form [formGroup]="novedadForm" (ngSubmit)="registrarNovedad()">
+<mat-dialog-content>
+    <h1>Editar asistencia</h1>
+    @if (novedadForm) {
+    <form [formGroup]="novedadForm" (ngSubmit)="editarNovedad()">
 
         <label for="descripcion">Novedad:</label> 
         <textarea id="comentarios" name="comentarios" rows="4" cols="50" formControlName="descripcion" >
         </textarea>
         <br>
-
-        <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar asistencia</button>
-      </form>  
+        <button type="submit" class="btn btn-warning" cdkFocusInitial>Editar</button>
+    </form>
+    }
 </mat-dialog-content>
 <mat-dialog-actions align="center">
     <button type="button" (click)="cancelar()" mat-button>Cancelar</button>

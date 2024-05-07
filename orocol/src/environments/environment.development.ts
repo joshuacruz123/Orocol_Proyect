@@ -7,6 +7,7 @@ export const environment = {
     productosURL: 'http://localhost:3000/producto/',
     turnoURL: 'http://localhost:3000/turno/',
     novedadURL: 'http://localhost:3000/novedad/',
+    solicitudURL: 'http://localhost:3000/solicitudes/',
     ventaURL: 'http://localhost:3000/venta/',
     salidaURL: 'http://localhost:3000/salida/',
     reportesURL: 'http://localhost:3000/reportes',

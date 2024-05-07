@@ -1,1 +1,14 @@
-<p>consultar-novedad works!</p>
+<h1>Novedad</h1>
+<br/>
+<strong>Fecha de creación de la novedad:</strong>
+<p> {{ novedad.fechaNovedad }}</p>
+<br/>
+<strong>Decripción:</strong>
+<p> {{ novedad.descripcion }}</p>
+<br/>
+@if (!usuarioAdmin) {
+    <button class="btn btn-warning" type="button"
+        (click)="editarNovedad(novedad.idNovedad)"><mat-icon>edit</mat-icon> Editar novedad</button>
+}
+<br/>
+<button type="button" (click)="cancelar()" mat-button>Cerrar</button>

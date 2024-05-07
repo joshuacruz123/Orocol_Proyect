@@ -30,6 +30,13 @@ export class TurnoController {
     
     @RolDecorator(RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard) 
+    @Get(':idTurno/consultar')
+    async consultarTurno(@Param('idTurno', ParseIntPipe) idTurno: number) {
+        return await this.mineroService.consultarTurno(idTurno);
+    }
+    
+    @RolDecorator(RolNombre.ADMINISTRADOR)
+    @UseGuards(JwtAuthGuard, RolesGuard) 
     @UsePipes(new ValidationPipe({whitelist: true}))
     @Post(':numeroDocumento/registrar')
     async registrarTurno(@Param('numeroDocumento', ParseIntPipe) numeroDocumento: number,

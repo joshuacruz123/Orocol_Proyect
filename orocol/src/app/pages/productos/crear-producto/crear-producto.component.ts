@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-//import { Productos } from '../../../models/productos';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';

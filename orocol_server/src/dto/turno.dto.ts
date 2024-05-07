@@ -11,7 +11,6 @@ export class TurnoDto {
     @IsNotBlank({message: 'La asistencia no puede estar vacía'})
     Asistencia: Asistencia;  
 
-
     @IsNotBlank({message: 'La dirección no puede estar vacía'})
     @MaxLength(255, {message: 'nombre: longitud máxima de 255'})
     AsignacionTareas: string;

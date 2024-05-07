@@ -1,58 +1,39 @@
 /* 
- idTurno: 1;
- FechaTurno: 2023-01-12T18:00:00.000Z;
- Asistencia: Nó asistió;
- AsignacionTareas: Recolección de oro;
- minero: 
-   IdMinero: 1;
-   tipo_documento: Cedula de ciudadania;
-   numero_documento: 1012587523;
-   cambio_documento: Acepto;
-   telefono: 3212564;
-   fecha_nacimiento: 1993-10-15;
-   direccion_vivienda: cra 102 #45-46;
-   usuario: 
-     idUsuario: 2;
-     nombreUsuario: Alezander Antonio;
-     apellidosUsuario: Velazco;
-     correoUsuario: alexV@gmail.com;
-     passwordUsuario: $2a$10$GQ3JH9B8.AxIGBUZLXPcUuzmGixAUUIGS2RtSn4j/12W0vagatbQe;
-     estadoUsuario: activo;
 ---------------------------------------------------
-
 nombreUsuario: "Pedro"
 apellidosUsuario: "Rodríguez García"
 correoUsuario: "pedro.rodriguez@gmail.com"
-passwordUsuario: "clave789"
+passwordUsuario: "clave789988j"
 tipo_documento: "Carnet de identidad"
-numero_documento: 54321678
-telefono: 654987321
-fecha_nacimiento: 820804
+numero_documento: 1254321678
+telefono: 316987321
+fecha_nacimiento: 06/05/1988
 direccion_vivienda: "Plaza Mayor 789"
 cambio_documento: "No"
 
-nombreUsuario: "Ana"
+nombreUsuario: "Ana Maria"
 apellidosUsuario: "Fernández Ruiz"
 correoUsuario: "ana.fernandez@gmail.com"
-passwordUsuario: "contrasena321"
+passwordUsuario: "ena32188j"
 tipo_documento: "DNI"
-numero_documento: 87654321
-telefono: 789456123
+numero_documento: 123789456
+telefono: 32187654
 fecha_nacimiento: 910210
 direccion_vivienda: "Calle Secundaria 987"
 cambio_documento: "Sí"
 
-nombreUsuario: "Carlos"
-apellidosUsuario: "Martín Sánchez"
+nombreUsuario: "Carlos Martín"
+apellidosUsuario: "Sánchez"
 correoUsuario: "carlos.martin@gmail.com"
-passwordUsuario: "segura789"
+passwordUsuario: "segura789segura789"
 tipo_documento: "Pasaporte"
-numero_documento: 65432187
-telefono: 456789123
+numero_documento: 18765432
+telefono: 345678912
 fecha_nacimiento: 880725
 direccion_vivienda: "Paseo de la Playa 321"
 cambio_documento: "No"
 
+---------------------------------------------------
 nombreUsuario: "Laura"
 apellidosUsuario: "Gómez López"
 correoUsuario: "laura.gomez@gmail.com"

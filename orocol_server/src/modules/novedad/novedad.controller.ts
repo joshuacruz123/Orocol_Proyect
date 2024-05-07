@@ -36,5 +36,5 @@ export class NovedadController {
     @Put(':idNovedad')
     async editarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number, @Body() dto: NovedadDto) {
         return await this.novedadService.editarNovedad(idNovedad, dto);
-    } 
+    }
 }

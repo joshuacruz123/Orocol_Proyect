@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MineroInterface } from '../interfaces/minero.interface';
 import { AdministradorInterface } from '../interfaces/administrador.interface';
 import { PasswordInterface } from '../interfaces/usuario.interface';
+import { SolicitudInterface } from '../interfaces/solicitud.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class UsuarioService {
   adminURL = environment.adminURL;
   mineroURL = environment.mineroURL;
   paswordURL = environment.paswordURL;
+  solicitudURL = environment.solicitudURL;
 
   login(correoUsuario: string, passwordUsuario: string): Observable<any> {
     const body = {
@@ -55,7 +57,7 @@ export class UsuarioService {
     return this.http.post<void>(`${this.ventaURL}${IdMinero}/${TipoOro}`, venta);
   } */
 
-  registrarAdministrador (usuarioData: any) {
+  registrarAdministrador (usuarioData: any): Observable<any> {
     return this.http.post(this.adminURL, usuarioData);
   }
 
@@ -82,5 +84,13 @@ export class UsuarioService {
   inactivarCuenta(id: number, estadoUsuario: string): Observable<any> {
     const body = { estadoUsuario: estadoUsuario };
     return this.http.put(`${this.usuarioURL}${id}`, body)
+  }
+
+  crearSolicitudIngreso(correoUsuario: string, solicitudData: any): Observable<any> {
+    return this.http.post(this.solicitudURL + correoUsuario, solicitudData);
+  }
+
+  consultarSolicitudesIngreso(): Observable<SolicitudInterface[]> {
+    return this.http.get<SolicitudInterface[]>(this.solicitudURL)
   }
 }

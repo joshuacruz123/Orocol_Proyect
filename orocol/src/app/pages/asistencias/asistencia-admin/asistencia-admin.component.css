@@ -1,0 +1,21 @@
+.pokemon-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    list-style: none;
+    gap: 10px;
+    padding: 10px;
+}
+
+.pokemon-list, h1 {
+    text-align: center;
+}
+
+.datos-admin {
+    background-color: #f8a557;
+    border-radius: 5px;
+    box-shadow: 3px 4px #404040;
+}
+
+.datos-admin strong, .datos-admin p{
+    font-size: 20px;
+}

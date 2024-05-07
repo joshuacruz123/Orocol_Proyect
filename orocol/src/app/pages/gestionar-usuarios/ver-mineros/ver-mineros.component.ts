@@ -13,6 +13,7 @@ import { EditarUsuariosMinerosComponent } from '../editar-usuarios-mineros/edita
 import { DetalleMineroComponent } from './detalle-minero.component';
 import { NavAdminComponent } from '../../../shared/navbar-usuarios/nav-admin.component';
 import { RegistrarMinerosComponent } from './registrar-mineros.component';
+import { ConsultarSolicitudesComponent } from '../../solicitud-entrada/consultar-solicitudes/consultar-solicitudes.component';
 
 @Component({
   selector: 'app-ver-mineros',
@@ -42,7 +43,6 @@ export class VerMinerosComponent {
   consultarMineros() {
     this.gestionUsuarios.consultarMineros().subscribe({
       next: (result) => {
-        
         this.mineros = result;
         this.minerosFiltro = [...this.mineros];
       },
@@ -133,24 +133,7 @@ export class VerMinerosComponent {
         this.consultarMineros();
       }
     });
-  } /*
-"cargoAdmin": "string",
-"nombreUsuario": "string",
-"apellidosUsuario": "string",
-"correoUsuario": "string",
-"passwordUsuario": "string"
-
-"tipo_documento": "Cedula de ciudadania",
-"numero_documento": 10,
-"telefono": 10,
-"fecha_nacimiento": "2024-04-24T17:34:01.872Z",
-"direccion_vivienda": "string",
-"cambio_documento": "No acepto",
-"nombreUsuario": "string",
-"apellidosUsuario": "string",
-"correoUsuario": "string",
-"passwordUsuario": "string"
-*/
+  }
 
   detalleMinero(IdMinero?: number) {
     const dialogRef = this.dialog.open(DetalleMineroComponent, {
@@ -162,6 +145,15 @@ export class VerMinerosComponent {
       if (result) {
         this.consultarMineros();
       }
+    });
+  }
+
+  verSolicitudesIngresos() {
+    const dialogRef = this.dialog.open(ConsultarSolicitudesComponent, {
+      width: '550px',
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 }

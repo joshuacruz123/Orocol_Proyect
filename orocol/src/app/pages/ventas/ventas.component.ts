@@ -118,7 +118,6 @@ export class VentasComponent {
       width: '550px',
       disableClose: true,
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) { 
         this.consultarVentas();
@@ -131,7 +130,6 @@ export class VentasComponent {
       width: '550px',
       disableClose: true,
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) { 
         this.consultarVentas();

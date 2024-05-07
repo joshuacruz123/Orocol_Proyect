@@ -1,1 +1,21 @@
-<p>crear-solicitud works!</p>
+<mat-dialog-content class="mat-typography">
+    <div class="col-md-5">
+        <div class="card">
+            <p>Registrar solicitud para rectivación de usuario al sistema:</p>
+            <br />
+            <form [formGroup]="form" (ngSubmit)="crearProducto()">
+                <label for="correoUsuario">Correo electrónico:</label>
+                <input type="text" formControlName="correoUsuario" required>
+                
+                <label for="descripcionSolicitud">Novedad:</label> 
+                <textarea id="comentarios" name="comentarios" rows="4" cols="50" formControlName="descripcionSolicitud" >
+                </textarea>
+                <br />
+                <button type="submit" class="btn btn-primary" cdkFocusInitial>Crear solicitud</button>
+              </form>          
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>
