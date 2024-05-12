@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NavAdminComponent } from '../../../shared/navbar-usuarios/nav-admin.component';
 import { PieComponent } from '../../../shared/footer/pie.component';
 import { EncabezadoComponent } from '../../../shared/encabezado/encabezado.component';
-import { TurnoInterface } from '../../../core/interfaces/turno.interface';
+import { TurnoFechaInterface, TurnoInterface } from '../../../core/interfaces/turno.interface';
 import { TurnoService } from '../../../core/services/turno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConsultarNovedadComponent } from '../../novedades/consultar-novedad/consultar-novedad.component';
@@ -22,8 +22,10 @@ import { RegistrarAsistenciaComponent } from '../registrar-asistencia/registrar-
 })
 export class AsistenciaAdminComponent implements OnInit {
 
-  turno: TurnoInterface[] = [];
-  turnosFiltro: TurnoInterface[] = [];
+  turnosHoy: TurnoInterface[] = [];
+  turnosAnteriores: TurnoInterface[] = [];
+  turnosHoyFiltro: TurnoInterface[] = [];
+  turnosAnterioresFiltro: TurnoInterface[] = [];
 
   constructor(
     private turnoService: TurnoService,
@@ -39,26 +41,15 @@ export class AsistenciaAdminComponent implements OnInit {
   consultarTurnos() {
     this.turnoService.consultarTurnos().subscribe({
       next: (result) => {
-        this.turno = result;
-        this.turnosFiltro = [...this.turno];
+        this.turnosHoy = result.hoy;
+        this.turnosAnteriores = result.anteriores;
+        this.turnosHoyFiltro = [...this.turnosHoy]; 
+        this.turnosAnterioresFiltro = [...this.turnosAnteriores];
       },
       error: (err) => {
         console.log(err);
       }
     });
-  } // Función para ver las asistencias
-
-  dividirRegistrosFecha() {
-    const hoy = new Date().toISOString().split('T')[0]; // Obtener fecha actual en formato YYYY-MM-DD
-    const turnosHoy = this.turnosFiltro.filter(turno => {
-      const FechaTurno = new Date(turno.FechaTurno).toISOString().split('T')[0];
-      return FechaTurno === hoy;
-    });
-    const turnosAnteriores = this.turnosFiltro.filter(turno => {
-      const FechaTurno = new Date(turno.FechaTurno).toISOString().split('T')[0];
-      return FechaTurno === hoy;
-    });
-    return { hoy: turnosHoy, anteriores: turnosAnteriores };
   }
 
   registrarAsistencia() {
@@ -66,7 +57,6 @@ export class AsistenciaAdminComponent implements OnInit {
       width: '550px',
       disableClose: true,
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.consultarTurnos();
@@ -76,7 +66,12 @@ export class AsistenciaAdminComponent implements OnInit {
 
   buscarAsistencias(event: any) {
     const busqueda = event?.target?.value.trim().toLowerCase() || '';
-    this.turnosFiltro = this.turno.filter(turno =>
+    this.turnosHoyFiltro = this.turnosHoy.filter(turno =>
+      turno.minero.usuario.nombreUsuario.toLowerCase().includes(busqueda) ||
+      turno.minero.usuario.apellidosUsuario.toLowerCase().includes(busqueda) ||
+      turno.minero.numero_documento.toString().toLowerCase().includes(busqueda)
+    );
+    this.turnosAnterioresFiltro = this.turnosAnteriores.filter(turno =>
       turno.minero.usuario.nombreUsuario.toLowerCase().includes(busqueda) ||
       turno.minero.usuario.apellidosUsuario.toLowerCase().includes(busqueda) ||
       turno.minero.numero_documento.toString().toLowerCase().includes(busqueda)

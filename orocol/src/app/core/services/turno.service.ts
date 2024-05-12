@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { TurnoInterface } from '../interfaces/turno.interface';
+import { TurnoInterface, TurnoFechaInterface } from '../interfaces/turno.interface';
 import { NovedadInterface } from '../interfaces/novedad.interface';
 
 @Injectable({
@@ -19,8 +19,8 @@ export class TurnoService {
     return this.http.post(`${this.turnoURL}${numero_documento}/registrar`, turnoData);
   }
 
-  consultarTurnos(): Observable<TurnoInterface[]> {
-    return this.http.get<TurnoInterface[]>(this.turnoURL);
+  consultarTurnos(): Observable<TurnoFechaInterface> {
+    return this.http.get<TurnoFechaInterface>(this.turnoURL);
   }
   
   consultarTurnosMinero(IdMinero: number): Observable<any> {

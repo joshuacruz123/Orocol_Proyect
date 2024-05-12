@@ -13,12 +13,12 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class TurnoController {
 
     constructor(private readonly mineroService: MineroService) {}
-
+/*
     @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard) 
+    @UseGuards(JwtAuthGuard, RolesGuard) */
     @Get()
-    async consultarTurnos() {
-        return await this.mineroService.consultarTurnos();
+    async consultarTurnosHoyYAnteriores() {
+        return await this.mineroService.consultarTurnosPorFecha();
     }
 
     @RolDecorator(RolNombre.MINERO)

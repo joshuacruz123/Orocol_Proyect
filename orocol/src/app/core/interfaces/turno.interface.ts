@@ -9,3 +9,8 @@ export interface TurnoInterface {
     minero: MineroInterface;
     novedad: NovedadInterface;
 }
+
+export interface TurnoFechaInterface {
+    hoy: TurnoInterface[];
+    anteriores: TurnoInterface[];
+}

@@ -1,4 +1,85 @@
 /* 
+{
+  "hoy": [
+    {
+      "idTurno": 10,
+      "FechaTurno": "2024-05-08T15:15:00.000Z",
+      "Asistencia": "Sí asistió",
+      "AsignacionTareas": "Manejo de maquinaria pesada",
+      "minero": {
+        "IdMinero": 1,
+        "tipo_documento": "Cedula de ciudadania",
+        "numero_documento": 1012587523,
+        "cambio_documento": "Acepto",
+        "telefono": 3212564,
+        "fecha_nacimiento": "1993-10-15",
+        "direccion_vivienda": "cra 102 #45-46",
+        "usuario": {
+          "idUsuario": 2,
+          "nombreUsuario": "Alezander Antonio",
+          "apellidosUsuario": "Velazco",
+          "correoUsuario": "alexV@gmail.com",
+          "passwordUsuario": "$2a$10$Gj7FV60OYNa8MP5yr8QnzeWyrFz./ntZVlFYiz5qx3dQINM0zYSdy",
+          "estadoUsuario": "activo"
+        }
+      },
+      "novedad": null
+    },
+    {}
+  ],
+  "anteriores": [
+    {
+      "idTurno": 2,
+      "FechaTurno": "2024-05-02T01:02:30.000Z",
+      "Asistencia": "Nó asistió",
+      "AsignacionTareas": "Carga de materiales.",
+      "minero": {
+        "IdMinero": 2,
+        "tipo_documento": "Cedula de ciudadania",
+        "numero_documento": 1332778599,
+        "cambio_documento": "No acepto",
+        "telefono": 3186279,
+        "fecha_nacimiento": "1987-12-08",
+        "direccion_vivienda": "Transversal 1b este # 81d 84 sur",
+        "usuario": {
+          "idUsuario": 4,
+          "nombreUsuario": "Anderson",
+          "apellidosUsuario": "Perez Silva",
+          "correoUsuario": "Anders@gmail.com",
+          "passwordUsuario": "$2a$10$LxZH0H017to0OuGuWNgq3eRXn4tF/Vmy5v8NpSduXbxUKInGF5pYK",
+          "estadoUsuario": "activo"
+        }
+      },
+      "novedad": {
+        "idNovedad": 1,
+        "fechaNovedad": "2024-05-03T23:19:09.000Z",
+        "descripcion": "Hoy no puede asistir ya tuve una emergencia médica."
+      }
+    },
+    {}
+  ]
+}
+""""""""""""""""""""""""""""""""""""""""""""""""
+{
+  "IdMinero": 1,
+  "turno": [
+    {
+      "idTurno": 1,
+      "FechaTurno": "2024-05-03T13:00:00.000Z",
+      "Asistencia": "Sí asistió",
+      "AsignacionTareas": "Recolección de oro y limpieza.",
+      "novedad": null
+    },
+    {
+      "idTurno": 10,
+      "FechaTurno": "2024-05-08T15:15:00.000Z",
+      "Asistencia": "Sí asistió",
+      "AsignacionTareas": "Manejo de maquinaria pesada",
+      "novedad": null
+    }
+  ]
+}
+
 ---------------------------------------------------
 nombreUsuario: "Pedro"
 apellidosUsuario: "Rodríguez García"

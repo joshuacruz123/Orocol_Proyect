@@ -12,35 +12,8 @@
             <a type="button" class="btn btn-info text-white btn-lg" (click)="registrarAsistencia()">Registrar asistencia
                 <mat-icon>person_add</mat-icon></a>
             <br />
-            @if (dividirRegistrosFecha().hoy.length > 0) {
-            <h2>Hoy:</h2>
-            @for (item of dividirRegistrosFecha().hoy.length > 0; track $index) {
-            <div class="pokemon-list"> <!-- ; track $index -->
-                <div class="datos-admin">
-                    <strong>Nombre completo:</strong>
-                    <p> {{item.minero.usuario.nombreUsuario}} {{item.minero.usuario.apellidosUsuario}}</p>
-                    <strong>Número de documento:</strong>
-                    <p> {{item.minero.numero_documento}}</p>
-                    <strong>Fecha del turno:</strong>
-                    <p>{{ item.FechaTurno }}</p>
-                    <strong>Asignación de Tareas:</strong>
-                    <p>{{ item.AsignacionTareas }}</p>
-                    <strong>Asistencia:</strong>
-                    <p>{{ item.Asistencia }}</p>
-                    <button class="btn btn-warning" type="button"
-                        (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar asistencia</button>
-                    @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
-                    <button class="btn btn-info" type="button"
-                        (click)="verNovedad(item.novedad.idNovedad)"><mat-icon>add</mat-icon> Ver novedad</button>
-                    }
-                </div>
-            </div>
-                }
-            }
-            <br>
-            @if (dividirRegistrosFecha().anteriores.length > 0) {
-                <h2>Anteriores:</h2>
-                @for (item of dividirRegistrosFecha().anteriores.length > 0; track $index) {
+            <h1>Hoy:</h1>
+            @for (item of turnosHoyFiltro; track $index) {
                 <div class="pokemon-list">
                     <div class="datos-admin">
                         <strong>Nombre completo:</strong>
@@ -54,14 +27,36 @@
                         <strong>Asistencia:</strong>
                         <p>{{ item.Asistencia }}</p>
                         <button class="btn btn-warning" type="button"
-                            (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar asistencia</button>
+                        (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar asistencia</button> 
                         @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
-                        <button class="btn btn-info" type="button"
+                            <button class="btn btn-info" type="button"
                             (click)="verNovedad(item.novedad.idNovedad)"><mat-icon>add</mat-icon> Ver novedad</button>
                         }
                     </div>
                 </div>
-                }
+            }
+            <h1>Anteriores:</h1>
+            @for (item of turnosAnterioresFiltro; track $index) {
+                <div class="pokemon-list">
+                    <div class="datos-admin">
+                        <strong>Nombre completo:</strong>
+                        <p> {{item.minero.usuario.nombreUsuario}} {{item.minero.usuario.apellidosUsuario}}</p>
+                        <strong>Número de documento:</strong>
+                        <p> {{item.minero.numero_documento}}</p>
+                        <strong>Fecha del turno:</strong>
+                        <p>{{ item.FechaTurno }}</p>
+                        <strong>Asignación de Tareas:</strong>
+                        <p>{{ item.AsignacionTareas }}</p>
+                        <strong>Asistencia:</strong>
+                        <p>{{ item.Asistencia }}</p>
+                        <button class="btn btn-warning" type="button"
+                        (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar asistencia</button> 
+                        @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
+                            <button class="btn btn-info" type="button"
+                            (click)="verNovedad(item.novedad.idNovedad)"><mat-icon>add</mat-icon> Ver novedad</button>
+                        }
+                    </div>
+                </div>
             }
         </main>
     </div>

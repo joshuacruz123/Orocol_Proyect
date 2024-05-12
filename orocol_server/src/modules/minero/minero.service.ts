@@ -151,6 +151,27 @@ export class MineroService {
     } 
     // Método para consultar las turnos
 
+    async consultarTurnosPorFecha(): Promise<{ hoy: TurnoMineroEntity[], anteriores: TurnoMineroEntity[] }> {
+        const turnos = await this.consultarTurnos();
+        const hoy = new Date().setHours(0, 0, 0, 0);
+        turnos.sort((a, b) => {
+            const fechaTurnoA = new Date(a.FechaTurno).getTime();
+            const fechaTurnoB = new Date(b.FechaTurno).getTime();
+            return fechaTurnoA - fechaTurnoB;
+        });
+        const hoyTurnos = [];
+        const anterioresTurnos = [];
+        turnos.forEach(turno => {
+            const fechaTurno = new Date(turno.FechaTurno).setHours(0, 0, 0, 0);
+            if (fechaTurno === hoy) {
+                hoyTurnos.push(turno);
+            } else {
+                anterioresTurnos.push(turno);
+            }
+        });
+        return { hoy: hoyTurnos, anteriores: anterioresTurnos };
+    }
+
     async consultarTurnosMinero(IdMinero: number): Promise<MineroEntity> {
         const minero = await this.mineroRepository.findOne({
             where: { IdMinero },
