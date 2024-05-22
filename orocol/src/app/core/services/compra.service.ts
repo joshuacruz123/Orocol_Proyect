@@ -21,7 +21,7 @@ export class CompraService {
 
   consultarCompra(IdCliente: number): Observable<ComprasInterface> {
     return this.http.get<ComprasInterface>(`${this.compraURL}${IdCliente}`)
-  }// :IdCliente
+  }
 
   registrarCompra(idGestionVenta: number, idAdmin: number, compra: ComprasInterface): Observable<any> {
     return this.http.post<void>(`${this.compraURL}${idGestionVenta}/${idAdmin}`, compra);
@@ -29,12 +29,12 @@ export class CompraService {
 
   editarCompra(IdCliente: number, compra: ComprasInterface): Observable<any> {
     return this.http.put<void>(`${this.compraURL}${IdCliente}`, compra);
-  }// entrada_Compra/:IdCliente
+  }
 
   terminarCompra(IdCliente: number, estadoCompra: string): Observable<any> {
     const body = { estadoCompra: estadoCompra };
     return this.http.put(`${this.compraURL}compra/${IdCliente}`, body)
-  } // inactivar/:IdCliente
+  }
 
   generarReporteCompra(): Observable<ReporteComprasInterface[]> {
     return this.http.get<ReporteComprasInterface[]>(this.compraURL).pipe(
@@ -45,5 +45,9 @@ export class CompraService {
         return reportes;
       })
     );
+  }
+
+  obtenerIndicadoresFinancieros(): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/indicadores');
   }
 }

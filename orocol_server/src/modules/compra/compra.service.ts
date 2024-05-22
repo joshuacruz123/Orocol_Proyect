@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, LessThan, MoreThan, Repository } from 'typeorm';
 import { MessageDto } from 'src/dto/common/message.dto';
 import { ClienteEntity } from './cliente.entity';
 import { EntradaVentaEntity } from '../venta/entradaventas.entity';
@@ -144,4 +144,56 @@ export class CompraService {
         return new MessageDto(`Compra terminada`);
     }
     // Método para inactivar ventas
+
+    /*
+    async calcularVolumenTotalOro(startDate: Date, endDate: Date): Promise<any> {
+        const ventas = await this.entradaVentaRepository
+          .createQueryBuilder('entrada')
+          .leftJoinAndSelect('entrada.salida', 'salida')
+          .leftJoinAndSelect('salida.compras', 'cliente')
+          .where('cliente.FechaExportacion BETWEEN :startDate AND :endDate', { startDate, endDate })
+          .select('SUM(entrada.precioOro * entrada.cantidad)', 'totalVentas')
+          .addSelect('DATE_TRUNC(\'month\', cliente.FechaExportacion)', 'month')
+          .groupBy('month')
+          .orderBy('month')
+          .getRawMany();
+      
+        return ventas;
+    } */
+    async obtenerIndicadoresFinancieros() {
+        const entradas = await this.entradaVentaRepository.find();
+        console.log('Entradas:', entradas);
+        const indicadores = entradas.map(entrada => {
+          let fechaExportacion: Date;
+          if (entrada.fechaExtraccionOro instanceof Date) {
+            fechaExportacion = entrada.fechaExtraccionOro;
+          } else {
+            // Intenta convertir la fecha a un objeto Date
+            fechaExportacion = new Date(entrada.fechaExtraccionOro);
+          }
+          const precioOro = entrada.precioOro;
+          const cantidad = entrada.cantidad;
+          const valorTotal = precioOro * cantidad;
+          return { fechaExportacion, valorTotal };
+        });
+        console.log('Indicadores:', indicadores);
+        const indicadoresAgrupados = indicadores.reduce((acc, curr) => {
+          // Verifica si la fecha es válida antes de usar toISOString
+          if (!(curr.fechaExportacion instanceof Date) || isNaN(curr.fechaExportacion.getTime())) {
+            throw new Error(`Invalid date: ${curr.fechaExportacion}`);
+          }
+          const fecha = curr.fechaExportacion.toISOString().split('T')[0];
+          if (!acc[fecha]) {
+            acc[fecha] = 0;
+          }
+          acc[fecha] += curr.valorTotal;
+          return acc;
+        }, {});
+        console.log('Indicadores Agrupados:', indicadoresAgrupados);
+        return Object.keys(indicadoresAgrupados).map(fecha => ({
+          fecha,
+          valorTotal: indicadoresAgrupados[fecha],
+        }));
+    }  
+    // Método para calcular total de productos comprados
 } 

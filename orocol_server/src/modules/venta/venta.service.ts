@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityManager, Equal, Repository } from 'typeorm';
+import { Between, EntityManager, Equal, Repository } from 'typeorm';
 import { MessageDto } from 'src/dto/common/message.dto';
 import { EntradaVentaEntity } from './entradaventas.entity';
 import { SalidaVentaEntity } from './salidaventas.entity';
@@ -229,10 +229,19 @@ export class VentaService {
     }
     // Método para generar reportes de las ventas 
 
-    /*
-    async generarIndicadoresFinancieros(): Promise<> {
-        
-    }
-    // Método para generar indicadores financieros
-    */
+    async calcularIngresosVentas(): Promise<{ totalCantidad: string, totalPesoOro: string }> {
+        const { minFecha, maxFecha } = await this.entradaVentaRepository.createQueryBuilder('venta')
+            .select('MIN(venta.fechaExtraccionOro)', 'minFecha')
+            .addSelect('MAX(venta.fechaExtraccionOro)', 'maxFecha')
+            .getRawOne();
+        const ventas = await this.entradaVentaRepository.find({
+            where: {
+                fechaExtraccionOro: Between(minFecha, maxFecha)
+            }
+        });
+        const totalCantidad = ventas.reduce((total, venta) => total + venta.cantidad, 0).toFixed(2);
+        const totalPesoOro = ventas.reduce((total, venta) => total + venta.salida.PesogrOro, 0).toFixed(2);
+        return { totalCantidad, totalPesoOro };
+    }    
+    // Método para generar indicadores financieros de las ventas
 }

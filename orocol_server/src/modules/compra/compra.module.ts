@@ -24,12 +24,13 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { TurnoMineroEntity } from '../minero/turno.entity';
 import { PerfilEntity } from '../usuario/perfil.entity';
 import { SolicitudEntity } from '../usuario/solicitud.entity';
+import { IndicadoresCompraController } from './indicadores_compra.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ClienteEntity, EntradaVentaEntity, SalidaVentaEntity, ProductoEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
   VentaModule, ProductoModule, MineroModule, AdministradorModule, UsuarioModule,
   ],
   providers: [CompraService, VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService],
-  controllers: [CompraController]
+  controllers: [CompraController, IndicadoresCompraController]
 })
 export class CompraModule {} 

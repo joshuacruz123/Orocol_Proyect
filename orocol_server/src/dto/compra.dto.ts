@@ -27,4 +27,12 @@ export class CompraDto {
     @IsNotEmpty({ message: 'El peso del oro no puede estar vacío' })
     @Min(1, { message: 'el peso debe de ser al menos de 1 gramo' })
     PesogrOro: number;
-}  
+} 
+
+export class DateRangeDto {
+    @IsDateString({ message: 'FechaExportacion debe ser una fecha válida' })
+    startDate: string;
+  
+    @IsDateString({ message: 'FechaExportacion debe ser una fecha válida' })
+    endDate: string;
+  }
