@@ -14,6 +14,7 @@ export class CompraService {
   constructor(private http: HttpClient) { }
 
   compraURL = environment.compraURL;
+  indicadoresCompraUrl = environment.indicadoresCompraUrl;
   
   consultarCompras(): Observable<ComprasInterface[]> {
     return this.http.get<ComprasInterface[]>(this.compraURL)
@@ -48,6 +49,10 @@ export class CompraService {
   }
 
   obtenerIndicadoresFinancieros(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/indicadores');
+    return this.http.get<any>(this.indicadoresCompraUrl);
+  }
+   
+  obtenerVolumenTotalOro(): Observable<{ total: number }> {
+    return this.http.get<{ total: number }>(`${this.indicadoresCompraUrl}volumen-total-oro`);
   }
 }

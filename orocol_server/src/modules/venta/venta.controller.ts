@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { VentaService } from './venta.service';
 import { EntradaDto } from 'src/dto/entrada.dto';
 import { EstadoVentaDto } from 'src/dto/enum.dto';
@@ -78,12 +78,5 @@ export class VentaController {
     @Put('activar/:idGestionVenta')
     async activarVenta(@Param('idGestionVenta', ParseIntPipe) idGestionVenta: number, @Body() dto: EstadoVentaDto) {
         return await this.ventaService.activarVenta(idGestionVenta, dto);
-    }
-
-    @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard) 
-    @Get('indicadores')
-    async conseguirIndicadores() {
-        return this.ventaService.calcularIngresosVentas();
     }
 }

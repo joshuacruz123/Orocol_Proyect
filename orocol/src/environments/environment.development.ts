@@ -11,5 +11,6 @@ export const environment = {
     ventaURL: 'http://localhost:3000/venta/',
     salidaURL: 'http://localhost:3000/salida/',
     reportesURL: 'http://localhost:3000/reportes',
-    compraURL: 'http://localhost:3000/compra/'
+    compraURL: 'http://localhost:3000/compra/',
+    indicadoresCompraUrl: 'http://localhost:3000/indicadores/'
 };

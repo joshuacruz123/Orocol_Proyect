@@ -21,14 +21,26 @@ interface IndicadorFinanciero {
   styleUrl: './indicadores-financieros.component.css'
 })
 export class IndicadoresFinancierosComponent implements OnInit {
+  volumenTotalOro: number | null = null;
+  error: string | null = null;
+
   constructor(private compraService: CompraService) {
-    // Registrar todos los componentes de Chart.js
     Chart.register(...registerables);
   }
 
   ngOnInit(): void {
     this.compraService.obtenerIndicadoresFinancieros().subscribe((data: IndicadorFinanciero[]) => {
       this.createChart(data);
+    });
+    this.compraService.obtenerVolumenTotalOro().subscribe({
+      next: (data) => {
+        this.volumenTotalOro = data.total;
+        this.error = null;
+      },
+      error: (err) => {
+        this.error = 'Error al obtener el volumen total de oro';
+        console.error(err);
+      }
     });
   }
 
@@ -49,7 +61,7 @@ export class IndicadoresFinancierosComponent implements OnInit {
     const values = data.map(item => item.valorTotal);
 
     new Chart(ctx, {
-      type: 'bar',
+      type: 'line', // bar
       data: {
         labels: labels,
         datasets: [{
@@ -57,7 +69,8 @@ export class IndicadoresFinancierosComponent implements OnInit {
           data: values,
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
+          borderWidth: 1,
+          fill: false, // fill: false,
         }]
       },
       options: {

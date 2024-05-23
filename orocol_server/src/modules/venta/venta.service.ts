@@ -242,6 +242,38 @@ export class VentaService {
         const totalCantidad = ventas.reduce((total, venta) => total + venta.cantidad, 0).toFixed(2);
         const totalPesoOro = ventas.reduce((total, venta) => total + venta.salida.PesogrOro, 0).toFixed(2);
         return { totalCantidad, totalPesoOro };
-    }    
+    } /*
+    async obtenerIndicadoresFinancieros() {
+        const compras = await this.clienteRepository.find({
+            relations: ['salidaVentas.entrada']
+        });
+        const indicadores = compras.map(compra => {
+          let fechaExportacion: Date;
+          if (compra.FechaExportacion instanceof Date) {
+            fechaExportacion = compra.FechaExportacion;
+          } else {
+            fechaExportacion = new Date(compra.FechaExportacion);
+          }
+          const precioOro = compra.salidaVentas.entrada.precioOro;
+          const cantidad = compra.salidaVentas.entrada.cantidad;
+          const valorTotal = precioOro * cantidad;
+          return { fechaExportacion, valorTotal };
+        });
+        const indicadoresAgrupados = indicadores.reduce((acc, curr) => {
+          if (!(curr.fechaExportacion instanceof Date) || isNaN(curr.fechaExportacion.getTime())) {
+            throw new Error(`Invalid date: ${curr.fechaExportacion}`);
+          }
+          const fecha = curr.fechaExportacion.toISOString().split('T')[0];
+          if (!acc[fecha]) {
+            acc[fecha] = 0;
+          }
+          acc[fecha] += curr.valorTotal;
+          return acc;
+        }, {});
+        return Object.keys(indicadoresAgrupados).map(fecha => ({
+          fecha,
+          valorTotal: indicadoresAgrupados[fecha],
+        }));
+    } */    
     // Método para generar indicadores financieros de las ventas
 }

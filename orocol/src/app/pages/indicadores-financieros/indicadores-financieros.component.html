@@ -5,10 +5,19 @@
                 <app-nav-admin></app-nav-admin>
             </div>
             <main class="main col">
-                <h1>Grafica de volumen de compras hechas</h1>
+                <h1>Grafica de ingresos de las ventas:</h1>
                 <div style="width: 80%; margin: auto;">
                     <canvas id="myChart"></canvas>
                 </div>
+                <br>
+                @if(volumenTotalOro !== null) {
+                    <p>Volumen total de oro comprado: {{ volumenTotalOro }}gr de oro.</p>
+                } @else() {
+                    <p style="color: red;">{{ error }}</p>
+                }
+                <br>
+                <h1>Grafica de volumen de compras hechas:</h1>
+                <br>
             </main>
         </div>
     <app-pie></app-pie>

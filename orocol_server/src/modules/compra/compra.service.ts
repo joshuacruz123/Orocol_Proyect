@@ -143,42 +143,25 @@ export class CompraService {
         await this.clienteRepository.save(compra);
         return new MessageDto(`Compra terminada`);
     }
-    // Método para inactivar ventas
+    // Método para finalizar compras
 
-    /*
-    async calcularVolumenTotalOro(startDate: Date, endDate: Date): Promise<any> {
-        const ventas = await this.entradaVentaRepository
-          .createQueryBuilder('entrada')
-          .leftJoinAndSelect('entrada.salida', 'salida')
-          .leftJoinAndSelect('salida.compras', 'cliente')
-          .where('cliente.FechaExportacion BETWEEN :startDate AND :endDate', { startDate, endDate })
-          .select('SUM(entrada.precioOro * entrada.cantidad)', 'totalVentas')
-          .addSelect('DATE_TRUNC(\'month\', cliente.FechaExportacion)', 'month')
-          .groupBy('month')
-          .orderBy('month')
-          .getRawMany();
-      
-        return ventas;
-    } */
     async obtenerIndicadoresFinancieros() {
-        const entradas = await this.entradaVentaRepository.find();
-        console.log('Entradas:', entradas);
-        const indicadores = entradas.map(entrada => {
+        const compras = await this.clienteRepository.find({
+            relations: ['salidaVentas.entrada']
+        });
+        const indicadores = compras.map(compra => {
           let fechaExportacion: Date;
-          if (entrada.fechaExtraccionOro instanceof Date) {
-            fechaExportacion = entrada.fechaExtraccionOro;
+          if (compra.FechaExportacion instanceof Date) {
+            fechaExportacion = compra.FechaExportacion;
           } else {
-            // Intenta convertir la fecha a un objeto Date
-            fechaExportacion = new Date(entrada.fechaExtraccionOro);
+            fechaExportacion = new Date(compra.FechaExportacion);
           }
-          const precioOro = entrada.precioOro;
-          const cantidad = entrada.cantidad;
+          const precioOro = compra.salidaVentas.entrada.precioOro;
+          const cantidad = compra.salidaVentas.entrada.cantidad;
           const valorTotal = precioOro * cantidad;
           return { fechaExportacion, valorTotal };
         });
-        console.log('Indicadores:', indicadores);
         const indicadoresAgrupados = indicadores.reduce((acc, curr) => {
-          // Verifica si la fecha es válida antes de usar toISOString
           if (!(curr.fechaExportacion instanceof Date) || isNaN(curr.fechaExportacion.getTime())) {
             throw new Error(`Invalid date: ${curr.fechaExportacion}`);
           }
@@ -189,11 +172,17 @@ export class CompraService {
           acc[fecha] += curr.valorTotal;
           return acc;
         }, {});
-        console.log('Indicadores Agrupados:', indicadoresAgrupados);
         return Object.keys(indicadoresAgrupados).map(fecha => ({
           fecha,
           valorTotal: indicadoresAgrupados[fecha],
         }));
     }  
     // Método para calcular total de productos comprados
+
+    async calcularVolumenTotalOro(): Promise<number> {
+        const salidaVentas = await this.salidaVentaRepository.find();
+        console.log(salidaVentas); // Para verificar los datos obtenidos
+        const totalPesogrOro = salidaVentas.reduce((sum, venta) => sum + Number(venta.PesogrOro), 0);
+        return totalPesogrOro;
+    }
 } 
