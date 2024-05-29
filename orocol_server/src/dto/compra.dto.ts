@@ -20,7 +20,7 @@ export class CompraDto {
     CiudadMunicipio: string;
 
     @IsNotEmpty({ message: 'El La fecha no puede estar vacía' })
-    @IsDateString({ message: 'FechaExportacion debe ser una fecha válida' })
+    @IsDateString({}, { message: 'FechaExportacion debe ser una fecha válida' })
     FechaExportacion: string;
 
     @IsNumber({}, { message: 'El peso del oro debe ser un número' })
@@ -30,9 +30,9 @@ export class CompraDto {
 } 
 
 export class DateRangeDto {
-    @IsDateString({ message: 'FechaExportacion debe ser una fecha válida' })
+    @IsDateString({}, { message: 'FechaExportacion debe ser una fecha válida' })
     startDate: string;
   
-    @IsDateString({ message: 'FechaExportacion debe ser una fecha válida' })
+    @IsDateString({}, { message: 'FechaExportacion debe ser una fecha válida' })
     endDate: string;
   }

@@ -3,7 +3,7 @@ import { IsDateString, IsDecimal, IsNotEmpty, IsNumber, Max, Min } from "class-v
 export class EntradaDto {
 
     @IsNotEmpty({ message: 'El La fecha no puede estar vacía' })
-    @IsDateString({ message: 'La fecha debe ser una fecha válida' })
+    @IsDateString({}, { message: 'La fecha debe ser una fecha válida' })
     fechaExtraccionOro: string;
 
     @IsDecimal({}, {message: 'El procio debe ser un número decimal'})

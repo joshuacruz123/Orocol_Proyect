@@ -10,7 +10,7 @@ export class UsuarioDto {
     @MaxLength(60, {message: 'apellido: longitud máxima de 60'})
     apellidosUsuario: string;
 
-    @IsEmail({message: 'Tiene que ser un correo electronico valido'}) 
+    @IsEmail({}, {message: 'Tiene que ser un correo electronico valido'}) 
     @IsNotBlank({message: 'el correo no puede estar vacío'})
     @MaxLength(70, {message: 'correo: longitud máxima de 70'})
     correoUsuario: string;
@@ -29,7 +29,7 @@ export class EditarUsuarioDto {
     @MaxLength(60, {message: 'apellido: longitud máxima de 60'})
     apellidosUsuario: string;
 
-    @IsEmail({message: 'Tiene que ser un correo electronico valido'}) 
+    @IsEmail({}, {message: 'Tiene que ser un correo electronico valido'}) 
     @IsNotBlank({message: 'el correo no puede estar vacío'})
     @MaxLength(70, {message: 'correo: longitud máxima de 70'})
     correoUsuario: string;
