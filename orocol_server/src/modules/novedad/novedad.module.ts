@@ -17,12 +17,13 @@ import { AdministradorEntity } from '../administrador/administrador.entity';
 import { AdministradorService } from '../administrador/administrador.service';
 import { PerfilEntity } from '../usuario/perfil.entity';
 import { SolicitudEntity } from '../usuario/solicitud.entity';
+import { MailService } from 'src/mail/mail.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([NovedadEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
   MineroModule, AdministradorModule, UsuarioModule,
 ],
-  providers: [NovedadService, MineroService, AdministradorService, UsuarioService, JwtService],
+  providers: [NovedadService, MineroService, AdministradorService, UsuarioService, JwtService, MailService],
   controllers: [NovedadController]
 })
 export class NovedadModule {}

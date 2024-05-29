@@ -25,12 +25,13 @@ import { TurnoMineroEntity } from '../minero/turno.entity';
 import { PerfilEntity } from '../usuario/perfil.entity';
 import { SolicitudEntity } from '../usuario/solicitud.entity';
 import { IndicadoresCompraController } from './indicadores_compra.controller';
+import { MailService } from 'src/mail/mail.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ClienteEntity, EntradaVentaEntity, SalidaVentaEntity, ProductoEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
   VentaModule, ProductoModule, MineroModule, AdministradorModule, UsuarioModule,
   ],
-  providers: [CompraService, VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService],
+  providers: [CompraService, VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService, MailService],
   controllers: [CompraController, IndicadoresCompraController]
 })
 export class CompraModule {} 

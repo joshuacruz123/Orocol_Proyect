@@ -14,6 +14,7 @@ import { CompraModule } from './modules/compra/compra.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MailService } from './mail/mail.service';
 import * as fs from 'fs';
 
 const UPLOADS_FOLDER = './uploads';
@@ -55,5 +56,6 @@ if (!fs.existsSync(UPLOADS_FOLDER)) {
     UsuarioModule, RolModule, AdministradorModule, MineroModule, NovedadModule, VentaModule, ProductoModule, CompraModule],
   //Importa todos los módulos 
   controllers: [AppController],
+  providers: [MailService],
 })
 export class AppModule { }

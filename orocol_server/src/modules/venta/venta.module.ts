@@ -24,12 +24,13 @@ import { ReportesVentasController } from './reporteventa.controller';
 import { PerfilEntity } from '../usuario/perfil.entity';
 import { SolicitudEntity } from '../usuario/solicitud.entity';
 import { IndicadoresVentasController } from './indicadores_ventas.controller';
+import { MailService } from 'src/mail/mail.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntradaVentaEntity, SalidaVentaEntity, ProductoEntity, MineroEntity, TurnoMineroEntity, AdministradorEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
   ProductoModule, MineroModule, AdministradorModule, UsuarioModule,
   ],
-  providers: [VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService],
+  providers: [VentaService, ProductoService, MineroService, AdministradorService, UsuarioService, JwtService, MailService],
   controllers: [VentaController, SalidaVentaController, ReportesVentasController, IndicadoresVentasController]
 })
 export class VentaModule {}

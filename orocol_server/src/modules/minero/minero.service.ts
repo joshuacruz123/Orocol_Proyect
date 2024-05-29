@@ -10,7 +10,7 @@ import { RolEntity } from '../rol/rol.entity';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { TurnoMineroEntity } from './turno.entity';
 import { TurnoDto } from 'src/dto/turno.dto';
-import { EstadoUsuario } from '../usuario/usuario.enum';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class MineroService {
@@ -23,7 +23,8 @@ export class MineroService {
         private readonly rolRepository: Repository<RolEntity>,
         @InjectRepository(UsuarioEntity)
         private readonly usuarioRepository: Repository<UsuarioEntity>,
-        private readonly usuarioService: UsuarioService,
+        private readonly usuarioService: UsuarioService, // Inyecta la instancia de UsuarioService
+        private readonly mailService: MailService,
     ) { }
 
     async consultarMineros(): Promise<MineroEntity[]> {
@@ -76,13 +77,14 @@ export class MineroService {
         nuevoUsuario.roles = rolAdmin;
         const nuevoMinero = new MineroEntity();
         nuevoMinero.tipo_documento = dto.tipo_documento,
-            nuevoMinero.numero_documento = dto.numero_documento,
-            nuevoMinero.cambio_documento = dto.cambio_documento,
-            nuevoMinero.telefono = dto.telefono,
-            nuevoMinero.fecha_nacimiento = dto.fecha_nacimiento,
-            nuevoMinero.direccion_vivienda = dto.direccion_vivienda,
-            nuevoMinero.usuario = nuevoUsuario;
+        nuevoMinero.numero_documento = dto.numero_documento,
+        nuevoMinero.cambio_documento = dto.cambio_documento,
+        nuevoMinero.telefono = dto.telefono,
+        nuevoMinero.fecha_nacimiento = dto.fecha_nacimiento,
+        nuevoMinero.direccion_vivienda = dto.direccion_vivienda,
+        nuevoMinero.usuario = nuevoUsuario;
         try {
+            await this.mailService.enviarCorreosRegistro(correoUsuario, nuevoUsuario.nombreUsuario); // Envío al correo
             await this.usuarioRepository.save(nuevoUsuario);
             await this.mineroRepository.save(nuevoMinero);
             return new MessageDto(`Usuario ${nuevoUsuario.nombreUsuario} ${nuevoUsuario.apellidosUsuario} registrado.`)

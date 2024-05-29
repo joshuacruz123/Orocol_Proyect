@@ -10,6 +10,7 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { RolEntity } from '../rol/rol.entity';
 import { ActivarUsuarioDto } from 'src/dto/enum.dto';
 import { EstadoUsuario } from '../usuario/usuario.enum';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class AdministradorService {
@@ -21,6 +22,7 @@ export class AdministradorService {
         @InjectRepository(UsuarioEntity)
         private readonly usuarioRepository: Repository<UsuarioEntity>,
         private readonly usuarioService: UsuarioService, // Inyecta la instancia de UsuarioService
+        private readonly mailService: MailService,
     ) { }
 
     
@@ -40,6 +42,7 @@ export class AdministradorService {
         nuevoAdmin.cargoAdmin = dto.cargoAdmin;
         nuevoAdmin.usuario = nuevoUsuario;
         try {
+            await this.mailService.enviarCorreosRegistro(correoUsuario, nuevoUsuario.nombreUsuario); // Envío al correo
             await this.usuarioRepository.save(nuevoUsuario);
             await this.administradorRepository.save(nuevoAdmin);
             return new MessageDto(`Usuario ${nuevoUsuario.nombreUsuario} ${nuevoUsuario.apellidosUsuario} registrado.`)

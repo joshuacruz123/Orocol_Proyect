@@ -14,13 +14,14 @@ import { JwtService } from '@nestjs/jwt';
 import { TurnoController } from './turno.controller';
 import { PerfilEntity } from '../usuario/perfil.entity';
 import { SolicitudEntity } from '../usuario/solicitud.entity';
+import { MailService } from 'src/mail/mail.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([MineroEntity, TurnoMineroEntity, RolEntity, UsuarioEntity, PerfilEntity, SolicitudEntity]),
     RolModule, UsuarioModule,
   ],
-  providers: [MineroService, RolService, UsuarioService, JwtService],
+  providers: [MineroService, RolService, UsuarioService, JwtService, MailService],
   controllers: [MineroController, TurnoController]
 })
 export class MineroModule {}
