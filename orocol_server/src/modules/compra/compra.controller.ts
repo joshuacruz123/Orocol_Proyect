@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Post, Body, Put, Delete, ValidationPipe, UsePipes, ParseIntPipe, UseGuards, Query } from '@nestjs/common';
 import { CompraService } from './compra.service';
-import { CompraDto, DateRangeDto } from 'src/dto/compra.dto';
+import { CompraDto } from 'src/dto/compra.dto';
 import { EstadoCompraDto } from 'src/dto/enum.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';

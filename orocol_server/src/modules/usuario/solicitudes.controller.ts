@@ -1,9 +1,9 @@
 import { UsuarioService } from './usuario.service';
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { SolicitudEntity } from './solicitud.entity';
+import { SolicitudEntity } from 'src/entities/solicitud.entity';
 import { SolicitudDto } from 'src/dto/solicitud.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';

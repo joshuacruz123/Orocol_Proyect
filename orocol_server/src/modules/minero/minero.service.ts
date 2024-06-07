@@ -1,14 +1,14 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { MineroEntity } from './minero.entity';
+import { MineroEntity } from 'src/entities/minero.entity';
 import { MessageDto } from 'src/dto/common/message.dto';
 import { EditarMineroDto, mineroDto } from 'src/dto/minero.dto';
 import { UsuarioService } from '../usuario/usuario.service';
-import { RolNombre } from '../rol/rol.enum';
-import { RolEntity } from '../rol/rol.entity';
-import { UsuarioEntity } from '../usuario/usuario.entity';
-import { TurnoMineroEntity } from './turno.entity';
+import { RolNombre } from 'src/enums/rol.enum';
+import { RolEntity } from 'src/entities/rol.entity';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
+import { TurnoMineroEntity } from 'src/entities/turno.entity';
 import { TurnoDto } from 'src/dto/turno.dto';
 import { MailService } from 'src/mail/mail.service';
 

@@ -1,25 +1,22 @@
-import { RolEntity } from './../rol/rol.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { MessageDto } from '../../dto/common/message.dto';
-import { UsuarioEntity } from './usuario.entity';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RolNombre } from 'src/modules/rol/rol.enum';
+import { RolNombre } from 'src/enums/rol.enum';
 import { InactivarUsuarioDto } from 'src/dto/enum.dto';
-import { EstadoUsuario } from './usuario.enum';
+import { EstadoUsuario } from '../../enums/usuario.enum';
 import { JwtService } from '@nestjs/jwt';
 import { LoginUsuarioDto } from 'src/dto/login.dto';
 import { compare, hash } from 'bcryptjs';
 import { PayloadInterface } from 'src/auth/payload.interface';
 import { TokenDto } from 'src/dto/token.dto';
-import { PerfilEntity } from './perfil.entity';
-import { SolicitudEntity } from './solicitud.entity';
+import { PerfilEntity } from 'src/entities/perfil.entity';
+import { SolicitudEntity } from 'src/entities/solicitud.entity';
 import { PerfilDto } from 'src/dto/perfil.dto';
 import { Repository } from 'typeorm';
-import { UsuarioDto } from 'src/dto/usuario.dto';
 import { PasswordDto, RecuperarPassDto } from 'src/dto/editar-password.dto';
-import { MulterOptionsFactory, MulterModuleOptions } from '@nestjs/platform-express';
 import * as fs from 'fs';
-import { PerfilCompleto } from './perfil.interface';
 import { SolicitudDto } from 'src/dto/solicitud.dto';
 // Importamos los archivos necesarios
 

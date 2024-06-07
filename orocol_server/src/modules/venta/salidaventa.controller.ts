@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { VentaService } from './venta.service';
-import { SalidaDto } from 'src/dto/salida.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';

@@ -20,7 +20,7 @@ export class EditarUsuariosMinerosComponent implements OnInit {
     IdMinero: 0,
     tipo_documento: '',
     numero_documento: 0,
-    telefono: 0,
+    telefono: '',
     fecha_nacimiento: new Date(),
     direccion_vivienda: '',
     cambio_documento: '',

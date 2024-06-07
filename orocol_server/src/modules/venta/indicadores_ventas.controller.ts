@@ -1,8 +1,6 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { VentaService } from './venta.service';
-import { EntradaDto } from 'src/dto/entrada.dto';
-import { EstadoVentaDto } from 'src/dto/enum.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
@@ -20,12 +18,5 @@ export class IndicadoresVentasController {
     @Get()
     async conseguirIndicadores() {
         return this.ventaService.calcularIngresosVentas();
-    } /*
-    @RolDecorator(RolNombre.ADMINISTRADOR)
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Get('volumen-total-oro')
-    async obtenerVolumenTotalOro(): Promise<{ total: number }> {
-        const total = await this.compraService.calcularVolumenTotalOro();
-        return { total };
-    } */
+    }
 }

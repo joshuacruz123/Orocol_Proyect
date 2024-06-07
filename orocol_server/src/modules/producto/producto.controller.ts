@@ -2,7 +2,7 @@ import { Controller, Get, Param, Post, Body, Put, Delete, ValidationPipe, UsePip
 import { ProductoService } from './producto.service';
 import { ProductoDto } from '../../dto/producto.dto';
 import { EstadoProductoDto } from 'src/dto/enum.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';

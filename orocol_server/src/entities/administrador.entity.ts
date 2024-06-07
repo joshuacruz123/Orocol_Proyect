@@ -1,7 +1,7 @@
 // administrador.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne, OneToOne, OneToMany } from 'typeorm';
-import { UsuarioEntity } from '../usuario/usuario.entity';
-import { SalidaVentaEntity } from '../venta/salidaventas.entity';
+import { UsuarioEntity } from './usuario.entity';
+import { SalidaVentaEntity } from './salidaventas.entity';
 
 @Entity({ name: 'Administradores' })
 export class AdministradorEntity {

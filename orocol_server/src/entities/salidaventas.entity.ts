@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne, OneToMany } from 'typeorm';
-import { AdministradorEntity } from '../administrador/administrador.entity';
+import { AdministradorEntity } from './administrador.entity';
 import { EntradaVentaEntity } from './entradaventas.entity';
-import { ClienteEntity } from '../compra/cliente.entity';
+import { ClienteEntity } from './cliente.entity';
 
 
 @Entity({ name: 'SalidaVentas' })

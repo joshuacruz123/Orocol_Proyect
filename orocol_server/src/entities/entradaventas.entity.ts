@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
-import { MineroEntity } from '../minero/minero.entity';
-import { EstadoVenta } from './venta.enum';
-import { ProductoEntity } from '../producto/producto.entity';
+import { MineroEntity } from './minero.entity';
+import { EstadoVenta } from '../enums/venta.enum';
+import { ProductoEntity } from './producto.entity';
 import { SalidaVentaEntity } from './salidaventas.entity';
 
 @Entity({ name: 'EntradaVentas' })
@@ -15,7 +15,7 @@ export class EntradaVentaEntity {
   @Column({ type: 'numeric', precision: 10, scale: 2, nullable: false })
   precioOro: number;
 
-  @Column({ type: 'numeric', precision: 10, scale: 2, nullable: false })
+  @Column({ type: 'int', nullable: false })
   cantidad: number;
 
   @Column({type: 'varchar', length: 15, nullable: false, default: EstadoVenta.ACTIVO})

@@ -9,6 +9,7 @@ export const environment = {
     novedadURL: 'http://localhost:3000/novedad/',
     solicitudURL: 'http://localhost:3000/solicitudes/',
     ventaURL: 'http://localhost:3000/venta/',
+    indicadoresVentaUrl: 'http://localhost:3000/indicadores/ventas/',
     salidaURL: 'http://localhost:3000/salida/',
     reportesURL: 'http://localhost:3000/reportes',
     compraURL: 'http://localhost:3000/compra/',

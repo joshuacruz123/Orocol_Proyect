@@ -1,15 +1,15 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AdministradorEntity } from './administrador.entity';
+import { AdministradorEntity } from 'src/entities/administrador.entity';
 import { MessageDto } from 'src/dto/common/message.dto';
 import { AdministradorDto, EditarAdministradorDto } from 'src/dto/administrador.dto';
 import { UsuarioService } from '../usuario/usuario.service';
-import { RolNombre } from '../rol/rol.enum';
-import { UsuarioEntity } from '../usuario/usuario.entity';
-import { RolEntity } from '../rol/rol.entity';
+import { RolNombre } from 'src/enums/rol.enum';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { ActivarUsuarioDto } from 'src/dto/enum.dto';
-import { EstadoUsuario } from '../usuario/usuario.enum';
+import { EstadoUsuario } from 'src/enums/usuario.enum';
 import { MailService } from 'src/mail/mail.service';
 
 @Injectable()

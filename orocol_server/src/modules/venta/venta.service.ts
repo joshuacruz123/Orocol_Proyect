@@ -1,22 +1,22 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, EntityManager, Equal, Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { MessageDto } from 'src/dto/common/message.dto';
-import { EntradaVentaEntity } from './entradaventas.entity';
-import { SalidaVentaEntity } from './salidaventas.entity';
-import { ProductoEntity } from '../producto/producto.entity';
+import { EntradaVentaEntity } from 'src/entities/entradaventas.entity';
+import { SalidaVentaEntity } from 'src/entities/salidaventas.entity';
+import { ProductoEntity } from 'src/entities/producto.entity';
 import { ProductoService } from '../producto/producto.service';
-import { MineroEntity } from '../minero/minero.entity';
+import { MineroEntity } from 'src/entities/minero.entity';
 import { MineroService } from '../minero/minero.service';
-import { AdministradorEntity } from '../administrador/administrador.entity';
-import { UsuarioEntity } from '../usuario/usuario.entity';
+import { AdministradorEntity } from 'src/entities/administrador.entity';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
 import { EntradaDto } from 'src/dto/entrada.dto';
-import { EstadoProducto } from '../producto/producto.enum';
+import { EstadoProducto } from '../../enums/producto.enum';
 import { AdministradorService } from '../administrador/administrador.service';
-import { RolEntity } from '../rol/rol.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { UsuarioService } from '../usuario/usuario.service';
 import { EstadoVentaDto } from 'src/dto/enum.dto';
-import { EstadoVenta } from './venta.enum';
+import { EstadoVenta } from 'src/enums/venta.enum';
 
 @Injectable()
 export class VentaService {
@@ -229,51 +229,37 @@ export class VentaService {
     }
     // Método para generar reportes de las ventas 
 
-    async calcularIngresosVentas(): Promise<{ totalCantidad: string, totalPesoOro: string }> {
-        const { minFecha, maxFecha } = await this.entradaVentaRepository.createQueryBuilder('venta')
-            .select('MIN(venta.fechaExtraccionOro)', 'minFecha')
-            .addSelect('MAX(venta.fechaExtraccionOro)', 'maxFecha')
-            .getRawOne();
-        const ventas = await this.entradaVentaRepository.find({
-            where: {
-                fechaExtraccionOro: Between(minFecha, maxFecha)
+    async calcularIngresosVentas() {
+        const ventas = await this.entradaVentaRepository.find();
+    
+        // Agrupar y sumar las cantidades por fecha de extracción de oro
+        const indicadoresAgrupados = ventas.reduce((acc, venta) => {
+            let fechaExtraccionOro: Date;
+            if (venta.fechaExtraccionOro instanceof Date) {
+                fechaExtraccionOro = venta.fechaExtraccionOro;
+            } else {
+                fechaExtraccionOro = new Date(venta.fechaExtraccionOro);
             }
-        });
-        const totalCantidad = ventas.reduce((total, venta) => total + venta.cantidad, 0).toFixed(2);
-        const totalPesoOro = ventas.reduce((total, venta) => total + venta.salida.PesogrOro, 0).toFixed(2);
-        return { totalCantidad, totalPesoOro };
-    } /*
-    async obtenerIndicadoresFinancieros() {
-        const compras = await this.clienteRepository.find({
-            relations: ['salidaVentas.entrada']
-        });
-        const indicadores = compras.map(compra => {
-          let fechaExportacion: Date;
-          if (compra.FechaExportacion instanceof Date) {
-            fechaExportacion = compra.FechaExportacion;
-          } else {
-            fechaExportacion = new Date(compra.FechaExportacion);
-          }
-          const precioOro = compra.salidaVentas.entrada.precioOro;
-          const cantidad = compra.salidaVentas.entrada.cantidad;
-          const valorTotal = precioOro * cantidad;
-          return { fechaExportacion, valorTotal };
-        });
-        const indicadoresAgrupados = indicadores.reduce((acc, curr) => {
-          if (!(curr.fechaExportacion instanceof Date) || isNaN(curr.fechaExportacion.getTime())) {
-            throw new Error(`Invalid date: ${curr.fechaExportacion}`);
-          }
-          const fecha = curr.fechaExportacion.toISOString().split('T')[0];
-          if (!acc[fecha]) {
-            acc[fecha] = 0;
-          }
-          acc[fecha] += curr.valorTotal;
-          return acc;
+    
+            if (isNaN(fechaExtraccionOro.getTime())) {
+                throw new Error(`Invalid date: ${venta.fechaExtraccionOro}`);
+            }
+    
+            const fecha = fechaExtraccionOro.toISOString().split('T')[0];
+            if (!acc[fecha]) {
+                acc[fecha] = 0;
+            }
+            
+            // Aquí se suma la cantidad de la venta actual a la fecha correspondiente
+            acc[fecha] += Number(venta.cantidad);
+            return acc;
         }, {});
+    
+        // Convertir el objeto de acumulación a un arreglo de resultados
         return Object.keys(indicadoresAgrupados).map(fecha => ({
-          fecha,
-          valorTotal: indicadoresAgrupados[fecha],
+            fecha,
+            valorTotal: indicadoresAgrupados[fecha],
         }));
-    } */    
+    }   
     // Método para generar indicadores financieros de las ventas
 }

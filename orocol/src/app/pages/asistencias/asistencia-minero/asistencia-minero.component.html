@@ -12,14 +12,16 @@
                         <p>Fecha del turno: {{ turno.FechaTurno }}</p>
                         <p>Asistencia: {{ turno.Asistencia }}</p>
                         <p>Asignación de Tareas: {{ turno.AsignacionTareas }}</p>
-                        <!-- <p>Novedad: {{ turno.novedad ? turno.novedad : 'Ninguna' }}</p> -->
+                        @if (!turno.novedad) {
+                            <p>Novedad: {{ turno.novedad ? turno.novedad : 'Ninguna' }}</p> 
+                        }
                         @if (turno.Asistencia === 'Nó asistió' && !turno.novedad) {
                             <button class="btn btn-success" type="button"
                             (click)="agregarNovedad(turno.idTurno)"><mat-icon>add</mat-icon> Registrar novedad</button>
                         }
-                        @if (turno.novedad.idNovedad) {
+                        @if (turno.novedad && turno.novedad.idNovedad) {
                             <button class="btn btn-info" type="button"
-                            (click)="verNovedad(turno.novedad.idNovedad)"><mat-icon>add</mat-icon> Ver novedad</button>
+                            (click)="verNovedad(turno.novedad.idNovedad)"><mat-icon>search</mat-icon> Ver novedad</button>
                         }
                     </div>
                 } 

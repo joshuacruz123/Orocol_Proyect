@@ -15,6 +15,7 @@ export class VentasService {
 
   ventaURL = environment.ventaURL;
   reportesURL = environment.reportesURL;
+  indicadoresVentaUrl = environment.indicadoresVentaUrl; 
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -61,5 +62,9 @@ export class VentasService {
         return reportes;
       })
     );
+  }
+
+  obtenerIndicadoresFinancierosVentas(): Observable<any> {
+    return this.http.get<any>(this.indicadoresVentaUrl);
   }
 }

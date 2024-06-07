@@ -1,4 +1,4 @@
-import { RolEntity } from './rol.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { Module } from '@nestjs/common';
 import { RolService } from './rol.service';
 import { RolController } from './rol.controller';

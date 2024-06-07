@@ -21,7 +21,7 @@ export class EditarAsistenciaComponent implements OnInit {
     FechaTurno: new Date(),
     Asistencia: '',
     AsignacionTareas: '',
-    minero: { IdMinero: 0, tipo_documento: '', numero_documento: 0, telefono: 0, fecha_nacimiento: new Date(), direccion_vivienda: '', cambio_documento: '', 
+    minero: { IdMinero: 0, tipo_documento: '', numero_documento: 0, telefono: '', fecha_nacimiento: new Date(), direccion_vivienda: '', cambio_documento: '', 
       usuario: {idUsuario: 0, nombreUsuario: '', apellidosUsuario: '', correoUsuario: '', passwordUsuario: '', estadoUsuario: ''}
     },
     novedad: {idNovedad: 0, fechaNovedad: new Date(), descripcion: ''}

@@ -15,6 +15,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MailService } from './mail/mail.service';
+import { BackupService } from './config/backup/backup.service';
+import { ScheduleModule } from '@nestjs/schedule';
 import * as fs from 'fs';
 
 const UPLOADS_FOLDER = './uploads';
@@ -40,7 +42,7 @@ if (!fs.existsSync(UPLOADS_FOLDER)) {
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
+        type: 'postgres', // 'mysql'
         host: configService.get<string>(DB_HOST),
         port: +configService.get<number>(DB_PORT),
         username: configService.get<string>(DB_USER),
@@ -53,9 +55,11 @@ if (!fs.existsSync(UPLOADS_FOLDER)) {
       inject: [ConfigService],
       // Conexión a la base de datos con TypeOrm 
     }),
-    UsuarioModule, RolModule, AdministradorModule, MineroModule, NovedadModule, VentaModule, ProductoModule, CompraModule],
+    UsuarioModule, RolModule, AdministradorModule, MineroModule, NovedadModule, VentaModule, ProductoModule, CompraModule,
+    ScheduleModule.forRoot(), // ScheduleModule para crear el backup
+  ],
   //Importa todos los módulos 
   controllers: [AppController],
-  providers: [MailService],
+  providers: [MailService, BackupService], // Servicio de correos y servicio de backups
 })
 export class AppModule { }

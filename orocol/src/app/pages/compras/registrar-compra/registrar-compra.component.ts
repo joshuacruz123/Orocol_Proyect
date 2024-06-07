@@ -35,6 +35,7 @@ export class RegistrarCompraComponent {
       Pais: [null, Validators.required],
       CiudadMunicipio: [null, Validators.required],
       FechaExportacion: [null, Validators.required],
+      PesogrOro: [null, Validators.required]
     });
   }
 

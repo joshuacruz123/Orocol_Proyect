@@ -1,7 +1,7 @@
 // rol.entity.ts
-import { Column, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { RolNombre } from './rol.enum';
-import { UsuarioEntity } from '../usuario/usuario.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { RolNombre } from '../enums/rol.enum';
+import { UsuarioEntity } from './usuario.entity';
 
 @Entity({ name: 'Rol' })
 export class RolEntity {

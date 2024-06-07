@@ -1,6 +1,6 @@
 import { Controller, Get, UseGuards} from '@nestjs/common'
 import { CompraService } from './compra.service';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';

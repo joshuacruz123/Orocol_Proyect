@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
-import { TurnoMineroEntity } from '../minero/turno.entity';
+import { TurnoMineroEntity } from './turno.entity';
 
 @Entity({ name: 'novedades' })
 export class NovedadEntity {
   @PrimaryGeneratedColumn('increment')
   idNovedad: number;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) // datetime en MySQL
   fechaNovedad: Date;
 
   @Column({ type: 'text', nullable: false })

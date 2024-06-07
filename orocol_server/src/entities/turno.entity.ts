@@ -1,15 +1,15 @@
 // turno.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { MineroEntity } from './minero.entity';
-import { Asistencia } from './turno.enum';
-import { NovedadEntity } from '../novedad/novedad.entity';
+import { Asistencia } from '../enums/turno.enum';
+import { NovedadEntity } from './novedad.entity';
 
 @Entity({ name: 'turnoMinero' })
 export class TurnoMineroEntity {
   @PrimaryGeneratedColumn('increment')
   idTurno: number;
 
-  @Column({ type: 'datetime', nullable: false })
+  @Column({ type: 'timestamp', nullable: false }) // datetime en MySQL
   FechaTurno: Date;
 
   @Column({type: 'varchar', length: 15, nullable: false})

@@ -2,25 +2,23 @@ import { BadRequestException, HttpException, Injectable, InternalServerErrorExce
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, LessThan, MoreThan, Repository } from 'typeorm';
 import { MessageDto } from 'src/dto/common/message.dto';
-import { ClienteEntity } from './cliente.entity';
-import { EntradaVentaEntity } from '../venta/entradaventas.entity';
-import { SalidaVentaEntity } from '../venta/salidaventas.entity';
-import { ProductoEntity } from '../producto/producto.entity';
+import { ClienteEntity } from 'src/entities/cliente.entity';
+import { EntradaVentaEntity } from 'src/entities/entradaventas.entity';
+import { SalidaVentaEntity } from 'src/entities/salidaventas.entity';
+import { ProductoEntity } from 'src/entities/producto.entity';
 import { ProductoService } from '../producto/producto.service';
-import { MineroEntity } from '../minero/minero.entity';
+import { MineroEntity } from 'src/entities/minero.entity';
 import { MineroService } from '../minero/minero.service';
-import { AdministradorEntity } from '../administrador/administrador.entity'; 
-import { UsuarioEntity } from '../usuario/usuario.entity';
-import { EntradaDto } from 'src/dto/entrada.dto';
-import { EstadoProducto } from '../producto/producto.enum';
+import { AdministradorEntity } from 'src/entities/administrador.entity'; 
+import { UsuarioEntity } from 'src/entities/usuario.entity';
 import { AdministradorService } from '../administrador/administrador.service'; 
-import { RolEntity } from '../rol/rol.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { UsuarioService } from '../usuario/usuario.service'; 
 import { CompraDto } from 'src/dto/compra.dto';
 import { EstadoCompraDto } from 'src/dto/enum.dto';
 import { VentaService } from '../venta/venta.service';
-import { EstadoCompra } from './cliente.enum';
-import { EstadoVenta } from '../venta/venta.enum';
+import { EstadoCompra } from '../../enums/cliente.enum';
+import { EstadoVenta } from '../../enums/venta.enum';
 
 @Injectable()
 export class CompraService {

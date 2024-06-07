@@ -1,18 +1,18 @@
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { MineroEntity } from '../minero/minero.entity';
+import { MineroEntity } from 'src/entities/minero.entity';
 import { MessageDto } from 'src/dto/common/message.dto';
 import { UsuarioService } from '../usuario/usuario.service';
-import { RolEntity } from '../rol/rol.entity';
-import { UsuarioEntity } from '../usuario/usuario.entity';
-import { NovedadEntity } from './novedad.entity';
+import { RolEntity } from 'src/entities/rol.entity';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
+import { NovedadEntity } from 'src/entities/novedad.entity';
 import { NovedadDto } from 'src/dto/novedad.dto';
 import { MineroService } from '../minero/minero.service';
-import { TurnoMineroEntity } from '../minero/turno.entity';
-import { AdministradorEntity } from '../administrador/administrador.entity';
+import { TurnoMineroEntity } from 'src/entities/turno.entity';
+import { AdministradorEntity } from 'src/entities/administrador.entity';
 import { AdministradorService } from '../administrador/administrador.service';
-import { Asistencia } from '../minero/turno.enum';
+import { Asistencia } from 'src/enums/turno.enum';
 
 @Injectable()
 export class NovedadService {

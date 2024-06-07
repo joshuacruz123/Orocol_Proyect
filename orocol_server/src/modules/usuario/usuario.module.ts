@@ -1,5 +1,5 @@
-import { UsuarioEntity } from './usuario.entity';
-import { RolEntity } from './../rol/rol.entity';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { Module } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { UsuarioController } from './usuario.controller';
@@ -9,9 +9,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JWT_SECRET } from 'src/config/constants';
 import { JwtStrategy } from 'src/auth/strategies/jwt.strategy';
-import { PerfilEntity } from './perfil.entity';
+import { PerfilEntity } from 'src/entities/perfil.entity';
 import { PasswordController } from './password.controller';
-import { SolicitudEntity } from './solicitud.entity';
+import { SolicitudEntity } from 'src/entities/solicitud.entity';
 import { SolicitudesController } from './solicitudes.controller';
 
 @Module({

@@ -27,20 +27,13 @@
       "correoUsuario": "alexisGe@gmail.com",
       "passwordUsuario": "slpk1245Z",
       "cargoAdmin": "Jefe de minas"
-    },
-    {
-      "nombreUsuario": "Angelina Marcela",
-      "apellidosUsuario": "Cruz Fierro",
-      "correoUsuario": "amcruzf04@gmail.com",
-      "passwordUsuario": "ajskahdjsjs",
-      "cargoAdmin": "Supervisor"
     }
   ],
   "Minero": [
     {
       "tipo_documento": "Cedula de ciudadania",
       "numero_documento": 1012587523,
-      "telefono": 3212564,
+      "telefono": 3212564555,
       "fecha_nacimiento": "1993-10-15",
       "direccion_vivienda": "cra 102 #45-46",
       "cambio_documento": "Acepto",
@@ -57,9 +50,9 @@
       "tipo_documento": "Cedula de ciudadania",
       "numero_documento": 1332778599,
       "cambio_documento": "No acepto",
-      "telefono": 3186279,
+      "telefono": 3186279457,
       "fecha_nacimiento": "1987-12-08",
-      "direccion_vivienda": "Transversal 1b este # 81d 84 sur"
+      "direccion_vivienda": "Transversal 8a este # 80d 83 sur"
     },
     {
       "nombreUsuario": "Brenton Para",
@@ -69,14 +62,14 @@
       "tipo_documento": "Cedula de ciudadania",
       "numero_documento": 1312587790,
       "cambio_documento": "Acepto",
-      "telefono": 3182777,
+      "telefono": 3182777777,
       "fecha_nacimiento": "1996-08-12",
       "direccion_vivienda": "Av C.Cali #64 sur"
     },
     {
       "nombreUsuario": "Joshua Sebastian",
       "apellidosUsuario": "Cruz Fierro",
-      "correoUsuario": "joshuacruz@gmail.com",
+      "correoUsuario": "joshuasebastiancruzfierro@gmail.com",
       "passwordUsuario": "JoshuaDeveloper2506",
       "tipo_documento": "Cedula de ciudadania",
       "numero_documento": 1032678564,
@@ -93,7 +86,7 @@
       "tipo_documento": "Cedula de Extranjeria",
       "numero_documento": 1234567855,
       "cambio_documento": "Acepto",
-      "telefono": 8388607,
+      "telefono": 3068388607,
       "fecha_nacimiento": "1994-04-25",
       "direccion_vivienda": "Calle Principal 123"
     },
@@ -105,25 +98,48 @@
       "tipo_documento": "Cedula de ciudadania",
       "numero_documento": 1398765432,
       "cambio_documento": "Acepto",
-      "telefono": 123456789,
+      "telefono": 3123456789,
       "fecha_nacimiento": "1987-10-14",
       "direccion_vivienda": "Avenida Central 456"
-    }
-  ],
-  "ejemploperfil": [
+    },
     {
-      "usuario": {
-        "idUsuario": 1,
-        "nombreUsuario": "Andres Manuel",
-        "apellidosUsuario": "Hernadez Castillo",
-        "perfil": {
-          "idPerfil": 11,
-          "fotoPerfil": "/uploads/1_1.jpg"
-        }
-      },
-      "fotoPerfilUrl": "http://localhost:3000/uploads/1_1.jpg"
+      "nombreUsuario": "Pedro",
+      "apellidosUsuario": "Rodríguez García",
+      "correoUsuario": "pedro.rodriguez@gmail.com",
+      "passwordUsuario": "clave789988j",
+      "tipo_documento": "Carnet de identidad",
+      "numero_documento": 1254321678,
+      "telefono": 316987321,
+      "fecha_nacimiento": "06/05/1988",
+      "direccion_vivienda": "Plaza Mayor 789",
+      "cambio_documento": "No"
+    },
+    {
+      "nombreUsuario": "Ana Maria",
+      "apellidosUsuario": "Fernández Ruiz",
+      "correoUsuario": "ana.fernandez@gmail.com",
+      "passwordUsuario": "ena32188j",
+      "tipo_documento": "DNI",
+      "numero_documento": 123789456,
+      "telefono": 32187654,
+      "fecha_nacimiento": 910210,
+      "direccion_vivienda": "Calle Secundaria 987",
+      "cambio_documento": "Sí"
+    },
+    {
+      "nombreUsuario": "Carlos Martín",
+      "apellidosUsuario": "Sánchez",
+      "correoUsuario": "carlos.martin@gmail.com",
+      "passwordUsuario": "segura789segura789",
+      "tipo_documento": "Pasaporte",
+      "numero_documento": 18765432,
+      "telefono": 345678912,
+      "fecha_nacimiento": 880725,
+      "direccion_vivienda": "Paseo de la Playa 321",
+      "cambio_documento": "No"
     }
   ],
+
   "login": [
     {
       "secreto": "SiTiOWebOrocolPassClaveHASH°Secret25012006A°¡_°nD2¡0202312"
@@ -164,7 +180,7 @@
       "rol": "Administrador"
     },
     {
-      "correoUsuario": "joshuacruz@gmail.com",
+      "correoUsuario": "joshuasebastiancruzfierro@gmail.com",
       "passwordUsuario": "JoshuaDesarrollador2006",
       "rol": "Minero"
     },
@@ -177,8 +193,24 @@
       "correoUsuario": "marialopez@gmail.com",
       "passwordUsuario": "seguraenorocol456",
       "rol": "Minero"
+    },
+    {
+      "correoUsuario": "pedro.rodriguez@gmail.com",
+      "passwordUsuario": "clave789988j",
+      "rol": "Minero"
+    },
+    {
+      "correoUsuario": "ana.fernandez@gmail.com",
+      "passwordUsuario": "ena32188j",
+      "rol": "Minero"
+    },
+    {
+      "correoUsuario": "carlos.martin@gmail.com",
+      "passwordUsuario": "segura789segura789",
+      "rol": "Minero"
     }
   ],
+  
   "turnominero": [
     {
       "url": "http://localhost:3000/turno/1",

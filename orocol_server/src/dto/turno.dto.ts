@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, MaxLength, Min } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
-import { Asistencia } from "../modules/minero/turno.enum";
+import { Asistencia } from "../enums/turno.enum";
 
 export class TurnoDto {
     

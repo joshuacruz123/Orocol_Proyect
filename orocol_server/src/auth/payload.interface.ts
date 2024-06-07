@@ -1,4 +1,4 @@
-import { RolNombre } from "src/modules/rol/rol.enum";
+import { RolNombre } from "src/enums/rol.enum";
 
 export interface PayloadInterface {
     idUsuario: number;

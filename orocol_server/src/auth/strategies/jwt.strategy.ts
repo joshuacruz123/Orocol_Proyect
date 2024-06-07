@@ -2,7 +2,7 @@ import { PayloadInterface } from './../payload.interface';
 import { MessageDto } from '../../dto/common/message.dto';
 import { JWT_SECRET } from './../../config/constants';
 import { ConfigService } from '@nestjs/config';
-import { UsuarioEntity } from 'src/modules/usuario/usuario.entity';
+import { UsuarioEntity } from 'src/entities/usuario.entity';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';

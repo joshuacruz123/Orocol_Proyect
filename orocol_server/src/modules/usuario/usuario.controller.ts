@@ -1,7 +1,7 @@
 import { UsuarioService } from './usuario.service';
-import { Body, Controller, Delete, Get, InternalServerErrorException, NotFoundException, Param, ParseIntPipe, Post, Put, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InactivarUsuarioDto } from 'src/dto/enum.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { LoginUsuarioDto } from 'src/dto/login.dto';
 import { TokenDto } from 'src/dto/token.dto';
 import { RolDecorator } from 'src/decorators/rol.decorator';
@@ -9,7 +9,6 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiParam, ApiTags } from '@nestjs/swagger';
 import { PerfilDto } from 'src/dto/perfil.dto';
-import { UsuarioDto } from 'src/dto/usuario.dto';
 import { PasswordDto } from 'src/dto/editar-password.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 

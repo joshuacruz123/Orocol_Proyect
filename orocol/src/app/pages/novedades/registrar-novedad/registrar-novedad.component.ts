@@ -3,12 +3,13 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { TurnoService } from '../../../core/services/turno.service';
 
 @Component({
   selector: 'app-registrar-novedad',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatIconModule],
   templateUrl: './registrar-novedad.component.html',
   styleUrl: './registrar-novedad.component.css'
 })
@@ -38,10 +39,10 @@ export class RegistrarNovedadComponent {
         });
       },
       error => {
-        console.error('Error al registrar', error);
         this.toastr.error(error.error.message, 'Error:', {
           timeOut: 3000
         });
+        console.error('Error al registrar', error);
       }
     )
   }

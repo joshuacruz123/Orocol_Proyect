@@ -21,7 +21,7 @@ import { EditarNovedadComponent } from '../../novedades/editar-novedad/editar-no
   styleUrl: './asistencia-minero.component.css'
 })
 export class AsistenciaMineroComponent implements OnInit{
-  turnos!: any[];
+  turnos: any[] = [];
 
   constructor( 
     private turnoService: TurnoService,

@@ -1,6 +1,6 @@
 import { CreateRolDto } from 'src/dto/rol.dto';
 import { MessageDto } from '../../dto/common/message.dto';
-import { RolEntity } from './rol.entity';
+import { RolEntity } from 'src/entities/rol.entity';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

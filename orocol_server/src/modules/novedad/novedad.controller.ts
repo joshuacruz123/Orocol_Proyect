@@ -1,9 +1,9 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, ValidationPipe, UsePipes, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { NovedadService } from './novedad.service';
 import { NovedadDto } from 'src/dto/novedad.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RolDecorator } from 'src/decorators/rol.decorator';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
 

@@ -1,12 +1,12 @@
 import { Controller, Get, Param, Post, Body, Put, ValidationPipe, UsePipes, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { MineroService } from './minero.service';
 import { EditarMineroDto, mineroDto } from '../../dto/minero.dto';
-import { RolNombre } from '../rol/rol.enum';
+import { RolNombre } from '../../enums/rol.enum';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
-import { MineroEntity } from './minero.entity';
+import { MineroEntity } from 'src/entities/minero.entity';
 
 @ApiTags('Usuarios mineros')
 @Controller('minero')

@@ -1,11 +1,11 @@
 import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { RolEntity } from '../rol/rol.entity';
-import { EstadoUsuario } from './usuario.enum';
+import { RolEntity } from './rol.entity';
+import { EstadoUsuario } from '../enums/usuario.enum';
 import { hash } from 'bcryptjs';
-import { MineroEntity } from "../minero/minero.entity";
-import { AdministradorEntity } from "../administrador/administrador.entity";
-import { PerfilEntity } from "./perfil.entity";
+import { MineroEntity } from "./minero.entity";
+import { AdministradorEntity } from "./administrador.entity";
 import { SolicitudEntity } from "./solicitud.entity";
+import { PerfilEntity } from "./perfil.entity";
    
   @Entity({ name: 'Usuarios' })
   export class UsuarioEntity {

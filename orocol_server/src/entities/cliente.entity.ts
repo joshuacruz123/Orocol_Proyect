@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { SalidaVentaEntity } from '../venta/salidaventas.entity';
-import { EstadoCompra } from './cliente.enum';
+import { SalidaVentaEntity } from './salidaventas.entity';
+import { EstadoCompra } from 'src/enums/cliente.enum';
 
 @Entity({ name: 'Clientes' })
 export class ClienteEntity {
