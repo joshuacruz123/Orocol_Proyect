@@ -1,5 +1,4 @@
 export const SERVER_PORT = 'SERVER_PORT';
-export const SERVER_PORT_ONE = 'SERVER_PORT_ONE';
 
 export const DB_HOST='DB_HOST'
 export const DB_PORT='DB_PORT'

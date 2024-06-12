@@ -1,14 +1,12 @@
 <body>
     <app-regresar-home></app-regresar-home>
     <br>
-    <form [formGroup]="editarForm" (ngSubmit)="recuperarPass()">
+    <form class="p-5 bg-light" [formGroup]="editarForm" (ngSubmit)="recuperarPass()">
         <div class="form-group">
             <label for="passwordNuevo">Nueva contraseña:</label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <font color="blue"><mat-icon>key</mat-icon></font>
-                    </span>
+                    <span class="input-group-text"><mat-icon>key</mat-icon></span>
                 </div>
                 <input type="password" id="passwordNuevo" formControlName="passwordNuevo" class="form-control inputt" placeholder="Nueva contraseña">
             </div>
@@ -19,6 +17,7 @@
                 Mostrar contraseña
             </label>
         </div>
+        <br/>
         <div class="form-group">
             <label for="usuario">Confirma tu nueva contraseña:</label>
             <div class="input-group">
@@ -36,7 +35,6 @@
             <button type="submit" class="btn btn-primary btn-lg" [disabled]="!editarForm.valid">Crear nueva contraseña</button>
         </div>
     </form>
-    <br>
     <br>
     <app-pie></app-pie>
 </body>

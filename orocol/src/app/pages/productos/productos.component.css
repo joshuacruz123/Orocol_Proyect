@@ -27,6 +27,10 @@ h2{
     text-align: inherit;
 }
 
+h1 {
+    margin-left: 15px;
+}
+
 .logo{
      padding: 5px;
      margin-right: 120px;
@@ -93,15 +97,22 @@ table, .div-boton {
     width: 1000px;
 }
 
+table, .div-boton a {
+    margin-top: -3px;
+}
+
 .busqueda {
-    margin-top: 25px;
+    margin-top: 35px;
     margin-left: 15px;
-    height: 45px;
+    height: 50px;
     width: 300px;
+    border-radius: 5px;
 }
 
 th, td {
   padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 th {

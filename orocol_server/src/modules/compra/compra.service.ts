@@ -179,7 +179,7 @@ export class CompraService {
 
     async calcularVolumenTotalOro(): Promise<number> {
         const salidaVentas = await this.salidaVentaRepository.find();
-        console.log(salidaVentas); // Para verificar los datos obtenidos
+        // console.log(salidaVentas);
         const totalPesogrOro = salidaVentas.reduce((sum, venta) => sum + Number(venta.PesogrOro), 0);
         return totalPesogrOro;
     }

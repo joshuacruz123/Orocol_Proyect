@@ -74,8 +74,8 @@ export class IndicadoresFinancierosComponent implements OnInit {
         datasets: [{
           label: 'Valor total de compras',
           data: values,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(254, 254, 50, 1)',
+          borderColor: 'rgba(197, 168, 3, 1)',
           borderWidth: 1,
           fill: false, // fill: false,
         }]
@@ -110,8 +110,8 @@ export class IndicadoresFinancierosComponent implements OnInit {
         datasets: [{
           label: 'Valor total de las ventas',
           data: values,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(248, 50, 50, 0.744)',
+          borderColor: 'rgba(195, 0, 0, 1)',
           borderWidth: 1,
         }]
       },

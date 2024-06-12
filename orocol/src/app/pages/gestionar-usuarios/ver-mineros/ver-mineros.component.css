@@ -35,3 +35,7 @@ a {
     margin-top: 5px;
     margin-left: 10px;
 }
+
+.table-responsive {
+    width: 1000px;
+}

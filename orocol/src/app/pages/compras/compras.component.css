@@ -1,0 +1,16 @@
+table, .div-boton {
+    width: 1500px;
+}
+
+.btn {
+    margin-left: 5px;
+}
+
+.div-boton a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h1 {
+    margin-left: 15px;
+}

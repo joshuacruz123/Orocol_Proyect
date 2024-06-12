@@ -1,0 +1,18 @@
+.radios{
+    text-align: center;
+    gap: 2rem;
+    font-size: 25px;
+}
+
+.radios label {
+    margin-right: 20px;
+}
+
+.radios label:hover{
+  color: #c79603;
+  transition: 0.4s ease-in-out;
+}
+
+.radios label input:hover{
+  cursor: pointer;
+}

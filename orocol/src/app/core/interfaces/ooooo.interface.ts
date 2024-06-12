@@ -4,15 +4,60 @@ TypeError: Cannot read properties of null (reading 'roles')
     at UsuarioService.refresh (C:\Users\Us\Documents\Orocol_Proyect\orocol_server\src\modules\usuario\usuario.service.ts:113:20)
     at processTicksAndRejections (node:internal/process/task_queues:95:5)
 ---------------------------------------------------
-1012587523, 2024-06-06 08:00:00, si, Carga de materiales.
-1332778599, 2024-05-03 08:00:00, no, Recolección de oro y limpieza.
-1312587790, 2024-05-01 20:02:30, si, Carga de materiales.
-1032678564, 2024-05-02 07:00:00, si, Limpiar piezas de oro.
-1234567855, 2024-05-06 13:00:00, si, Recolección de oro.
-1398765432, 2024-05-08 14:00:00, si, Limpieza de materiales.
-1254321678, 2024-05-08 13:30:00, si, Carga de materiales.
-123789456, 2024-05-08 10:15:00, si, Manejo de maquinaria pesada.
-18765432, 2024-05-11 17:42:27, so, Carga de materiales y oro.
+{
+    1012587523,
+    2024-06-06 08:00:00, 
+    si, 
+    Carga de materiales. 
+},
+{
+    1332778599, 
+    2024-05-03 08:00:00,
+    no, 
+    Recolección de oro y limpieza.
+},
+{
+    1312587790, 
+    2024-05-01 20:02:30, 
+    si, 
+    Carga de materiales.
+},
+{
+    1032678564, 
+    2024-05-02 07:00:00, 
+    si, 
+    Limpiar piezas de oro.
+},
+{
+    1234567855, 
+    2024-05-06 13:00:00, 
+    si, 
+    Recolección de oro.
+},
+{
+    1398765432, 
+    2024-05-08 14:00:00, 
+    si, 
+    Limpieza de materiales.
+},
+{
+    1254321678, 
+    2024-05-08 13:30:00, 
+    si, 
+    Carga de materiales.
+},
+{
+    123789456, 
+    2024-05-08 10:15:00, 
+    si, 
+    Manejo de maquinaria pesada.
+},
+{
+    18765432, 
+    2024-05-11 17:42:27, 
+    so, 
+    Carga de materiales y oro.
+}
 ---------------------------------------------------
 ,
 "nombreUsuario": "Laura"

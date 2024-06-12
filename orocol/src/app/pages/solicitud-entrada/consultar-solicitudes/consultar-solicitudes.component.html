@@ -1,20 +1,20 @@
 <mat-dialog-content class="mat-typography">
     <div class="col-md-5">
         @for (item of solicitudList; track $index) {
-            @if (item.usuario.estadoUsuario === 'inactivo') {
-            <div class="datos-admin">
-                <br>
-                <strong>Nombre</strong>
-                <p> {{item.usuario.nombreUsuario}} {{item.usuario.apellidosUsuario}}</p>
-                <strong>Correo:</strong>
-                <p> {{item.usuario.correoUsuario}} </p>
-                <strong>Descripción de la solicitud:</strong>
-                <p>{{ item.descripcionSolicitud }}</p>
-            </div>
-            <br />
-            <hr>
-            <br />
-            }
+        @if (item.usuario.estadoUsuario === 'inactivo') {
+        <div class="datos-admin">
+            <br>
+            <strong>Nombre</strong>
+            <p> {{item.usuario.nombreUsuario}} {{item.usuario.apellidosUsuario}}</p>
+            <strong>Correo:</strong>
+            <p> {{item.usuario.correoUsuario}} </p>
+            <strong>Descripción de la solicitud:</strong>
+            <p>{{ item.descripcionSolicitud }}</p>
+        </div>
+        <br />
+        <hr>
+        <br />
+        }
         }
     </div>
 </mat-dialog-content>

@@ -3,8 +3,8 @@
 }
   
 body{ 
-  background: #fcfcd8; 
-  height: 1600px;
+  background: #f9f9db; 
+  height: 1800px;
 } 
   
 /* INICIO */
@@ -172,8 +172,8 @@ a {
     padding-bottom: 20px;
   }
   
-  article{
-    width: 60%;
+article{
+    width: 50%;
     margin-left: 25%;
     padding: 20px;
     border: 4px double #f7f738;

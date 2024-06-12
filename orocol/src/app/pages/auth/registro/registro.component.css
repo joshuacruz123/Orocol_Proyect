@@ -1,9 +1,9 @@
 /* PÁGINA DE REGISTRO*/
 body{
-  height: 1600px; 
+  height: 1700px; 
   background: #fceabb; 
-  background: -webkit-linear-gradient(to bottom, #fcf2da, #f8c331);  
-  background: linear-gradient(to bottom, #fcf2da, #f8c331);
+  background: -webkit-linear-gradient(to bottom, #fdf5e2, #f7c539);  
+  background: linear-gradient(to bottom, #fdf5e2, #f8c331);
 }
 
 .div-titulo{
@@ -31,8 +31,8 @@ body{
 
 /* INICIO FOMULARIO*/
 .contenedor .div-formulario{
-    width: 60%;
-    height: 135%;
+    width: 50%;
+    height: 140%;
     margin: 15px 15px;
     background-color: #000000d7; 
     flex-direction: column;
