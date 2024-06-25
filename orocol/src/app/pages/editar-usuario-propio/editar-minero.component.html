@@ -1,0 +1,58 @@
+<body>
+    <app-encabezado></app-encabezado>
+    <div class="divformulario">
+        <br />
+        <h1>Editar datos propios</h1>
+        <br />
+        @if (mineroForm) {
+        <form [formGroup]="mineroForm" (ngSubmit)="editarMinero()">
+            <label for="nombreUsuario">Nombre(s): </label>
+            <input class="inputt" type="text" formControlName="nombreUsuario" id="nombreUsuario">
+
+            <label for="apellidosUsuario">Apellido(s):</label>
+            <input class="inputt" type="text" formControlName="apellidosUsuario" id="apellidosUsuario">
+
+            <label for="correoUsuario">Correo electrónico: </label>
+            <input class="inputt" type="text" formControlName="correoUsuario" id="correoUsuario">
+
+            <label for="tipo_documento">Tipo de documento: </label>
+            <select id="tipo_documento" formControlName="tipo_documento">
+                <option value="Cedula de ciudadania">Cédula de ciudadanía (C.C)</option>
+                <option value="Cedula de extranjeria">Cédula de extranjería (C.E)</option>
+            </select>
+
+            <label for="pwd">Número de documento: </label>
+            <input class="inputt" type="number" formControlName="numero_documento">
+
+            <label for="pwd">Número de teléfono: </label>
+            <input class="inputt" type="text" id="telefono" formControlName="telefono">
+
+            <label for="pwd">Fecha de nacimiento: </label>
+            <input class="inputt" type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento">
+
+            <label for="usuario">Dirección de vivienda: </label>
+            <input class="inputt" type="text" id="direccion_vivienda" formControlName="direccion_vivienda">
+
+            <div class="form-group">
+                <label>¿Acepta que el administrador del sistema pueda editar su documento de identidad?</label>
+                <div class="form-check">
+                    <label><input type="radio" formControlName="cambio_documento" value="Acepto"> Acepto</label>
+                </div>
+                <div class="form-check">
+                    <label><input type="radio" formControlName="cambio_documento" value="No acepto"> No acepto</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!mineroForm.valid">Editar
+                <mat-icon>edit</mat-icon></button>
+        </form>
+        }
+        <br />
+        <a class="btn btn-danger btn-lg" routerLink="/minero">Cancelar <mat-icon>block</mat-icon></a>
+        <br />
+        <br />
+    </div>
+    <br />
+    <app-pie></app-pie>
+</body>
+<router-outlet />

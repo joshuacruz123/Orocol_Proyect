@@ -144,13 +144,20 @@ export class MineroService {
         if (!turnos.length) {
             throw new NotFoundException(new MessageDto('No hay turnos registrados'));
         }
+        return turnos;
+    } /* 
+    async consultarTurnos(): Promise<TurnoMineroEntity[]> {
+        const turnos = await this.turnoRepository.find({ relations: ['minero', 'minero.usuario', 'novedad'] });
+        if (!turnos.length) {
+            throw new NotFoundException(new MessageDto('No hay turnos registrados'));
+        }
         return turnos.map(turno => {
             if (turno.novedad) {
                 turno.novedad;
             }
             return turno;
         });
-    } 
+    } */
     // Método para consultar las turnos
 
     async consultarTurnosPorFecha(): Promise<{ hoy: TurnoMineroEntity[], anteriores: TurnoMineroEntity[] }> {
@@ -178,11 +185,9 @@ export class MineroService {
         const minero = await this.mineroRepository.findOne({
             where: { IdMinero },
             relations: ['turno', 'turno.novedad'],
-            select: ['IdMinero'],
+            select: ['IdMinero', 'turno'],
         }); 
-        const confirmar = await this.mineroRepository.findOne({ where: { IdMinero }, relations: ['turno'],
-        }); 
-        if (!confirmar) {
+        if (!minero) {
             throw new NotFoundException('No tienes asistencias registradas');
         }
         return minero;

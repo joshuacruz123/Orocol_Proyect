@@ -40,17 +40,8 @@ export class EncabezadoComponent implements OnInit{
   }
     
   cerrar(): void {
-    let terminarSesion;
-    do {
-        terminarSesion = confirm("¿Deseas terminar la sesión?");
-
-        if (terminarSesion) {
-            this.tokenService.logOut();
-            this.router.navigate(['/iniciar_sesion'])
-        } else {
-            break;
-        }
-    } while (!terminarSesion); 
+    this.tokenService.logOut();
+    this.router.navigate(['/iniciar_sesion']);
   }
 }
  

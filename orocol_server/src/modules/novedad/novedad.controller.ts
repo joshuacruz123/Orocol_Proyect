@@ -6,6 +6,7 @@ import { RolDecorator } from 'src/decorators/rol.decorator';
 import { RolNombre } from '../../enums/rol.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/rol.guard';
+import { NovedadEntity } from 'src/entities/novedad.entity';
 
 @ApiBearerAuth()
 @ApiTags('Novedades de mineros')
@@ -27,7 +28,11 @@ export class NovedadController {
     @UseGuards(JwtAuthGuard, RolesGuard) 
     @Get(':idNovedad')
     async consultarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number) {
-        return await this.novedadService.consultarNovedad(idNovedad);
+        const novedad = await this.novedadService.consultarNovedad(idNovedad);
+        return {
+            ...novedad,
+            fechaNovedad: this.formatDateForDatetimeLocal(novedad.fechaNovedad.toISOString())
+        };
     }
     
     @RolDecorator(RolNombre.MINERO)
@@ -37,4 +42,15 @@ export class NovedadController {
     async editarNovedad(@Param('idNovedad', ParseIntPipe) idNovedad: number, @Body() dto: NovedadDto) {
         return await this.novedadService.editarNovedad(idNovedad, dto);
     }
+
+    private formatDateForDatetimeLocal(dateString: string): string {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    // Método auxiliar para formatear fechas de fechaNovedad
 }

@@ -1,9 +1,28 @@
-<li><strong>Producto:</strong> {{ compra.salidaVentas.entrada?.producto?.TipoOro }}</li>
-<li><strong>Nombre del comprador:</strong> {{ compra.NombreCompleto }}</li>
-<li><strong>Empresa:</strong> {{ compra.Empresa }}</li>
-<li><strong>País:</strong> {{ compra.Pais }}</li>
-<li><strong>Ciudad/Municipio:</strong> {{ compra.CiudadMunicipio }}</li>
-<li><strong>Fecha de exportacion:</strong> {{ compra.FechaExportacion }}</li>
-<li><strong>Peso del oro:</strong> {{ compra.salidaVentas.PesogrOro }}</li>
-<li><strong>Estado de la compra:</strong> {{ compra.estadoCompra }}</li>
-<button type="button" (click)="cancelar()" mat-button>Cerrar</button>
+<mat-dialog-content class="mat-typography cuerpo">
+    <div class="caja">
+        <br />
+        <h1>Detalle de la venta</h1>
+        <div class="detalle-compra">
+            <strong>Producto:</strong> 
+            <p>{{ compra.salidaVentas.entrada?.producto?.TipoOro }}</p>
+            <strong>Nombre del comprador:</strong> 
+            <p>{{ compra.NombreCompleto }}</p>
+            <strong>Empresa:</strong> 
+            <p>{{ compra.Empresa }}</p>
+            <strong>País:</strong> 
+            <p>{{ compra.Pais }}</p>
+            <strong>Ciudad/Municipio:</strong> 
+            <p>{{ compra.CiudadMunicipio }}</p>
+            <strong>Fecha de exportacion:</strong> 
+            <p>{{ compra.FechaExportacion }}</p>
+            <strong>Peso del oro:</strong> 
+            <p>{{ compra.salidaVentas.PesogrOro }}</p>
+            <strong>Estado de la compra:</strong> 
+            <p>{{ compra.estadoCompra }}</p>
+            <br />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center" class="boton">
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cerrar</button>
+</mat-dialog-actions>

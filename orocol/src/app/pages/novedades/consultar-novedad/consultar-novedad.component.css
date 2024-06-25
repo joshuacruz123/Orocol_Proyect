@@ -1,0 +1,55 @@
+.cuerpo, .boton {
+    background-color: rgb(250, 250, 241);
+}
+
+.caja {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalle-venta {
+    width: 80%;
+    border: groove 4px #b9a701;
+    margin: 0;
+    border-radius: 5px;
+    padding-left: 5%;
+    padding-top: 5px;
+} 
+
+h1 {
+    text-align: center;
+}
+
+strong {
+    font-size: 18px;
+}
+
+p {
+    color: #000;
+}
+
+p {
+    font-size: 16px;
+    width: 90%;
+}
+
+p:hover {
+    color: #473601;
+}
+
+h1 {
+    color: #342700;
+}
+
+h1:hover, strong:hover {
+    color: #bfac02;
+    transition: all 3s ease;
+}
+
+.boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -68,6 +68,17 @@ mat-icon {
   padding: 0;
 }
 
+.divformulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.obligatorio {
+  color: red;
+}
+
 @media screen and (max-width:1300px) {
   .barra-lateral {
       min-width: auto;

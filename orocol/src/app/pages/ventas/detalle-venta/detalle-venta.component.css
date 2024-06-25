@@ -1,0 +1,39 @@
+.caja, .boton {
+    background-color: rgb(252, 252, 235);
+}
+
+.caja {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalle-venta {
+    width: 80%;
+    border: double 4px #000;
+    margin: 0;
+    padding-left: 5%;
+    padding-top: 5px;
+} 
+
+h1 {
+    text-align: center;
+}
+
+strong {
+    font-size: 20px;
+    color: #8c6a02;
+}
+
+p, h1 {
+    color: #000;
+}
+
+p {
+    font-size: 18px;
+}
+
+strong:hover, p:hover {
+    color: #f7ff05;
+}

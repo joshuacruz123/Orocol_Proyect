@@ -1,0 +1,34 @@
+<body>
+    <app-encabezado></app-encabezado>
+    <br />
+    <div class="divformulario">
+        <br />
+        <h1>Editar datos propios</h1>
+        <br />
+        @if (adminForm) {
+        <form [formGroup]="adminForm" (ngSubmit)="editarAdmin()">
+
+            <label for="nombreUsuario">Nombre(s): </label>
+            <input type="text" formControlName="nombreUsuario" id="nombreUsuario">
+
+            <label for="apellidosUsuario">Apellido(s):</label>
+            <input type="text" formControlName="apellidosUsuario" id="apellidosUsuario">
+
+            <label for="correoUsuario">Correo electrónico: </label>
+            <input type="text" formControlName="correoUsuario" id="correoUsuario">
+
+            <label for="cargoAdmin">Cargo en la empresa: </label>
+            <input type="text" id="cargoAdmin" formControlName="cargoAdmin">
+
+            <button type="submit" class="btn btn-warning btn-lg text-white" cdkFocusInitial [disabled]="!adminForm.valid">Editar <mat-icon>edit</mat-icon></button>
+        </form>
+        }
+        <br />
+        <a class="btn btn-danger btn-lg" routerLink="/administrador">Cancelar <mat-icon>block</mat-icon></a>
+        <br />
+        <br />
+    </div>
+    <br />
+    <app-pie></app-pie>
+</body>
+<router-outlet />

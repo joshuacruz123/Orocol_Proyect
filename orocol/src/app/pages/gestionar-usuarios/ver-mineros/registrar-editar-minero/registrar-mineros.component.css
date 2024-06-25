@@ -1,0 +1,57 @@
+form{
+    width: 90%;
+    display: flex;
+    padding-left: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    padding-top: 20px;
+    gap: 1rem;
+    background-color: #dff2fd;
+    border-radius: 8px;
+    position: relative;
+}
+
+form .form-group .input-group .inputt, form .form-group .input-group select{
+    width: 80%;
+    padding-left: 10px;
+    background-color: #fdfddf;
+    border: none;
+    outline: 0px;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+form .form-group .input-group .inputt::placeholder, 
+form .form-group .input-group select::placeholder, 
+.select-document{
+    color: #8c8c8c;
+}
+
+form .form-group .input-group .inputt:hover, 
+form .form-group .input-group select:hover {
+    content: '';
+    border-bottom: 1px solid #ffb700;
+    transition: all 1s ease;
+}
+
+.labell {
+    margin-left: 10px;
+    color: #000;
+}
+
+.contenedor .div-formulario .botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    width: 150px;
+    margin: 5%;
+}
+
+.btn-primary mat-icon {
+    padding-top: 6px;
+    font-size: 20px;
+}

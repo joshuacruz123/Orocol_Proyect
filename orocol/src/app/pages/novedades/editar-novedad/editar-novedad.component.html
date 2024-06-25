@@ -1,16 +1,22 @@
 <mat-dialog-content>
-    <h1>Editar asistencia</h1>
+    <div class="divformulario">
+        <br />
+        <h1>Editar asistencia</h1>
+        <br />
     @if (novedadForm) {
-    <form [formGroup]="novedadForm" (ngSubmit)="editarNovedad()">
-
+        <form [formGroup]="novedadForm" (ngSubmit)="editarNovedad()">
         <label for="descripcion">Novedad:</label> 
-        <textarea id="comentarios" name="comentarios" rows="4" cols="50" formControlName="descripcion" >
+        <textarea id="comentarios" name="comentarios" rows="5" cols="50" formControlName="descripcion" >
         </textarea>
         <br>
-        <button type="submit" class="btn btn-warning" cdkFocusInitial>Editar</button>
+        <div class="div-boton">
+            <button type="submit" class="btn btn-warning" cdkFocusInitial><mat-icon>edit</mat-icon> Editar</button>
+        </div>
     </form>
     }
+    <br />
+</div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar</button>
 </mat-dialog-actions>

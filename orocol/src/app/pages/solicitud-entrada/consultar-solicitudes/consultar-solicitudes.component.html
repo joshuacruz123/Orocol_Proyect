@@ -1,9 +1,12 @@
-<mat-dialog-content class="mat-typography">
-    <div class="col-md-5">
-        @for (item of solicitudList; track $index) {
+<mat-dialog-content class="mat-typography cuerpo">
+    <div class="caja">
+        <h2>Solicitudes de reactivación para ingreso al sistema:</h2>
+    </div>
+    @for (item of solicitudList; track $index) {
+    <div class="caja">
         @if (item.usuario.estadoUsuario === 'inactivo') {
-        <div class="datos-admin">
-            <br>
+        <hr>
+        <div class="solicitudes">
             <strong>Nombre</strong>
             <p> {{item.usuario.nombreUsuario}} {{item.usuario.apellidosUsuario}}</p>
             <strong>Correo:</strong>
@@ -11,13 +14,11 @@
             <strong>Descripción de la solicitud:</strong>
             <p>{{ item.descripcionSolicitud }}</p>
         </div>
-        <br />
         <hr>
-        <br />
-        }
         }
     </div>
+    }
 </mat-dialog-content>
-<mat-dialog-actions align="center">
-    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+<mat-dialog-actions align="center" class="boton">
+    <button type="button" class="btn btn-danger" (click)="cancelar()" mat-button>Cancelar</button>
 </mat-dialog-actions>

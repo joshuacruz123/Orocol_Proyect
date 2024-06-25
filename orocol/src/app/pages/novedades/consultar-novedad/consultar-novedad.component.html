@@ -1,14 +1,26 @@
-<h1>Novedad</h1>
-<br/>
-<strong>Fecha de creación de la novedad:</strong>
-<p> {{ novedad.fechaNovedad }}</p>
-<br/>
-<strong>Decripción:</strong>
-<p> {{ novedad.descripcion }}</p>
-<br/>
-@if (!usuarioAdmin) {
-    <button class="btn btn-warning" type="button"
-        (click)="editarNovedad(novedad.idNovedad)"><mat-icon>edit</mat-icon> Editar novedad</button>
-}
-<br/>
-<button type="button" (click)="cancelar()" mat-button>Cerrar</button>
+<mat-dialog-content class="mat-typography cuerpo">
+    <div class="caja">
+        <br />
+        <h1>Novedad</h1>
+        <div class="detalle-venta">
+            <br />
+            <strong>Fecha de creación de la novedad:</strong>
+            <p> {{ novedad.fechaNovedad }}</p>
+            <br />
+            <strong>Decripción:</strong>
+            <p> {{ novedad.descripcion }}</p>
+            <br />
+            @if (!usuarioAdmin) {
+            <div class="boton">
+                <button class="btn btn-warning" type="button"
+                    (click)="editarNovedad(novedad.idNovedad)">Editar novedad</button>
+            </div>
+            }
+            <br />
+        </div>
+    </div>
+    <br />
+</mat-dialog-content>
+<mat-dialog-actions align="center" class="boton">
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cerrar <mat-icon>close</mat-icon></button>
+</mat-dialog-actions>

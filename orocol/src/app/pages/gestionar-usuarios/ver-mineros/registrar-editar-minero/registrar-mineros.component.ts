@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { UsuarioService } from '../../../core/services/usuario.service';
+import { UsuarioService } from '../../../../core/services/usuario.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

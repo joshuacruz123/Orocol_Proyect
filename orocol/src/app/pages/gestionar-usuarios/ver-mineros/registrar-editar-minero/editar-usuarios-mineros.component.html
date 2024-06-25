@@ -1,0 +1,46 @@
+<mat-dialog-content>
+    <div class="divformulario">
+        <h1>Editar empleado minero:</h1>
+        @if (mineroForm) {
+        <br />
+        <form [formGroup]="mineroForm" (ngSubmit)="editarMineros()">
+
+            <label class="labell" for="nombreUsuario">Nombre(s):</label>
+            <input class="inputt" type="text" formControlName="nombreUsuario" id="nombreUsuario">
+
+            <label class="labell" for="apellidosUsuario">Apellido(s):</label>
+            <input class="inputt" type="text" formControlName="apellidosUsuario" id="apellidosUsuario">
+
+            <label class="labell" for="correoUsuario">Correo electrónico:</label>
+            <input class="inputt" type="text" formControlName="correoUsuario" id="correoUsuario">
+
+            @if (mineros.cambio_documento === 'Acepto') {
+            <label class="labell" for="tipo_documento">Tipo de documento:</label>
+            <select id="tipo_documento" formControlName="tipo_documento">
+                <option value="Cedula de ciudadania">Cédula de ciudadanía (C.C)</option>
+                <option value="Cedula de extranjeria">Cédula de extranjería (C.E)</option>
+            </select>
+
+            <label class="labell" for="pwd">Número de documento:</label>
+            <input class="inputt" type="number" formControlName="numero_documento">
+            }
+
+            <label class="labell" for="pwd">Número de teléfono:</label>
+            <input class="inputt" type="text" id="telefono" formControlName="telefono">
+
+            <label class="labell" for="pwd">Fecha de nacimiento:</label>
+            <input class="inputt" type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento">
+
+            <label class="labell" for="usuario">Dirección de vivienda:</label>
+            <input class="inputt" type="text" id="direccion_vivienda" formControlName="direccion_vivienda">
+
+            <div class="boton">
+                <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!mineroForm.valid">Editar usuario <mat-icon>manage_accounts</mat-icon></button>
+            </div>
+        </form>
+        }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" class="btn btn-danger" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

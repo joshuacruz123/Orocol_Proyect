@@ -5,11 +5,12 @@ import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angula
 import { VentasService } from '../../../core/services/ventas.service';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { TokenService } from '../../../core/services/token.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-registro-ventas',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatIconModule],
   templateUrl: './registro-ventas.component.html',
   styleUrl: './registro-ventas.component.css'
 })

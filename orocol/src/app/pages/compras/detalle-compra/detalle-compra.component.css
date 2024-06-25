@@ -1,0 +1,39 @@
+mat-dialog-content, .boton {
+    background-color: rgb(252, 251, 220);
+}
+
+.caja {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalle-compra {
+    width: 80%;
+    border: dashed 4px #fa5017;
+    margin: 0;
+    padding-left: 5%;
+    padding-top: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+strong {
+    font-size: 20px;
+    color: #000;
+}
+
+p, h1 {
+    color: #352801;
+}
+
+p, strong {
+    font-size: 18px;
+}
+
+p:hover {
+    color: #bfb202;
+}

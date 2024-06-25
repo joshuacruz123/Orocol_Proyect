@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { UsuarioService } from '../../../core/services/usuario.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-crear-solicitud',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatIcon],
   templateUrl: './crear-solicitud.component.html',
   styleUrl: './crear-solicitud.component.css'
 })
@@ -20,7 +20,6 @@ export class CrearSolicitudComponent {
   constructor(
     private usuarioService: UsuarioService,
     private toastr: ToastrService,
-    private router: Router,
     public dialogRef: MatDialogRef<CrearSolicitudComponent>,
     ) { }
 

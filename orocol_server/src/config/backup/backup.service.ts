@@ -11,7 +11,7 @@ export class BackupService {
 
     constructor(private readonly configService: ConfigService) {}
 
-    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT) // Se actualiza a diario a las 00:00:00 horas
+    @Cron(CronExpression.EVERY_DAY_AT_NOON) // Se actualiza a diario a las 00:00:00 horas, EVERY_DAY_AT_MIDNIGHT
     handleCron() {
         const dbName = this.configService.get<string>('DB_DATABASE');
         const dbUser = this.configService.get<string>('DB_USER');

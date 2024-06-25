@@ -1,16 +1,26 @@
-<h1>Editar venta</h1>
-@if (ventaForm) {
-<form [formGroup]="ventaForm" (ngSubmit)="editarVenta()">
+<mat-dialog-content>
+    <div class="divformulario">
+        <h1>Editar venta</h1>
+        @if (ventaForm) {
+        <form [formGroup]="ventaForm" (ngSubmit)="editarVenta()">
 
-    <label for="fechaExtraccionOro">Fecha extracción de oro:</label>
-    <input type="date" formControlName="fechaExtraccionOro">
+            <label for="fechaExtraccionOro">Fecha extracción de oro:</label>
+            <input type="date" formControlName="fechaExtraccionOro">
 
-    <label for="precioOro">Precio Oro:</label>
-    <input type="number" formControlName="precioOro">
+            <label for="precioOro">Precio Oro:</label>
+            <input type="number" formControlName="precioOro">
 
-    <label for="cantidad">Cantidad:</label>
-    <input type="number" formControlName="cantidad">
-    <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!ventaForm.valid">Editar</button>
-</form>
-}
-<button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" formControlName="cantidad">
+            <br />
+            <div class="divboton">
+                <button type="submit" class="btn btn-warning" cdkFocusInitial
+                    [disabled]="!ventaForm.valid">Editar</button>
+            </div>
+        </form>
+        }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" class="btn btn-danger" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

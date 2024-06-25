@@ -1,6 +1,22 @@
-<li><strong>Producto:</strong> {{ venta.producto.TipoOro }}</li>
-<li><strong>Fecha de extracción:</strong> {{ venta.fechaExtraccionOro }}</li>
-<li><strong>Cantidad:</strong> {{ venta.cantidad }}</li>
-<li><strong>Precio:</strong> {{ venta.precioOro }}</li>
-<li><strong>Estado de la venta:</strong> {{ venta.estadoVenta }}</li>
-<button type="button" (click)="cancelar()" mat-button>Cerrar</button>
+<mat-dialog-content class="mat-typography cuerpo">
+    <div class="caja">
+        <br />
+        <h1>Detalle de la venta</h1>
+        <div class="detalle-venta">
+            <strong>Producto:</strong>
+            <p> {{ venta.producto.TipoOro }}</p>
+            <strong>Fecha de extracción:</strong>
+            <p> {{ venta.fechaExtraccionOro }}</p>
+            <strong>Cantidad:</strong>
+            <p> {{ venta.cantidad }}</p>
+            <strong>Precio:</strong> 
+            <p> {{ venta.precioOro }}</p>
+            <strong>Estado de la venta:</strong>
+            <p> {{ venta.estadoVenta }}</p>
+            <br />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center" class="boton">
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cerrar</button>
+</mat-dialog-actions>

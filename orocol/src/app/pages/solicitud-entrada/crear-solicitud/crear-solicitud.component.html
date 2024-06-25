@@ -1,21 +1,20 @@
 <mat-dialog-content class="mat-typography">
-    <div class="col-md-5">
-        <div class="card">
-            <p>Registrar solicitud para rectivación de usuario al sistema:</p>
-            <br />
-            <form [formGroup]="form" (ngSubmit)="crearProducto()">
-                <label for="correoUsuario">Correo electrónico:</label>
-                <input type="text" formControlName="correoUsuario" required>
-                
-                <label for="descripcionSolicitud">Novedad:</label> 
-                <textarea id="comentarios" name="comentarios" rows="4" cols="50" formControlName="descripcionSolicitud" >
+    <div class="divformulario">
+        <h2>Enviar solicitud para rectivación de usuario al sistema:</h2>
+        <br />
+        <form [formGroup]="form" (ngSubmit)="crearProducto()">
+            <label for="correoUsuario">Correo electrónico:</label>
+            <input type="text" placeholder="Tu correo electrónico" formControlName="correoUsuario" required>
+
+            <label for="descripcionSolicitud">Novedad: </label>
+            <textarea id="comentarios" placeholder="Una brebe descripción para solicitar reactivación de usuario."
+             name="comentarios" rows="4" cols="50" formControlName="descripcionSolicitud">
                 </textarea>
-                <br />
-                <button type="submit" class="btn btn-primary" cdkFocusInitial>Crear solicitud</button>
-              </form>          
-        </div>
+            <br />
+            <button type="submit" class="btn btn-primary" cdkFocusInitial>Enviar <mat-icon>send</mat-icon></button>
+        </form>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar</button>
 </mat-dialog-actions>

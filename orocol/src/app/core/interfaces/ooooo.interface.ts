@@ -70,6 +70,7 @@ TypeError: Cannot read properties of null (reading 'roles')
 "fecha_nacimiento": 930401
 "direccion_vivienda": "Calle del Parque 654"
 "cambio_documento": "Sí"
+---------------------------------------------------
 
 "nombreUsuario": "Miguel"
 "apellidosUsuario": "Pérez Rodríguez"

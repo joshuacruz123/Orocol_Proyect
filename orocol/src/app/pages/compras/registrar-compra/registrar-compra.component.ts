@@ -6,11 +6,12 @@ import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/materia
 import { CompraService } from '../../../core/services/compra.service';
 import { TokenService } from '../../../core/services/token.service';
 import { Router, RouterOutlet } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-registrar-compra',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterOutlet, MatDialogModule, MatIconModule],
   templateUrl: './registrar-compra.component.html',
   styleUrl: './registrar-compra.component.css'
 })

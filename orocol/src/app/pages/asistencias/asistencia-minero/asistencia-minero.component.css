@@ -1,6 +1,33 @@
 .turno {
-    border: 1px solid #ccc;
+    border: 1px solid #cfcfcf;
     padding: 10px;
     margin-bottom: 10px;
 }
-  
+
+.lista-asistencias {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    list-style: none;
+    gap: 10px;
+    padding: 10px;
+}
+
+.lista-asistencias, h1 {
+    text-align: center;
+}
+
+.turno {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-color: #fdfcbe;
+    border-radius: 5px;
+    border: 1px solid #b59102;
+}
+
+.turno p{
+    font-size: 18px;
+}
+
+.turno strong {
+    font-size: 20px;
+}

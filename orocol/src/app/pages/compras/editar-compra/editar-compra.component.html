@@ -1,26 +1,35 @@
-<h1>Editar compra</h1>
-@if (compraForm) {
-<form [formGroup]="compraForm" (ngSubmit)="editarCompra()">
+<mat-dialog-content>
+    <div class="divformulario">
+        <h1>Editar compra</h1>
+        @if (compraForm) {
+        <form [formGroup]="compraForm" (ngSubmit)="editarCompra()">
 
-    <label for="NombreCompleto">Nombre completo del cliente:</label>
-    <input type="text" formControlName="NombreCompleto">
+            <label for="NombreCompleto">Nombre completo del cliente:</label>
+            <input type="text" formControlName="NombreCompleto">
 
-    <label for="Empresa">Nombre de la empresa:</label>
-    <input type="text" formControlName="Empresa">
+            <label for="Empresa">Nombre de la empresa:</label>
+            <input type="text" formControlName="Empresa">
 
-    <label for="Pais">País:</label>
-    <input type="text" formControlName="Pais">
+            <label for="Pais">País:</label>
+            <input type="text" formControlName="Pais">
 
-    <label for="CiudadMunicipio">Ciudad/Municipio:</label>
-    <input type="text" formControlName="CiudadMunicipio">
+            <label for="CiudadMunicipio">Ciudad/Municipio:</label>
+            <input type="text" formControlName="CiudadMunicipio">
 
-    <label for="FechaExportacion">Fecha exportación de oro:</label>
-    <input type="date" formControlName="FechaExportacion">
+            <label for="FechaExportacion">Fecha exportación de oro:</label>
+            <input type="date" formControlName="FechaExportacion">
 
-    <label for="PesogrOro">Peso del oro (Gramos):</label>
-    <input type="number" formControlName="PesogrOro">
-
-    <button type="submit" class="btn btn-warning" cdkFocusInitial [disabled]="!compraForm.valid">Editar</button>
-</form>
-}
-<button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+            <label for="PesogrOro">Peso del oro (Gramos):</label>
+            <input type="number" formControlName="PesogrOro">
+            <br />
+            <div class="divboton">
+                <button type="submit" class="btn btn-warning" cdkFocusInitial
+                    [disabled]="!compraForm.valid">Editar</button>
+            </div>
+        </form>
+        }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

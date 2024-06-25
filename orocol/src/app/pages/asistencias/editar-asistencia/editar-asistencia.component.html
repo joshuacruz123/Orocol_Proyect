@@ -1,24 +1,28 @@
-<mat-dialog-content>
-    <h1>Editar asistencia</h1>
-    @if (turnoForm) {
-    <form [formGroup]="turnoForm" (ngSubmit)="editarTurno()">
-    
-        <label for="FechaTurno">Fecha y hora del turno:</label> 
-        <input type="datetime-local" formControlName="FechaTurno" required>
-        
-        <label for="Asistencia">Asistencia:</label>
-        <select id="Asistencia" formControlName="Asistencia">
-            <option value="Sí asistió">Sí asistió</option>
-            <option value="Nó asistió">Nó asistió</option>
-        </select>
-            
-        <label for="AsignacionTareas">Asignación de tareas:</label>
-        <input type="text" formControlName="AsignacionTareas" required>
+<mat-dialog-content class="mat-typography">
+    <div class="divformulario">
+        <h1>Editar asistencia</h1>
+        @if (turnoForm) {
+        <form [formGroup]="turnoForm" (ngSubmit)="editarTurno()">
 
-        <button type="submit" class="btn btn-warning" cdkFocusInitial>Editar</button>
-    </form>
-    }
-    </mat-dialog-content>
-    <mat-dialog-actions align="center">
-        <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
-    </mat-dialog-actions>
+            <label for="FechaTurno">Fecha y hora del turno:</label>
+            <input type="datetime-local" formControlName="FechaTurno" required>
+
+            <label for="Asistencia">Asistencia:</label>
+            <select id="Asistencia" formControlName="Asistencia">
+                <option value="Sí asistió">Sí asistió</option>
+                <option value="Nó asistió">Nó asistió</option>
+            </select>
+
+            <label for="AsignacionTareas">Asignación de tareas:</label>
+            <input type="text" formControlName="AsignacionTareas" required>
+
+            <div class="boton">
+                <button type="submit" class="btn btn-warning" cdkFocusInitial>Editar asistencia</button>
+            </div>
+        </form>
+        }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

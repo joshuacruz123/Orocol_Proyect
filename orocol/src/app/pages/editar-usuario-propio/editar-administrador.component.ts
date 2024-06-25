@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { UsuarioService } from '../../../core/services/usuario.service';
-import { AdministradorInterface } from '../../../core/interfaces/administrador.interface';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { AdministradorInterface } from '../../core/interfaces/administrador.interface';
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { EncabezadoComponent } from '../../../shared/encabezado/encabezado.component';
-import { PieComponent } from '../../../shared/footer/pie.component';
+import { MatIconModule } from '@angular/material/icon';
+import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
+import { PieComponent } from '../../shared/footer/pie.component';
 
 @Component({
   selector: 'app-editar-administrador',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, ReactiveFormsModule, EncabezadoComponent, PieComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, ReactiveFormsModule, MatIconModule, EncabezadoComponent, PieComponent],
   templateUrl: './editar-administrador.component.html',
-  styleUrl: './editar-administrador.component.css'
+  styleUrl: './editar-usuario-propio.component.css'
 })
 export class EditarAdministradorComponent {
 

@@ -1,26 +1,29 @@
 <mat-dialog-content class="mat-typography">
-    <div class="card-header">
-        Agregar venta
-    </div>
-    <form [formGroup]="asisteciaForm" (ngSubmit)="crearAsistencia()">
-        <label for="numero_documento">Número de Documento:</label>
-        <input type="number" formControlName="numero_documento" required>
-        
-        <label for="FechaTurno">Fecha y hora del turno:</label> 
-        <input type="datetime-local" formControlName="FechaTurno" required>
-        
-        <label for="Asistencia">Asistencia:</label>
-        <select id="Asistencia" formControlName="Asistencia">
-            <option value="Sí asistió">Sí asistió</option>
-            <option value="Nó asistió">Nó asistió</option>
-        </select>
+    <div class="divformulario">
+        <h1>Agregar venta</h1>
+        <form [formGroup]="asisteciaForm" (ngSubmit)="crearAsistencia()">
+            <label for="numero_documento">Número de Documento:</label>
+            <input type="number" formControlName="numero_documento" placeholder="Número de documento" required>
             
-        <label for="AsignacionTareas">Asignación de tareas:</label>
-        <input type="text" formControlName="AsignacionTareas" required>
+            <label for="FechaTurno">Fecha y hora del turno:</label> 
+            <input type="datetime-local" formControlName="FechaTurno" required>
+            
+            <label for="Asistencia">Asistencia:</label>
+            <select id="Asistencia" formControlName="Asistencia">
+                <option value="">Selecciona una opción</option>
+                <option value="Sí asistió">Sí asistió</option>
+                <option value="Nó asistió">Nó asistió</option>
+            </select>
+                
+            <label for="AsignacionTareas">Asignación de tareas:</label>
+            <input type="text" formControlName="AsignacionTareas" placeholder="La asignación de tareas" required>
 
-        <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar asistencia</button>
-      </form>  
+            <div class="boton">
+                <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar asistencia</button>
+            </div>
+        </form>  
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar</button>
 </mat-dialog-actions>

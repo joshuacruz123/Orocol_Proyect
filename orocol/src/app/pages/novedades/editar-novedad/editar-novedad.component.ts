@@ -5,11 +5,12 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { ToastrService } from 'ngx-toastr';
 import { NovedadInterface } from '../../../core/interfaces/novedad.interface';
 import { TurnoService } from '../../../core/services/turno.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-editar-novedad',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatIconModule],
   templateUrl: './editar-novedad.component.html',
   styleUrl: './editar-novedad.component.css'
 })

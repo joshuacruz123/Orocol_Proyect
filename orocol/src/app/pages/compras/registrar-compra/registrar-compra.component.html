@@ -1,29 +1,31 @@
-<div class="col-md-5">
-    <div class="card">
-        <div class="card-header">
-            Agregar venta
-        </div>
+<mat-dialog-content>
+    <div class="divformulario">
+        <h1>Registrar compra</h1>
         <form [formGroup]="compraForm" (ngSubmit)="crearCompra()">
-            <label for="NombreCompleto">Nombre completo del cliente:</label>
-            <input type="text" formControlName="NombreCompleto" required>
+            <label for="NombreCompleto">Nombre completo del cliente <mat-icon class="maticon">person</mat-icon>:</label>
+            <input type="text" placeholder="Nombre del cliente" formControlName="NombreCompleto" required>
             
-            <label for="Empresa">Nombre de la empresa:</label>
-            <input type="text" formControlName="Empresa" required>
+            <label for="Empresa">Empresa <mat-icon class="maticon">work</mat-icon>:</label>
+            <input type="text" placeholder="Nombre de la empresa" formControlName="Empresa" required>
             
-            <label for="Pais">País:</label>
-            <input type="text" formControlName="Pais" required>
+            <label for="Pais">País <mat-icon class="maticon">location_on</mat-icon>:</label>
+            <input type="text" placeholder="Pais destinatario" formControlName="Pais" required>
             
-            <label for="CiudadMunicipio">Ciudad/Municipio:</label>
-            <input type="text" formControlName="CiudadMunicipio" required>
+            <label for="CiudadMunicipio">Ciudad/Municipio <mat-icon class="maticon">apartment</mat-icon>:</label>
+            <input type="text" placeholder="Ciudad, pueblo o municipio" formControlName="CiudadMunicipio" required>
             
-            <label for="FechaExportacion">Fecha exportación de oro:</label> 
+            <label for="FechaExportacion">Fecha exportación de oro <mat-icon class="maticon">alarm</mat-icon>:</label> 
             <input type="date" formControlName="FechaExportacion" required>
             
-            <label for="PesogrOro">Peso del oro (Gramos):</label>
-            <input type="number" formControlName="PesogrOro" required>
-
-            <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
-            <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar compra</button>
-          </form>          
-    </div>
+            <label for="PesogrOro">Peso oro (Gramos) <mat-icon class="maticon">balance</mat-icon>:</label>
+            <input type="number" placeholder="Peso del oro en gramos" formControlName="PesogrOro" required>
+            <br />
+            <div class="divboton">
+            <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar <mat-icon>paid</mat-icon></button>
+        </div>
+    </form>
 </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+<button type="button" class="btn btn-danger" (click)="cancelar()" mat-button>Cancelar</button>
+</mat-dialog-actions>

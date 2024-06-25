@@ -1,21 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MineroInterface } from '../../../core/interfaces/minero.interface';
-import { UsuarioService } from '../../../core/services/usuario.service';
+import { MatIconModule } from '@angular/material/icon';
+import { EncabezadoComponent } from '../../shared/encabezado/encabezado.component';
+import { PieComponent } from '../../shared/footer/pie.component';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { MineroInterface } from '../../core/interfaces/minero.interface';
 
 @Component({
-  selector: 'app-editar-usuarios-mineros',
+  selector: 'app-editar-minero',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
-  templateUrl: './editar-usuarios-mineros.component.html',
-  styleUrl: './editar-usuarios-mineros.component.css'
+  imports: [CommonModule, RouterOutlet, RouterLink, ReactiveFormsModule, MatIconModule, EncabezadoComponent, PieComponent],
+  templateUrl: './editar-minero.component.html',
+  styleUrl: './editar-usuario-propio.component.css'
 })
-export class EditarUsuariosMinerosComponent implements OnInit {
+export class EditarMineroComponent {
 
-  IdMinero!: number;
+  id!: number;
   mineros: MineroInterface = {
     IdMinero: 0,
     tipo_documento: '',
@@ -27,19 +30,17 @@ export class EditarUsuariosMinerosComponent implements OnInit {
     usuario: { idUsuario: 0, nombreUsuario: '', apellidosUsuario: '', correoUsuario: '', passwordUsuario: '' }
   };
   mineroForm!: FormGroup;
-  cambioDocumentoControl: FormControl = new FormControl(false);
 
   constructor(
     public usuarioService: UsuarioService,
+    private route: ActivatedRoute,
+    private router: Router,
     private toastr: ToastrService,
-    public dialogRef: MatDialogRef<EditarUsuariosMinerosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { IdMinero: number }
-  ) {
-    this.IdMinero = data.IdMinero;
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.usuarioService.consultarMinero(this.IdMinero).subscribe((data: MineroInterface) => {
+    this.id = this.route.snapshot.params['IdMinero'];
+    this.usuarioService.consultarMinero(this.id).subscribe((data: MineroInterface) => {
       this.mineros = data;
       this.mineroForm = new FormGroup({
         nombreUsuario: new FormControl(this.mineros.usuario.nombreUsuario, Validators.required),
@@ -59,22 +60,17 @@ export class EditarUsuariosMinerosComponent implements OnInit {
     return this.mineroForm.controls;
   }
 
-  cancelar() {
-    this.dialogRef.close(false);
-  }
-
-  editarMineros() {
-    console.log(this.mineroForm.value);
-    this.usuarioService.editarMinero(this.IdMinero, this.mineroForm.value).subscribe(
+  editarMinero() {
+    this.usuarioService.editarMinero(this.id, this.mineroForm.value).subscribe(
       response => {
+        this.router.navigate(['/minero']);
         this.toastr.success(response.message, 'OK', {
           timeOut: 3000
         });
-        this.dialogRef.close(true);
       },
       error => {
-        console.error('Error al editar la venta', error);
-        this.toastr.error(error.error.message, 'Error:', {
+        console.error('Error al editar tus datos', error);
+        this.toastr.error(error.error.message, 'Error al editar tus datos:', {
           timeOut: 3000
         });
       }

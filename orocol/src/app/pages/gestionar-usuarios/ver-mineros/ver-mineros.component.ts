@@ -9,10 +9,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MineroInterface } from '../../../core/interfaces/minero.interface';
 import { GestionUsuariosService } from '../../../core/services/gestion-usuarios.service';
 import { UsuarioService } from '../../../core/services/usuario.service';
-import { EditarUsuariosMinerosComponent } from '../editar-usuarios-mineros/editar-usuarios-mineros.component';
+import { EditarUsuariosMinerosComponent } from './registrar-editar-minero/editar-usuarios-mineros.component';
 import { DetalleMineroComponent } from './detalle-minero.component';
 import { NavAdminComponent } from '../../../shared/navbar-usuarios/nav-admin.component';
-import { RegistrarMinerosComponent } from './registrar-mineros.component';
+import { RegistrarMinerosComponent } from './registrar-editar-minero/registrar-mineros.component';
 import { ConsultarSolicitudesComponent } from '../../solicitud-entrada/consultar-solicitudes/consultar-solicitudes.component';
 
 @Component({

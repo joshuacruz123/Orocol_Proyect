@@ -1,0 +1,25 @@
+.cuerpo, .boton {
+    background-color: rgb(235, 252, 252);
+}
+
+.caja {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.solicitudes {
+    width: 70%;
+} 
+
+hr {
+    width: 100%;
+    color: rgb(255, 225, 0);
+    border: 1pt solid rgb(255, 225, 1);
+}
+
+h2 {
+    text-align: center;
+    width: 50%;
+}

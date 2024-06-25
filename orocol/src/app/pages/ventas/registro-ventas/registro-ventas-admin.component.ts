@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { VentasService } from '../../../core/services/ventas.service';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-registro-ventas-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatIconModule],
   templateUrl: './registro-ventas-admin.component.html',
-  styleUrl: './registro-ventas-admin.component.css'
+  styleUrl: './registro-ventas.component.css'
 })
 export class RegistroVentasAdminComponent {
 

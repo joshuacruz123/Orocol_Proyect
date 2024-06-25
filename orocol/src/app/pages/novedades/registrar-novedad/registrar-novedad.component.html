@@ -1,16 +1,20 @@
 <mat-dialog-content class="mat-typography">
-    <div class="card-header">
-        Crear novedad
+    <div class="divformulario">
+        <br />
+        <h1>Crear novedad</h1>
+        <br />
+        <form [formGroup]="novedadForm" (ngSubmit)="registrarNovedad()">
+            <label for="descripcion">Novedad:</label>
+            <textarea id="comentarios" placeholder="Escribe una brebe descripción de la razón de tu inasistencia."
+                name="comentarios" rows="5" cols="50" formControlName="descripcion">
+            </textarea>
+            <div class="div-boton">
+                <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar novedad</button>
+            </div>
+        </form>
+        <br />
     </div>
-    <form [formGroup]="novedadForm" (ngSubmit)="registrarNovedad()">
-        <label for="descripcion">Novedad:</label> 
-        <textarea id="comentarios" name="comentarios" rows="4" cols="50" formControlName="descripcion" >
-        </textarea>
-        <br>
-
-        <button type="submit" class="btn btn-primary" cdkFocusInitial>Registrar asistencia</button>
-      </form>  
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar</button>
 </mat-dialog-actions>

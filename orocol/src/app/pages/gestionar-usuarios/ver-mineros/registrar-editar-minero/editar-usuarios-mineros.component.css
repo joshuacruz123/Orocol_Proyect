@@ -1,0 +1,60 @@
+mat-dialog-content, mat-dialog-actions {
+    background-color: #ffffc2;
+}
+
+form{
+    width: 90%;
+    display: flex;
+    padding-left: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    padding-top: 20px;
+    gap: 1rem;
+    background-color: #ededed;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+form input, form select{
+    width: 90%;
+    height: 30px;
+    border: none;
+    outline: 0px;
+    border-bottom: 1px solid #6d6301;
+}
+
+form input, form select, form select option {
+    background-color: transparent;
+}
+
+form .inputt:hover, 
+form select:hover {
+    content: '';
+    border-bottom: 1px solid #e4d900;
+    transition: all 2s ease;
+}
+
+label {
+    color: #875603;
+}
+
+.contenedor .div-formulario .botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btn-primary mat-icon {
+    padding-top: 6px;
+    font-size: 20px;
+}
+
+.boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}

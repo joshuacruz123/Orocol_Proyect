@@ -1,18 +1,7 @@
 /* INICIO FOMULARIO*/
 
-.divformulario {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-h2 {
-    text-align: center;
-}
-
 form{
-    width: 90%;
+    width: 40%;
     height: 80%;
     display: flex;
     padding-left: 15px;
@@ -21,10 +10,9 @@ form{
     align-items: left;
     padding: 2%;
     gap: 1rem;
-    background-color: #ececea;
+    background-color: #f3f894;
     border-radius: 10px;
     position: relative;
-    
 }
 
 form .form-group {
@@ -44,6 +32,22 @@ form .inputt, form select{
 
 form select option{
     color: #000;
+}
+
+form input:hover, form select:hover{
+    content: '';
+    padding-left: 15px;
+    border-bottom: 1px solid #ffb700;
+    color: #041ac5;
+    transition: all 2s ease;
+}
+
+form .form-group {
+    margin-left: -20px;
+}
+
+form button{
+    width: 90%;
 }
 
 form select{

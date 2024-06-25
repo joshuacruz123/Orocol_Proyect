@@ -1,0 +1,42 @@
+form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 1rem;
+    background-color: #ebebe9;
+    position: relative;
+}
+
+form label {
+    color: #000;
+}
+
+form input, form select{
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    outline: 0px;
+    border-bottom: 1px solid #030303;
+}
+
+form input:hover, form select:hover {
+    content: '';
+    border-bottom: 1px solid #e4d900;
+    transition: all 3s ease;
+}
+
+.divboton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form button {
+    width: 40%;
+}
