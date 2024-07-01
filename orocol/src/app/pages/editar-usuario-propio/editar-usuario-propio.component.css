@@ -66,4 +66,9 @@ form select{
 h1 {
     text-align: center;
 }
+
+.boton {
+    display: flex;
+    justify-content: center;
+}
 /* FIN FOMULARIO*/

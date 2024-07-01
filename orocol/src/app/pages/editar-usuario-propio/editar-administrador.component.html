@@ -18,8 +18,10 @@
             <label for="cargoAdmin">Cargo en la empresa: </label>
             <input type="text" id="cargoAdmin" formControlName="cargoAdmin">
 
-            <button type="submit" class="btn btn-warning btn-lg text-white" cdkFocusInitial
-                [disabled]="!adminForm.valid">Editar <mat-icon>edit</mat-icon></button>
+            <div class="boton">
+                <button type="submit" class="btn btn-warning btn-lg text-white" cdkFocusInitial
+                    [disabled]="!adminForm.valid">Editar <mat-icon>edit</mat-icon></button>
+            </div>
         </form>
         }
         <br />
