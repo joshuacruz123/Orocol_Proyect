@@ -25,12 +25,8 @@ export class ProductoService {
     return this.http.get<ProductosInterface[]>(this.productosURL);
   }
 
-  registrarProducto(producto: ProductosInterface): Observable<any> {
-    return this.http.post(this.productosURL, JSON.stringify(producto), this.httpOptions)
-
-    .pipe(
-      catchError(this.errorHandler)
-    )
+  registrarProducto(producto: any): Observable<any> {
+    return this.http.post(this.productosURL, producto);
   }
 
   inactivarProducto(id: number, estadoProducto: string): Observable<any> {

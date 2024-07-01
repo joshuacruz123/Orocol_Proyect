@@ -1,0 +1,86 @@
+/* INICIO FOMULARIO*/
+/* INICIO FOMULARIO*/
+form{
+    background-color: #000000d7;
+    width: 550px;
+    display: flex;
+    padding-left: 15px;
+    flex-direction: column;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: left;
+    padding: 2%;
+}
+
+form div .obligatorio{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-size: 15px;
+    color: rgb(255, 1, 1);
+}
+
+form .form-group {
+    margin-top: 15px;
+}
+
+form .form-group .input-group .inputt, 
+form .form-group .input-group select {
+    width: 85%;
+    background-color: transparent;
+    color:#ffffff;
+    border: none;
+    outline: 0px;
+    border-bottom: 1px solid #c7c7c7;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+form .form-group .input-group select option {
+    color:#000000;
+}
+
+form .form-group .input-group .inputt::placeholder{
+    color: #c7c7c7;
+}
+
+form .form-group .input-group .inputt:hover, 
+form .form-group .input-group select:hover{
+    content: '';
+    width: 85%;
+    border-bottom: 1px solid #ffb700;
+    transition: all 2s ease;
+}
+
+form .form-group .input-group .inputt:focus, 
+form .form-group .input-group select:focus {
+    border-bottom: 1px solid #ffb700;
+}
+/* FIN FOMULARIO*/
+
+.botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botones button {
+    margin-right: 10px;
+}
+
+form label{
+    color: whitesmoke;
+    font-size: 16px;
+}
+
+form div select{
+    background-color: transparent;
+    color: white;
+}
+
+div{
+    background-color: transparent;
+}
+
+.form-check-label {
+    margin-left: 5px;
+}

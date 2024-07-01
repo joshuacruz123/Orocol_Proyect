@@ -33,7 +33,7 @@ export class TurnoController {
         const minero = await this.mineroService.consultarTurnosMinero(IdMinero);
         return {
             ...minero,
-            turno: this.formatTurnos(minero.turno) // Asegúrate de transformar las fechas
+            turno: this.formatTurnos(minero.turno) // Transforma las fechas
         };
     }
     

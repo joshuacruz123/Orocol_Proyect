@@ -1,29 +1,37 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-    <div class="row">
-        <div class="barra-lateral col-6 col-sm-auto">
+    <div class="div-alineador">
+        <div class="barra-lateral">
             <app-nav-admin></app-nav-admin>
         </div>
-        <main class="main col">
-            <div class="radios">
-                <label>
-                    <input type="radio" name="tipoUsuario" value="Minero" [(ngModel)]="tipoUsuario">
-                    Empleados mineros
-                </label>
-                <label>
-                    <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario"> Administradores
-                </label>
+        <div class="div-centrar">
+            <div class="div-centrar-radios">
+                <div class="radios">
+                    <label>
+                        <input type="radio" name="tipoUsuario" value="Minero" [(ngModel)]="tipoUsuario">
+                        Empleados mineros
+                    </label>
+                    <label>
+                        <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario">
+                        Administradores
+                    </label>
+                </div>
+                <br>
+                <div>
+                    @if (tipoUsuario === 'Administrador') {
+                    <br>
+                    <app-ver-administradores></app-ver-administradores>
+                    } 
+                </div>
+                <div>
+                    @if (tipoUsuario === 'Minero') {
+                    <br>
+                    <app-ver-mineros></app-ver-mineros>
+                    }
+                </div>
             </div>
-            <div>
-            @if (tipoUsuario === 'Administrador') {
-            <app-ver-administradores></app-ver-administradores>
-            } </div>
-            <div>
-            @if (tipoUsuario === 'Minero') {
-            <app-ver-mineros></app-ver-mineros>
-            }</div>
-        </main>
+        </div>
     </div>
     <app-pie></app-pie>
-</body>
+</div>
 <router-outlet />

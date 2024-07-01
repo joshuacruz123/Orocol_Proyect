@@ -140,34 +140,22 @@ export class MineroService {
     // Método para registrar los turnos
 
     async consultarTurnos(): Promise<TurnoMineroEntity[]> {
-        const turnos = await this.turnoRepository.find({ relations: ['minero', 'minero.usuario', 'novedad'] });
+        const turnos = await this.turnoRepository.find({
+            relations: ['minero', 'minero.usuario', 'novedad'],
+            order: {
+                FechaTurno: 'DESC' // Ordena los turnos por fecha en orden descendente
+            }
+        });
         if (!turnos.length) {
             throw new NotFoundException(new MessageDto('No hay turnos registrados'));
         }
         return turnos;
-    } /* 
-    async consultarTurnos(): Promise<TurnoMineroEntity[]> {
-        const turnos = await this.turnoRepository.find({ relations: ['minero', 'minero.usuario', 'novedad'] });
-        if (!turnos.length) {
-            throw new NotFoundException(new MessageDto('No hay turnos registrados'));
-        }
-        return turnos.map(turno => {
-            if (turno.novedad) {
-                turno.novedad;
-            }
-            return turno;
-        });
-    } */
+    }
     // Método para consultar las turnos
 
     async consultarTurnosPorFecha(): Promise<{ hoy: TurnoMineroEntity[], anteriores: TurnoMineroEntity[] }> {
         const turnos = await this.consultarTurnos();
         const hoy = new Date().setHours(0, 0, 0, 0);
-        turnos.sort((a, b) => {
-            const fechaTurnoA = new Date(a.FechaTurno).getTime();
-            const fechaTurnoB = new Date(b.FechaTurno).getTime();
-            return fechaTurnoA - fechaTurnoB;
-        });
         const hoyTurnos = [];
         const anterioresTurnos = [];
         turnos.forEach(turno => {
@@ -190,7 +178,8 @@ export class MineroService {
         if (!minero) {
             throw new NotFoundException('No tienes asistencias registradas');
         }
-        return minero;
+        minero.turno.sort((a, b) => new Date(b.FechaTurno).getTime() - new Date(a.FechaTurno).getTime());
+        return minero; 
     }
     // Método para consultar los turnos de los usuarios
     

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { VentasService } from '../../../core/services/ventas.service';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { ProductosInterface } from '../../../core/interfaces/producto.interface';
+import { ProductoService } from '../../../core/services/producto.service';
 
 @Component({
   selector: 'app-registro-ventas-admin',
@@ -13,12 +15,14 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './registro-ventas-admin.component.html',
   styleUrl: './registro-ventas.component.css'
 })
-export class RegistroVentasAdminComponent {
+export class RegistroVentasAdminComponent implements OnInit {
 
+  productList: ProductosInterface[] = [];
   ventaForm!: FormGroup;
 
   constructor(
     private ventaService: VentasService,
+    private productoService: ProductoService,
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<RegistroVentasAdminComponent>,
     private fb: FormBuilder
@@ -31,6 +35,21 @@ export class RegistroVentasAdminComponent {
       cantidad: [null, Validators.required],
     });
   }
+
+  ngOnInit(): void {
+    this.consultarProductos();
+  }
+  
+  consultarProductos() {
+    this.productoService.consultarProductos().subscribe({
+      next: (result) => {
+        this.productList = result;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  } 
 
   cancelar() {
     this.dialogRef.close(false);

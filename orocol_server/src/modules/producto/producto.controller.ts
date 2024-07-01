@@ -31,7 +31,7 @@ export class ProductoController {
 
     @RolDecorator(RolNombre.ADMINISTRADOR)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    @UsePipes(new ValidationPipe({whitelist: true}))
+    @UsePipes(new ValidationPipe({ whitelist: true }))
     @Post()
     async registrarProducto(@Body() dto: ProductoDto) {
         return await this.productoService.insertarProducto(dto);

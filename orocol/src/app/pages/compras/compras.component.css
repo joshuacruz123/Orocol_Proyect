@@ -12,5 +12,17 @@ table, .div-boton {
 }
 
 h1 {
-    margin-left: 15px;
+    text-align: center;
 }
+
+.table-responsive {
+    background-color: white;
+    max-width: 1000px;
+}
+
+th, td {
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  

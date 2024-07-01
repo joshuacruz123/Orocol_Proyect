@@ -1,13 +1,11 @@
-<body>
+<div class="fullscreen-div">
     <app-encabezado></app-encabezado>
     <br />
     <div class="divformulario">
         <br />
-        <h1>Editar datos propios</h1>
-        <br />
         @if (adminForm) {
         <form [formGroup]="adminForm" (ngSubmit)="editarAdmin()">
-
+            <h1>Editar datos propios</h1>
             <label for="nombreUsuario">Nombre(s): </label>
             <input type="text" formControlName="nombreUsuario" id="nombreUsuario">
 
@@ -20,7 +18,8 @@
             <label for="cargoAdmin">Cargo en la empresa: </label>
             <input type="text" id="cargoAdmin" formControlName="cargoAdmin">
 
-            <button type="submit" class="btn btn-warning btn-lg text-white" cdkFocusInitial [disabled]="!adminForm.valid">Editar <mat-icon>edit</mat-icon></button>
+            <button type="submit" class="btn btn-warning btn-lg text-white" cdkFocusInitial
+                [disabled]="!adminForm.valid">Editar <mat-icon>edit</mat-icon></button>
         </form>
         }
         <br />
@@ -29,6 +28,6 @@
         <br />
     </div>
     <br />
-    <app-pie></app-pie>
-</body>
+</div>
+<app-pie></app-pie>
 <router-outlet />

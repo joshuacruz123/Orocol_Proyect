@@ -1,5 +1,4 @@
   /*BARRA LATERAL*/
-
   a {
       color: #fff;
       text-decoration: none;
@@ -9,9 +8,9 @@
 
   .menu a {
       display: block;
-      padding: 20px;
-      font-family: Roboto, sans-serif;
-      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      padding: 25px;
+      font-size: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.127);
   }
 
   .menu a:hover {

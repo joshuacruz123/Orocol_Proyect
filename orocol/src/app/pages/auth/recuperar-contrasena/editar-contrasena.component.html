@@ -1,41 +1,46 @@
-<body>
+<div class="fullscreen-div">
     <app-regresar-home></app-regresar-home>
     <br>
-    <form class="p-5 bg-light" [formGroup]="editarForm" (ngSubmit)="recuperarPass()">
-        <div class="form-group">
-            <label for="passwordNuevo">Nueva contraseña:</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><mat-icon>key</mat-icon></span>
+    <div class="divformulario">
+        <form class="p-5 bg-light" [formGroup]="editarForm" (ngSubmit)="recuperarPass()">
+            <div class="form-group">
+                <label for="passwordNuevo">Nueva contraseña:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><mat-icon>key</mat-icon></span>
+                    </div>
+                    <input type="password" id="passwordNuevo" formControlName="passwordNuevo"
+                        class="form-control inputt" placeholder="Nueva contraseña">
                 </div>
-                <input type="password" id="passwordNuevo" formControlName="passwordNuevo" class="form-control inputt" placeholder="Nueva contraseña">
             </div>
-        </div>
-        <div class="form-group">
-            <input class="form-check-input" type="checkbox" (click)="verPassword()">
-            <label class="form-check-label"> 
-                Mostrar contraseña
-            </label>
-        </div>
-        <br/>
-        <div class="form-group">
-            <label for="usuario">Confirma tu nueva contraseña:</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><mat-icon>lock</mat-icon></span><!--bootstrap y fontawesome-->				
+            <div class="form-group">
+                <input class="form-check-input" type="checkbox" (click)="verPassword()">
+                <label class="form-check-label">
+                    Mostrar contraseña
+                </label>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="usuario">Confirma tu nueva contraseña:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><mat-icon>lock</mat-icon></span><!--bootstrap y fontawesome-->
+                    </div>
+                    <input type="password" id="confirmarPwd" formControlName="confirmarPwd" class="form-control inputt"
+                        placeholder="Confirmar contraseña">
                 </div>
-                <input type="password" id="confirmarPwd" formControlName="confirmarPwd" class="form-control inputt" placeholder="Confirmar contraseña">
             </div>
-        </div>
-        <br/>
-        <br/>
-        <div id="advertencia"></div>
-        <br/>
-        <div class="botones">
-            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!editarForm.valid">Crear nueva contraseña</button>
-        </div>
-    </form>
+            <br />
+            <br />
+            <div id="advertencia"></div>
+            <br />
+            <div class="botones">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="!editarForm.valid">Crear nueva
+                    contraseña</button>
+            </div>
+        </form>
+    </div>
     <br>
-    <app-pie></app-pie>
-</body>
+</div>
+<app-pie></app-pie>
 <router-outlet />

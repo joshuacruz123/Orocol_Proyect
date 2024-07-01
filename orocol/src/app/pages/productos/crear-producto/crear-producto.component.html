@@ -1,36 +1,18 @@
-<div class="container">
-    <h1>Registrar producto</h1>
-
-    <form [formGroup]="form" (ngSubmit)="crearProducto()">
-        <div class="form-group">
-            <label for="TipoOro">Tipo de oro</label>
-            <input formControlName="TipoOro" id="TipoOro" class="form-control" type="text" autocomplete="off">
-            <div *ngIf="f['TipoOro'].touched && f['TipoOro'].invalid" class="alert alert-danger">
-                <div *ngIf="f['TipoOro'].errors && f['TipoOro'].errors['required']">Diligenciar el tipo de producto.
-                </div>
+<mat-dialog-content class="mat-typography">
+    <div class="divformulario">
+        <h1>Agregar venta</h1>
+        <form [formGroup]="productoForm" (ngSubmit)="crearProducto()">
+            <label for="valorQuilates">Número de quilates:</label>
+            <input type="number" formControlName="valorQuilates" placeholder="Número de quilates del oro"  autocomplete="off">
+            <p>Recuerda que la cantidad maxima de quilates es 24 (oro 100% puro)</p>
+            <br />
+            <div class="boton">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="!productoForm.valid" cdkFocusInitial>Agregar +</button>
             </div>
-        </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Agregar +</button>
-    </form>
-</div>
-<button type="button" (click)="cancelar()" mat-button>Cancelar</button>
-<!--
-<div class="col-md-5">
-    <div class="card"> 
-        <div class="card-header">
-            Agregar Producto
-        </div>
-        <div class="card" class="card-body">
-            <form (ngSubmit)="crearProducto()" novalidate class="form">
-                <div class="mb-3">
-                    <label for="" class="form-label">Tipo de Oro</label>
-                    <input type="text" class="form-control" name="tipo de oro" id="tipooro" aria-describedby="helpId" required  placeholder="Digite el tipo de Oro" [(ngModel)]="TipoOro" >
-                </div>
-                <input name="" id="" class="btn btn-primary" style="background-color: white; color:black;" type="submit" value="Agregar +" [disabled]="!f.valid">
-            </form>
-        </div>
-        <div class="card-footer text-muted">
-        </div>
+        </form> 
+        <br /> 
     </div>
-</div> 
--->
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="button" class="btn btn-danger btn-lg" (click)="cancelar()" mat-button>Cancelar X</button>
+</mat-dialog-actions>

@@ -1,44 +1,50 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-        <div class="row">
-            <div class="barra-lateral col-6 col-sm-auto">
-                <app-nav-minero></app-nav-minero>
-            </div>
-            <main class="main col">
+    <div class="div-alineador">
+        <div class="barra-lateral">
+            <app-nav-minero></app-nav-minero>
+        </div>
+        <div class="div-centrar">
+            <div class="div-centrado">
                 <h1>Tus asistencias:</h1>
                 <div class="lista-asistencias">
-                <br />
-                @for (turno of turnos; track $index) {
+                    <br />
+                    @for (turno of turnos; track $index) {
                     <div class="turno">
-                        <strong>Fecha del turno: </strong><p>{{ turno.FechaTurno }}</p>
+                        <strong>Fecha del turno: </strong>
+                        <p>{{ turno.FechaTurno }}</p>
                         <strong>Asistencia: </strong>
                         @if (turno.Asistencia === 'Nó asistió') {
-                            <p class="text-danger">{{ turno.Asistencia }}</p>
+                        <p class="text-danger">{{ turno.Asistencia }}</p>
                         } @else {
-                            <p>{{ turno.Asistencia }}</p>
+                        <p>{{ turno.Asistencia }}</p>
                         }
-                        <strong>Asignación de Tareas: </strong><p>{{ turno.AsignacionTareas }}</p>
+                        <strong>Asignación de Tareas: </strong>
+                        <p>{{ turno.AsignacionTareas }}</p>
                         @if (!turno.novedad) {
-                            <strong>Novedad: </strong><p>{{ turno.novedad ? turno.novedad : 'Ninguna' }}</p> 
+                        <strong>Novedad: </strong>
+                        <p>{{ turno.novedad ? turno.novedad : 'Ninguna' }}</p>
                         }
                         @if (turno.Asistencia === 'Nó asistió' && !turno.novedad) {
-                            <button class="btn btn-success" type="button"
-                            (click)="agregarNovedad(turno.idTurno)">Registrar novedad</button>
+                        <button class="btn btn-success" type="button" (click)="agregarNovedad(turno.idTurno)">Registrar
+                            novedad</button>
                         }
                         @if (turno.novedad && turno.novedad.idNovedad) {
-                            <button class="btn btn-info" type="button"
-                            (click)="verNovedad(turno.novedad.idNovedad)"><mat-icon>search</mat-icon> Ver novedad</button>
+                        <button class="btn btn-info" type="button"
+                            (click)="verNovedad(turno.novedad.idNovedad)"><mat-icon>search</mat-icon> Ver
+                            novedad</button>
                         }
                     </div> <!--==
                         "correoUsuario": "Anders@gmail.com",
                         "passwordUsuario": "PeSiAnde1987",
                         ==-->
-                } 
+                    }
                 </div>
                 <br />
                 <br />
-            </main>
+            </div>
         </div>
-    <app-pie></app-pie>
-</body> 
-<router-outlet /> 
+    </div>
+</div>
+<app-pie></app-pie>
+<router-outlet />

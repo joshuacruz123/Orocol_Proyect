@@ -1,31 +1,36 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-        <div class="row">
-            <div class="barra-lateral col-6 col-sm-auto">
-                <app-nav-admin></app-nav-admin>
-            </div>
-            <main class="main col">
-                <br>
-                <h1>Grafica de ingresos de compras hechas:</h1>
-                <div style="width: 80%; margin: auto;">
-                    <canvas id="myChart"></canvas>
-                </div>
-                <br>
-                @if(volumenTotalOro !== null) {
-                    <p>Volumen total de oro comprado: {{ volumenTotalOro }}gr de oro.</p>
-                } @else() {
-                    <p style="color: red;">{{ error }}</p>
-                }
-                <br>
-                <h1>Grafica de total de oro en venta:</h1>
-                <br>
-                <div style="width: 80%; margin: auto;">
-                    <canvas id="myChartSales"></canvas>
-                </div>
-                <br>
-                <br>
-            </main>
+    <div class="div-alineador">
+        <div class="barra-lateral">
+            <app-nav-admin></app-nav-admin>
         </div>
-    <app-pie></app-pie>
-</body> 
+        <main class="main col">
+            <br>
+            <h1>Grafica de ingresos de compras hechas:</h1>
+            <div style="width: 80%; margin: auto;">
+                <canvas id="myChart"></canvas>
+            </div>
+            <br>
+            <br>
+            <h1>Volumen total de oro comprado:</h1>
+            @if(volumenTotalOro !== null) {
+            <p>{{ volumenTotalOro }}gr de oro.</p>
+            } @else() {
+            <p style="color: red;">{{ error }}</p>
+            }
+            <br>
+            <br>
+            <h1>Grafica de total de oro en venta:</h1>
+            <div style="width: 80%; margin: auto;">
+                <canvas id="myChartSales"></canvas>
+            </div>
+            <br>
+            <br>
+            <div class="colombia">
+                <img src="/assets/images/colombia.png" alt="Colombia">
+            </div>
+        </main>
+    </div>
+</div>
+<app-pie></app-pie>
 <router-outlet />

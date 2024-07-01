@@ -1,10 +1,11 @@
-body {
+.fullscreen {
     background-color: rgb(252, 248, 181);
     height: 150%;
 }
 
 .table-responsive {
     background-color: white;
+    width: 1000px;
 }
 
 table, .div-boton {
@@ -22,10 +23,6 @@ th, td {
   padding-left: 10px;
 }
 
-th {
-    font-size: 18px;
-}
-
 td button {
     margin-right: 6px;
 }
@@ -36,5 +33,5 @@ a {
 }
 
 h1 {
-    margin-left: 15px;
+    text-align: center;
 }

@@ -1,9 +1,8 @@
-import { MaxLength } from "class-validator";
-import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
+import { Max, IsInt, Min } from 'class-validator';
 
 export class ProductoDto {
-
-    @IsNotBlank({message: 'el tipo de oro no puede estar vacío'})
-    @MaxLength(60, {message: 'Tipo de oro: longitud máxima de 60'})
-    TipoOro?: string;
-} 
+    @IsInt({ message: 'El valor de quilates debe ser un número entero' })
+    @Min(1, { message: 'El valor de quilates debe ser al menos 1' })
+    @Max(24, { message: 'El valor de quilates no puede ser mayor a 24' })
+    valorQuilates: number;
+}

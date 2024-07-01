@@ -1,6 +1,7 @@
 <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
     <div class="form-group">
         <label class="obligatorio">*Obligatorio</label>
+        <br />
         <label for="nombreUsuario">Nombre(s) <font color="red">*</font></label>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -10,7 +11,7 @@
             </div>
             <input type="text" id="nombreUsuario" formControlName="nombreUsuario" class="inputt" placeholder="Nombre">
         </div>
-    </div>
+    </div> 
 
     <div class="form-group">
         <label for="apellidosUsuario">Apellido(s)</label>
@@ -75,4 +76,7 @@
         <button type="submit" class="btn btn-primary btn-lg" [disabled]="!registroForm.valid">Resgistrar</button>
         <button class="btn btn-light active text-danger" type="reset">Borrar formulario</button>
     </div>
+    <br />
+    <br />
+    <br />
 </form>

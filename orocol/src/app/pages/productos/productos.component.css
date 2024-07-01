@@ -1,31 +1,11 @@
-.stilnav{
-    list-style-type: none;
-    align-items: center;
-}
-
-nav li{
-    display: inline;
-
-}
-
 a {
     margin-top: 5px;
     margin-left: 15px;
 }
-
-/*Estilos formulario de registro*/
-.contenendorstyle{
-    width: 60%;
-}
-
-h4{
-   text-align: center;
-   color: white;
-}
-
+/*
 h2{
     text-align: inherit;
-}
+} */
 
 h1 {
     margin-left: 15px;
@@ -44,46 +24,6 @@ h1 {
     padding-bottom: 10px;
 }
 
-.dropdown-menu {
-    margin: 17px;
-    background: #252121;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
-}
-
-.menuperfil {
-    color: white;
-}
-
-.menuperfil:focus {
-    background: #aea023;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.568);
-}
-.menuperfil:hover{
-    background-color: #aea023;
-}
-
-.cerrar:hover {
-    background-color: #a49123;
-}
-
-.user {
-    font-size: 40px;
-    padding: 10px;
-}
-
-
-/*MAIN*/
-
-.main {
-    padding-top: 40px;
-}
-
-.main .columna {
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
 /*Estilo de tabla*/
 .listavacia {
     background-color:#252121 ;
@@ -94,7 +34,7 @@ h1 {
 }
 
 table, .div-boton {
-    width: 1000px;
+    width: 900px;
 }
 
 table, .div-boton a {
@@ -104,8 +44,8 @@ table, .div-boton a {
 .busqueda {
     margin-top: 35px;
     margin-left: 15px;
-    height: 50px;
-    width: 300px;
+    height: 45px;
+    width: 400px;
     border-radius: 5px;
 }
 
@@ -119,49 +59,6 @@ th {
     font-size: 18px;
 }
 
-.my-button {
-    padding: 10px;
-    background-color: #252121;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border: 1px solid rgb(255, 255, 255);
-}
-
-.my-button:hover {
-    background-color: #aea023;
-}
-
-.my-button:active {
-    background-color: #aea023;
-}
-
-
-.search-container {
-    display: flex;
-    justify-items: right;
-    justify-content: right;
-    text-align: right;
-    margin-right: 80px;
-}
-
-.search-input {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-}
-
-.search-button {
-    background-color: #252121;
-    color: white;
-    border: 1px solid #000;
-    border-radius: 0 5px 5px 0;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #aea023;
+td:hover {
+    color: #ccc606;
 }

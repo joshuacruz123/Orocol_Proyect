@@ -6,7 +6,7 @@
         <img class="foto-perfil" [src]="imagenPerfilUrl" alt="Tu perfil" />
     }
     <br>
-    <input class="input-file" type="file" (change)="onFileSelect($event)" />
+    <input class="input-file" type="file" (change)="onFileSelect($event)" accept="image/*" />
     <br>
     @if(mostrarCambiarFoto) {
     <button [disabled]="!fotoPerfil" class="btn btn-warning text-light" (click)="subirFoto()"><mat-icon>upload_file</mat-icon> Cambiar

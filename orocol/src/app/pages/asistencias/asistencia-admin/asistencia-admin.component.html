@@ -1,79 +1,81 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-    <div class="row">
-        <div class="barra-lateral col-6 col-sm-auto">
+    <div class="div-alineador">
+        <div class="barra-lateral">
             <app-nav-admin></app-nav-admin>
         </div>
-        <main class="main col">
-            <h1>Gestión de asistencias de mineros:</h1>
-            <br />
-            <div class="div-acciones">
-                <input type="text" class="busqueda" placeholder="Buscar por nombre, apellido o número de documento"
-                    (input)="buscarAsistencias($event)">
+        <div class="div-centrar">
+            <div class="div-centrado">
+                <h1>Gestión de asistencias de mineros:</h1>
                 <br />
-                <a type="button" class="btn btn-info text-white btn-lg" (click)="registrarAsistencia()">Registrar
-                    asistencia
-                    <mat-icon>checklist</mat-icon></a>
-            </div>
-            <br />
-            <h1>Hoy:</h1>
-            <div class="lista-asistencias">
-                @for (item of turnosHoyFiltro; track $index) {
-                <div class="datos-admin">
-                    <strong>Nombre completo:</strong>
-                    <p> {{item.minero.usuario.nombreUsuario}} {{item.minero.usuario.apellidosUsuario}}</p>
-                    <strong>Número de documento:</strong>
-                    <p> {{item.minero.numero_documento}}</p>
-                    <strong>Fecha del turno:</strong>
-                    <p>{{ item.FechaTurno }}</p>
-                    <strong>Asignación de Tareas:</strong>
-                    <p>{{ item.AsignacionTareas }}</p>
-                    <strong>Asistencia:</strong>
-                    @if (item.Asistencia === 'Nó asistió') {
+                <div class="div-acciones">
+                    <input type="text" class="busqueda" placeholder="Buscar por nombre, apellido o número de documento"
+                        (input)="buscarAsistencias($event)">
+                    <br />
+                    <a type="button" class="btn btn-info text-white btn-lg" (click)="registrarAsistencia()">Registrar
+                        asistencia
+                        <mat-icon>checklist</mat-icon></a>
+                </div>
+                <br />
+                <h1>Hoy:</h1>
+                <div class="lista-asistencias">
+                    @for (item of turnosHoyFiltro; track $index) {
+                    <div class="datos-admin">
+                        <strong>Nombre completo:</strong>
+                        <p> {{item.minero.usuario.nombreUsuario}} {{item.minero.usuario.apellidosUsuario}}</p>
+                        <strong>Número de documento:</strong>
+                        <p> {{item.minero.numero_documento}}</p>
+                        <strong>Fecha del turno:</strong>
+                        <p>{{ item.FechaTurno }}</p>
+                        <strong>Asignación de Tareas:</strong>
+                        <p>{{ item.AsignacionTareas }}</p>
+                        <strong>Asistencia:</strong>
+                        @if (item.Asistencia === 'Nó asistió') {
                         <p class="rojo">{{ item.Asistencia }}</p>
-                    } @else {
+                        } @else {
                         <p>{{ item.Asistencia }}</p>
-                    }
-                    <button class="btn btn-warning" type="button"
-                        (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar asistencia</button>
-                    @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
-                    <button class="btn btn-info" type="button" (click)="verNovedad(item.novedad.idNovedad)">Ver novedad
-                        <mat-icon>visibility</mat-icon></button>
+                        }
+                        <button class="btn btn-warning" type="button"
+                            (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar</button>
+                        @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
+                        <button class="btn btn-info" type="button" (click)="verNovedad(item.novedad.idNovedad)">Ver
+                            novedad
+                            <mat-icon>visibility</mat-icon></button>
+                        }
+                    </div>
                     }
                 </div>
-                }
-            </div>
-            <h1>Anteriores:</h1>
-            <div class="lista-asistencias">
-                @for (item of turnosAnterioresFiltro; track $index) {
-                <div class="datos-admin">
-                    <strong>Nombre completo:</strong>
-                    <p> {{item.minero.usuario.nombreUsuario}} {{item.minero.usuario.apellidosUsuario}}</p>
-                    <strong>Número de documento:</strong>
-                    <p> {{item.minero.numero_documento}}</p>
-                    <strong>Fecha del turno:</strong>
-                    <p>{{ item.FechaTurno }}</p>
-                    <strong>Asignación de Tareas:</strong>
-                    <p>{{ item.AsignacionTareas }}</p>
-                    <strong>Asistencia:</strong>
-                    @if (item.Asistencia === 'Nó asistió') {
+                <h1>Anteriores:</h1>
+                <div class="lista-asistencias">
+                    @for (item of turnosAnterioresFiltro; track $index) {
+                    <div class="datos-admin">
+                        <strong>Nombre completo:</strong>
+                        <p> {{item.minero.usuario.nombreUsuario}} {{item.minero.usuario.apellidosUsuario}}</p>
+                        <strong>Número de documento:</strong>
+                        <p> {{item.minero.numero_documento}}</p>
+                        <strong>Fecha del turno:</strong>
+                        <p>{{ item.FechaTurno }}</p>
+                        <strong>Asignación de Tareas:</strong>
+                        <p>{{ item.AsignacionTareas }}</p>
+                        <strong>Asistencia:</strong>
+                        @if (item.Asistencia === 'Nó asistió') {
                         <p class="rojo">{{ item.Asistencia }}</p>
-                    } @else {
+                        } @else {
                         <p>{{ item.Asistencia }}</p>
-                    }
-                    <button class="btn btn-warning" type="button"
-                        (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar</button>
-                    @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
-                    <button class="btn btn-primary" type="button" (click)="verNovedad(item.novedad.idNovedad)">Ver
-                        novedad <mat-icon class="visibi">visibility</mat-icon></button>
+                        }
+                        <button class="btn btn-warning" type="button"
+                            (click)="editarAsistencia(item.idTurno)"><mat-icon>edit</mat-icon> Editar</button>
+                        @if (item.novedad && item.novedad.idNovedad && item.Asistencia === 'Nó asistió') {
+                        <button class="btn btn-primary" type="button" (click)="verNovedad(item.novedad.idNovedad)">Ver
+                            novedad <mat-icon class="visibi">visibility</mat-icon></button>
+                        }
+                    </div>
                     }
                 </div>
-                }
+                <br />
+                <br />
             </div>
-            <br />
-            <br />
-        </main>
+        </div>
     </div>
     <app-pie></app-pie>
-</body>
-<router-outlet />
+    <router-outlet />

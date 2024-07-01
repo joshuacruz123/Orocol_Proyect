@@ -8,7 +8,7 @@
     margin-bottom: 5x;
 }
 
-.pokemon-list {
+.admin-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     list-style: none;
@@ -16,7 +16,7 @@
     padding: 10px;
 }
 
-.pokemon-list, h1 {
+.admin-list, h1 {
     text-align: center;
 }
 
@@ -24,6 +24,7 @@
     background-color: #f8a557;
     border-radius: 5px;
     box-shadow: 3px 4px #404040;
+    padding: 10px;
 }
 
 .datos-admin strong, .datos-admin p{

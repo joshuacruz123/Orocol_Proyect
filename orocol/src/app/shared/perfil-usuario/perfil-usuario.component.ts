@@ -20,7 +20,7 @@ export class PerfilUsuarioComponent implements OnInit {
   mostrarCambiarFoto: boolean = false;
   imagenPreviaUrl: string | ArrayBuffer | null = null; 
 
-  constructor(
+  constructor( 
     public usuarioService: UsuarioService,
     private tokenService: TokenService,
     private router: Router,

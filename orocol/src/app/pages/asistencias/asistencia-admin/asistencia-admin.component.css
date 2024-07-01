@@ -1,5 +1,5 @@
 .lista-asistencias {
-    display: grid ;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     list-style: none;
     gap: 10px;
@@ -8,6 +8,7 @@
 
 .lista-asistencias, h1 {
     text-align: center;
+    margin-top: 40px;
 }
 
 .datos-admin {
@@ -18,12 +19,14 @@
     border: 1px solid #2a2a2a;
 }
 
-.datos-admin strong, .datos-admin p{
+.datos-admin strong,
+.datos-admin p {
     font-size: 15px;
 }
 
 .datos-admin .btn-warning {
     margin-right: 2%;
+    margin-bottom: 5px;
 }
 
 .visibi {

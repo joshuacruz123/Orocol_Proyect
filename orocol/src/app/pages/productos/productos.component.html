@@ -1,73 +1,69 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-    <div class="row">
-        <div class="barra-lateral col-6 col-sm-auto">
-        @if (usuarioAdmin) {
+    <div class="div-alineador">
+        <div class="barra-lateral">
+            @if (usuarioAdmin) {
             <app-nav-admin></app-nav-admin>
-        } @else {
+            } @else {
             <app-nav-minero></app-nav-minero>
-        }
+            }
         </div>
-        <main class="main col">
-            <br>
-            <h1>Tabla de productos (Oro por quilates):</h1>
-            <div class="contenendorstyle" class="container">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div id="tablaVents">
-                            
-                            <div class="table-responsive-xl">
-                                <div class="bg-dark div-boton">
-                                    @if (usuarioAdmin) {
-                                    <a type="button" class="btn btn-primary btn-lg"
-                                    (click)="agregarProducto()"><mat-icon>add</mat-icon> Registrar producto</a>
-                                    }
-                                    <input type="text" class="busqueda" placeholder="Buscar tipo de oro..." (input)="buscarProducto($event)">
-                                </div>
-                                <table class="table table-hover table-dark table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Tipo de oro</th>
-                                            <th scope="col">Estado del producto</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    @if (!sinLista) {
-                                    <tbody>
-                                        @for (item of productListFiltro; track $index) {
-                                        <tr>
-                                            <td scope="row"> {{item.TipoOro}}</td>
-                                            <td> {{item.estadoProducto}} </td> 
-                                            <td>
-                                            @if (usuarioAdmin) {
-                                                @if (item.estadoProducto === 'No disponible') {
-                                                <button class="btn btn-success" type="button"
-                                                    (click)="activarProducto(item.IdProducto)"> Activar </button>
-                                                } @else {
-                                                <button class="btn btn-danger" type="button"
-                                                    (click)="inactivarProducto(item.IdProducto)">Inactivar</button>
-                                                }
-                                            }
-                                            </td>
-                                        </tr>
-                                        }
-                                    </tbody>
-                                    }
-                                    @if (sinLista) {
-                                    <tbody>
-                                        <div class="p-3 mb-2 bg-dark text-white text-center">
-                                            <h2>No hay productos en la lista</h2>
-                                        </div>
-                                    </tbody>
-                                    }
-                                </table>
-                            </div>
-                        </div>
+        <div class="div-centrar">
+            <div class="div-centrado">
+                <br />
+                <br />
+                <h1>Tabla de productos (Oro por quilates):</h1>
+                <div class="table-responsive">
+                    <div class="bg-dark div-boton">
+                        @if (usuarioAdmin) {
+                        <a type="button" class="btn btn-primary btn-lg"
+                            (click)="agregarProducto()"><mat-icon>add</mat-icon> Registrar producto</a>
+                        }
+                        <input type="text" class="busqueda" placeholder="Buscar tipo de oro y disponibilidad"
+                            (input)="buscarProducto($event)">
                     </div>
+                    <table class="table table-hover table-dark table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tipo de oro</th>
+                                <th scope="col">Estado del producto</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        @if (!sinLista) {
+                        <tbody>
+                            @for (item of productListFiltro; track $index) {
+                            <tr>
+                                <td scope="row"> {{item.TipoOro}}</td>
+                                <td> {{item.estadoProducto}} </td>
+                                <td>
+                                    @if (usuarioAdmin) {
+                                    @if (item.estadoProducto === 'No disponible') {
+                                    <button class="btn btn-success" type="button"
+                                        (click)="activarProducto(item.IdProducto)"> Activar </button>
+                                    } @else {
+                                    <button class="btn btn-danger" type="button"
+                                        (click)="inactivarProducto(item.IdProducto)">Inactivar</button>
+                                    }
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                        @if (sinLista) {
+                        <tbody>
+                            <div class="p-3 mb-2 bg-dark text-white text-center">
+                                <h2>No hay productos en la lista</h2>
+                            </div>
+                        </tbody>
+                        }
+                    </table>
                 </div>
+                <br />
+                <br />
             </div>
-        </main>
+        </div>
     </div>
     <app-pie></app-pie>
-</body>
-<router-outlet />
+    <router-outlet />

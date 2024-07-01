@@ -3,7 +3,7 @@ import { ProductoService } from '../../../core/services/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -14,32 +14,26 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './crear-producto.component.css'
 })
 export class CrearProductoComponent {
- 
-  form!: FormGroup;
+
+  productoForm!: FormGroup;
 
   constructor(
     private productoService: ProductoService,
     private toastr: ToastrService,
-    private router: Router,
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<CrearProductoComponent>,
-    ) { }
-
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      TipoOro: new FormControl('', [Validators.required])
+  ) {
+    this.productoForm = this.fb.group({
+      valorQuilates: [null, Validators.required],
     });
   }
 
-  get f(){
-    return this.form.controls;
-  }
-
-  crearProducto(){
-    this.productoService.registrarProducto(this.form.value).subscribe(
+  crearProducto() {
+    this.productoService.registrarProducto(this.productoForm.value).subscribe(
       response => {
         this.dialogRef.close(true);
         this.toastr.success(response.message, 'Producto registrado', {
-          timeOut: 6000 
+          timeOut: 6000
         });
       },
       error => {

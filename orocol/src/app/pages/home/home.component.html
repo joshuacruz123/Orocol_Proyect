@@ -1,4 +1,4 @@
-<body [class.colorClass]="color">
+<div class="fullscreen-div" [class.colorClass]="color">
   <header>
     <div class="container">
       <div class="row">
@@ -15,7 +15,7 @@
           </div>
           <div class="menu" [class.menuClass]="menuVariable">
             <ul>
-              <li><a routerLink="/" (click)="openDialog()">¿Quienes somos?</a></li> 
+              <li><a routerLink="/" (click)="openDialog()">¿Quienes somos?</a></li>
               <li><a routerLink="/manual_usuario"><mat-icon>description</mat-icon> Manual usuario</a></li>
               <li><a routerLink="/registro"><mat-icon>person_add</mat-icon> Registrarse</a></li>
               <li><a routerLink="/iniciar_sesion"><mat-icon>login</mat-icon> Iniciar sesión</a></li>
@@ -108,31 +108,34 @@
   <hr />
   <br />
   <br />
-  <article>
-    <br />
-    <br />
-    <br />
-    <p>¿Ya te registraste?</p>
-    <a routerLink="/iniciar_sesion" type="button" class="btn btn-primary btn-lg">Haz click aquí <mat-icon>login</mat-icon></a>
-    <br />
-    <br />
-    <p>¿No te haz registrado?</p>
-    <a routerLink="/registro" type="button" class="btn btn-info btn-lg">Haz click aquí <mat-icon>person</mat-icon></a>
-    <br />
-    <br />
-    <br />
-    <p>Solicitar reactivación</p>
-    <p> de usuario:</p>
-    <a type="button" class="btn btn-success btn-lg" (click)="agregarSolicitud()">Solicitar reactivación</a>
-    <br />
-    <br />
-    <br />
-  </article>
+  <div class="una-caja">
+    <article>
+      <br />
+      <br />
+      <br />
+      <p>¿Ya te registraste?</p>
+      <a routerLink="/iniciar_sesion" type="button" class="btn btn-primary btn-lg">Haz click aquí
+        <mat-icon>login</mat-icon></a>
+      <br />
+      <br />
+      <p>¿No te haz registrado?</p>
+      <a routerLink="/registro" type="button" class="btn btn-info btn-lg">Haz click aquí <mat-icon>person</mat-icon></a>
+      <br />
+      <br />
+      <br />
+      <p>Solicitar reactivación</p>
+      <p> de usuario:</p>
+      <a type="button" class="btn btn-success btn-lg" (click)="agregarSolicitud()">Solicitar reactivación</a>
+      <br />
+      <br />
+      <br />
+    </article>
+  </div>
   <br />
   <br />
   <br />
   <br />
   <br />
-  <app-pie />
-</body>
+</div>
+<app-pie />
 <router-outlet />

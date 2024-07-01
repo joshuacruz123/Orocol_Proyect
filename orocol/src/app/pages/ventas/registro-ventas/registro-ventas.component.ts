@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -6,6 +6,8 @@ import { VentasService } from '../../../core/services/ventas.service';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { TokenService } from '../../../core/services/token.service';
 import { MatIconModule } from '@angular/material/icon';
+import { ProductosInterface } from '../../../core/interfaces/producto.interface';
+import { ProductoService } from '../../../core/services/producto.service';
 
 @Component({
   selector: 'app-registro-ventas',
@@ -14,12 +16,14 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './registro-ventas.component.html',
   styleUrl: './registro-ventas.component.css'
 })
-export class RegistroVentasComponent {
+export class RegistroVentasComponent implements OnInit {
 
   ventaForm!: FormGroup;
-
+  productList: ProductosInterface[] = [];
+  
   constructor(
     private ventaService: VentasService,
+    private productoService: ProductoService,
     private tokenService: TokenService,
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<RegistroVentasComponent>,
@@ -38,6 +42,18 @@ export class RegistroVentasComponent {
   }
 
   ngOnInit(): void {
+    this.consultarProductos();
+  }
+  
+  consultarProductos() {
+    this.productoService.consultarProductos().subscribe({
+      next: (result) => {
+        this.productList = result;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   crearVenta() {

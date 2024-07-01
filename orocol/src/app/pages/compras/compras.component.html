@@ -1,74 +1,70 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-    <div class="row">
-        <div class="barra-lateral col-6 col-sm-auto">
+    <div class="div-alineador">
+        <div class="barra-lateral">
             <app-nav-admin></app-nav-admin>
         </div>
-        <main class="main col">
-            <br>
-            <h1>Tabla de compras de oro:</h1>
-            <div class="contenendorstyle" class="container">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div id="tablaVents">
-                            <div class="table-responsive">
-                                <div class="bg-dark div-boton">
-                                    <a type="button" class="btn btn-secondary btn-lg"
-                                        (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar
-                                        reporte de compras</a>
-                                </div>
-                                <table class="table table-hover table-dark table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Producto</th>
-                                            <th scope="col">Nombre del comprador</th>
-                                            <th scope="col">Empresa</th>
-                                            <th scope="col">País</th>
-                                            <th scope="col">Estado compra</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    @if (!sinLista) {
-                                    <tbody class="table-secondary">
-                                        @for (item of compraList; track $index) {
-                                        <tr>
-                                            <td scope="row">{{item.salidaVentas.entrada?.producto?.TipoOro}}</td>
-                                            <td> {{item.NombreCompleto}}</td>
-                                            <td> {{item.Empresa}} </td>
-                                            <td> {{item.Pais}} </td>
-                                            <td> {{item.estadoCompra}} </td>
-                                            <td>
-                                                <button class="btn btn-info text-white" type="button"
-                                                    (click)="detalleCompra(item.IdCliente)"><mat-icon>search</mat-icon>
-                                                    Ver detalle</button>
-                                                <button class="btn btn-warning text-white" type="button"
-                                                    (click)="editarCompra(item.IdCliente)"><mat-icon>edit</mat-icon>
-                                                    Editar compra</button>
-                                                @if (item.estadoCompra === 'En proceso') {
-                                                <button class="btn btn-danger" type="button"
-                                                    (click)="inactivarCompra(item.IdCliente)"><mat-icon>toggle_off</mat-icon>
-                                                    Terminar compra</button>
-                                                }
-                                            </td>
-                                        </tr>
-                                        }
-                                    </tbody>
-                                    }
-                                    @if (sinLista) {
-                                    <tbody>
-                                        <div class="p-3 mb-2 bg-dark text-white text-center">
-                                            <h2>No hay compras en la lista</h2>
-                                        </div>
-                                    </tbody>
-                                    }
-                                </table>
-                            </div>
-                        </div>
+        <div class="div-centrar">
+            <div class="div-centrado">
+                <br>
+                <br>
+                <h1>Tabla de compras de oro:</h1>
+                <div class="table-responsive">
+                    <div class="bg-dark div-boton">
+                        <a type="button" class="btn btn-secondary btn-lg"
+                            (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar
+                            reporte de compras</a>
                     </div>
+                    <table class="table table-hover table-dark table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Nombre del comprador</th>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">País</th>
+                                <th scope="col">Estado compra</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        @if (!sinLista) {
+                        <tbody class="table-secondary">
+                            @for (item of compraList; track $index) {
+                            <tr>
+                                <td scope="row">{{item.salidaVentas.entrada?.producto?.TipoOro}}</td>
+                                <td> {{item.NombreCompleto}}</td>
+                                <td> {{item.Empresa}} </td>
+                                <td> {{item.Pais}} </td>
+                                <td> {{item.estadoCompra}} </td>
+                                <td>
+                                    <button class="btn btn-info text-white" type="button"
+                                        (click)="detalleCompra(item.IdCliente)"><mat-icon>search</mat-icon>
+                                        Ver detalle</button>
+                                    <button class="btn btn-warning text-white" type="button"
+                                        (click)="editarCompra(item.IdCliente)"><mat-icon>edit</mat-icon>
+                                        Editar compra</button>
+                                    @if (item.estadoCompra === 'En proceso') {
+                                    <button class="btn btn-danger" type="button"
+                                        (click)="inactivarCompra(item.IdCliente)"><mat-icon>toggle_off</mat-icon>
+                                        Terminar compra</button>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                        @if (sinLista) {
+                        <tbody>
+                            <div class="p-3 mb-2 bg-dark text-white text-center">
+                                <h2>No hay compras en la lista</h2>
+                            </div>
+                        </tbody>
+                        }
+                    </table>
                 </div>
+                <br />
+                <br />
             </div>
-        </main>
+        </div>
     </div>
     <app-pie></app-pie>
-</body>
-<router-outlet />
+    <router-outlet />

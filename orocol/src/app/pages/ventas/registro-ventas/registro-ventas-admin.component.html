@@ -6,7 +6,12 @@
             <input type="number" placeholder="Número documento de usuario minero" formControlName="numero_documento" required>
 
             <label for="TipoOro">Tipo de Oro:</label>
-            <input type="text" placeholder="Selecciona el tipo de oro" formControlName="TipoOro" required>
+            <select id="TipoOro" formControlName="TipoOro">
+                <option value="" class="select-document">Selecciona un tipo de oro</option>
+                @for (item of productList; track $index) {
+                    <option value={{item.TipoOro}}>{{item.TipoOro}}</option>
+                }
+            </select>
 
             <label for="fechaExtraccionOro">Fecha Extracción Oro:</label>
             <input type="date" formControlName="fechaExtraccionOro" required>

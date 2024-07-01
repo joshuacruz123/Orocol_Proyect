@@ -1,56 +1,38 @@
-<body>
+<div class="fullscreen-div">
     <app-regresar-home></app-regresar-home>
-    <div class="container-fluid">
-        <div class="container py-5">
-            <br>
-            <div class="contenedor">
-                <div class="div-formulario">
-                    <h3>Registrarse</h3><br>
-                    <div class="radios">
-                        <label>
-                            <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario"> Como
-                            administrador
-                        </label>
-                        <label>
-                            <input type="radio" name="tipoUsuario" value="Minero" [(ngModel)]="tipoUsuario">
-                            Como empleado (Minero)
-                        </label>
-                    </div>
-                    <div>
-                    @if (tipoUsuario === 'Administrador') {
-                    <app-formulario-administrador></app-formulario-administrador>
-                    } </div>
-                    <div>
-                    @if (tipoUsuario === 'Minero') {
-                    <app-formulario-minero></app-formulario-minero>
-                    }</div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-            </div>
+    <br>
+    <br>
+    <div class="divformulario">
+        <h3>Registrarse</h3>
+        <br>
+        <div class="radios">
+            <label>
+                <input type="radio" name="tipoUsuario" value="Administrador" [(ngModel)]="tipoUsuario"> Como
+                administrador
+            </label>
+            <label>
+                <input type="radio" name="tipoUsuario" value="Minero" [(ngModel)]="tipoUsuario">
+                Como empleado (Minero)
+            </label>
         </div>
+        <div>
+            @if (tipoUsuario === 'Administrador') {
+            <app-formulario-administrador></app-formulario-administrador>
+            }
+        </div>
+        <div>
+            @if (tipoUsuario === 'Minero') {
+            <app-formulario-minero></app-formulario-minero>
+            }
+        </div>
+        <br>
+        <br>
     </div>
     <br>
     <br>
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <app-pie></app-pie>
-</body>
+</div>
+<app-pie></app-pie>
 <router-outlet />

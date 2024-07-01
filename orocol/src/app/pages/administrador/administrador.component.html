@@ -1,42 +1,39 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-        <div class="row">
-            <div class="barra-lateral col-6 col-sm-auto">
-                <app-nav-admin></app-nav-admin>
-            </div>
-            <main class="main col">
-                <div class="row justify-content-center align-content-center text-center">
-                    <div class="columna col-lg-6">
-                        <br>
-                        <br>
-                        <article class="informacion-usuarios">
-                            <br>
-                            <app-perfil-usuario></app-perfil-usuario>
-                            <br>
-                            <h2>Administrador {{ administrador.usuario.nombreUsuario }} {{ administrador.usuario.apellidosUsuario }}</h2>
-                            <ul>
-                              <li><strong>Cargo:</strong> {{ administrador.cargoAdmin }}</li>
-                              <li><strong>Correo:</strong> {{ administrador.usuario.correoUsuario }}</li>
-                              <li><strong>Estado:</strong> {{ administrador.usuario.estadoUsuario }}</li>
-                            </ul> 
-                            <br>
-                            <hr>
-                            <br>
-                            <a class="btn btn-lg btn-warning text-white" [routerLink]="['/editar_administrador/', administrador.idAdmin]">Actualizar datos personales</a>
-                            <br> 
-                            <hr>
-                            <br>
-                            <app-editar-password></app-editar-password>
-                            <br>
-                        </article>
-                        <br>
-                        <br>
-                        <br>
-                        <br> 
-                    </div>
+    <div class="div-alineador">
+        <div class="barra-lateral">
+            <app-nav-admin></app-nav-admin>
+        </div>
+        <div class="div-info-usuarios">
+            <article class="informacion-usuarios">
+                <br>
+                <app-perfil-usuario></app-perfil-usuario>
+                <br>
+                <div class="info">
+                    <h1>Administrador</h1>
+                    <h2>{{ administrador.usuario.nombreUsuario }} {{
+                        administrador.usuario.apellidosUsuario }}</h2>
+                    <br>
+                    <strong>Cargo:</strong>
+                    <p>{{ administrador.cargoAdmin }}</p>
+                    <strong>Correo:</strong>
+                    <p>{{ administrador.usuario.correoUsuario }}</p>
+                    <strong>Estado:</strong>
+                    <p>{{ administrador.usuario.estadoUsuario }}</p>
                 </div>
-            </main> 
-        </div> 
+                <br>
+                <hr>
+                <br>
+                <a class="btn btn-lg btn-warning text-white"
+                    [routerLink]="['/editar_administrador/', administrador.idAdmin]">Actualizar datos personales</a>
+                <br>
+                <hr>
+                <br>
+                <app-editar-password></app-editar-password>
+                <br>
+            </article>
+        </div>
+    </div>
     <app-pie></app-pie>
-</body>
+</div>
 <router-outlet />

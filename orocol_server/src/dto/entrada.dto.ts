@@ -8,7 +8,6 @@ export class EntradaDto {
 
     @IsDecimal({}, {message: 'El procio debe ser un número decimal'})
     @IsNotEmpty({ message: 'El precio no puede estar vacío' })
-    @Min(2, { message: 'el precio debe de ser mas de dos números' })
     precioOro: number;
 
     @IsNumber({}, { message: 'La cantidad de oro debe ser un número' })

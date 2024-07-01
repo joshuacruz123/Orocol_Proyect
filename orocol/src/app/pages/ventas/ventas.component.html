@@ -1,100 +1,95 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-    <div class="row">
-        <div class="barra-lateral col-6 col-sm-auto">
+    <div class="div-alineador">
+        <div class="barra-lateral">
             @if (usuarioAdmin) {
-                <app-nav-admin></app-nav-admin>
+            <app-nav-admin></app-nav-admin>
             } @else {
-                <app-nav-minero></app-nav-minero>
+            <app-nav-minero></app-nav-minero>
             }
         </div>
-        <main class="main col">
-            <br>
-            <h1>Tabla de oro en venta:</h1>
-            <div class="contenendorstyle" class="container">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div id="tablaVents">
-                            <div class="table-responsive">
-                                <div class="bg-dark div-boton">
-                                @if (usuarioAdmin) {
-                                    <a type="button" class="btn btn-primary btn-lg"
-                                    (click)="agregarVentaAdmin()"><mat-icon>add</mat-icon> Registrar Venta</a>
-                                    <a type="button" class="btn btn-secondary btn-lg"
-                                        (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar reporte</a>
-                                } @else {
-                                    <a type="button" class="btn btn-primary btn-lg"
-                                    (click)="agregarVenta()"><mat-icon>add</mat-icon> Registrar Venta</a>
-                                }
-                                    <input type="text" class="busqueda" placeholder="Buscar venta..."
-                                        (input)="buscarVenta($event)">
-                                </div>
-                                <table class="table table-hover table-dark table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Venta</th>
-                                            <th scope="col">Fecha extracción de oro</th>
-                                            <th scope="col">Precio del oro</th>
-                                            <th scope="col">Cantidad</th>
-                                            <th scope="col">Estado de la venta</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    @if (!sinLista) {
-                                    <tbody class="table-secondary">
-                                        @for (item of ventaListFiltro; track $index) {
-                                        <tr>
-                                            <td scope="row">{{item.producto.TipoOro}}</td>
-                                            <td> {{item.fechaExtraccionOro}}</td>
-                                            <td> {{item.precioOro}} </td>
-                                            <td> {{item.cantidad}} </td>
-                                            <td> {{item.estadoVenta}} </td>
-                                            <td>
-                                                <button class="btn btn-info text-white" type="button"
-                                                    (click)="detalleVenta(item.idGestionVenta)"><mat-icon>search</mat-icon> Ver detalle</button>
-                                                @if (usuarioAdmin) {
-                                                    @if (item.estadoVenta === 'Activo') {
-                                                        <button class="btn btn-success" type="button"
-                                                        (click)="agregarCompra(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar compra</button>
-                                                    } @else {
-                                                        <button class="btn btn-success" type="button" disabled><mat-icon>add</mat-icon> Registrar compra</button>
-                                                    }
-                                                    <button class="btn btn-warning text-white" type="button"
-                                                        (click)="editarVenta(item.idGestionVenta)"><mat-icon>edit</mat-icon> Editar venta</button>
-                                                    @if (item.estadoVenta === 'Inactivo') {
-                                                    <button class="btn btn-success" type="button"
-                                                        (click)="activarVenta(item.idGestionVenta)"><mat-icon>toggle_on</mat-icon> Activar </button>
-                                                    } @else {
-                                                    <button class="btn btn-danger" type="button"
-                                                        (click)="inactivarVenta(item.idGestionVenta)"><mat-icon>toggle_off</mat-icon> Inactivar</button>
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
-                                        }
-                                    </tbody>
-                                    }
-                                    @if (sinLista) {
-                                    <tbody>
-                                        <div class="p-3 mb-2 bg-dark text-white text-center">
-                                            <h2>No hay Ventas en la lista</h2>
-                                        </div>
-                                    </tbody>
-                                    }
-                                </table>
-                            </div>
-                        </div>
+        <div class="div-centrar">
+            <div class="div-centrado">
+                <br>
+                <br>
+                <h1>Tabla de oro en venta:</h1>
+                <div class="table-responsive">
+                    <div class="bg-dark div-boton">
+                        @if (usuarioAdmin) {
+                        <a type="button" class="btn btn-primary btn-lg"
+                            (click)="agregarVentaAdmin()"><mat-icon>add</mat-icon> Registrar Venta</a>
+                        <a type="button" class="btn btn-secondary btn-lg"
+                            (click)="generarReporte()"><mat-icon>picture_as_pdf</mat-icon> Generar reporte</a>
+                        } @else {
+                        <a type="button" class="btn btn-primary btn-lg"
+                            (click)="agregarVenta()"><mat-icon>add</mat-icon> Registrar Venta</a>
+                        }
+                        <input type="text" class="busqueda" placeholder="Buscar venta..." (input)="buscarVenta($event)">
                     </div>
+                    <table class="table table-hover table-dark table-sm table-bordered border-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Venta</th>
+                                <th scope="col">Fecha extracción de oro</th>
+                                <th scope="col">Precio del oro</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Estado de la venta</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        @if (!sinLista) {
+                        <tbody class="table-secondary">
+                            @for (item of ventaListFiltro; track $index) {
+                            <tr>
+                                <td scope="row">{{item.producto.TipoOro}}</td>
+                                <td> {{item.fechaExtraccionOro}}</td>
+                                <td> {{item.precioOro}} </td>
+                                <td> {{item.cantidad}} </td>
+                                <td> {{item.estadoVenta}} </td>
+                                <td>
+                                    <button class="btn btn-info text-white" type="button"
+                                        (click)="detalleVenta(item.idGestionVenta)"><mat-icon>search</mat-icon> Ver
+                                        detalle</button>
+                                    @if (usuarioAdmin) {
+                                    @if (item.estadoVenta === 'Activo') {
+                                    <button class="btn btn-success" type="button"
+                                        (click)="agregarCompra(item.idGestionVenta)"><mat-icon>add</mat-icon> Registrar
+                                        compra</button>
+                                    } @else {
+                                    <button class="btn btn-success" type="button" disabled><mat-icon>add</mat-icon>
+                                        Registrar compra</button>
+                                    }
+                                    <button class="btn btn-warning text-white" type="button"
+                                        (click)="editarVenta(item.idGestionVenta)"><mat-icon>edit</mat-icon> Editar
+                                        venta</button>
+                                    @if (item.estadoVenta === 'Inactivo') {
+                                    <button class="btn btn-success" type="button"
+                                        (click)="activarVenta(item.idGestionVenta)"><mat-icon>toggle_on</mat-icon>
+                                        Activar </button>
+                                    } @else {
+                                    <button class="btn btn-danger" type="button"
+                                        (click)="inactivarVenta(item.idGestionVenta)"><mat-icon>toggle_off</mat-icon>
+                                        Inactivar</button>
+                                    }
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                        }
+                        @if (sinLista) {
+                        <tbody>
+                            <div class="p-3 mb-2 bg-dark text-white text-center">
+                                <h2>No hay Ventas en la lista</h2>
+                            </div>
+                        </tbody>
+                        }
+                    </table>
                 </div>
+                <br />
+                <br />
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-        </main>
+        </div>
     </div>
     <app-pie></app-pie>
-</body>
-<router-outlet />
+    <router-outlet />

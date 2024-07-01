@@ -34,9 +34,13 @@ export class ProductoService {
     // Método para consultar producto
 
     async insertarProducto(dto: ProductoDto): Promise<any> {
-        const producto = this.productoRepository.create(dto);
+        const tipoOro = `Oro de ${dto.valorQuilates} quilates`;
+        const producto = this.productoRepository.create({
+            ...dto,
+            TipoOro: tipoOro
+        });
         await this.productoRepository.save(producto);
-        return new MessageDto(`Producto ${producto.TipoOro} creado`);
+        return new MessageDto(`${producto.TipoOro} creado`);
     }
     // Método para registrar productos
 

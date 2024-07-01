@@ -1,11 +1,10 @@
-<body>
+<div class="fullscreen-div">
     <app-encabezado></app-encabezado>
     <div class="divformulario">
         <br />
-        <h1>Editar datos propios</h1>
-        <br />
         @if (mineroForm) {
         <form [formGroup]="mineroForm" (ngSubmit)="editarMinero()">
+            <h1>Editar datos propios</h1>
             <label for="nombreUsuario">Nombre(s): </label>
             <input class="inputt" type="text" formControlName="nombreUsuario" id="nombreUsuario">
 
@@ -49,10 +48,7 @@
         }
         <br />
         <a class="btn btn-danger btn-lg" routerLink="/minero">Cancelar <mat-icon>block</mat-icon></a>
-        <br />
-        <br />
     </div>
-    <br />
-    <app-pie></app-pie>
-</body>
+</div>
+<app-pie></app-pie>
 <router-outlet />

@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { TokenService } from '../../core/services/token.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-encabezado',
@@ -20,6 +21,7 @@ export class EncabezadoComponent implements OnInit{
   constructor(
     public usuarioService: UsuarioService,
     private tokenService: TokenService,
+    private toastr: ToastrService,
     private router: Router
   ) { }
 
@@ -42,6 +44,9 @@ export class EncabezadoComponent implements OnInit{
   cerrar(): void {
     this.tokenService.logOut();
     this.router.navigate(['/iniciar_sesion']);
+    this.toastr.info('La sesión ha finalizado', 'Sesión terminada:', {
+      timeOut: 8000
+    });
   }
 }
  

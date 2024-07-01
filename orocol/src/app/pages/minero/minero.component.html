@@ -1,52 +1,54 @@
-<body>
+<div class="fullscreen">
     <app-encabezado></app-encabezado>
-    <div class="row">
-        <div class="barra-lateral col-6 col-sm-auto">
+    <div class="div-alineador">
+        <div class="barra-lateral">
             <app-nav-minero></app-nav-minero>
         </div>
-        <main class="main col">
-            <div class="row justify-content-center align-content-center text-center">
-                <div class="columna col-lg-6">
+        <div class="div-info-usuarios">
+            <article class="informacion-usuarios">
+                <br>
+                <app-perfil-usuario></app-perfil-usuario>
+                <br>
+                <div class="info">
+                    <h1>Minero</h1>
+                    <h2>{{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}</h2>
                     <br>
-                    <br>
-                    <article class="informacion-usuarios">
-                        <br>
-                        <app-perfil-usuario></app-perfil-usuario>
-                        <br>
-                        <h2>Minero {{ minero.usuario.nombreUsuario }} {{ minero.usuario.apellidosUsuario }}
-                        </h2>
-                        <ul>
-                            <li><strong>Correo:</strong> {{ minero.usuario.correoUsuario }}</li>
-                            <li><strong>Estado:</strong> {{ minero.usuario.estadoUsuario }}</li>
-                            <li><strong>Tipo de documento:</strong> {{ minero.tipo_documento }}</li>
-                            <li><strong>Número de documento:</strong> {{ minero.numero_documento }}</li>
-                            <li><strong>Número de teléfono:</strong> {{ minero.telefono }}</li>
-                            <li><strong>Fecha de nacimiento:</strong> {{ minero.fecha_nacimiento }}</li>
-                            <li><strong>Dirección de vivienda:</strong> {{ minero.direccion_vivienda }}</li>
-                            <li><strong>Cambio de documento:</strong> {{ minero.cambio_documento }}</li>
-                        </ul>
-                        <br>
-                        <hr>
-                        <br>
-                        <a class="btn btn-lg btn-warning text-white" [routerLink]="['/editar_minero/', minero.IdMinero]">Actualizar datos personales</a>
-                        <br> 
-                        <hr>
-                        <br>
-                        <app-editar-password></app-editar-password>
-                        <br>
-                        <hr>
-                        <br>
-                        <button class="btn btn-danger text-white" type="button"
-                            (click)="inactivarUsuarioPropio(minero.usuario.idUsuario)"><mat-icon>manage_accounts</mat-icon> Inactivar cuenta</button>
-                    </article>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    <strong>Correo:</strong>
+                    <p>{{ minero.usuario.correoUsuario }}</p>
+                    <strong>Estado:</strong>
+                    <p>{{ minero.usuario.estadoUsuario }}</p>
+                    <strong>Tipo de documento:</strong>
+                    <p>{{ minero.tipo_documento }}</p>
+                    <strong>Número de documento:</strong>
+                    <p>{{ minero.numero_documento }}</p>
+                    <strong>Número de teléfono:</strong>
+                    <p>{{ minero.telefono }}</p>
+                    <strong>Fecha de nacimiento:</strong>
+                    <p>{{ minero.fecha_nacimiento }}</p>
+                    <strong>Dirección de vivienda:</strong>
+                    <p>{{ minero.direccion_vivienda }}</p>
+                    <strong>Cambio de documento:</strong>
+                    <p>{{ minero.cambio_documento }}</p>
                 </div>
-            </div>
-        </main>
+                <br>
+                <hr>
+                <br>
+                <a class="btn btn-lg btn-warning text-white"
+                    [routerLink]="['/editar_minero/', minero.IdMinero]">Actualizar datos personales</a>
+                <br>
+                <hr>
+                <br>
+                <app-editar-password></app-editar-password>
+                <br>
+                <hr>
+                <br>
+                <button class="btn btn-danger text-white" type="button"
+                    (click)="inactivarUsuarioPropio(minero.usuario.idUsuario)"><mat-icon>manage_accounts</mat-icon>
+                    Inactivar cuenta</button>
+                <br>
+            </article>
+        </div>
     </div>
     <app-pie></app-pie>
-</body>
+</div>
 <router-outlet />

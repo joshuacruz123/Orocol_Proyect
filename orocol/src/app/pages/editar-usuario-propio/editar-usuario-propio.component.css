@@ -1,4 +1,13 @@
 /* INICIO FOMULARIO*/
+.fullscreen-div {
+    background: url(/assets/images/mina.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 1300px;
+}
 
 form{
     width: 40%;
@@ -10,7 +19,7 @@ form{
     align-items: left;
     padding: 2%;
     gap: 1rem;
-    background-color: #f3f894;
+    background-color: #f7f9c6;
     border-radius: 10px;
     position: relative;
 }
@@ -52,5 +61,9 @@ form button{
 
 form select{
     background-color: transparent;
+}
+
+h1 {
+    text-align: center;
 }
 /* FIN FOMULARIO*/

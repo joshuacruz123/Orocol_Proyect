@@ -36,9 +36,6 @@ export class RecuperarContrasenaComponent {
       response => {
         this.router.navigate(['/editar_contrasena', { correo: correoUsuario }]);
         console.log(response.message);
-        this.toastr.success(response.message, 'OK', {
-          timeOut: 6000 
-        });
       },
       error => {
         console.error('Error al consultar', error);

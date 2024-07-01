@@ -1,27 +1,32 @@
-<body>
+<div class="fullscreen-div">
     <app-regresar-home></app-regresar-home>
-    <form class="form login" (ngSubmit)="iniciarSesion()">
-        <h1>Iniciar Sesión</h1>
-        <label class="labbel">Correo</label><br>
-        <input class="inputt" type="email" name="correoUsuario" [(ngModel)]="correoUsuario" required placeholder="Correo electrónico">
-        
-        <label class="labbel">Contraseña</label><br>
-        <input class="inputt" type="password" id="passwordUsuario" name="passwordUsuario" [(ngModel)]="passwordUsuario" required placeholder="Digite su contraseña">
-        <div class="form-group">
-            <input class="form-check-input" type="checkbox" (click)="verPassword()">
-            <label class="form-check-label"> 
-                Mostrar contraseña
-            </label>
-        </div>
-        <br/>
-        <button class="btn btn-outline-dark btn-lg" type="submit">Iniciar sesión <mat-icon>login</mat-icon></button>
-        <br/>
-        <button type="button" class="btn btn-link" routerLink="/registro">¿No estas registrado?</button>
-        <br/>
-        <br/>
-        <button type="button" class="btn btn-link" routerLink="/recuperar_contrasena">¿Olvidaste tu contraseña?</button>
-        <br/>
-    </form>      
-    <app-pie></app-pie>
-</body>
-<router-outlet /> 
+    <div class="divformulario">
+        <form class="form login" (ngSubmit)="iniciarSesion()">
+            <h1>Iniciar Sesión</h1>
+            <label class="labbel">Correo</label><br>
+            <input class="inputt" type="email" name="correoUsuario" [(ngModel)]="correoUsuario" required
+                placeholder="Correo electrónico">
+
+            <label class="labbel">Contraseña</label><br>
+            <input class="inputt" type="password" id="passwordUsuario" name="passwordUsuario"
+                [(ngModel)]="passwordUsuario" required placeholder="Digite su contraseña">
+            <div class="form-group">
+                <input class="form-check-input" type="checkbox" (click)="verPassword()">
+                <label class="form-check-label">
+                    Mostrar contraseña
+                </label>
+            </div>
+            <br />
+            <button class="btn btn-outline-dark btn-lg" type="submit">Iniciar sesión <mat-icon>login</mat-icon></button>
+            <br />
+            <button type="button" class="btn btn-link" routerLink="/registro">¿No estas registrado?</button>
+            <br />
+            <br />
+            <button type="button" class="btn btn-link" routerLink="/recuperar_contrasena">¿Olvidaste tu
+                contraseña?</button>
+            <br />
+        </form>
+    </div>
+</div>
+<app-pie></app-pie>
+<router-outlet />
